@@ -1,0 +1,259 @@
+<div class="container p-0">
+  <h1 class="h3 mb-3">Settings</h1>
+  <div class="row">
+    <div class="col-md-5 col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Profile Settings</h5>
+        </div>
+        <div class="list-group list-group-flush" role="tablist">
+          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
+            Account
+          </a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
+            Password
+          </a>
+          <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#privacy-safety" role="tab">
+            Privacy and safety
+          </a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#email-notifications" role="tab">
+            Email notifications
+          </a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+            Web notifications
+          </a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#web-widgets" role="tab">
+            Widgets
+          </a> -->
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#userdata" role="tab">
+            Your data
+          </a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#delete-accountuser" role="tab">
+            Delete account
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 col-xl-8">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="account" role="tabpanel">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Public info</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="inputUsername">Username</label>
+                      <h1>{{ userData1.userFirstName }} {{ userData1.userLastName }}</h1>
+                    </div>
+                    <!-- <div class="form-group">
+                      <label for="inputBio">Biography</label>
+                      <textarea rows="2" class="form-control" id="inputBio"
+                        placeholder="Tell something about yourself"></textarea>
+                    </div> -->
+                  </div>
+                  <!-- <div class="col-md-4">
+                    <div class="text-center">
+                      <img alt="User Avatar" src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                        class="rounded-circle img-responsive mt-2" width="128" height="128">
+                      <div class="mt-2">
+                        <span class="btn btn-primary">
+                          <svg class="svg-inline--fa fa-upload fa-w-16" aria-hidden="true" data-prefix="fas"
+                            data-icon="upload" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                            data-fa-i2svg="">
+                            <path fill="currentColor"
+                              d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z">
+                            </path>
+                          </svg>
+                          Upload
+                        </span>
+                      </div>
+                      <small>For best results, use an image at least 128px by 128px in .jpg format</small>
+                    </div>
+                  </div> -->
+                </div>
+                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="password" role="tabpanel">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Password</h5>
+              <form [formGroup]="passwordResetForm" (submit)="submitForm()">
+                <div class="form-group">
+                  <label for="inputUserName">Username</label>
+                  <input type="text" class="form-control" id="inputUserName" formControlName="userName">
+                </div>
+                <div class="form-group">
+                  <label for="inputPasswordCurrent">Current password</label>
+                  <input type="password" class="form-control" id="inputPasswordCurrent" formControlName="oldPassword">
+                </div>
+                <div class="form-group">
+                  <label for="inputPasswordNew">New password</label>
+                  <input type="password" class="form-control" id="inputPasswordNew" formControlName="newPassword">
+                </div>
+                <div class="form-group">
+                  <label for="inputPasswordNew2">Verify password</label>
+                  <input type="password" class="form-control" id="inputPasswordNew2" formControlName="verifyPassword">
+                </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </form>
+              <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+              <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- ... Existing code ... -->
+
+        <div class="tab-pane fade" id="privacy-safety" role="tabpanel">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Privacy and Safety</h5>
+              <!-- Add content for privacy and safety settings here -->
+              <form>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="privacySetting1" name="privacySetting1">
+                  <label class="form-check-label" for="privacySetting1">
+                    Keep my profile private.
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="privacySetting2" name="privacySetting2">
+                  <label class="form-check-label" for="privacySetting2">
+                    Enable two-factor authentication for added security.
+                  </label>
+                </div>
+                <!-- Add more privacy and safety settings here -->
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="email-notifications" role="tabpanel">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Email Notifications</h5>
+              <!-- Add content for email notifications here -->
+              <form>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="emailNotification1" name="emailNotification1">
+                  <label class="form-check-label" for="emailNotification1">
+                    Send me email notifications for important updates.
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="emailNotification2" name="emailNotification2">
+                  <label class="form-check-label" for="emailNotification2">
+                    Send me promotional emails.
+                  </label>
+                </div>
+                <!-- Add more email notification options here -->
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="web-widgets" role="tabpanel">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Web Application Widgets</h5>
+              <!-- Add content for web widgets here -->
+              <p>This section is where you can manage your web application widgets.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ... Remaining code ... -->
+
+        <div class="tab-pane fade" id="userdata" role="tabpanel">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Profile</h5>
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <!-- <th>ID</th> -->
+                    <!-- <td>{{ userData1.uid }}</td> -->
+                  </tr>
+                  <tr>
+                    <th>First Name</th>
+                    <td>{{ userData1.userFirstName }}</td>
+                  </tr>
+                  <tr>
+                    <th>Last Name</th>
+                    <td>{{ userData1.userLastName }}</td>
+                  </tr>
+                  <tr>
+                    <th>Company</th>
+                    <td>{{ userData1.companyuser }}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>{{ userData1.userName }}</td>
+                  </tr>
+                  <tr>
+                    <th>Phone</th>
+                    <td>{{ userData1.userphone }}</td>
+                  </tr>
+                  <tr>
+                    <th>Country</th>
+                    <td>{{ userData1.usercountry }}</td>
+                  </tr>
+                  <tr>
+                    <th>State</th>
+                    <td>{{ userData1.userstate }}</td>
+                  </tr>
+                  <tr>
+                    <th>City</th>
+                    <td>{{ userData1.usercity }}</td>
+                  </tr>
+                  <!-- Add more properties as needed -->
+                </tbody>
+              </table>
+              <button class="btn btn-primary" (click)="openUpdateProfileForm()">Update Profile</button>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ... Existing code ... -->
+
+        <div class="tab-pane fade" id="delete-accountuser" role="tabpanel">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Delete Account</h5>
+              <!-- Display user information to confirm deletion -->
+              <p>
+                You are about to delete the following account:
+              </p>
+              <ul>
+                <li><strong>Username:</strong> {{ userData1.userName }}</li>
+                <li><strong>First Name:</strong> {{ userData1.userFirstName }}</li>
+                <!-- <li><strong>User ID:</strong> {{ userData1.uid }}</li> -->
+              </ul>
+              <p>
+                This action cannot be undone. Are you sure you want to proceed?
+              </p>
+              <!-- Add a delete button to confirm account deletion -->
+              <button class="btn btn-danger" (click)="deleteAccount()">Delete Account</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ... Remaining code ... -->
+
+        <!-- Add more tab content here -->
+      </div>
+    </div>
+  </div>
+</div>

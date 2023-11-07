@@ -1,0 +1,128 @@
+<div class="container text-center">
+    <p><a routerLink="/login"><b>Post your resume</b></a> - It only takes a few seconds</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-2 hello text-center" style="padding: 15px;">
+            <a (click)="showContainer('jbfeed')">Job Feed</a>
+        </div>
+        <div class="col-md-2 hello text-center" style="padding: 15px;">
+            <a (click)="showContainer('showsearches')">Job Searches</a>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="container" [hidden]="!showJobFeed" id="jbfeed">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
+                        *ngFor="let job of jobs" (click)="selectJob(job)">
+                        <h1>{{ job.jobtitle }}</h1>
+                        <h2>{{ job.companyforthisjob }}</h2>
+                        <h4><strong>Number of Openings:</strong> {{ job.numberofopening }}</h4>
+                        <h4><strong>Location:</strong> {{ job.locationjob }}</h4>
+               
+                        <h4><strong>Schedule:</strong> {{ job.schedulejob }}</h4>
+                        <h4><strong>Pay:</strong> {{ job.payjob }}</h4>
+                        <!-- Display other relevant job information here -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
+                        <h2>{{ selectedJob.jobtitle }}</h2>
+                        <h3>{{ selectedJob.companyforthisjob }}</h3>
+                        <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
+                        <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
+                        <!-- <p>{{ selectedJob.location }}</p> -->
+                        <button type="button" class="btn btn-primary" (click)="navigateToSignIn()">Apply Now</button>
+                        <ul>
+                            <!-- <li>{{ selectedJob.descriptiondata }}</li> -->
+                        </ul>
+                    </div>
+
+                    <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
+                        <h2>{{ selectedJob.jobtitle }}</h2>
+                        <h3>{{ selectedJob.companyforthisjob }}</h3>
+                        <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
+                        <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
+                        <h4><strong>Job Type:</strong> {{ selectedJob.jobtype }}</h4>
+                        <h4><strong>Schedule:</strong> {{ selectedJob.schedulejob }}</h4>
+                        <h4><strong>Pay:</strong> {{ selectedJob.payjob }}</h4>
+                        <h4><strong>Pay Job Sup:</strong> {{ selectedJob.payjobsup }}</h4>
+                        <ul>
+                            <li *ngFor="let description of selectedJob.descriptiondata">{{ description }}</li>
+                        </ul>
+                    </div>
+                    
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" [hidden]="!showJobSearches" id="showsearches">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Trending Searches</h2>
+        
+            <button (click)="toggleTrending()" class="btn btn-primary text-center mt-4">
+                {{ showTrending ? 'Show Less' : 'Show More' }}
+            </button>
+            <div class="row mt-4" *ngIf="showTrending">
+                <div class="col-md-3">
+                    <ul class="list-unstyled">
+                        <li>Full Time Remote</li>
+                        <li>Full Time Kochi, Kerala</li>
+                        <!-- Add more items as needed -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul class="list-unstyled">
+                        <li>Full Time Indore, Madhya Pradesh</li>
+                        <li>Part Time Remote</li>
+                        <!-- Add more items as needed -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul class="list-unstyled">
+                        <li>Full Time Visakhapatnam, Andhra Pradesh</li>
+                        <li>Full Time Ahmedabad, Gujarat</li>
+                        <!-- Add more items as needed -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul class="list-unstyled">
+                        <li>Full Time Lucknow, Uttar Pradesh</li>
+                        <li>Work From Home Kalyan Dombivli, Maharashtra</li>
+                        <!-- Add more items as needed -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" [hidden]="jobs.length > 0" id="noJobsFoundCard">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h4 class="card-title">No Jobs Found</h4>
+                    <p class="card-text">There are no jobs available in this location.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

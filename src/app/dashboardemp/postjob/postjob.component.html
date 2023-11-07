@@ -1,0 +1,122 @@
+<div class="container shadow">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <div class="col">
+          <h2 class="text-dark text-center"><b>Create A Job Post</b></h2>
+        </div>
+        <div class="col text-center">
+          <img src="/assets/pictureindeed-removebg-preview.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Job Details</h2>
+  <form [formGroup]="jobPostForm" (ngSubmit)="jobdetailsform(jobPostForm)">
+    <div *ngIf="currentStep === 1">
+      <!-- Step 1: Job Title and Company Name -->
+      <div class="mb-3">
+        <label for="jobtitle" class="form-label">Job Title*</label>
+        <input type="text" class="form-control" id="jobtitle" formControlName="jobtitle" required>
+        <div *ngIf="jobPostForm.get('jobtitle')?.hasError('required')" class="text-danger">
+          Job Title is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="companyforthisjob" class="form-label">Company Name*</label>
+        <input type="text" class="form-control" id="companyforthisjob" formControlName="companyforthisjob" required>
+        <div *ngIf="jobPostForm.get('companyforthisjob')?.hasError('required')" class="text-danger">
+          Company Name is required.
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 2">
+      <!-- Step 2: Job Details -->
+      <div class="mb-3">
+        <label for="numberofopening" class="form-label">Number of Openings*</label>
+        <input type="number" class="form-control" id="numberofopening" formControlName="numberofopening" required>
+        <div *ngIf="jobPostForm.get('numberofopening')?.hasError('required')" class="text-danger">
+          Number of Openings is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="locationjob" class="form-label">Location</label>
+        <input type="text" class="form-control" id="locationjob" formControlName="locationjob">
+      </div>
+      <div class="mb-3">
+        <label for="jobtype" class="form-label">Job Type</label>
+        <input type="text" class="form-control" id="jobtype" formControlName="jobtype">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Schedule *</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="morningShift" (change)="updateSchedule($event, 'Morning Shift')" formControlName="schedulejob">
+          <label class="form-check-label" for="morningShift">Morning Shift</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="nightShift" (change)="updateSchedule($event, 'Night Shift')" formControlName="schedulejob">
+          <label class="form-check-label" for="nightShift">Night Shift</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="dayNightShift" (change)="updateSchedule($event, 'Day-Night Shift')" formControlName="schedulejob">
+          <label class="form-check-label" for="dayNightShift">Day-Night Shift</label>
+        </div>
+        <div *ngIf="jobPostForm.get('schedule')?.hasError('required')" class="text-danger">
+          Schedule is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="payjob" class="form-label">Pay*</label>
+        <input type="text" class="form-control" id="payjob" formControlName="payjob" required>
+        <div *ngIf="jobPostForm.get('payjob')?.hasError('required')" class="text-danger">
+          Pay is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="payjobsup" class="form-label">Supplemental Pay*</label>
+        <input type="text" class="form-control" id="payjobsup" formControlName="payjobsup" required>
+        <div *ngIf="jobPostForm.get('payjobsup')?.hasError('required')" class="text-danger">
+          Supplemental Pay is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="descriptiondata" class="form-label">Descriptiondata</label>
+        <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea>
+        <div *ngIf="jobPostForm.get('descriptiondata')?.hasError('required')" class="text-danger">
+          Descriptiondata is required.
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 3">
+      <!-- Step 3: Submission -->
+      <div class="mb-3">
+        <h4>Review your job post:</h4>
+        <p><strong>Job Title:</strong> {{ jobPostForm.value.jobtitle }}</p>
+        <p><strong>Company Name:</strong> {{ jobPostForm.value.companyforthisjob }}</p>
+        <p><strong>Number of Openings:</strong> {{ jobPostForm.value.numberofopening }}</p>
+        <p><strong>Location:</strong> {{ jobPostForm.value.locationJob }}</p>
+        <p><strong>Job Type:</strong> {{ jobPostForm.value.jobtype }}</p>
+        <p><strong>Schedule:</strong> {{ jobPostForm.value.schedulejob.join(', ') }}</p>
+        <p><strong>Pay:</strong> {{ jobPostForm.value.payjob }}</p>
+        <p><strong>Supplemental Pay:</strong> {{ jobPostForm.value.payjobsup }}</p>
+        <p><strong>descriptiondata:</strong> {{ jobPostForm.value.descriptiondata }}</p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

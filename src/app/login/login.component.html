@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="container login-container mt-5" style="background-color: white;">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="container">
+          <div class="text-center">
+            <img src="assets/Screenshot-2023-08-25-110628.png" alt="job4jobless" width="30%">
+            <h2>Sign in to job4jobless</h2>
+          </div>
+  
+          <!-- Sign-In Form -->
+          <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="userName" id="userName"
+                placeholder="Username or Email"
+                [ngClass]="{ 'is-invalid': loginform.get('userName')?.invalid && loginform.get('userName')?.touched }" />
+              <div class="invalid-feedback" *ngIf="loginform.get('userName')?.hasError('required')">
+                Username or Email is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" formControlName="userPassword" id="userPassword"
+                placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
+              <div class="form-group text-right"> <!-- Move this div to the right -->
+                <span class="password-toggle-ico" (click)="togglePasswordVisibility()">
+                  {{ passwordVisible ? 'Hide' : 'Show' }} Password
+                </span>
+              </div>
+            </div>
+            <!-- Move "Forgot your password?" link to the right bottom of the password input field -->
+            <div class="form-group text-right">
+              <a class="forgot-password-link" routerLink="/resetpass">Forgot your password?</a>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <div class="create-account-link text-center">
+              Don't have an account? <a routerLink="/register">Create Account.</a>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+      <div class="container text-center  p-4">
+      <!-- Google Sign-In Button with red background and white text -->
+      <button class="btn btn-block" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
+        <i class="fab fa-google"></i> Sign In with Google
+      </button>
+      </div>
+    </div>
+  </div>
+</div>

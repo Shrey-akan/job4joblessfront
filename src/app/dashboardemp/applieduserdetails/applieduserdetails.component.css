@@ -1,0 +1,12 @@
+.status-option {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .status-option:hover {
+    background-color: #f0f0f0;
+  }
+  

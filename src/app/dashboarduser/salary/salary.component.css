@@ -1,0 +1,5 @@
+.card-hover:hover {
+    border: 1px solid #007BFF; /* Add border on hover */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+    cursor: pointer;
+}

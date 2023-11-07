@@ -1,0 +1,64 @@
+/* Additional CSS styles for your UI */
+.local-video {
+  width: 100%; /* Make the local video full-width */
+  max-width: 100%;
+  border: 1px solid #ccc;
+  background-color: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  /* Add any other styles for the local video container */
+}
+
+/* Styles for the "Full Screen" button */
+.full-screen-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+/* Styles for chat panel scrolling */
+.chat-container {
+  height: 400px; /* Set a fixed height for scrolling */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Styles for chat messages */
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Styles for sent and received messages */
+.sent {
+  background-color: #007bff;
+  color: #fff;
+  text-align: right;
+}
+
+.received {
+  background-color: #f4f4f4;
+  text-align: left;
+  
+}
+
+.video-container {
+  position: relative;
+  
+}
+
+
+
+.video-container:nth-child(2) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

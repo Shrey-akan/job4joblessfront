@@ -1,0 +1,38 @@
+/* Client card styles */
+.client-card {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    transition: box-shadow 0.3s;
+}
+
+.client-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.client-card img {
+    max-width: 100%;
+}
+
+/* Testimonial styles */
+.testimonial {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.client-card:hover .testimonial {
+    display: block;
+}
+.card:hover {
+    border: 2px solid #007bff;
+}
+.card {
+    height: 100%;
+}
+p{
+    text-align: justify;
+  }

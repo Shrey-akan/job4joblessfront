@@ -1,0 +1,43 @@
+<div class="container text-center">
+  <h1>Edit Job</h1>
+  <form [formGroup]="jobForm" (ngSubmit)="updateJob()" class="job-form">
+    <div class="form-group">
+      <label for="jobTitle">Job Title</label>
+      <input type="text" class="form-control" id="jobTitle" formControlName="jobtitle" required>
+    </div>
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text" class="form-control" id="company" formControlName="companyforthisjob" required>
+    </div>
+    <div class="form-group">
+      <label for="openings">Number of Openings</label>
+      <input type="number" class="form-control" id="openings" formControlName="numberofopening" required>
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" id="location" formControlName="locationjob" required>
+    </div>
+    <div class="form-group">
+      <label for="jobType">Job Type</label>
+      <input type="text" class="form-control" id="jobType" formControlName="jobtype" required>
+    </div>
+    <div class="form-group">
+      <label for="schedule">Schedule</label>
+      <input type="text" class="form-control" id="schedule" formControlName="schedulejob" required>
+    </div>
+    <div class="form-group">
+      <label for="pay">Pay</label>
+      <input type="number" class="form-control" id="pay" formControlName="payjob" required>
+    </div>
+    <div class="form-group">
+      <label for="paySupport">Pay Support</label>
+      <input type="number" class="form-control" id="paySupport" formControlName="payjobsup" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" formControlName="descriptiondata" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Job</button>
+  </form>
+</div>

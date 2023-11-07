@@ -1,0 +1,9 @@
+/* Style the eye icon for the employer password toggle */
+.fa-eye {
+    cursor: pointer;
+  }
+  
+  .fa-eye-slash {
+    cursor: pointer;
+  }
+  
