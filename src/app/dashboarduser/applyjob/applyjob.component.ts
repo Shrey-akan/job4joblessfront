@@ -140,7 +140,7 @@ this.router.navigate(['/dashboarduser']);
       formData.append('file', this.selectedFile);
       formData.append('uid', this.uid);
 
-      this.http.post('https://job4jobless.com:9001/api/upload', formData).subscribe(
+      this.http.post('https://job4jobless.com:9001/api/uploadPdf', formData).subscribe(
    {
     next:     (response:any) => {
       console.log('File uploaded successfully');
