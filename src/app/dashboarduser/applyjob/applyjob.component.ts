@@ -141,7 +141,7 @@ console.log("checking the selected file ",this.selectedFile);
       formData.append('file', this.selectedFile);
       formData.append('uid', this.uid);
       console.log("checking the selected file ",formData);
-      this.http.post('https://job4jobless.com:9001/api/uploadPdf', formData).subscribe(
+      this.http.post('https://job4jobless.com:9001/uploadPdf', formData).subscribe(
    {
     next:     (response:any) => {
       console.log('File uploaded successfully');
