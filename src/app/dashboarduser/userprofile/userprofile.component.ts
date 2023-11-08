@@ -72,7 +72,7 @@ export class UserprofileComponent implements OnInit {
     });
 
 
-    this.pdfUrl = `https://job4jobless.com:9001/getPdfByUid/${this.userID}`;
+    this.pdfUrl = `https://job4jobless.com:9001/getPdfByUi/${this.userID}`;
     console.log('PDF URL:', this.pdfUrl);
 
   }
