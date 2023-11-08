@@ -19,6 +19,7 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
 import { CheckotpemployerComponent } from './checkotpemployer/checkotpemployer.component';
 import { ResetpasswordemployerComponent } from './resetpasswordemployer/resetpasswordemployer.component';
 import { FootercComponent } from './footerc/footerc.component';
+import { OvercomingComponent } from './overcoming/overcoming.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FootercComponent } from './footerc/footerc.component';
     ResetpassComponent,
     CheckotpemployerComponent,
     ResetpasswordemployerComponent,
-    FootercComponent
+    FootercComponent,
+    OvercomingComponent
   ],
   imports: [
     CommonModule,

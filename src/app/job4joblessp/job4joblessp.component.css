@@ -1,0 +1,17 @@
+.details-tip {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.summary-tip {
+    font-weight: bold;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.tip-content {
+    margin-top: 10px;
+}

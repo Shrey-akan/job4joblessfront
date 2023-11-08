@@ -14,6 +14,7 @@ import { OptverifyComponent } from './optverify/optverify.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
 import { CheckotpemployerComponent } from './checkotpemployer/checkotpemployer.component';
 import { ResetpasswordemployerComponent } from './resetpasswordemployer/resetpasswordemployer.component';
+import { OvercomingComponent } from './overcoming/overcoming.component';
 
 const routes: Routes = [
 
@@ -55,6 +56,9 @@ const routes: Routes = [
       },
       {
         path:'resetpasswordemployer' , component:ResetpasswordemployerComponent
+      },
+      {
+        path:'overcoming' , component:OvercomingComponent
       }
     ]
   },

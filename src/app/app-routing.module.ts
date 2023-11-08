@@ -72,7 +72,7 @@ const routes: Routes = [
     path: 'resetpassword', component: ResetpasswordComponent
   },
   {
-    path: 'job4joblessp', component: Job4joblesspComponent
+    path: 'job4joblessp/:id', component: Job4joblesspComponent
   },
   {
     path: '**', // This route will match any URL
