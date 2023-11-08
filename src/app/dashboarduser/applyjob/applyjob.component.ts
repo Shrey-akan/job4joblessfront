@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/auth/user.service';
   styleUrls: ['./applyjob.component.css']
 })
 export class ApplyjobComponent implements OnInit {
-
+  selectedFile: File | null = null;
   jobTitle: string | null = null;
   companyName: string | null = null;
   empId: string | null = null;
@@ -20,7 +21,7 @@ export class ApplyjobComponent implements OnInit {
   // router: any;
   data: any;
   uid!: string;
-  constructor(private formBuilder: FormBuilder, private router: Router, private b1: UserService,private cookie:CookieService) { }
+  constructor(private formBuilder: FormBuilder,private http:HttpClient, private router: Router, private b1: UserService,private cookie:CookieService) { }
 
 
 
@@ -125,4 +126,32 @@ this.router.navigate(['/dashboarduser']);
       reader.readAsDataURL(file);
     }
   }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadFile() {
+     // Get the 'uid' from the cookie
+  this.uid = this.cookie.get('uid');
+
+    if (this.selectedFile && this.uid) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+      formData.append('uid', this.uid);
+
+      this.http.post('https://job4jobless.com:9001/api/upload', formData).subscribe(
+   {
+    next:     (response:any) => {
+      console.log('File uploaded successfully');
+    },
+    error:(error:any) => {
+      console.error('File upload failed:', error);
+    }
+   }
+      );
+    }
+  }
+
+
 }

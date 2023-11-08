@@ -38,9 +38,10 @@
                         
                         <div class="mb-3">
                           <label class="form-label" for="resume">Upload Resume:</label>
-                          <input type="file" id="resume" class="form-control" formControlName="juresume"  (change)="onImageSelect($event)">
+                          <input type="file" id="resume" class="form-control" formControlName="juresume" (change)="onFileSelected($event)" />
+                          <!-- <input type="file" id="resume" class="form-control" formControlName="juresume"  (change)="onImageSelect($event)"> -->
                         </div>
-                        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                        <button class="btn btn-primary" (click)="nextStep(); uploadFile()">Next & Upload File</button>
                       </div>
   
                       <div *ngIf="currentStep === 2">
