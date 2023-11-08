@@ -25,6 +25,7 @@ interface User {
 export class UserprofileComponent implements OnInit {
   data: any
   userData1!: User;
+  public pdfUrl: string = '';
   abc: any;
   user: any;
   isOpen: boolean = false;
@@ -69,6 +70,9 @@ export class UserprofileComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
       verifyPassword: ['', Validators.required],
     });
+
+
+    this.pdfUrl = `https://job4jobless.com:9001/getPdfByUid/${this.userID}`;
   }
 
   submitForm() {
