@@ -50,10 +50,6 @@ export class UserService {
   getUser() {
     throw new Error('Method not implemented.');
   }
-
-
-
-
   private jobTitleSource = new BehaviorSubject<string | null>(null);
   private companyNameSource = new BehaviorSubject<string | null>(null);
 
