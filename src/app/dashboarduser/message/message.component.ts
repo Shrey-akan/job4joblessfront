@@ -80,7 +80,7 @@ export class MessageComponent implements OnInit {
           const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
           if (matchingEmployer) {
             // Matching employer found, store the name in employerNames
-            this.employerNames[messageFrom] = matchingEmployer.emplname;
+            this.employerNames[messageFrom] = matchingEmployer.empfname;
           }
         }
       } else {
