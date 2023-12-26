@@ -51,7 +51,7 @@ export class ApplyjobComponent implements OnInit {
       jujobtitle: ['', Validators.required],
       jucompanyname: ['', Validators.required],
       empid: ['', Validators.required],
-      jobid: this.jobId,
+      jobid: ['', Validators.required],
       uid: this.uid // Add the user ID to the form
     })
     // Add more steps as needed
@@ -61,6 +61,10 @@ export class ApplyjobComponent implements OnInit {
 
     this.b1.jobId$.subscribe((jobId) => {
       this.jobId = jobId;
+          // Set the value of the form control inside the subscription block
+    this.myformsubmission.get('jobid')?.setValue(this.jobId);
+
+    console.log("checking the jobid ", this.jobId);
     });
 
     this.b1.companyName$.subscribe((companyName) => {
