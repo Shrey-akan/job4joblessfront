@@ -14,6 +14,7 @@ export class ApplyjobComponent implements OnInit {
   selectedFile: File | null = null;
   jobTitle: string | null = null;
   companyName: string | null = null;
+  jobId:string | null = null;
   empId: string | null = null;
   imageSrc: string = 'https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png';
   myformsubmission!: FormGroup; // Initialize with an empty group
@@ -50,11 +51,16 @@ export class ApplyjobComponent implements OnInit {
       jujobtitle: ['', Validators.required],
       jucompanyname: ['', Validators.required],
       empid: ['', Validators.required],
+      jobid: ['', Validators.required],
       uid: this.uid // Add the user ID to the form
     })
     // Add more steps as needed
     this.b1.jobTitle$.subscribe((jobTitle) => {
       this.jobTitle = jobTitle;
+    });
+
+    this.b1.jobId$.subscribe((jobId) => {
+      this.jobId = jobId;
     });
 
     this.b1.companyName$.subscribe((companyName) => {
@@ -67,6 +73,7 @@ export class ApplyjobComponent implements OnInit {
     this.myformsubmission.get('jucompny')?.setValue(this.companyName);
     this.myformsubmission.get('jutitle')?.setValue(this.jobTitle);
     this.myformsubmission.get('empid')?.setValue(this.empId);
+    this.myformsubmission.get('jobid')?.setValue(this.jobId);
     this.loadFormDataFromLocalStorage();
   }
   loadFormDataFromLocalStorage() {

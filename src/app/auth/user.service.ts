@@ -52,11 +52,13 @@ export class UserService {
   }
   private jobTitleSource = new BehaviorSubject<string | null>(null);
   private companyNameSource = new BehaviorSubject<string | null>(null);
+  private jobIdSource = new BehaviorSubject<string | null>(null);
 
   private empIdSource = new BehaviorSubject<string | null>(null);
   empId$ = this.empIdSource.asObservable();
 
   jobTitle$ = this.jobTitleSource.asObservable();
+  jobId$ = this.jobIdSource.asObservable();
   companyName$ = this.companyNameSource.asObservable();
 
   setJobTitle(jobTitle: string) {
@@ -65,6 +67,9 @@ export class UserService {
 
   setEmpId(empId: string) {
     this.empIdSource.next(empId);
+  }
+  setJobId(jobId: string) {
+    this.empIdSource.next(jobId);
   }
 
   setCompanyName(companyName: string) {

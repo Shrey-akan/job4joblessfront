@@ -20,6 +20,7 @@ export class ApplyJob {
     juexpecsalary: string;
     empid: string;
     uid: string;
+    jobid:string;
     profileupdate: string;
     isOpen: boolean; // Add this property
     selectedOption: string; 
@@ -45,6 +46,7 @@ export class ApplyJob {
       this.juexpecsalary = "";
       this.empid = "";
       this.uid = "";
+      this.jobid="";
       this.profileupdate = "";
       this.isOpen = false;
       this.selectedOption = "";

@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
 
 interface Job {
+  jobid: string;
   jobtitle: string;
   companyforthisjob: string;
   numberofopening: string;
@@ -55,6 +56,7 @@ export class FindjobuComponent {
     this.b1.setJobTitle(this.selectedJob.jobtitle);
     this.b1.setCompanyName(this.selectedJob.companyforthisjob);
     this.b1.setEmpId(this.selectedJob.empid);
+    this.b1.setJobId(this.selectedJob.jobid);
     console.log('Setting EmpId:', this.selectedJob.empid);
   }
 
