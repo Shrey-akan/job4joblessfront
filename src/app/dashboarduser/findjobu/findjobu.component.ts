@@ -57,6 +57,7 @@ export class FindjobuComponent {
     this.b1.setCompanyName(this.selectedJob.companyforthisjob);
     this.b1.setEmpId(this.selectedJob.empid);
     this.b1.setJobId(this.selectedJob.jobid);
+    console.log("check the jobid for apply job",this.selectedJob.jobid);
     console.log('Setting EmpId:', this.selectedJob.empid);
   }
 

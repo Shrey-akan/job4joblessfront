@@ -70,6 +70,7 @@ export class UserService {
   }
   setJobId(jobId: string) {
     this.jobIdSource.next(jobId);
+    console.log("check the jobid",jobId);
   }
 
   setCompanyName(companyName: string) {
