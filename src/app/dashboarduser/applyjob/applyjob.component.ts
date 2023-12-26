@@ -75,6 +75,7 @@ export class ApplyjobComponent implements OnInit {
     this.myformsubmission.get('empid')?.setValue(this.empId);
     this.myformsubmission.get('jobid')?.setValue(this.jobId);
     this.loadFormDataFromLocalStorage();
+    console.log("checking the jobid ",this.jobId);
   }
   loadFormDataFromLocalStorage() {
     const savedData = localStorage.getItem('applyJobFormData');
