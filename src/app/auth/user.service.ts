@@ -69,7 +69,7 @@ export class UserService {
     this.empIdSource.next(empId);
   }
   setJobId(jobId: string) {
-    this.jobIdSource.next(jobId);
+    this.jobIdSource.next(  );
   }
 
   setCompanyName(companyName: string) {
