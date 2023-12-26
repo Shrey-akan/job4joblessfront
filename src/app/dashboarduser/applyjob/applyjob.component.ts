@@ -51,7 +51,7 @@ export class ApplyjobComponent implements OnInit {
       jujobtitle: ['', Validators.required],
       jucompanyname: ['', Validators.required],
       empid: ['', Validators.required],
-      jobid: ['', Validators.required],
+      jobid: this.jobId,
       uid: this.uid // Add the user ID to the form
     })
     // Add more steps as needed
