@@ -60,7 +60,13 @@ export class ApplyjobComponent implements OnInit {
     });
 
     this.b1.jobId$.subscribe((jobId) => {
-      this.jobIda = jobId;
+       // Ensure jobId is not null or undefined
+    if (jobId != null) {
+      // Set the value of the form control inside the subscription block
+      this.myformsubmission.get('jobid')?.setValue(jobId);
+
+      console.log("checking the jobid ", jobId);
+    }
     });
 
     this.b1.companyName$.subscribe((companyName) => {
@@ -73,9 +79,9 @@ export class ApplyjobComponent implements OnInit {
     this.myformsubmission.get('jucompny')?.setValue(this.companyName);
     this.myformsubmission.get('jutitle')?.setValue(this.jobTitle);
     this.myformsubmission.get('empid')?.setValue(this.empId);
-    this.myformsubmission.get('jobid')?.setValue(this.jobIda);
+    // this.myformsubmission.get('jobid')?.setValue(this.jobIda);
     this.loadFormDataFromLocalStorage();
-    console.log("checking the jobid ",this.jobIda);
+    // console.log("checking the jobid ",this.jobIda);
   }
   loadFormDataFromLocalStorage() {
     const savedData = localStorage.getItem('applyJobFormData');
