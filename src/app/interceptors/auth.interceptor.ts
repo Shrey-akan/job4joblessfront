@@ -16,8 +16,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private http: HttpClient) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('Intercepting request...');
-    console.log('Access Token:', AuthInterceptor.accessToken);
+    // console.log('Intercepting request...');
+    // console.log('Access Token:', AuthInterceptor.accessToken);
 
     const req = request.clone({
       setHeaders: {
