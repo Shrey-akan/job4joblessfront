@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
         const user = userCredential.user;
         console.log('Authenticated');
         console.log('User Info:', user);
-  66687769i8
         if (user.email) {
           // If the email is not null, proceed with further actions
           const userName = user.email;
