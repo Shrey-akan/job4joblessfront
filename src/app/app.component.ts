@@ -22,14 +22,14 @@ export class AppComponent implements OnInit {
   ngOnInit():void {
    
     const refreshToken = this.cookie.get('refreshToken');
-    console.log("Checking the method is running");
-    console.log("checking the value of refreshToken",refreshToken);
+    // console.log("Checking the method is running");
+    // console.log("checking the value of refreshToken",refreshToken);
     if (refreshToken) {
       this.http.post('https://job4jobless.com:9001/refreshToken', { refreshToken }).subscribe(
        {
         next:(response: any) => {
           if (response.accessToken) {
-            console.log(response.accessToken);
+            // console.log(response.accessToken);
             const accessToken = response.accessToken;
             
 
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
         },
         error:(error) => {
          // Handle the error here (e.g., redirect to login)
-         console.error('Error while refreshing the token:', error);
+        //  console.error('Error while refreshing the token:', error);
          // Redirect to the login page or display an error message
          this.router.navigate(['/login']);
         }
@@ -70,18 +70,18 @@ export class AppComponent implements OnInit {
     getToken(messaging, { vapidKey: environment.firebase.vapidKey })
       .then((currentToken) => {
         if (currentToken) {
-          console.log('Hurraaa!!! we got the token.....');
-          console.log(currentToken);
+          // console.log('Hurraaa!!! we got the token.....');
+          // console.log(currentToken);
           this.sendTokenToAPI(currentToken);
 
         } else {
-          console.log(
-            'No registration token available. Request permission to generate one.',
-          );
+          // console.log(
+          //   'No registration token available. Request permission to generate one.',
+          // );
         }
       })
       .catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
+        // console.log('An error occurred while retrieving token. ', err);
       });
   }
 
@@ -96,10 +96,10 @@ export class AppComponent implements OnInit {
     // Send the token and tokenid to your API
     this.http.post(apiUrl, { token, tokenid }).subscribe({
       next: (response: any) => {
-        console.log('Token and TokenID sent to the API successfully.');
+        // console.log('Token and TokenID sent to the API successfully.');
       },
       error: (error) => {
-        console.error('Error while sending the Token and TokenID to the API:', error);
+        // console.error('Error while sending the Token and TokenID to the API:', error);
       }
     });
   
@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
   listen() {
     const messaging = getMessaging();
     onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
+      // console.log('Message received. ', payload);
       this.message = payload;
     });
   }
