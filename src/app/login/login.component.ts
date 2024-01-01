@@ -30,14 +30,13 @@ export class LoginComponent implements OnInit {
     this.passwordVisible = !this.passwordVisible;
   }
   loginWithGoogle() {
-    this.userservice
-      .loginWithGoogle()
+    this.userservice.loginWithGoogle()
       .then((userCredential) => {
         // User is successfully authenticated
         const user = userCredential.user;
         console.log('Authenticated');
         console.log('User Info:', user);
-  
+  66687769i8
         if (user.email) {
           // If the email is not null, proceed with further actions
           const userName = user.email;

@@ -232,7 +232,7 @@ export class UserService {
     this.h1.post(this.logincheckurlgmail, data, { headers }).subscribe({
       next: (resp: any) => {
 
-
+        console.log(resp);
         console.log("Access Token Generated" + resp.accessToken);
         const mainres: User = resp;
         console.log(`Login response from the server: ${mainres}`);
@@ -571,7 +571,7 @@ export class UserService {
 
     this.h1.post(this.logincheckurlgmailemp, data, { headers }).subscribe({
       next: (resp: any) => {
-
+        console.log(resp);
         console.log("Access Token Generated" + resp.accessToken);
         const mainres: Employer = resp;
         console.log(`Login response from server: ${mainres}`);
