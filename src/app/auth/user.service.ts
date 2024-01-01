@@ -70,7 +70,7 @@ export class UserService {
   }
   setJobId(jobId: string) {
     this.jobIdSource.next(jobId);
-    console.log("check the jobid",jobId);
+    // console.log("check the jobid",jobId);
   }
 
   setCompanyName(companyName: string) {
@@ -128,31 +128,31 @@ export class UserService {
 
   //User 
   public insertusermail(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.inserturlc, data).subscribe({
       next: (resp: any) => {
 
-        console.log(resp);
+        // console.log(resp);
 
-        console.log("Data inserted");
+        // console.log("Data inserted");
       },
       error: (err: any) => {
-        console.log(err, "get the error");
+        // console.log(err, "get the error");
       }
     });
   }
 
   insertusermailgog(data: string) {
 
-    console.log("inside user google login");
+    // console.log("inside user google login");
 
     return this.h1.post(this.insertusermailurl, data).subscribe({
       next: (resp: any) => {
-        console.log(resp);
-        console.log("data inserted");
+        // console.log(resp);
+        // console.log("data inserted");
       },
       error: (err: any) => {
-        console.log(err, "get the error");
+        // console.log(err, "get the error");
       }
     })
   }
@@ -181,19 +181,19 @@ export class UserService {
   }
 
   public logincheck(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.logincheckurl, data).subscribe({
       next: (resp: any) => {
 
-        console.log("Access Token Generated" + resp.accessToken);
+        // console.log("Access Token Generated" + resp.accessToken);
         const mainres: User = resp;
-        console.log(`Login response from the server: ${mainres}`);
+        // console.log(`Login response from the server: ${mainres}`);
 
         // Store the access token and uid in cookies
         this.cookie.set('accessToken', resp.accessToken);
         this.cookie.set('uid', resp.uid);
         this.cookie.set('refreshToken', resp.refreshToken);
-        console.log("refresh token saved ", resp.refreshToken);
+        // console.log("refresh token saved ", resp.refreshToken);
         // Inside your logincheckgmail function
         const accessToken = resp.accessToken; // Assuming this is where you get the access token
         AuthInterceptor.accessToken = accessToken;
@@ -201,7 +201,7 @@ export class UserService {
         const isAuthenticated = resp.accessToken && resp.uid;
 
         if (isAuthenticated) {
-          console.log("Server responded with an object of the user");
+          // console.log("Server responded with an object of the user");
 
           // Redirect to the dashboard if the response is true
           alert('Login Successful!');
@@ -211,10 +211,10 @@ export class UserService {
           alert('Incorrect Credentials!');
           this.router.navigate(['/login']);
         }
-        console.log("Data checked");
+        // console.log("Data checked");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
         alert('Incorrect Credentials!');
         this.router.navigate(['/login']);
       }
@@ -232,17 +232,17 @@ export class UserService {
     this.h1.post(this.logincheckurlgmail, data, { headers }).subscribe({
       next: (resp: any) => {
 
-        console.log(resp);
-        console.log("Access Token Generated" + resp.accessToken);
+        // console.log(resp);
+        // console.log("Access Token Generated" + resp.accessToken);
         const mainres: User = resp;
-        console.log(`Login response from the server: ${mainres}`);
+        // console.log(`Login response from the server: ${mainres}`);
 
         // Store the access token and uid in cookies
         this.cookie.set('accessToken', resp.accessToken);
         this.cookie.set('uid', resp.uid);
         this.cookie.set('refreshToken', resp.refreshToken);
-        console.log("Refresh token saved ", resp.refreshToken);
-        console.log('Response from server:', resp);
+        // console.log("Refresh token saved ", resp.refreshToken);
+        // console.log('Response from server:', resp);
         // Inside your logincheckgmail function
         const accessToken = resp.accessToken; // Assuming this is where you get the access token
         AuthInterceptor.accessToken = accessToken;
@@ -251,9 +251,9 @@ export class UserService {
 
         // Check if both accessToken and uid are present to determine authentication
         const isAuthenticated = resp.accessToken && resp.uid;
-        console.log("Checking the value of isAuthenticated", isAuthenticated);
+        // console.log("Checking the value of isAuthenticated", isAuthenticated);
         if (isAuthenticated) {
-          console.log("Server responded with an object of the user");
+          // console.log("Server responded with an object of the user");
 
           // Redirect to the dashboard if the response is true
           alert('Login Successful!');
@@ -263,10 +263,10 @@ export class UserService {
           alert('Incorrect Credentials!');
           this.router.navigate(['/login']);
         }
-        console.log("Data checked");
+        // console.log("Data checked");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
         alert('Incorrect Credentials!');
         this.router.navigate(['/login']);
       }
@@ -336,7 +336,7 @@ export class UserService {
             if (response.status === 200) {
               // API call was successful
               const responseBody = response.body;
-              console.log('API Response:', responseBody);
+              // console.log('API Response:', responseBody);
 
               // You can access the data from the response as needed, e.g., responseBody.accessToken
               const accessToken = responseBody.accessToken;
@@ -344,15 +344,15 @@ export class UserService {
 
               // Handle the response data here
               if (accessToken && uid) {
-                console.log("Access Token Generated" + accessToken);
+                // console.log("Access Token Generated" + accessToken);
                 const mainres: User = response;
-                console.log(`Login response from the server: ${mainres}`);
+                // console.log(`Login response from the server: ${mainres}`);
 
                 // Store the access token and uid in cookies
                 this.cookie.set('accessToken', accessToken);
                 this.cookie.set('uid', uid);
                 this.cookie.set('refreshToken', responseBody.refreshToken);
-                console.log("refresh token saved ", responseBody.refreshToken);
+                // console.log("refresh token saved ", responseBody.refreshToken);
                 // Inside your logincheckgmail function
 
                 AuthInterceptor.accessToken = accessToken;
@@ -360,7 +360,7 @@ export class UserService {
                 const isAuthenticated = accessToken && uid;
                 // User data is available, do something with it
                 if (isAuthenticated) {
-                  console.log("Server responded with an object of the user");
+                  // console.log("Server responded with an object of the user");
 
                   // Redirect to the dashboard if the response is true
                   alert('Login Successful!');
@@ -379,7 +379,7 @@ export class UserService {
           },
           error: (error: any) => {
             // Handle HTTP error or client-side error here
-            console.error('API Error:', error);
+            // console.error('API Error:', error);
           }
         }
       );
@@ -413,30 +413,30 @@ export class UserService {
       // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.error(errorMessage);
+    // console.error(errorMessage);
     return throwError(errorMessage);
   }
 
 
   logincheckemp(data: any) {
-    console.log(data);
+    // console.log(data);
 
     return this.h1.post(this.employercheckurl, data).subscribe({
       next: (resp: any) => {
-        console.log("Access Token Generated" + resp.accessToken);
+        // console.log("Access Token Generated" + resp.accessToken);
         const mainres: Employer = resp;
-        console.log(`Login response from the server: ${mainres}`);
+        // console.log(`Login response from the server: ${mainres}`);
         this.cookie.set('emp', resp.empid);
         this.cookie.set('accessToken', resp.accessToken);
         this.cookie.set('refreshToken', resp.refreshToken);
-        console.log("Refresh token saved ", resp.refreshToken);
+        // console.log("Refresh token saved ", resp.refreshToken);
         // Inside your logincheckgmail function
         const accessToken = resp.accessToken; // Assuming this is where you get the access token
         AuthInterceptor.accessToken = accessToken;
         const isAuthenticated = resp.accessToken && resp.empid;
 
         if (isAuthenticated) {
-          console.log("Server responded with an object of employer");
+          // console.log("Server responded with an object of employer");
           alert('Login Successful!');
           this.router.navigate(['/dashboardemp']);
         } else {
@@ -445,7 +445,7 @@ export class UserService {
         }
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
         alert('Incorrect Credentials!');
         this.router.navigate(['/employer']);
       }
@@ -513,23 +513,23 @@ export class UserService {
             if (response.status === 200) {
               // API call was successful
               const responseBody = response.body;
-              console.log('API Response:', responseBody);
-              console.log("Response", response.accessToken);
+              // console.log('API Response:', responseBody);
+              // console.log("Response", response.accessToken);
 
               // You can access the data from the response as needed, e.g., responseBody.accessToken
               const accessToken = responseBody.accessToken;
               const empid = responseBody.empid;
-              console.log("AccessToken", accessToken);
-              console.log("empid", empid);
+              // console.log("AccessToken", accessToken);
+              // console.log("empid", empid);
               // Handle the response data here
               if (accessToken && empid) {
-                console.log("Access Token Generated" + accessToken);
+                // console.log("Access Token Generated" + accessToken);
                 const mainres: Employer = response;
-                console.log(`Login response from server: ${mainres}`);
+                // console.log(`Login response from server: ${mainres}`);
                 this.cookie.set('emp', empid);
                 this.cookie.set('accessToken', accessToken);
                 this.cookie.set('refreshToken', responseBody.refreshToken);
-                console.log('Refresh Token Saved:', responseBody.refreshToken);
+                // console.log('Refresh Token Saved:', responseBody.refreshToken);
                 // Inside your logincheckgmail function
 
                 AuthInterceptor.accessToken = accessToken;
@@ -537,7 +537,7 @@ export class UserService {
                 // Check if both accessToken and empid are present to determine authentication
                 const isAuthenticated = accessToken && empid;
                 if (isAuthenticated) {
-                  console.log("Server responded with an object of employer");
+                  // console.log("Server responded with an object of employer");
 
                   // Redirect to the dashboard if the response is true
                   alert('Login Successful!');
@@ -556,7 +556,7 @@ export class UserService {
           },
           error: (error: any) => {
             // Handle HTTP error or client-side error here
-            console.error('API Error:', error);
+            // console.error('API Error:', error);
           }
         }
       );
@@ -571,14 +571,14 @@ export class UserService {
 
     this.h1.post(this.logincheckurlgmailemp, data, { headers }).subscribe({
       next: (resp: any) => {
-        console.log(resp);
-        console.log("Access Token Generated" + resp.accessToken);
+        // console.log(resp);
+        // console.log("Access Token Generated" + resp.accessToken);
         const mainres: Employer = resp;
-        console.log(`Login response from server: ${mainres}`);
+        // console.log(`Login response from server: ${mainres}`);
         this.cookie.set('emp', resp.empid);
         this.cookie.set('accessToken', resp.accessToken); // Store access token in a cookie
         this.cookie.set('refreshToken', resp.refreshToken);
-        console.log("refresh token saved ", resp.refreshToken);
+        // console.log("refresh token saved ", resp.refreshToken);
         // Inside your logincheckgmail function
         const accessToken = resp.accessToken; // Assuming this is where you get the access token
         AuthInterceptor.accessToken = accessToken;
@@ -587,7 +587,7 @@ export class UserService {
         const isAuthenticated = resp.accessToken && resp.empid;
 
         if (isAuthenticated) {
-          console.log("Server responded with an object of employer");
+          // console.log("Server responded with an object of employer");
 
           // Redirect to the dashboard if the response is true
           alert('Login Successful!');
@@ -599,7 +599,7 @@ export class UserService {
         }
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
         alert('Incorrect Credentials!');
         this.router.navigate(['/employer']);
       }
@@ -610,33 +610,33 @@ export class UserService {
 
 
   public insertemployer(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.inserturle, data).subscribe({
       next: (resp: any) => {
 
-        console.log(resp);
+        // console.log(resp);
 
-        console.log("Data inserted");
+        // console.log("Data inserted");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
       }
     });
   }
 
 
   public insertemployeremail(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.inserturlemail, data).subscribe({
       next: (resp: any) => {
-        console.log("email is getting inserted");
-        console.log(resp);
+        // console.log("email is getting inserted");
+        // console.log(resp);
         this.router.navigate(['/dashboardemp/profilemep']);
 
-        console.log("Data inserted mail");
+        // console.log("Data inserted mail");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
       }
     });
   }
@@ -650,7 +650,7 @@ export class UserService {
 
   private handleError(error: any): Observable<never> {
 
-    console.error('An error occurred:', error);
+    // console.error('An error occurred:', error);
 
     // Return an observable with an error message or perform other error handling tasks.
     return throwError('Something went wrong. Please try again later.');
@@ -659,8 +659,8 @@ export class UserService {
   //Job Post
 
   public jobpostinsert(data: any): Observable<any> {
-    console.log("Data sent to server:", data);
-    console.log("done and check the data is coming or not ", data);
+    // console.log("Data sent to server:", data);
+    // console.log("done and check the data is coming or not ", data);
     return this.h1.post(this.inserturljobpost, data, { responseType: 'text' });
   }
 
@@ -675,16 +675,16 @@ export class UserService {
 
   //Conatct
   public insertcontact(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.inserturlcontact, data).subscribe({
       next: (resp: any) => {
 
-        console.log(resp);
+        // console.log(resp);
 
-        console.log("Data inserted");
+        // console.log("Data inserted");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
       }
     });
   }
@@ -708,31 +708,31 @@ export class UserService {
   }
   //insert apply form data
   public insertapplyjob(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.inserturlapplyjob, data).subscribe({
       next: (resp: any) => {
-        console.log(resp);
+        // console.log(resp);
 
-        console.log("Data inserted");
+        // console.log("Data inserted");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
       }
     });
   }
 
   //insert notification
   public insertnotification(data: any) {
-    console.log("done");
+    // console.log("done");
     return this.h1.post(this.notificationurl, data).subscribe({
       next: (resp: any) => {
-        console.log(resp);
+        // console.log(resp);
 
-        console.log("Data inserted");
+        // console.log("Data inserted");
         this.router.navigate(['/admin/dashboardadmin']);
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
       }
     });
   }
@@ -744,8 +744,8 @@ export class UserService {
 
   //Insert Resume
   public resumeinsert(data: any): Observable<any> {
-    console.log(data);
-    console.log("done");
+    // console.log(data);
+    // console.log("done");
 
     return this.h1.post(this.insert_resumeurl, data);
   }
@@ -770,22 +770,22 @@ export class UserService {
 
   //check all answere from database 
   public checkallanswer(userAnswers: any[]) {
-    console.log("Sending the answere to checked in database");
-    console.log(userAnswers, "checking all the values are correct or not");
+    // console.log("Sending the answere to checked in database");
+    // console.log(userAnswers, "checking all the values are correct or not");
 
     // Replace `this.checkalanswere` with the actual URL where your Spring backend is hosted
     const url = this.checkalanswere;
 
     return this.h1.post(url, userAnswers).subscribe({
       next: (resp: any) => {
-        console.log(resp);
+        // console.log(resp);
         if (resp) {
           this.router.navigate(['/dashboarduser/applyjob'])
         }
-        console.log("Data checked from the database");
+        // console.log("Data checked from the database");
       },
       error: (err: any) => {
-        console.log(err);
+        // console.log(err);
         this.router.navigate(['/dashboarduser/'])
       }
     });

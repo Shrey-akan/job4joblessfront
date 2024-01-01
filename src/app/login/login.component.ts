@@ -34,20 +34,20 @@ export class LoginComponent implements OnInit {
       .then((userCredential) => {
         // User is successfully authenticated
         const user = userCredential.user;
-        console.log('Authenticated');
-        console.log('User Info:', user);
+        // console.log('Authenticated');
+        // console.log('User Info:', user);
         if (user.email) {
           // If the email is not null, proceed with further actions
           const userName = user.email;
-          console.log(userName);
+          // console.log(userName);
           this.b1.logincheckgmail(userName);
           // this.userservice.insertusermailgog(userName);
         } else {
-          console.error('User email is null. Handle this case as needed.');
+          // console.error('User email is null. Handle this case as needed.');
         }
       })
       .catch((error) => {
-        console.error('Authentication Error:', error);
+        // console.error('Authentication Error:', error);
       });
   }
 }

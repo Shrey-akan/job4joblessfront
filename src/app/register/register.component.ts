@@ -68,21 +68,21 @@ if (innputElement) {
       .then((userCredential) => {
         // User is successfully authenticated
         const user = userCredential.user;
-        console.log('Authenticated');
-        console.log('User Info:', user);
+        // console.log('Authenticated');
+        // console.log('User Info:', user);
         const userName = user.email;
-        console.log(userName);
+        // console.log(userName);
         if (user.email) {
           const username = user.email;
-          console.log(userName);
+          // console.log(userName);
           this.userservice.createOrGetUser(userName);
         }
         else {
-          console.error('User email is null. Handle this case as needed.');
+          // console.error('User email is null. Handle this case as needed.');
         }
       })
       .catch((error: any) => {
-        console.error('Authentication Error:', error);
+        // console.error('Authentication Error:', error);
         // Handle authentication errors here
       });
   }
@@ -92,13 +92,13 @@ if (innputElement) {
       this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe({
         next: (payload: any) => {
 
-          console.log(payload);
-          console.log(payload.uid);
+          // console.log(payload);
+          // console.log(payload.uid);
           this.generateOtp(payload);
 
         },
         error: (err) => {
-          console.error(`Some error occurred: ${err}`);
+          // console.error(`Some error occurred: ${err}`);
         }
       });
     } else {
@@ -112,18 +112,18 @@ if (innputElement) {
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
-          console.log(response.otpCreated);
+          // console.log(response.otpCreated);
 
           this.router.navigate(['/checkotp', payload.uid]);
 
         }
         else {
-          console.error("Otp not generated");
+          // console.error("Otp not generated");
           alert("Otp not generated");
         }
       },
       error: (err) => {
-        console.error(`Some error occured: ${err}`);
+        // console.error(`Some error occured: ${err}`);
         alert(err);
       }
     })
@@ -137,10 +137,10 @@ if (innputElement) {
 
     if (empmatch) {
       this.router.navigate(['/seeker/']);
-      console.log(usersignin.value);
+      // console.log(usersignin.value);
     } else {
-      console.log(usersignin.value);
-      console.log("Invalid login");
+      // console.log(usersignin.value);
+      // console.log("Invalid login");
       alert("Invalid Details");
       // Optionally, show an error message to the user
     }
