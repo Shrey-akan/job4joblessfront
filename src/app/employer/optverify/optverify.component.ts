@@ -52,7 +52,7 @@ export class OptverifyComponent  implements OnInit {
     this.http.post('https://job4jobless.com:9001/verifyEmployer', { empmailid : empmailid })
         .subscribe({
             next: (response: any) => {
-                console.log("Employer verified successfully");
+                // console.log("Employer verified successfully");
                 // Navigate to the desired route (e.g., '/employer/empsign')
                 this.router.navigate(['/employer/empsign']);
                 alert('Register successful!');

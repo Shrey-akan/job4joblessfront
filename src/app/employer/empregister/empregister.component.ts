@@ -38,12 +38,12 @@ export class EmpregisterComponent {
 
 
   empRegisteration(): void {
-    console.log(this.employerdetails);
+    // console.log(this.employerdetails);
     this.http.post('https://job4jobless.com:9001/insertEmployer', this.employerdetails.getRawValue()).subscribe({
       next: (payload: any) => {
       
-          console.log(payload);
-          console.log(payload.empid);
+          // console.log(payload);
+          // console.log(payload.empid);
           this.generateOtp(payload);
         
       },
@@ -58,13 +58,13 @@ export class EmpregisterComponent {
       .then((userCredential) => {
         // User is successfully authenticated
         const user = userCredential.user;
-        console.log('Authenticated');
-        console.log('User Info:', user);
+        // console.log('Authenticated');
+        // console.log('User Info:', user);
         const empmailid = user.email;
-        console.log(empmailid);
+        // console.log(empmailid);
         if(user.email){
           const empmailid = user.email;
-          console.log(empmailid);
+          // console.log(empmailid);
           this.b1.createOrGetEmployer(empmailid);
         }
         else{
@@ -82,7 +82,7 @@ export class EmpregisterComponent {
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', {uid: payload.empid, email:payload.empmailid}).subscribe({
       next:(response: any) => {
         if(response.otpCreated) {
-          console.log(response.otpCreated);
+          // console.log(response.otpCreated);
 
 this.router.navigate(['/employer/optverify', payload.empid]);
           

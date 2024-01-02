@@ -39,7 +39,7 @@ export class ResetpasswordemployerComponent implements OnInit{
           {
             next: (response: any) => {
               // Handle success
-              console.log(response);
+              // console.log(response);
               this.successMessage = 'Password updated successfully';
               this.errorMessage = '';
               alert('Password updated successfully');

@@ -30,7 +30,7 @@ export class EmpsignComponent {
 
 
   empCheckInfo() {
-    console.log(this.empsignin.getRawValue());
+    // console.log(this.empsignin.getRawValue());
     return this.authService.logincheckemp(this.empsignin.getRawValue());
 
   }
@@ -41,8 +41,8 @@ export class EmpsignComponent {
       .then((userCredential) => {
         // User is successfully authenticated
         const user = userCredential.user;
-        console.log('Authenticated');
-        console.log('User Info:', user.email);
+        // console.log('Authenticated');
+        // console.log('User Info:', user.email);
         const empmailid = user.email;
         if (empmailid != null) {
           this.router.navigate(['/dashboardemp/profilemep']);
@@ -57,7 +57,7 @@ export class EmpsignComponent {
 
 
   insertemp() {
-    console.log("Done");
+    // console.log("Done");
     this.router.navigate(['/employer/empregister']);
     // return this.b1.insertempmailadd(emailFormemp.value).subscribe();
   }

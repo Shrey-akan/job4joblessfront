@@ -33,13 +33,13 @@ export class ResetpassComponent  implements OnInit{
 
   checkUser() {
     if (this.employerForm.valid) {
-      console.log("checking the user name", this.employerForm.value.empmailid); // Access the empmailid field from employerForm.value
+      // console.log("checking the user name", this.employerForm.value.empmailid);
       this.userService.checkEmployer(this.employerForm.value.empmailid).subscribe({
         next: (payload: any) => {
           this.user = payload.empmailid;
           this.errorMessage = undefined;
-          console.log(payload);
-          console.log(payload.empid);
+          // console.log(payload);
+          // console.log(payload.empid);
           this.generateOtp(payload);
         },
         error: (err: any) => {
@@ -56,7 +56,7 @@ export class ResetpassComponent  implements OnInit{
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.empid, email: payload.empmailid }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
-          console.log(response.otpCreated);
+          // console.log(response.otpCreated);
           this.router.navigate(['/employer/checkotpemployer', payload.empid]);
         }
         else {

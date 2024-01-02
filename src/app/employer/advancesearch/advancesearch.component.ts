@@ -33,11 +33,11 @@ export class AdvancesearchComponent {
 
   onSubmit() {
     if (this.fincvwit.valid) {
-      console.log("Valid");
-      console.log(this.fincvwit.value);
+      // console.log("Valid");
+      // console.log(this.fincvwit.value);
     }
     else{
-      console.log("Error");
+      // console.log("Error");
     }
   }
 }

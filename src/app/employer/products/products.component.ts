@@ -104,15 +104,15 @@ export class ProductsComponent implements OnInit{
 
 contactdetailsemp(contactForma:{value:any;}) {
   this.router.navigate(['/employer/']);
-    console.log(contactForma.value);
+    // console.log(contactForma.value);
   return this.b1.insertcontact(contactForma.value);
 }
 
 
 switchtoemployer(){
   if (this.companyswitch.valid) {
-    console.log(this.companyswitch.getRawValue());
-    console.log(this.companyswitch);
+    // console.log(this.companyswitch.getRawValue());
+    // console.log(this.companyswitch);
     return this.b1.logincheckemp(this.companyswitch.getRawValue());
   } else {
     // Form is not valid, display an alert

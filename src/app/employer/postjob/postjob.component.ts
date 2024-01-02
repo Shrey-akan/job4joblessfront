@@ -66,8 +66,8 @@ export class PostjobComponent implements OnInit {
 
   switchtoemployer() {
     if (this.companyswitch.valid) {
-      console.log(this.companyswitch.getRawValue());
-      console.log(this.companyswitch);
+      // console.log(this.companyswitch.getRawValue());
+      // console.log(this.companyswitch);
       return this.b1.logincheckemp(this.companyswitch.getRawValue());
     } else {
       // Form is not valid, display an alert
