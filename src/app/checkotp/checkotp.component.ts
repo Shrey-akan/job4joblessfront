@@ -13,98 +13,93 @@ export class CheckotpComponent implements OnInit {
   otpForm!: FormGroup;
   otp: string = '';
   otpExpired: boolean = false;
-  snackBar: any;
-  
-  constructor(private fb:FormBuilder, private http:HttpClient, private router:Router, private activatedRoute: ActivatedRoute,private b1:UserService) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.otpForm = this.fb.group({
       otp: ['', Validators.minLength(6)],
       email: ['', Validators.email]
-    })
+    });
   }
 
   verifyOTP(): void {
-
     const uid = this.activatedRoute.snapshot.paramMap.get('uid');
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {uid: this.activatedRoute.snapshot.paramMap.get('uid'), otp: this.otpForm.controls['otp'].value, email: this.otpForm.controls['email'].value})
+
+    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+      uid: this.activatedRoute.snapshot.paramMap.get('uid'),
+      otp: otpValue,
+      email: emailValue
+    })
     .subscribe({
       next: (payload: any) => {
-        if(payload.otpValid) {
-          if(!payload.otpExpired) {
-            
+        if (payload.otpValid) {
+          if (!payload.otpExpired) {
             this.updateUserificationStatus(emailValue);
-            
+          } else {
+            this.otpExpired = true;
+            alert('OTP expired. Resend OTP.'); // Show alert using standard alert
+            this.resendOTP();
           }
-          else {
-            this.otpExpired = true; 
-            this.snackBar.open('OTP expired', 'Resend', {
-              duration: 2000*60, // Display the message for 5 seconds
-            });
-              this.resendOTP();
-          }
-        }
-        else {
-          this.snackBar.open('OTP not valid', 'Dismiss', {
-            duration: 5000, // Display the message for 5 seconds
-          });
-          
+        } else {
+          this.showAlert('OTP not matched. Please enter the correct OTP.');
         }
       },
       error: (err) => {
-        console.error(`Some error occured: ${err}`);
+        console.error(`Some error occurred: ${err}`);
       }
-    })
-  }
-
-
-
-
-  updateUserificationStatus(userName:string):void{
-    this.http.post('https://job4jobless.com:9001/verifyUser', { userName:userName })
-    .subscribe({
-        next: (response: any) => {
-            console.log("User verified successfully");
-            // Navigate to the desired route (e.g., '/employer/empsign')
-            this.router.navigate(['/login']);
-            alert('Register successful!');
-        },
-        error: (err) => {
-            console.error(`Error updating employer verification status: ${err}`);
-        }
     });
-
   }
+
+  updateUserificationStatus(userName: string): void {
+    this.http.post('https://job4jobless.com:9001/verifyUser', { userName: userName })
+    .subscribe({
+      next: (response: any) => {
+        console.log("User verified successfully");
+        this.router.navigate(['/login']);
+        alert('Register successful!');
+      },
+      error: (err) => {
+        console.error(`Error updating employer verification status: ${err}`);
+      }
+    });
+  }
+
   resendOTP(): void {
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {uid: this.activatedRoute.snapshot.paramMap.get('uid'), otp: this.otpForm.controls['otp'].value, email: this.otpForm.controls['email'].value})
+    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+      uid: this.activatedRoute.snapshot.paramMap.get('uid'),
+      otp: this.otpForm.controls['otp'].value,
+      email: this.otpForm.controls['email'].value
+    })
     .subscribe({
       next: (payload: any) => {
-        if(payload.otpValid) {
-          if(!payload.otpExpired) {
-            
+        if (payload.otpValid) {
+          if (!payload.otpExpired) {
             this.router.navigate(['login']);
-            
+          } else {
+            this.otpExpired = true;
+            alert('OTP expired. Resend OTP.'); // Show alert using standard alert
           }
-          else {
-            this.otpExpired = true; 
-            this.snackBar.open('OTP expired', 'Resend', {
-              duration: 5000, // Display the message for 5 seconds
-            });
-
-          }
-        }
-        else {
-          this.snackBar.open('OTP not valid', 'Dismiss', {
-            duration: 5000, // Display the message for 5 seconds
-          });
-          
+        } else {
+          this.showAlert('OTP not matched. Please enter the correct OTP.');
         }
       },
       error: (err) => {
-        console.error(`Some error occured: ${err}`);
+        console.error(`Some error occurred: ${err}`);
       }
-    })
+    });
+  }
+
+  // Function to show alerts using standard alert
+  showAlert(message: string): void {
+    alert(message);
   }
 }
