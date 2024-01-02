@@ -11,12 +11,14 @@
           <label for="email" class="form-label">Enter Email:</label>
           <input type="email" id="email" class="form-control" formControlName="email" required>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="otpForm.invalid">Verify Otp</button>
+        <button type="submit" class="btn btn-primary" [disabled]="otpForm.invalid">Verify OTP</button>
       </form>
-<!-- Add the Resend button and bind its [disabled] property -->
-<!-- <button class="btn btn-primary" (click)="resendOTP()" [disabled]="!otpExpired">Resend OTP</button> -->
 
-
+      <!-- Resend OTP Section -->
+      <div *ngIf="otpExpired">
+        <p class="text-danger">OTP expired. Resend OTP:</p>
+        <button class="btn btn-primary" (click)="resendOTP()" [disabled]="resendButtonDisabled">Resend OTP</button>
+      </div>
     </div>
   </div>
 </div>
