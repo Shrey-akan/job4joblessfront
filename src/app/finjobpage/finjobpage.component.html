@@ -28,7 +28,7 @@
                         <h2>{{ job.companyforthisjob }}</h2>
                         <h4><strong>Number of Openings:</strong> {{ job.numberofopening }}</h4>
                         <h4><strong>Location:</strong> {{ job.locationjob }}</h4>
-               
+
                         <h4><strong>Schedule:</strong> {{ job.schedulejob }}</h4>
                         <h4><strong>Pay:</strong> {{ job.payjob }}</h4>
                         <!-- Display other relevant job information here -->
@@ -60,7 +60,7 @@
                             <li *ngFor="let description of selectedJob.descriptiondata">{{ description }}</li>
                         </ul>
                     </div>
-                    
+
 
 
 
@@ -76,7 +76,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <h2>Trending Searches</h2>
-        
+
             <button (click)="toggleTrending()" class="btn btn-primary text-center mt-4">
                 {{ showTrending ? 'Show Less' : 'Show More' }}
             </button>
