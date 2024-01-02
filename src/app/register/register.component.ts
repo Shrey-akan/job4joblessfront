@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   formSubmitted: any;
   passwordVisible: boolean = false;
   data: any;
-
+  loading: boolean = false; // Added loading flag
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userservice: UserService, private http: HttpClient) {
   }

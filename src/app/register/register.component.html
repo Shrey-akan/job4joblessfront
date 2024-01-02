@@ -122,7 +122,11 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
+              <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
+                <span *ngIf="!loading">Register</span>
+                <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
+              </button>
+              
             </form>
           </div>
         </div>
