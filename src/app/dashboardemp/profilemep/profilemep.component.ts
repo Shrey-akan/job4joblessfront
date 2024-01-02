@@ -43,25 +43,25 @@ export class ProfilemepComponent implements OnInit {
 
     this.empId = this.cookie.get('emp');
 
-    console.log(this.empId);
-    console.log('Employer ID from cookie:', this.empId);
+    // console.log(this.empId);
+    // console.log('Employer ID from cookie:', this.empId);
     let response = this.b1.fetchemployer();
 
     response.subscribe((data1: any) => {
       // Debugging: Log the data received from the API
-      console.log('Data from API:', data1);
+      // console.log('Data from API:', data1);
       const eeid = this.empId;
-      console.log(eeid);
+      // console.log(eeid);
 
       // Filter the data array to include only the user with the matching userID
       // this.data = data1.find((user: any) => user.uid === uuid);
       this.empDetail = data1.find((emp: any) => emp.empid == eeid);
-      console.log(this.empDetail);
+      // console.log(this.empDetail);
       // Debugging: Log the filtered data
-      console.log("hello");
-      console.log('Filtered Data:', this.empDetail);
+      // console.log("hello");
+      // console.log('Filtered Data:', this.empDetail);
       this.abc = this.empDetail.empmailid;
-      console.log(this.abc);
+      // console.log(this.abc);
     });
 
     this.passwordResetForm = this.fb.group({
@@ -75,7 +75,7 @@ export class ProfilemepComponent implements OnInit {
 
   submitForm() {
     if (this.passwordResetForm.valid) {
-      console.log(this.abc);
+      // console.log(this.abc);
       // Set empmailid field in formData to the value of abc
       this.passwordResetForm.patchValue({ empmailid: this.abc });
 
@@ -86,7 +86,7 @@ export class ProfilemepComponent implements OnInit {
           {
             next: (response: any) => {
               // Handle success
-              console.log(response);
+              // console.log(response);
               this.successMessage = 'Password updated successfully';
               this.errorMessage = '';
               alert('Password updated successfully');
@@ -129,7 +129,7 @@ export class ProfilemepComponent implements OnInit {
 
 
   deleteAccountemp() {
-    console.log(this.empId);
+    // console.log(this.empId);
     // Use this.userID to pass the user's ID for deletion
     this.b1.deleteEmployer(this.empId).subscribe(
       {

@@ -42,26 +42,26 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
     // Check if the userID is correctly retrieved from the cookie
     this.userID = this.cookie.get('uid');
-    console.log(this.userID);
-    console.log('User ID from cookie:', this.userID);
+    // console.log(this.userID);
+    // console.log('User ID from cookie:', this.userID);
 
     let response = this.b1.fetchuser();
 
     response.subscribe((data1: any) => {
       // Debugging: Log the data received from the API
-      console.log('Data from API:', data1);
+      // console.log('Data from API:', data1);
       const uuid = this.userID;
-      console.log(uuid);
+      // console.log(uuid);
 
       // Filter the data array to include only the user with the matching userID
       // this.data = data1.find((user: any) => user.uid === uuid);
       this.userData1 = data1.find((user: any) => user.uid == uuid);
-      console.log(this.userData1);
+      // console.log(this.userData1);
       // Debugging: Log the filtered data
-      console.log("hello");
-      console.log('Filtered Data:', this.userData1);
+      // console.log("hello");
+      // console.log('Filtered Data:', this.userData1);
       this.abc = this.userData1.userName;
-      console.log(this.abc);
+      // console.log(this.abc);
     });
 
     this.passwordResetForm = this.formBuilder.group({
@@ -73,7 +73,7 @@ export class UserprofileComponent implements OnInit {
 
 
     this.pdfUrl = `https://job4jobless.com:9001/getPdfByUi/${this.userID}`;
-    console.log('PDF URL:', this.pdfUrl);
+    // console.log('PDF URL:', this.pdfUrl);
 
   }
 
@@ -90,7 +90,7 @@ export class UserprofileComponent implements OnInit {
      {
       next:     (response: any) => {
         // Handle success
-        console.log(response);
+        // console.log(response);
         this.successMessage = 'Password updated successfully';
         this.errorMessage = '';
         alert('Password updated successfully');
@@ -124,7 +124,7 @@ export class UserprofileComponent implements OnInit {
     this.router.navigate(['/dashboarduser/updateprofile', this.userID]);
   }
   deleteAccount() {
-    console.log(this.userID);
+    // console.log(this.userID);
     // Use this.userID to pass the user's ID for deletion
     this.b1.deleteUser(this.userID).subscribe(
       {

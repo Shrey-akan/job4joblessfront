@@ -41,7 +41,7 @@ export class UpdatejobComponent implements OnInit {
       .subscribe(
        {
         next: (response:any) => {
-          console.log('Job updated successfully', response);
+          // console.log('Job updated successfully', response);
           alert("JOB UPDATED SUCCESSFULLY");
           // Handle success (e.g., show a success message)
         },

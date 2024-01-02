@@ -53,25 +53,25 @@ export class UpdateprofileComponent implements OnInit {
     }
 
     this.userID = this.cookie.get('uid');
-    console.log(this.userID);
-    console.log('User ID from cookie:', this.userID);
+    // console.log(this.userID);
+    // console.log('User ID from cookie:', this.userID);
 
     let response = this.b1.fetchuser();
 
     response.subscribe((data1: any) => {
       // Debugging: Log the data received from the API
-      console.log('Data from API:', data1);
+      // console.log('Data from API:', data1);
       const uuid = this.userID;
-      console.log(uuid);
+      // console.log(uuid);
 
       // Filter the data array to include only the user with the matching userID
       // this.data = data1.find((user: any) => user.uid === uuid);
       this.userData1 = data1.find((user: any) => user.uid == uuid);
-      console.log(this.userData1);
+      // console.log(this.userData1);
       // Debugging: Log the filtered data
-      console.log('Filtered Data:', this.userData1);
+      // console.log('Filtered Data:', this.userData1);
       this.abc = this.userData1.uid;
-      console.log(this.abc);
+      // console.log(this.abc);
     });
 
     // Initialize the form with default values or load existing employee data
@@ -99,7 +99,7 @@ export class UpdateprofileComponent implements OnInit {
     if (this.userform.valid) {
       // Extract updated user data from the form
       const updatedUser = this.userform.value;
-      console.log(updatedUser);
+      // console.log(updatedUser);
       this.b1
         .updateUser(updatedUser)
         .pipe(
@@ -112,7 +112,7 @@ export class UpdateprofileComponent implements OnInit {
         .subscribe({
           next: (response) => {
             // Handle the success response here
-            console.log('Profile updated successfully:', response);
+            // console.log('Profile updated successfully:', response);
             alert("Profile updated successfully");
             this.router.navigate(['/dashboarduser/userprofile']);
           },

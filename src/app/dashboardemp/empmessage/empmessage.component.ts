@@ -31,11 +31,11 @@ export class EmpmessageComponent implements OnInit {
   }
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get("uid");
-  console.log("uid:", this.uid); 
+  // console.log("uid:", this.uid); 
     // Get the "to" value from the cookie (assuming "empemailid" is the cookie name)
     this.message.messageFrom = this.cookie.get('emp');
-    console.log(this.message.messageFrom);
-    console.log(this.uid);
+    // console.log(this.message.messageFrom);
+    // console.log(this.uid);
 
     this.fetchMessages();
     this.messageForm = this.formBuilder.group({
@@ -80,7 +80,7 @@ export class EmpmessageComponent implements OnInit {
         .post<SendMessage>('https://job4jobless.com:9001/send', messageToSend)
         .subscribe({
           next: (response: any) => {
-            console.log('Message sent successfully:', response);
+            // console.log('Message sent successfully:', response);
             // Optionally, reset the form
             this.messageForm.patchValue({
               message: '',

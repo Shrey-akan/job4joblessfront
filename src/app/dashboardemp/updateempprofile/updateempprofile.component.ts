@@ -39,25 +39,25 @@ if (innputElement) {
 
     this.empId = this.cookie.get('emp');
 
-    console.log(this.empId);
-    console.log('Employer ID from cookie:', this.empId);
+    // console.log(this.empId);
+    // console.log('Employer ID from cookie:', this.empId);
     let response = this.b1.fetchemployer();
   
     response.subscribe((data1: any) => {
       // Debugging: Log the data received from the API
-      console.log('Data from API:', data1);
+      // console.log('Data from API:', data1);
       const eeid=this.empId;
-      console.log(eeid);
+      // console.log(eeid);
       
       // Filter the data array to include only the user with the matching userID
       // this.data = data1.find((user: any) => user.uid === uuid);
       this.empDetail = data1.find((emp: any) => emp.empid == eeid);
-      console.log(this.empDetail);
+      // console.log(this.empDetail);
       // Debugging: Log the filtered data
-      console.log("hello");
-      console.log('Filtered Data:', this.empDetail);
+      // console.log("hello");
+      // console.log('Filtered Data:', this.empDetail);
       this.abc = this.empDetail.empmailid;
-      console.log(this.abc);
+      // console.log(this.abc);
     });
 
 
@@ -86,7 +86,7 @@ if (innputElement) {
     if (this.employeeForm.valid) {
       // Extract updated employee data from the form
       const updatedEmployee = this.employeeForm.value;
-      console.log(updatedEmployee);
+      // console.log(updatedEmployee);
       this.b1.updateEmployee(updatedEmployee)
       .pipe(
         catchError((error) => {
@@ -98,7 +98,7 @@ if (innputElement) {
       .subscribe({
         next: (response) => {
           // Handle the success response here
-          console.log('Profile updated successfully:', response);
+          // console.log('Profile updated successfully:', response);
           alert("Profile updated successfully");
           this.router.navigate(['/dashboardemp/profilemep']);
         },

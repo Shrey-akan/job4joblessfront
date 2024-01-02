@@ -26,11 +26,11 @@ export class HeaderdashboardempComponent implements OnInit {
   logoutEmployer() {
     // Retrieve the refresh token from the cookie
     const refreshToken = this.cookie.get('refreshToken');
-    console.log('Refresh token:', refreshToken);
+    // console.log('Refresh token:', refreshToken);
 
     // Ensure refreshToken is not empty
     if (!refreshToken) {
-      console.log('Refresh token is missing.');
+      // console.log('Refresh token is missing.');
       return;
     }
 
@@ -39,7 +39,7 @@ export class HeaderdashboardempComponent implements OnInit {
       responseType: 'text' // Specify the response type as 'text'
     }).subscribe({
       next: (response: string) => {
-        console.log('Logout response:', response);
+        // console.log('Logout response:', response);
 
         // Assuming the response is a simple message like "Logout successful"
         if (response === 'Logout successful') {
@@ -47,21 +47,21 @@ export class HeaderdashboardempComponent implements OnInit {
           this.cookie.delete('accessToken');
           this.cookie.delete('emp');
           // Handle the successful logout response
-          console.log('Logout successful');
+          // console.log('Logout successful');
 
           alert('Logout successful');
           // Navigate to the employer login page or any other desired route
           this.router.navigate(['/employer']);
         } else {
           // Handle other responses or errors
-          console.log('Logout failed:', response);
+          // console.log('Logout failed:', response);
         }
       },
       error: (error) => {
         // Handle errors if the logout request fails
-        console.log('Logout error', error);
-        console.log('HTTP Status:', error.status);
-        console.log('Error Message:', error.message);
+        // console.log('Logout error', error);
+        // console.log('HTTP Status:', error.status);
+        // console.log('Error Message:', error.message);
         // You can add additional error handling here if needed
       }
     });

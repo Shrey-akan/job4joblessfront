@@ -55,7 +55,7 @@ export class SalaryComponent {
     this.b1.setJobTitle(this.selectedJob.jobtitle);
     this.b1.setCompanyName(this.selectedJob.companyforthisjob);
     this.b1.setEmpId(this.selectedJob.empid);
-    console.log('Setting EmpId:', this.selectedJob.empid);
+    // console.log('Setting EmpId:', this.selectedJob.empid);
   }
 
   userID: String = '0';
@@ -66,25 +66,25 @@ export class SalaryComponent {
     response.subscribe((data1: any) => (this.data = data1));
 
     this.userID = this.cookie.get('user');
-    console.log(this.userID);
-    console.log('User ID from cookie:', this.userID);
+    // console.log(this.userID);
+    // console.log('User ID from cookie:', this.userID);
 
     let responseUser = this.b1.fetchuser();
 
     responseUser.subscribe((data1: any) => {
       // Debugging: Log the data received from the API
-      console.log('Data from API:', data1);
+      // console.log('Data from API:', data1);
       const uuid = this.userID;
-      console.log(uuid);
+      // console.log(uuid);
 
       // Filter the data array to include only the user with the matching userID
       this.userData1 = data1.find((user: any) => user.uid == uuid);
-      console.log(this.userData1);
+      // console.log(this.userData1);
       // Debugging: Log the filtered data
-      console.log('hello');
-      console.log('Filtered Data:', this.userData1);
+      // console.log('hello');
+      // console.log('Filtered Data:', this.userData1);
       this.abc = this.userData1.userName;
-      console.log(this.abc);
+      // console.log(this.abc);
       this.fetchApplyJob();
     });
   }
@@ -94,7 +94,7 @@ export class SalaryComponent {
 
     response.subscribe((data1: any) => {
       this.datajobs = data1.filter((apply: any) => apply.jumail == this.abc);
-      console.log('Filtered Data:', this.datajobs);
+      // console.log('Filtered Data:', this.datajobs);
     });
   }
 

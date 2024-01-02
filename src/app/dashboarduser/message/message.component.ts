@@ -50,14 +50,14 @@ export class MessageComponent implements OnInit {
 
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter((message) => {
-        console.log('message from', message.messageFrom);
-        console.log('message to' , message.messageTo);
-        console.log('userID', this.userID);
+        // console.log('message from', message.messageFrom);
+        // console.log('message to' , message.messageTo);
+        // console.log('userID', this.userID);
 
         if (!uniqueNames.has(message.messageFrom)&&(message.messageTo == this.userID)) {
           uniqueNames.add(message.messageFrom);
-                console.log(message.messageTo === this.userID);
-                console.log(message.messageTo === this.abc);
+                // console.log(message.messageTo === this.userID);
+                // console.log(message.messageTo === this.abc);
           return message.messageTo === this.userID;
         }
         return false;
@@ -74,7 +74,7 @@ export class MessageComponent implements OnInit {
     
     // Fetch employer data, including empid and name
     this.b1.fetchemployer().subscribe((employerData: any) => {
-      console.log('Employer Data:', employerData);
+      // console.log('Employer Data:', employerData);
       if (Array.isArray(employerData)) {
         for (const messageFrom of uniqueMessageFromValues) {
           const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
@@ -135,7 +135,7 @@ export class MessageComponent implements OnInit {
   startVideoCall() {
     if (this.selectedUser) {
       // Route to the video call page with the selected user as a route parameter
-      console.log("check the selectUser",this.selectedUser);
+      // console.log("check the selectUser",this.selectedUser);
       this.router.navigate(['/dashboarduser/videocall', this.selectedUser]); // Adjust the route as per your project's configuration
     }
   }

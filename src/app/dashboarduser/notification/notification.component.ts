@@ -17,15 +17,15 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
-    console.log(this.userID);
-    console.log('User ID from cookie:', this.userID);
+    // console.log(this.userID);
+    // console.log('User ID from cookie:', this.userID);
     this.fetchNotifications();
   }
 
   fetchNotifications(): void {
     this.notificationService.fetchnotify().subscribe({
       next: (response: any) => {
-        console.log('Fetched notifications:', response);
+        // console.log('Fetched notifications:', response);
         // Filter notifications based on the user ID
         this.notifications = response.filter((notification: any) => {
           return notification.notifyuid === this.userID;

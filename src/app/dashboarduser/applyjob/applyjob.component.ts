@@ -129,7 +129,7 @@ this.router.navigate(['/dashboarduser']);
         this.imageSrc = reader.result as string;
   
         if (typeof reader.result === 'string') {
-          console.log('Base64 Image Data:', reader.result);
+          // console.log('Base64 Image Data:', reader.result);
         }
       };
       reader.readAsDataURL(file);
@@ -143,17 +143,17 @@ this.router.navigate(['/dashboarduser']);
   uploadFile() {
      // Get the 'uid' from the cookie
   this.uid = this.cookie.get('uid');
-console.log("checking the selected file ",this.selectedFile);
+// console.log("checking the selected file ",this.selectedFile);
     if (this.selectedFile && this.uid) {
-      console.log("checking the selected file ",this.selectedFile);
+      // console.log("checking the selected file ",this.selectedFile);
       const formData = new FormData();
       formData.append('file', this.selectedFile);
       formData.append('uid', this.uid);
-      console.log("checking the selected file ",formData);
+      // console.log("checking the selected file ",formData);
       this.http.post('https://job4jobless.com:9001/uploadPdf', formData).subscribe(
    {
     next:     (response:any) => {
-      console.log('File uploaded successfully');
+      // console.log('File uploaded successfully');
     },
     error:(error:any) => {
       console.error('File upload failed:', error);

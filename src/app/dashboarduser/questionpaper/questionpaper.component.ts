@@ -54,7 +54,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
           }
         });
     
-        console.log(this.userAnswers+"checking the user answere");
+        // console.log(this.userAnswers+"checking the user answere");
         this.http.checkallanswer(this.userAnswers);
       }
 

@@ -84,7 +84,7 @@ export class ResumeComponent implements OnInit {
         this.http.resumeinsert(resumeData).subscribe(
           (response) => {
             // Handle the response from the backend, e.g., show a success message
-            console.log('Submitted data to backend:', response);
+            // console.log('Submitted data to backend:', response);
 
             // Clear local storage and reset the form only after a successful submission
             this.resumeForm.reset();

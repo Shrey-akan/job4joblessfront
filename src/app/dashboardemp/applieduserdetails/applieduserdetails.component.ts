@@ -88,7 +88,7 @@ export class ApplieduserdetailsComponent implements OnInit {
     // Make an HTTP request to update the 'profileupdate' field in the database
     this.b1.updateProfileUpdate(application).subscribe((updatedApplication: any) => {
       // Handle the response if needed
-      console.log('Profile updated:', updatedApplication);
+      // console.log('Profile updated:', updatedApplication);
     });
   }
   toggleDropdown(application: any) {
@@ -98,7 +98,7 @@ export class ApplieduserdetailsComponent implements OnInit {
   selectOption(application: any, option: string) {
     this.selectedOption = option; // Update the selected option
     application.isOpen = false;
-    console.log('Selected option:', this.selectedOption); // Add this line to check the selected option
+    // console.log('Selected option:', this.selectedOption); 
   }
   generateTablePDF() {
     const table = document.getElementById('dataTable');

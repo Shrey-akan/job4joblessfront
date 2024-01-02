@@ -41,11 +41,11 @@ export class VideocallComponent implements OnInit {
   ngOnInit(): void {
 
     this.uid = this.route.snapshot.paramMap.get("uid");
-    console.log("uid:", this.uid); 
+    // console.log("uid:", this.uid); 
       // Get the "to" value from the cookie (assuming "empemailid" is the cookie name)
       this.message.messageFrom = this.cookie.get('emp');
-      console.log(this.message.messageFrom);
-      console.log(this.uid);
+      // console.log(this.message.messageFrom);
+      // console.log(this.uid);
   
       this.fetchMessages();
       this.messageForm = this.formBuilder.group({
@@ -91,7 +91,7 @@ export class VideocallComponent implements OnInit {
         .post<SendMessage>('https://job4jobless.com:9001/send', messageToSend)
         .subscribe({
           next: (response: any) => {
-            console.log('Message sent successfully:', response);
+            // console.log('Message sent successfully:', response);
             // Optionally, reset the form
             this.messageForm.patchValue({
               message: '',
@@ -107,7 +107,7 @@ export class VideocallComponent implements OnInit {
     }
   }
   createRoom() {
-    console.log('Creating Room');
+    // console.log('Creating Room');
     const roomInput = this.roomInput.nativeElement.value.trim();
     if (!roomInput) {
       alert('Please enter room number');
@@ -116,7 +116,7 @@ export class VideocallComponent implements OnInit {
     this.room_id = this.PRE + roomInput + this.SUF;
     this.peer = new Peer(this.room_id);
     this.peer.on('open', (id: any) => {
-      console.log('Peer Connected with ID: ', id);
+      // console.log('Peer Connected with ID: ', id);
       this.hideModal();
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }) // Updated getUserMedia
         .then((stream: MediaStream) => {
@@ -124,7 +124,7 @@ export class VideocallComponent implements OnInit {
           this.setLocalStream(this.local_stream);
         })
         .catch((err: any) => {
-          console.log(err);
+          // console.log(err);
         });
       this.notify('Waiting for peer to join.');
     });
@@ -166,7 +166,7 @@ export class VideocallComponent implements OnInit {
   }
 
   joinRoom() {
-    console.log('Joining Room');
+    // console.log('Joining Room');
     const room = this.roomInput.nativeElement.value.trim();
     if (!room) {
       alert('Please enter room number');
@@ -176,7 +176,7 @@ export class VideocallComponent implements OnInit {
     this.hideModal();
     this.peer = new Peer();
     this.peer.on('open', (id: string) => {
-      console.log('Connected with Id: ' + id);
+      // console.log('Connected with Id: ' + id);
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }) // Updated getUserMedia
         .then((stream: MediaStream) => {
           this.local_stream = stream;
@@ -189,7 +189,7 @@ export class VideocallComponent implements OnInit {
           this.currentPeer = call;
         })
         .catch((err: any) => {
-          console.log(err);
+          // console.log(err);
         });
     });
   }
@@ -213,7 +213,7 @@ export class VideocallComponent implements OnInit {
           sender?.replaceTrack(videoTrack); // Add type guards here
           this.screenSharing = true;
         }
-        console.log(this.screenStream);
+        // console.log(this.screenStream);
       }
     });
   }
@@ -255,7 +255,7 @@ export class VideocallComponent implements OnInit {
       if (localVideoElement.requestFullscreen) {
         if (!document.fullscreenElement) {
           localVideoElement.requestFullscreen().catch(err => {
-            console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+            // console.log(`Error attempting to enable full-screen mode: ${err.message}`);
           });
         } else {
           document.exitFullscreen();

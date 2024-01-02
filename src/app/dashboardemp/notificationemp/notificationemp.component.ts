@@ -23,7 +23,7 @@ export class NotificationempComponent implements OnInit {
     this.isLoading = true;
     this.notificationService.fetchnotify().subscribe({
       next: (response: any) => {
-        console.log('Fetched notifications:', response);
+        // console.log('Fetched notifications:', response);
         
         // Filter notifications based on the user ID
         this.notifications = response.filter((notification: any) => {

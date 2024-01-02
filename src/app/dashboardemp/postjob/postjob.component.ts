@@ -41,7 +41,7 @@ export class PostjobComponent implements OnInit {
       empid: ['', Validators.required],
     });
     this.abc = this.cookie.get('emp');
-    console.log(this.abc);
+    // console.log(this.abc);
     this.jobPostForm.get('empid')?.setValue(this.abc);
      // Load saved data from the service (if available)
      const savedData = this.jobPostService.loadFormData();
@@ -70,8 +70,8 @@ export class PostjobComponent implements OnInit {
       // Submit the form
       this.b1.jobpostinsert(jobPostForm.value).subscribe({
         next: (resp: any) => {
-          console.log(resp);
-          console.log("Data inserted");
+          // console.log(resp);
+          // console.log("Data inserted");
           // Clear the saved data from local storage after a successful submission
           this.jobPostService.clearFormData();
           this.router.navigate(['/dashboardemp/alljobs']);
