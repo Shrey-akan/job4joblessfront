@@ -69,7 +69,7 @@ export class AlljobsComponent implements OnInit {
         this.selectedJob = { ...this.selectedJob, applicants: users };
         this.openModal();
       },
-      (error: any) => {
+      (error: any) => { 
         console.error('Error fetching applied users:', error);
         // Handle error and show appropriate message
       }
