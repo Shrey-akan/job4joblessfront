@@ -29,6 +29,9 @@ interface Job {
 ],
 })
 export class FindjobComponent implements OnInit{
+performSearch() {
+throw new Error('Method not implemented.');
+}
   data1: any;
   companies = [
     {
