@@ -130,6 +130,11 @@ export class FindjobComponent implements OnInit{
     this.router.navigate(['/login']);
   }
 
+  navigateToSignUp() {
+    // Replace 'sign-in' with the actual route name of your sign-in page
+    this.router.navigate(['/register']);
+  }
+
   showTrending = false;
 
   toggleTrending() {

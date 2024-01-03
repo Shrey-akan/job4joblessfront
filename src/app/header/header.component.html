@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white" *ngIf="showNavbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-blue" *ngIf="showNavbar">
     <div class="container">
         <img src="assets/Job4jobless & Hustleforwork-01.png" alt="" width="25%"  style="cursor: pointer"
         onclick="window.location.href = '/'">
@@ -35,7 +35,7 @@
                 [queryParams]="{ uid: uid, accessToken: accessToken }">Dashboard</button>
 
             <!-- Show Login button when the user is not authenticated -->
-            <button *ngIf="!showDashboardButton" type="button" class="btn btn-success"
+            <button *ngIf="!showDashboardButton" type="button" class="btn btn-secondary rounded-pill"
                 routerLink="/login">Sign-In</button>
 
             <!-- Other content of your app -->

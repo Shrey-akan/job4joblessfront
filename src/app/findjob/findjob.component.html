@@ -1,5 +1,4 @@
-<div class="container-fluid"
-    style="margin-bottom: 15px; background-color: #007BFF; padding: 50px; border-bottom-left-radius: 50px;">
+<div class="container-fluid" style="background-color: #add8e6; padding: 50px;">
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
@@ -10,15 +9,16 @@
                                 <div class="col-md-6 offset-md-3">
                                     <a routerLink="/finjobpage">
                                         <div class="input-group rounded">
-                                            <input type="text" id="findjob" name="findjob" class="form-control rounded"
+                                            <input type="text" id="findjob" name="findjob"
+                                                class="form-control rounded-pill border-0 py-3 px-4"
                                                 placeholder="Search Career or Company" [(ngModel)]="searchQuery" />
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary rounded" type="button">Search</button>
+                                                <button class="btn btn-primary rounded-pill px-4"
+                                                    style="background-color: #e6f7ff; color: black;" type="button">Search</button>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -30,160 +30,157 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md text-center">
-                            <div class="rounded shadow p-2" style="background-color: white;">
-                                <h2 style="font-weight: bold;">Let Employers Find You!</h2>
-                                <p>Get discovered by 10,000+ Employers & apply to jobs in a single click</p>
-                                <p>Get notified about jobs matching your criteria</p>
-                                <p>Create Job Alert</p>
-                                <button class="btn btn-danger" (click)="navigateToSignIn()">Register for Free</button>
+                            <div class="rounded shadow p-4"
+                                style="background-color: #e6f7ff; border-radius: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <h2 class="font-weight-bold text-center mb-4">Let Employers Find You!</h2>
+                                <p class="text-center mb-3">Get discovered by 10,000+ Employers & apply to jobs in a
+                                    single click</p>
+                                <p class="text-center mb-3">Get notified about jobs matching your criteria</p>
+                                <p class="text-center mb-3">Create Job Alert</p>
+                                <button class="btn btn-danger btn-block" (click)="navigateToSignUp()">Register for
+                                    Free</button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<marquee behavior="scroll" direction="left" scrollamount="8" style="margin-top: 10px;">
-    <p style="font-size: 18px; color: #ff4500; font-weight: bold;">Welcome to Job4Jobless - Your Gateway to Opportunities!</p>
-  </marquee>
-
-<div class="container mt-4 category-location-container">
-    <div class="row">
-        <div class="col-md-4 text-center section">
-            <h2>Show Jobs by Location</h2>
-            <div class="links">
-                <a *ngFor="let location of data" [routerLink]="['/finjobpage', location.locationjob]">
-                    {{ location.locationjob }}
-                </a>
-            </div>
-        </div>
-        <div class="col-md-5 text-center section">
-            <h2>Show Jobs by Category</h2>
-            <div class="links">
-                <a *ngFor="let location of data" [routerLink]="['/finjobpage', location.jobtitle]">
-                    {{ location.jobtitle }}
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="image-slider">
-                <img [src]="images[currentImageIndex]" alt="Slider Image" class="slider-image" [@fadeInOut]="'in'" />
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-
-<!-- <div class="container">
-    <h2 class="text-center mt-4" style="font-size: 2rem; text-shadow: 3px 3px 5px #888; color: black;">Top Recruiters
-        Hiring</h2>
-    <div class="row m-4">
-        <div class="logo-container">
-            <div *ngFor="let company of companies" class="company-logo">
-                <img [src]="company.logoUrl" alt="{{ company.name }}" />
-            </div>
-        </div>
-
-    </div>
-</div> -->
-
-
-
-
-
-<div class="container text-center">
-    <p><a routerLink="/login"><b>Post your resume</b></a> - It only takes a few seconds</p>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-2 hello text-center" style="padding: 15px;">
-            <h2><a href="#" (click)="showContainer('jbfeed')">Job Feed</a></h2>
-        </div>
-        <div class="col-md-2 hello text-center" style="padding: 15px;">
-            <h2><a href="#" (click)="showContainer('showsearches')">Job Searches</a></h2>
-        </div>
-    </div>
-</div>
-<hr>
-
-<div class="container" [hidden]="!showJobFeed" id="jbfeed">
-    <div class="row">
-        <div class="col-md-6">
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
-                        *ngFor="let job of getJobsForCurrentPage()" (click)="selectJob(job)">
-                        <h1>{{ job.jobtitle }}</h1>
-                        <h2>{{ job.companyforthisjob }}</h2>
-                        <h4><strong>Number of Openings:</strong> {{ job.numberofopening }}</h4>
-                        <h4><strong>Location:</strong> {{ job.locationjob }}</h4>
-               
-                        <h4><strong>Schedule:</strong> {{ job.schedulejob }}</h4>
-                        <h4><strong>Pay:</strong> {{ job.payjob }}</h4>
-                        <!-- Display other relevant job information here -->
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
-                        <h2>{{ selectedJob.jobtitle }}</h2>
-                        <h3>{{ selectedJob.companyforthisjob }}</h3>
-                        <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
-                        <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
-                        <!-- <p>{{ selectedJob.location }}</p> -->
-                        <button type="button" class="btn btn-primary" (click)="navigateToSignIn()">Apply Now</button>
-                        <ul>
-                            <!-- <li>{{ selectedJob.descriptiondata }}</li> -->
-                        </ul>
-                    </div>
-
-                    <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
-                        <h2>{{ selectedJob.jobtitle }}</h2>
-                        <h3>{{ selectedJob.companyforthisjob }}</h3>
-                        <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
-                        <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
-                        <h4><strong>Job Type:</strong> {{ selectedJob.jobtype }}</h4>
-                        <h4><strong>Schedule:</strong> {{ selectedJob.schedulejob }}</h4>
-                        <h4><strong>Pay:</strong> {{ selectedJob.payjob }}</h4>
-                        <h4><strong>Pay Job Sup:</strong> {{ selectedJob.payjobsup }}</h4>
-                        <ul>
-                            <li *ngFor="let description of selectedJob.descriptiondata">{{ description }}</li>
-                        </ul>
-                    </div>
-
-
-
 
                 </div>
             </div>
         </div>
     </div>
-    <div class="pagination">
-        <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
-            Previous
-        </button>
-        <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
-        <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
-            Next
-        </button>
+</div>
+<div class="container-fluid py-4" style="background-color: #add8e6;">
+    <div class="container category-location-container">
+        <div class="row">
+            <div class="col-md-5 text-center section rounded-pill" style="background-color: #e6f7ff;">
+                <h2>Show Jobs by Location</h2>
+                <div class="links rounded-pill">
+                    <a *ngFor="let location of data" [routerLink]="['/finjobpage', location.locationjob]">
+                        {{ location.locationjob }}
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5 text-center section rounded-pill" style="background-color: #e6f7ff;">
+                <h2>Show Jobs by Category</h2>
+                <div class="links">
+                    <a *ngFor="let location of data" [routerLink]="['/finjobpage', location.jobtitle]">
+                        {{ location.jobtitle }}
+                    </a>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+
+    <!-- <div class="container">
+        <h2 class="text-center mt-4" style="font-size: 2rem; text-shadow: 3px 3px 5px #888; color: black;">Top Recruiters
+            Hiring</h2>
+        <div class="row m-4">
+            <div class="logo-container">
+                <div *ngFor="let company of companies" class="company-logo">
+                    <img [src]="company.logoUrl" alt="{{ company.name }}" />
+                </div>
+            </div>
+    
+        </div>
+    </div> -->
+
+
+
+
+
+    <div class="container mt-2 text-center">
+        <p><a routerLink="/login"><b>Post your resume</b></a> - It only takes a few seconds</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2 hello text-center" style="padding: 15px;">
+                <h2><a href="#" (click)="showContainer('jbfeed')">Job Feed</a></h2>
+            </div>
+            <div class="col-md-2 hello text-center" style="padding: 15px;">
+                <h2><a href="#" (click)="showContainer('showsearches')">Job Searches</a></h2>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container" [hidden]="!showJobFeed" id="jbfeed">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
+                            *ngFor="let job of getJobsForCurrentPage()" (click)="selectJob(job)">
+                            <h1>{{ job.jobtitle }}</h1>
+                            <h2>{{ job.companyforthisjob }}</h2>
+                            <h4><strong>Number of Openings:</strong> {{ job.numberofopening }}</h4>
+                            <h4><strong>Location:</strong> {{ job.locationjob }}</h4>
+
+                            <h4><strong>Schedule:</strong> {{ job.schedulejob }}</h4>
+                            <h4><strong>Pay:</strong> {{ job.payjob }}</h4>
+                            <!-- Display other relevant job information here -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
+                            <h2>{{ selectedJob.jobtitle }}</h2>
+                            <h3>{{ selectedJob.companyforthisjob }}</h3>
+                            <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
+                            <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
+                            <!-- <p>{{ selectedJob.location }}</p> -->
+                            <button type="button" class="btn btn-primary" (click)="navigateToSignIn()">Apply
+                                Now</button>
+                            <ul>
+                                <!-- <li>{{ selectedJob.descriptiondata }}</li> -->
+                            </ul>
+                        </div>
+
+                        <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
+                            <h2>{{ selectedJob.jobtitle }}</h2>
+                            <h3>{{ selectedJob.companyforthisjob }}</h3>
+                            <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
+                            <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
+                            <h4><strong>Job Type:</strong> {{ selectedJob.jobtype }}</h4>
+                            <h4><strong>Schedule:</strong> {{ selectedJob.schedulejob }}</h4>
+                            <h4><strong>Pay:</strong> {{ selectedJob.payjob }}</h4>
+                            <h4><strong>Pay Job Sup:</strong> {{ selectedJob.payjobsup }}</h4>
+                            <ul>
+                                <li *ngFor="let description of selectedJob.descriptiondata">{{ description }}</li>
+                            </ul>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+                Previous
+            </button>
+            <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
+            <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)"
+                [disabled]="currentPage === totalPages">
+                Next
+            </button>
+        </div>
+
     </div>
 
 </div>
-
 
 
 <div class="container" [hidden]="!showJobSearches" id="showsearches">
     <div class="row">
         <div class="col-md-12 text-center">
             <h2>Trending Searches</h2>
-          
+
             <button (click)="toggleTrending()" class="btn btn-primary text-center mt-4">
                 {{ showTrending ? 'Show Less' : 'Show More' }}
             </button>
@@ -256,12 +253,12 @@
 </div>
 
 <div class="container">
-    <div class="row text-center mt-4" style="color: blue;">
+    <div class="row text-center mt-4" style="color: black;">
         <h1><b>PRODUCTS AND SERVICES</b></h1>
 
     </div>
     <div class="row" style="padding-bottom: 10px;">
-        <div class="col-md-6" style="border-right: 2px solid blue;">
+        <div class="col-md-6" style="border-right: 2px solid grey;">
             <div class="container">
                 <div class="row">
                     <h1><b>For Employers</b></h1>
@@ -365,7 +362,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6" style="border-left: 2px solid blue;">
+        <div class="col-md-6" style="border-left: 2px solid grey;">
             <div class="container">
                 <div class="row">
                     <h1><b>For Job Seekers</b></h1>
@@ -490,6 +487,21 @@
         <div class="col-md-6 text-center">
             <!-- <img src="assets/job4jobless-app.png" alt="Download QR Code" > -->
             <img src="assets/job4jobless-app-01.png" style="height:40vh;" alt="">
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+         
+            <div class="modal-body">
+                <img src="assets/popupimage.jpg" alt="Popup Image" class="img-fluid">
+                <div class="button-container">
+                    <button class="btn btn-primary button-signin" onclick="navigateToSignIn()">Sign In</button>
+                    <button class="btn btn-success button-register" onclick="navigateToSignUp()">Register</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
