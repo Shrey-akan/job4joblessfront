@@ -273,6 +273,17 @@ export class UserService {
     });
   }
 
+
+
+  fetchapplyformbyjobid(empid: string, jobid: string): Observable<any> {
+    const url = `https://job4jobless.com:9001/fetchapplyformbyjobid?empid=${empid}&jobid=${jobid}`;
+    return this.h1.get(url).pipe(
+      catchError(error => {
+        console.error('Error fetching apply form by job id:', error);
+        return throwError('Failed to fetch apply form by job id');
+      })
+    );
+  }
   // public createOrGetUser(userName: any) {
   //   const data = { userName }; // Wrap the username in an object
 

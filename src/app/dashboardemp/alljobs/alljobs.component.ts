@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-alljobs',
   templateUrl: './alljobs.component.html',
@@ -12,32 +14,28 @@ export class AlljobsComponent implements OnInit {
   data: any;
   empDetail: any;
   abc: any;
+  selectedJob: any;
 
-  constructor(public cookie: CookieService, private b1: UserService, private router: Router, private cdr: ChangeDetectorRef) { }
-
+  constructor(
+    public cookie: CookieService,
+    private b1: UserService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   empId: String = "0";
 
   ngOnInit(): void {
     this.empId = this.cookie.get('emp');
+    this.fetchEmployerDetails();
+  }
 
-    // console.log(this.empId);
-    // console.log('Employer ID from cookie:', this.empId);
-
-    // Fetch employer details
+  fetchEmployerDetails() {
     let response = this.b1.fetchemployer();
     response.subscribe((data1: any) => {
-      // console.log('Data from API:', data1);
       const eeid = this.empId;
-      // console.log(eeid);
-
       this.empDetail = data1.find((emp: any) => emp.empid == eeid);
-      // console.log(this.empDetail);
-
       this.abc = this.empDetail.empid;
-      // console.log(this.abc);
-
-      // Now that we have the empmailid, fetch job post details
       this.fetchJobPostDetails();
     });
   }
@@ -47,22 +45,43 @@ export class AlljobsComponent implements OnInit {
 
     response.subscribe((data1: any) => {
       this.data = data1.filter((job: any) => job.empid == this.abc);
-
-      // Initialize the showDetails property for each job
       this.data.forEach((job: any) => {
         job.showDetails = false;
       });
-
-      // console.log('Filtered Data:', this.data);
     });
   }
 
-
   showMoreInfo(job: any): void {
-    // Toggle the showDetails property to show/hide additional job details
     job.showDetails = !job.showDetails;
-    // console.log('showDetails:', job.showDetails); 
-    this.cdr.detectChanges(); // Trigger change detection to update the view
+
+    if (job.showDetails) {
+      this.fetchAppliedUsers(job.empid, job.jobid);
+    }
+
+    this.cdr.detectChanges();
+  }
+
+  fetchAppliedUsers(empid: string, jobid: string) {
+    let response = this.b1.fetchapplyformbyjobid(empid, jobid);
+  
+    response.subscribe(
+      (users: any) => {
+        this.selectedJob = { ...this.selectedJob, applicants: users };
+        this.openModal();
+      },
+      (error: any) => {
+        console.error('Error fetching applied users:', error);
+        // Handle error and show appropriate message
+      }
+    );
+  }
+
+  openModal() {
+    $('.modal').modal('show');
+  }
+
+  closeModal() {
+    $('.modal').modal('hide');
   }
 
   editJob(jobid: string) {
