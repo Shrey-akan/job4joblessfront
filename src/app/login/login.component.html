@@ -3,18 +3,18 @@
     <div class="col-md-4"></div>
     <div class="col-md-8">
       <div class="container-fluid">
-        <div class="container login-container mt-5" style=" padding: 20px;">
+        <div class="container login-container mt-5" style="padding: 20px;">
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-6">
               <div class="container">
                 <div class="text-center">
-                  <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" width="100%">
+                  <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" class="img-fluid" width="100%">
                   <h2>Sign in to job4jobless</h2>
                 </div>
-                
+
                 <!-- Sign-In Form -->
-                  <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
+                <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
                   <div class="form-group">
                     <input type="text" class="form-control" formControlName="userName" id="userName"
                       placeholder="Username or Email"
@@ -26,13 +26,12 @@
                   <div class="form-group">
                     <input type="password" class="form-control" formControlName="userPassword" id="userPassword"
                       placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
-                    <div class="form-group text-right"> <!-- Move this div to the right -->
+                    <div class="form-group text-right">
                       <span class="password-toggle-ico" (click)="togglePasswordVisibility()">
                         {{ passwordVisible ? 'Hide' : 'Show' }} Password
                       </span>
                     </div>
                   </div>
-                  <!-- Move "Forgot your password?" link to the right bottom of the password input field -->
                   <div class="form-group text-right">
                     <a class="forgot-password-link" routerLink="/resetpass">Forgot your password?</a>
                   </div>
@@ -45,7 +44,7 @@
                 </form>
               </div>
             </div>
-            <div class="container text-center p-4">
+            <div class="container text-center p-4 d-none d-md-block"> <!-- Hide on small screens -->
               <!-- Google Sign-In Button on the right side -->
               <button class="btn btn-block" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
                 <i class="fab fa-google"></i> Sign In with Google
