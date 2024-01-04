@@ -166,82 +166,67 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 cursor: pointer;
 }
 
-
 .popup {
-display: flex;
-justify-content: center;
-align-items: center;
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.7);
-z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
 }
 
-.popup-content {
-background: #fff;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-position: relative;
-max-width: 400px; /* Adjust the max-width as needed */
-width: 100%;
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex; /* Updated to flex */
+  max-width: 800px; /* Adjust the max-width as needed */
+  width: 100%;
 }
 
-.cancel-icon {
-position: absolute;
-top: 10px;
-right: 10px;
-font-size: 20px;
-cursor: pointer;
-}
-
-img {
-max-width: 100%;
-height: auto;
-border-radius: 5px;
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px; /* Optional spacing between image and buttons */
 }
 
 .button-container {
+  flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  gap: 10px; /* Spacing between buttons */
+  padding-left: 10px; /* Optional spacing between image and buttons */
 }
 
-.marquee {
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 0 15px;
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
 }
 
-.marquee-content {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee 10s linear infinite;
-}
-
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-
-.button {
-padding: 10px 10px;
-font-size: 16px;
-cursor: pointer;
+.btn {
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%; /* Make buttons full width of their container */
 }
 
 .button-signin {
-background-color: #007BFF;
-color: #fff;
-border: none;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
 }
 
 .button-register {
-background-color: #28a745;
-color: #fff;
-border: none;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
 }
