@@ -40,7 +40,7 @@
     <div *ngIf="currentStep === 2">
       <!-- Step 2: Job Details -->
       <div class="mb-3">
-        <label for="numberofopening" class="form-label">Number of Openings*</label>
+        <label for="numberofopening" class="form-label">Vacancies*</label>
         <input type="number" class="form-control" id="numberofopening" formControlName="numberofopening" required>
         <div *ngIf="jobPostForm.get('numberofopening')?.hasError('required')" class="text-danger">
           Number of Openings is required.
@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="descriptiondata" class="form-label">Descriptiondata</label>
+        <label for="descriptiondata" class="form-label">Description data</label>
         <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea>
         <div *ngIf="jobPostForm.get('descriptiondata')?.hasError('required')" class="text-danger">
           Descriptiondata is required.
