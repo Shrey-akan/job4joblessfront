@@ -49,7 +49,7 @@ if (innputElement) {
       ],
       companyuser: [''],
       websiteuser: [''],
-      userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       usercountry: ['', Validators.required],
       userstate: ['', Validators.required],
       usercity: ['', Validators.required]

@@ -28,7 +28,7 @@ export class EmpregisterComponent {
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
       ]],
-      empphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      empphone: ['',  [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       empcompany: [''],
       descriptionemp: [''],
      empcountry: ['', Validators.required],
