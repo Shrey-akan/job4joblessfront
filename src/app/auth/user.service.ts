@@ -781,27 +781,55 @@ export class UserService {
 
 
 
-  //check all answere from database 
+
+  //   public checkallanswer(userAnswers: any[]) {
+
+  //     const url = this.checkalanswere;
+
+  //     return this.h1.post(url, userAnswers).subscribe({
+  //       next: (resp: any) => {
+
+  //         if (resp) {
+  //           this.router.navigate(['/dashboarduser/applyjob']);
+  //         }
+  //         else{
+  //           this.router.navigate(['/dashboarduser']);
+  //         }
+
+  //       },
+  //       error: (err: any) => {
+
+  //         this.router.navigate(['/dashboarduser/'])
+  //       }
+  //     });
+  //   }
+
   public checkallanswer(userAnswers: any[]) {
-    // console.log("Sending the answere to checked in database");
-    // console.log(userAnswers, "checking all the values are correct or not");
-
-    // Replace `this.checkalanswere` with the actual URL where your Spring backend is hosted
     const url = this.checkalanswere;
-
+  
     return this.h1.post(url, userAnswers).subscribe({
       next: (resp: any) => {
-        // console.log(resp);
         if (resp) {
-          this.router.navigate(['/dashboarduser/applyjob'])
+          // If response is true
+          this.router.navigate(['/dashboarduser/applyjob']);
+          // Show alert with success message
+          alert('Answers checked successfully. You passed!');
+        } else {
+          // If response is false
+          this.router.navigate(['/dashboarduser']);
+          // Show alert with failure message
+          alert('Answers checked. Unfortunately, you did not pass. Try again.');
         }
-        // console.log("Data checked from the database");
       },
       error: (err: any) => {
-        // console.log(err);
-        this.router.navigate(['/dashboarduser/'])
+        // Handle error and navigate to the appropriate route
+        console.error(err);
+        this.router.navigate(['/dashboarduser/']);
+        // Show alert with error message
+        alert('Error checking answers. Please try again.');
       }
     });
   }
+  
 
 }

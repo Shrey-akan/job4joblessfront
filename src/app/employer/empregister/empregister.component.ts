@@ -23,7 +23,11 @@ export class EmpregisterComponent {
       empfname: ['', Validators.required],
       emplname: ['', Validators.required],
       empmailid: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
-      emppass: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]],
+      emppass: ['',         [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+      ]],
       empphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       empcompany: [''],
       descriptionemp: [''],
