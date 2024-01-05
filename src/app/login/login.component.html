@@ -1,22 +1,21 @@
-<div class="container" style="background-image: url('assets/usersigninimage.png'); border: 0.5px solid grey; padding: 45px; margin-top: 100px; background-size: cover; background-position: center;">
+<div class="container">
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-8">
       <div class="container-fluid">
         <div class="container login-container mt-5" style="padding: 20px;">
           <div class="row">
-            <div class="col-md-4"></div>
             <div class="col-md-6">
               <div class="container">
                 <div class="text-center">
-                  <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" class="img-fluid" width="100%">
-                  <h2>Sign in to job4jobless</h2>
+                  <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" class="img-fluid" width="100%"  onclick="window.location.href = '/'">
+                  <h2>Sign in to job4jobless as Job Seeker</h2>
                 </div>
 
                 <!-- Sign-In Form -->
                 <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
                   <div class="form-group">
-                    <input type="text" class="form-control" formControlName="userName" id="userName"
+                    <input type="text" class="form-control rounded-pill" formControlName="userName" id="userName"
                       placeholder="Username or Email"
                       [ngClass]="{ 'is-invalid': loginform.get('userName')?.invalid && loginform.get('userName')?.touched }" />
                     <div class="invalid-feedback" *ngIf="loginform.get('userName')?.hasError('required')">
@@ -24,7 +23,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control" formControlName="userPassword" id="userPassword"
+                    <input type="password" class="form-control rounded-pill" formControlName="userPassword" id="userPassword"
                       placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
                     <div class="form-group text-right">
                       <span class="password-toggle-ico" (click)="togglePasswordVisibility()">
@@ -40,16 +39,25 @@
                   </div>
                   <div class="create-account-link text-center">
                     Don't have an account? <a routerLink="/register">Create Account.</a>
+                    <!-- <button class="btn btn-block rounded-pill" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
+                      <i class="fab fa-google"></i> Sign In with Google
+                    </button> -->
                   </div>
+                  <div class="create-account-link text-center">
+                    <button class="btn btn-block rounded-pill" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
+                      <i class="fab fa-google"></i> Sign In with Google
+                    </button>
+                  </div>
+         
                 </form>
               </div>
             </div>
-            <div class="container text-center p-4 d-none d-md-block"> <!-- Hide on small screens -->
-              <!-- Google Sign-In Button on the right side -->
-              <button class="btn btn-block" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
+            <!-- <div class="container p-4 ">
+              
+              <button class="btn btn-block rounded-pill" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
                 <i class="fab fa-google"></i> Sign In with Google
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
