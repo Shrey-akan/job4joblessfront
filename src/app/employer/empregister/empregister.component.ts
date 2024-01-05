@@ -17,7 +17,7 @@ export class EmpregisterComponent {
   empPasswordVisible: boolean = false;
   data1: any;
 
-
+  loading: boolean = false; // Added loading flag
   constructor(private formBuilder: FormBuilder , private router:Router , private b1:UserService , private http:HttpClient) {
     this.employerdetails = this.formBuilder.group({
       empfname: ['', Validators.required],
