@@ -332,6 +332,7 @@ export class UserService {
 
   createOrGetUser(userName: any,userFirstName:any) {
     const requestBody = { userName ,userFirstName };
+    console.log(requestBody);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -347,7 +348,7 @@ export class UserService {
             if (response.status === 200) {
               // API call was successful
               const responseBody = response.body;
-              // console.log('API Response:', responseBody);
+              console.log('API Response:', responseBody);
 
               // You can access the data from the response as needed, e.g., responseBody.accessToken
               const accessToken = responseBody.accessToken;
