@@ -230,3 +230,30 @@ cursor: pointer;
   color: #fff;
   border: none;
 }
+/* Add your custom styles here */
+.modal-content {
+  border-radius: 10px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-container {
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.button-signin {
+  background-color: #007bff; /* Customize the color as needed */
+}
+
+.button-register {
+  background-color: #28a745; /* Customize the color as needed */
+}
