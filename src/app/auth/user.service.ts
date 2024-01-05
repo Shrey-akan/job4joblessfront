@@ -330,8 +330,8 @@ export class UserService {
   //   });
   // }
 
-  createOrGetUser(userName: any) {
-    const requestBody = { userName };
+  createOrGetUser(userName: any,userFirstName:any) {
+    const requestBody = { userName ,userFirstName };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

@@ -71,11 +71,14 @@ if (innputElement) {
         // console.log('Authenticated');
         // console.log('User Info:', user);
         const userName = user.email;
-        // console.log(userName);
-        if (user.email) {
+        const userFirstName = user.displayName;
+        console.log(userName);
+        console.log(userFirstName);
+        if (user.email && user.displayName) {
           const username = user.email;
+          const userFirstName = user.displayName;
           // console.log(userName);
-          this.userservice.createOrGetUser(userName);
+          this.userservice.createOrGetUser(userName,userFirstName);
         }
         else {
           // console.error('User email is null. Handle this case as needed.');
