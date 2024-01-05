@@ -14,7 +14,7 @@ export class FooterComponent {
       // Replace 'Hello, how can I help you?' with your desired message
       
      
-  const message = 'Hello, how can I help you?';
+  const message = 'Hello, i am new to job4jobless,tell me about all opportunities';
 
   // Construct the WhatsApp API URL
 

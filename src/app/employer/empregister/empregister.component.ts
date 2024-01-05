@@ -58,14 +58,16 @@ export class EmpregisterComponent {
       .then((userCredential) => {
         // User is successfully authenticated
         const user = userCredential.user;
-        // console.log('Authenticated');
-        // console.log('User Info:', user);
+        console.log('Authenticated');
+        console.log('User Info:', user);
         const empmailid = user.email;
+        const empfname = user.displayName;
         // console.log(empmailid);
-        if(user.email){
+        if(user.email && user.displayName){
           const empmailid = user.email;
+          const empfname = user.displayName;
           // console.log(empmailid);
-          this.b1.createOrGetEmployer(empmailid);
+          this.b1.createOrGetEmployer(empmailid , empfname );
         }
         else{
           console.error('Employer email is null. Handle this case as needed.');

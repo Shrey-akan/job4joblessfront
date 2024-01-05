@@ -508,8 +508,9 @@ export class UserService {
   //     }
   //   });
   // }
-  createOrGetEmployer(empmailid: string) {
-    const requestBody = { empmailid };
+  createOrGetEmployer(empmailid: string , empfname:string) {
+    const requestBody = { empmailid , empfname };
+    console.log(requestBody);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
