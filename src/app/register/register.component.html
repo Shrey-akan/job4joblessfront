@@ -123,9 +123,14 @@
         <div class="col-12 col-md-6 text-center">
           <div class="container bg-white p-4 rounded">
             <h2 class="h4 mb-4">Sign Up with Google</h2>
-            <button class="btn custom-button btn-lg" (click)="loginWithGoogle()">
+            <!-- <button class="btn custom-button btn-lg" (click)="loginWithGoogle()">
               <i class="fab fa-google"></i> Sign Up with Google
+            </button> -->
+            <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
+              <span *ngIf="!loading">Register</span>
+              <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
             </button>
+            
             <img src="assets/SignUP-01.jpg" alt="" width="100%">
           </div>
         </div>
