@@ -23,7 +23,7 @@ export class OptverifyComponent implements OnInit {
 
   ngOnInit(): void {
     this.otpForm = this.fb.group({
-      otp: ['',  [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
+      otp: ['',  [Validators.required, Validators.pattern(/^\d{6}$/), Validators.pattern(/^[0-9]*$/)]],
       email: ['', Validators.email]
     });
   }
