@@ -18,7 +18,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <button class="btn btn-primary show-more" (click)="showMoreInfo(job)">More Info</button>
                   <button class="btn btn-secondary edit-button" (click)="editJob(job.jobid)">Edit</button>
-                  <button class="btn btn-info apply-button" (click)="fetchAppliedUsers(job.empid, job.jobid)">View Applicants</button>
+                  <button class="btn btn-outline-primary apply-button" (click)="fetchAppliedUsers(job.empid, job.jobid)">View Applicants</button>
                 </div>
               </div>
               <div class="card-footer" *ngIf="job.showDetails">
