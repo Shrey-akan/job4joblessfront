@@ -473,6 +473,15 @@
 
 </div>
 
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <img src="assets/carosalforfindjob.gif" alt="" class="img-fluid" style="max-height: 300px; width: 100%;">
+        </div>
+    </div>
+</div>
+
 <div class="container " style="border-radius: 25px; overflow: hidden;">
     <div class="row ">
         <!-- Content Column with Animation -->
@@ -510,22 +519,44 @@
     </div>
 </div> -->
 <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-body">
-                <div class="content-container">
-                    <div class="image-container">
-                        <img src="assets/popupimage.jpg" alt="Popup Image" class="img-fluid">
-                    </div>
-                    <div class="button-container">
+            <div class="content-container">
+                <div class="image-container hide-on-mobile">
+                    <img src="assets/popupimage.jpg" alt="Popup Image" class="img-fluid">
+                </div>
+                <div class="button-container p-4">
+                    <div class="container">
+                       <div class="row">
+                        <img src="assets/Job4jobless & Hustleforwork-01.png" alt=""  style="cursor: pointer"
+                        onclick="window.location.href = '/'">
+                       </div>
+                       <div class="row text-center">
+                        <h1 style="font-size: 1.5rem; text-shadow: 3px 3px 5px #888; color: black;">Get Started</h1>
+                       </div>
+                       <div class="row text-center">
+                        <h2>Job Seeker</h2>
                         <button class="btn btn-primary button-signin" onclick="navigateToSignIn()">Sign In</button>
                         <button class="btn btn-success button-register" onclick="navigateToSignUp()">Register</button>
+                       </div>
+                       <div class="row">
+                        <div class="divider"></div>
+                       </div>
+                       <div class="row text-center">
+                        <h2>Employer</h2>
+                        <button class="btn btn-outline-primary " onclick="navigateToSignInEmp()">Sign In</button>
+                        <button class="btn btn-outline-success " onclick="navigateToSignUpEmp()">Register</button>
+                       </div>
+
                     </div>
+
+                  
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <app-footer></app-footer>

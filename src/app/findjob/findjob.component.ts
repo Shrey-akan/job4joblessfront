@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -18,6 +18,7 @@ interface Job {
   selector: 'app-findjob',
   templateUrl: './findjob.component.html',
   styleUrls: ['./findjob.component.css'],
+  // encapsulation: ViewEncapsulation.None, 
   animations: [
     trigger('fadeInOut', [
         state('in', style({ opacity: 1, transform: 'scale(1)' })),
@@ -153,4 +154,6 @@ throw new Error('Method not implemented.');
     return this.data.slice(startIndex, endIndex);
   }
   
+
+
 }

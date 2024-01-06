@@ -166,94 +166,60 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 cursor: pointer;
 }
 
-.popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 999;
-}
+  /* Add your component styles below */
+  .modal-dialog {
+    max-width: 50%;
+    max-height: 80vh; /* Adjust the height as needed */
+  }
 
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex; /* Updated to flex */
-  max-width: 800px; /* Adjust the max-width as needed */
-  width: 100%;
-}
+  .content-container {
+    display: flex;
+  }
 
-.image-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 10px; /* Optional spacing between image and buttons */
-}
+  .image-container {
+    flex: 1;
+  }
 
-.button-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px; /* Spacing between buttons */
-  padding-left: 10px; /* Optional spacing between image and buttons */
-}
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
+  .button-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
 
-.btn {
-  padding: 10px 10px;
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%; /* Make buttons full width of their container */
-}
+  .button-signin,
+  .button-register {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
-.button-signin {
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-}
+  @media (max-width: 768px) {
+    .modal-dialog {
+      max-width: 70%;
+      max-height: 80vh;
+    }
+  }
 
-.button-register {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-}
-/* Add your custom styles here */
-.modal-content {
-  border-radius: 10px;
-}
+  .divider {
+    width: 100%;
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the divider horizontally */
+    border-top: 1px solid #ccc; /* Define the style of the divider */
+    margin-top: 20px; /* Adjust the top margin as needed */
+    margin-bottom: 20px; /* Adjust the bottom margin as needed */
+  }
+  
 
-.content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header-container {
-  margin-bottom: 20px;
-}
-
-.button-container {
-  display: flex;
-  gap: 10px;
-}
-
-.button-signin {
-  background-color: #007bff; /* Customize the color as needed */
-}
-
-.button-register {
-  background-color: #28a745; /* Customize the color as needed */
+  @media (max-width: 767px) {
+    .hide-on-mobile {
+        display: none;
+    }
 }
