@@ -5,7 +5,7 @@ import { UserService } from 'src/app/auth/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { __importDefault } from 'tslib';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { Socket } from 'ngx-socket-io'; // Import Socket
 class SendMessage {
   messageTo!: string;
   messageFrom!: string;
@@ -27,7 +27,7 @@ export class EmpmessageComponent implements OnInit {
   messages!: SendMessage[];
 
   constructor(private http: HttpClient, private route: ActivatedRoute,
-    private cookie: CookieService,private formBuilder: FormBuilder) {
+    private cookie: CookieService,private formBuilder: FormBuilder,  private socket: Socket ) {
   }
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get("uid");
@@ -43,9 +43,34 @@ export class EmpmessageComponent implements OnInit {
       messageTo: [this.uid, Validators.required],
       message: [this.message.message, Validators.required]
     });
+    this.subscribeToChatMessages();
   }
 
+  // private subscribeToChatMessages() {
+  //   this.socket.fromEvent<SendMessage>('/topic/chat').subscribe((message: SendMessage) => {
+  //     console.log('Received chat message:', message);
+  //     this.fetchMessages(); // Update the message list
+  //   });
+  // }
 
+  private subscribeToChatMessages() {
+    this.socket.fromEvent<SendMessage>('/topic/chat').subscribe((message: SendMessage) => {
+      console.log('Received chat message:', message);
+      this.fetchMessages();
+    });
+
+    // Subscribe to a different event for bidirectional communication
+    this.socket.fromEvent<any>('/topic/bidirectional').subscribe((data: any) => {
+      console.log('Received bidirectional data:', data);
+      // Handle the bidirectional data as needed
+    });
+  }
+
+  // Example of emitting a bidirectional event
+  sendBidirectionalData() {
+    const data = { key: 'value' };
+    this.socket.emit('/bidirectional', data);
+  }
 
   fetchMessages() {
     // Fetch previous messages from the server
@@ -87,7 +112,7 @@ export class EmpmessageComponent implements OnInit {
               previousMessage: response.message, // Set previousMessage to the sent message
             });
             this.fetchMessages();
-            
+            this.socket.emit('/chat', response);
           },
           error: (err: any) => {
             console.error('Error sending message:', err);

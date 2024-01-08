@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { OtpService } from 'src/app/auth/otp.service';
 import { UserService } from 'src/app/auth/user.service';
+import { Socket } from 'ngx-socket-io'; // Import Socket from ngx-socket-io
 // Sample User and Message classes
 class User {
   constructor(public id: number, public name: string) { }
@@ -29,7 +30,9 @@ export class MessageComponent implements OnInit {
   abc: any;
   newMessage: string = '';
 
-  constructor(private http: HttpClient,private  router:Router, public cookie: CookieService, private b1: UserService) { }
+  constructor(private http: HttpClient,private  router:Router, public cookie: CookieService, private b1: UserService ,  private socket: Socket ) {
+    this.socket.connect();
+   }
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
@@ -41,10 +44,30 @@ export class MessageComponent implements OnInit {
       this.userData1 = data1.find((user: any) => user.uid == uuid);
       this.abc = this.userData1.uid;
     });
-
+    this.subscribeToChatMessages(); 
     this.fetchMessages();
   }
 
+
+  // private subscribeToChatMessages() {
+  //   this.socket.fromEvent<SendMessage>('/topic/chat').subscribe((message: SendMessage) => {
+  //     console.log('Received chat message:', message);
+  //     this.fetchMessages(); // Update the message list
+  //   });
+  // }
+
+  private subscribeToChatMessages() {
+    this.socket.fromEvent<SendMessage>('/topic/chat').subscribe((message: SendMessage) => {
+      console.log('Received chat message:', message);
+      this.fetchMessages(); // Update the message list
+    });
+  
+    // Subscribe to bidirectional messages
+    this.socket.fromEvent<any>('/topic/bidirectional').subscribe((data: any) => {
+      console.log('Received bidirectional data:', data);
+      // Handle the bidirectional data as needed
+    });
+  }
   fetchMessages() {
     const uniqueNames = new Set<string>();
 
@@ -125,6 +148,10 @@ export class MessageComponent implements OnInit {
         next: (response: SendMessage) => {
           this.newMessage = '';
           this.fetchMessages();
+            // Use Socket.IO to send the message
+            this.socket.emit('/chat', response);
+
+            this.sendBidirectionalData();
         },
         error: (err: any) => {
           console.error('Error sending message:', err);
@@ -139,4 +166,11 @@ export class MessageComponent implements OnInit {
       this.router.navigate(['/dashboarduser/videocall', this.selectedUser]); // Adjust the route as per your project's configuration
     }
   }
+
+  sendBidirectionalData() {
+    const data = { key: 'value' };
+    // Use Socket.IO to send bidirectional data
+    this.socket.emit('/bidirectional', data);
+  }
+  
 }
