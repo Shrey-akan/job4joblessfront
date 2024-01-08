@@ -38,7 +38,7 @@ if (innputElement) {
     }
 
     this.empId = this.cookie.get('emp');
-
+    this.fetchempDetailById(this.empId);
     // console.log(this.empId);
     // console.log('Employer ID from cookie:', this.empId);
     let response = this.b1.fetchemployer();
@@ -79,12 +79,12 @@ if (innputElement) {
       this.countries = data.map(country => country.name.common);
     });
     this.empid = this.route.snapshot.paramMap.get('empid');
-    this.fetchUserDetailById();
+
 
   }
-  fetchUserDetailById() {
-    if (this.empid) {
-      this.http.get(`https://job4jobless.com:9001/fetchempById/${this.empid}`)
+  fetchempDetailById(empId: String) {
+    if (this.empId) {
+      this.http.get(`https://job4jobless.com:9001/fetchempById/${empId}`)
         .subscribe({
           next: (response: any) => {
             console.log("Employer Old Details",response);
