@@ -101,6 +101,7 @@ export class UpdateprofileComponent implements OnInit {
       this.http.get(`https://job4jobless.com:9001/fetchuserById/${this.uid}`)
         .subscribe({
           next: (response: any) => {
+            console.log("User Old Details",response);
             // Assuming response has the job post data in the correct format
             this.userform.patchValue(response);
             // Populate form with the job details received

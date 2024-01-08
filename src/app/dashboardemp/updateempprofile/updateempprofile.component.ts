@@ -87,6 +87,7 @@ if (innputElement) {
       this.http.get(`https://job4jobless.com:9001/fetchempById/${this.empid}`)
         .subscribe({
           next: (response: any) => {
+            console.log("Employer Old Details",response);
             // Assuming response has the job post data in the correct format
             this.employeeForm.patchValue(response);
             // Populate form with the job details received
