@@ -40,9 +40,6 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 import { MessagingService } from './firebase/messaging.service';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-const config: SocketIoConfig = { url: 'https://job4jobless.com:9001', options: {} };
 
 @NgModule({
   declarations: [
@@ -81,8 +78,7 @@ const config: SocketIoConfig = { url: 'https://job4jobless.com:9001', options: {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule,
-    SocketIoModule.forRoot(config),
+    MatSelectModule
     // NgbModule
   ],
   providers: [CookieService,MessagingService,{
