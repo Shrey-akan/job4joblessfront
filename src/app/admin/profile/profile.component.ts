@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
   //     this.adminData = response;
   //   },
   //   error: (err) => {
-  //     // Handle errors
+      // Handle errors
   //     console.error('Error:', err);
   //   }
   //  }
