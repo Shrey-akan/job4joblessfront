@@ -28,3 +28,6 @@
   position: sticky;
   top: 0; /* Adjust if you have a header */
 }
+.scrollable-column::-webkit-scrollbar {
+  display: none;
+}

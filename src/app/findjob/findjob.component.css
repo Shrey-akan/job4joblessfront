@@ -225,7 +225,7 @@ cursor: pointer;
 
   /* Style for the scrollable column */
 .scrollable-column {
-  max-height: 500px; /* Adjust as needed */
+  max-height: 100vh; /* Adjust as needed */
   overflow-y: auto; /* Enables vertical scrolling */
 }
 
@@ -233,4 +233,7 @@ cursor: pointer;
 .fixed-column {
   position: sticky;
   top: 0; /* Adjust if you have a header */
+}
+.scrollable-column::-webkit-scrollbar {
+  display: none;
 }
