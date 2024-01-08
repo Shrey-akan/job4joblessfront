@@ -1,0 +1,20 @@
+/* your-component.css */
+.custom-button {
+    background-color: #FF5733;
+    color: white;
+    border: none;
+  }
+  .custom-button:hover {
+    background-color: #E64A2E;
+  }
+  .error {
+    border: 1px solid red;
+  }
+  /* Style the eye icon for the employer password toggle */
+.fa-eye {
+  cursor: pointer;
+}
+
+.fa-eye-slash {
+  cursor: pointer;
+}

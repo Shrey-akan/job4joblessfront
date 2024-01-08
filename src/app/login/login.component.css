@@ -1,0 +1,12 @@
+.forgot-password-link{
+  cursor: pointer;
+}
+.password-toggle-ico{
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .container {
+    background-image: none; /* Set background image to none on small screens */
+  }
+}

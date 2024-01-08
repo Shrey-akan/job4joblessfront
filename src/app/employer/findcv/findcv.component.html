@@ -1,0 +1,78 @@
+`<div class="container" style="margin-top: 25px; margin-bottom: 15px;;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1" style="margin-top: 10px;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="findjob" name="findjob" class="form-control"
+                                placeholder="What job title,keywords or company">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1" style="margin-top: 10px;">
+                            <i class="fa-sharp fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="Findcity" name="Findcity" class="form-control"
+                                placeholder="Where Noida, Uttar Pradesh">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn--outline-light" (click)="showPage()"><i class="fa-solid fa-bars"></i> Advancedsaerch </button>
+        </div>
+    </div>
+    <!-- <h5>Browse top-paying jobs</h5> -->
+    <!-- <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div> -->
+
+
+    <div class="container" style="margin: 50px auto; padding: 100px; background-color: rgb(249, 253, 252);">
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <h3>Search for your next candidate</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>Ready to contact a candidate? Purchase a <a href="">subscription</a> today!
+                            Create an job4jobless account or login to get started.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary" (click)="navigateTo()" > Sign-up</button>
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+   

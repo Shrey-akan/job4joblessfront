@@ -1,0 +1,89 @@
+.container {
+  background: linear-gradient(to right, #f0f0f0, #e0e0e0);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.employers-box, .messages-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.employers-box h3, .messages-box h3 {
+  text-align: center;
+}
+
+.messageFrom {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #d5e5f0;
+  transition: background-color 0.3s;
+}
+
+.messageFrom:hover {
+  background-color: #c1d8ea;
+}
+
+.messages-list-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.sent {
+  background-color: #007bff;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #d5e5f0;
+  align-self: flex-start;
+}
+
+.send-message-form {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-group {
+  flex-grow: 1;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}

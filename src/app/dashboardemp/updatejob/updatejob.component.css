@@ -1,0 +1,15 @@
+/* Add this CSS in your style.css or a separate CSS file */
+.job-form {
+    max-width: 400px; /* Adjust the width as per your preference */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add some padding for spacing */
+    border: 1px solid #ccc; /* Add a border for visual separation */
+    border-radius: 5px; /* Add rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  /* Style form controls if needed */
+  .form-control {
+    margin-bottom: 10px; /* Add spacing between form controls */
+  }
+  

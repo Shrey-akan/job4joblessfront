@@ -1,0 +1,22 @@
+.custom-box {
+    transition: box-shadow 0.3s ease, cursor 0.3s ease;
+}
+
+.custom-box:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+/* Style for the scrollable column */
+.scrollable-column {
+    max-height: 100vh; /* Adjust as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+}
+.scrollable-column::-webkit-scrollbar {
+    display: none;
+}
+
+/* Style for the fixed column */
+.fixed-column {
+    position: sticky;
+    top: 0; /* Adjust if you have a header */
+}

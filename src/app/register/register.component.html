@@ -1,0 +1,140 @@
+<div class="container-fluid registerform my-5">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      <h1 class="text-center" style="font-size: 1.5rem; text-shadow: 3px 3px 5px #888; color: black;">Ready to take the next step?</h1>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="container form-container bg-white p-4 rounded">
+            <h2 class="h4 mb-4">Registration</h2>
+            <form [formGroup]="userregister" (ngSubmit)="userRegisteration()">
+              <div class="form-group row">
+                <div class="col">
+                  <label for="userFirstName">First Name:</label>
+                  <input type="text" class="form-control" formControlName="userFirstName"
+                    placeholder="Enter First Name">
+                  <div
+                    *ngIf="userregister.get('userFirstName')?.hasError('required') && userregister.get('userFirstName')?.touched"
+                    class="text-danger">First Name is required.
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="userLastName">Last Name:</label>
+                  <input type="text" class="form-control" formControlName="userLastName" placeholder="Enter Last Name">
+                  <div
+                    *ngIf="userregister.get('userLastName')?.hasError('required') && userregister.get('userLastName')?.touched"
+                    class="text-danger">Last Name is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="userName">Email:</label>
+                <input type="email" class="form-control" formControlName="userName" placeholder="Enter Email">
+                <div
+                  *ngIf="userregister.get('userName')?.hasError('required') && userregister.get('userName')?.touched"
+                  class="text-danger">Email is required.
+                </div>
+                <div *ngIf="userregister.get('userName')?.hasError('email') && userregister.get('userName')?.touched"
+                  class="text-danger">Please enter a valid email address.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="userPassword">Password:</label>
+                <input type="password" class="form-control" formControlName="userPassword" placeholder="Enter Password">
+                <div
+                  *ngIf="userregister.get('userPassword')?.hasError('required') && userregister.get('userPassword')?.touched"
+                  class="text-danger">Password is required.
+                </div>
+                <div
+                  *ngIf="userregister.get('userPassword')?.hasError('minlength') && userregister.get('userPassword')?.touched"
+                  class="text-danger">Password must be at least 8 characters long.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="companyuser">Company Name:</label>
+                <input type="text" class="form-control" formControlName="companyuser" placeholder="Enter Company Name">
+                <div
+                  *ngIf="userregister.get('companyuser')?.hasError('required') && userregister.get('companyuser')?.touched"
+                  class="text-danger">Company Name is required.
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="websiteuser">Website URL:</label>
+                    <input type="text" class="form-control" formControlName="websiteuser" placeholder="Enter Website URL">
+                    <div *ngIf="userregister.get('websiteuser')?.hasError('required') && userregister.get('websiteuser')?.touched"
+                      class="text-danger">Website URL is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="userphone">Phone:</label>
+                    <input type="tel" id="phone" class="form-control" formControlName="userphone" placeholder="Enter Phone"/>
+                    <div *ngIf="userregister.get('userphone')?.hasError('required') && userregister.get('userphone')?.touched"
+                      class="text-danger">Phone number is required.
+                    </div>
+                    <div *ngIf="userregister.get('userphone')?.hasError('pattern') && userregister.get('userphone')?.touched"
+                      class="text-danger">Please enter a valid phone number with 10 digits.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="usercountry">Country:</label>
+                <select class="form-control" formControlName="usercountry" placeholder="Select your country">
+                  <option value="">Select a country</option>
+                  <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                </select>
+                <div *ngIf="userregister.get('usercountry')?.hasError('required') && userregister.get('usercountry')?.touched"
+                  class="text-danger">Country is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="userstate">State:</label>
+                <input type="text" class="form-control" formControlName="userstate" placeholder="Enter your state">
+                <div *ngIf="userregister.get('userstate')?.hasError('required') && userregister.get('userstate')?.touched"
+                  class="text-danger">State is required.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="usercity">City:</label>
+                <input type="text" class="form-control" formControlName="usercity" placeholder="Enter your city">
+                <div *ngIf="userregister.get('usercity')?.hasError('required') && userregister.get('usercity')?.touched"
+                  class="text-danger">City is required.
+                </div>
+              </div>
+
+              <!-- <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
+                <span *ngIf="!loading">Register</span>
+                <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
+              </button> -->
+              <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
+                <span *ngIf="!loading">Register</span>
+                <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
+              </button>
+              
+              
+            </form>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 text-center">
+          <div class="container bg-white p-4 rounded">
+            <h2 class="h4 mb-4">Sign Up with Google</h2>
+            <button class="btn custom-button btn-lg" (click)="loginWithGoogle()">
+              <i class="fab fa-google"></i> Sign Up with Google
+            </button>
+            <img src="assets/SignUP-01.jpg" alt="" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

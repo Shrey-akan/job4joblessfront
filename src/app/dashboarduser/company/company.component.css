@@ -1,0 +1,12 @@
+.btn-anchor {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none;
+    transition: color 0.2s; /* Smooth color transition on hover */
+  
+    /* Additional styles for hover effect */
+  }
+  
+  .btn-anchor:hover {
+    color: #0056b3; /* Darker blue on hover */
+  }
+  

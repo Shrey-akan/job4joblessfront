@@ -1,0 +1,20 @@
+<div class="notification-container" *ngIf="notifications && notifications.length > 0; else noNotifications">
+  <div *ngFor="let notification of notifications" class="notification">
+    <h3>{{ notification.nhead }}</h3>
+    <p>{{ notification.nsubhead }}</p>
+    <p>{{ notification.ndescription }}</p>
+    <p>{{ notification.notisend }}</p>
+  </div>
+</div>
+
+<!-- Template for no notifications -->
+<ng-template #noNotifications>
+  <div class="no-notifications">
+    <div class="center-content">
+      <img src="/assets/Job4jobless & Hustleforwork-01.png" alt="No Notifications Image" class="no-notifications-image">
+      <p class="no-notifications-text">NGet Notified and Stay Updated!</p>
+      <p>Don't miss anything important, stay informed about top matches and application progress</p>
+      <button class="refresh-button" (click)="refreshNotifications()">Refresh</button>
+    </div>
+  </div>
+</ng-template>

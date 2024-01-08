@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="showNavbaremp">
+  <div class="container">
+    <img src="assets/Asset 1@4x-8.png" alt="" width="15%" onclick="window.location.href = '/dashboardemp'">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboardemp/" routerLinkActive="active">Post Job</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboardemp/alljobs" routerLinkActive="active">Job Posted</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboardemp/applieduserdetails" routerLinkActive="active">Applied Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboardemp/notificationemp" routerLinkActive="active">Notifications<i class="fa-solid fa-bell"></i></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboardemp/profilemep" routerLinkActive="active">Profile</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" (click)="logoutEmployer()" routerLinkActive="active">
+            <button class="btn btn-primary">Sign Out</button>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ <router-outlet></router-outlet>
+  

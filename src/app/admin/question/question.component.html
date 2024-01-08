@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="container mt-4">
+            <h2>Add a Question</h2>
+            <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="question">Question:</label>
+                    <input type="text" id="question" formControlName="question" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="optionA">Option A:</label>
+                    <input type="text" id="optionA" formControlName="optionA" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="optionB">Option B:</label>
+                    <input type="text" id="optionB" formControlName="optionB" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="optionC">Option C:</label>
+                    <input type="text" id="optionC" formControlName="optionC" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="optionD">Option D:</label>
+                    <input type="text" id="optionD" formControlName="optionD" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="correctAnswer">Correct Answer:</label>
+                    <input type="text" id="correctAnswer" formControlName="correctAnswer" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Question</button>
+            </form>
+        </div>
+
+
+    </div>
+</div>

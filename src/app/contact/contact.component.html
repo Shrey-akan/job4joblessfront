@@ -1,0 +1,53 @@
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left column for the image -->
+        <div class="col-md-6">
+            <img src="assets/contact us@4x-8 (2).png" alt="" class="img-fluid rounded">
+        </div>
+        <!-- Right column for the contact form -->
+        <div class="col-md-6">
+            <div class="card contact-form">
+                <div class="card-body">
+                    <h1 class="card-title text-center"  style="font-size: 2rem; text-shadow: 3px 3px 5px #888; color: black;">Contact Us</h1>
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubmitForm()">
+                        <div class="mb-3">
+                            <label for="exampleInputName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="exampleInputName" formControlName="name">
+                            <!-- Add error message handling here if needed -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email">
+                            <div *ngIf="contactForm.get('email')?.hasError('required') && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)" class="text-danger">
+                                Email is required.
+                            </div>
+                            <div *ngIf="contactForm.get('email')?.hasError('email') && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)" class="text-danger">
+                                Please enter a valid email address.
+                            </div>
+                            <div *ngIf="contactForm.get('email')?.hasError('invalidGmail') && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)" class="text-danger">
+                                Email must end with @gmail.com.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputcont" class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" id="exampleInputcont" formControlName="contactNumber">
+                            <div *ngIf="contactForm.get('contactNumber')?.hasError('required') && (contactForm.get('contactNumber')?.dirty || contactForm.get('contactNumber')?.touched)" class="text-danger">
+                                Contact number is required.
+                            </div>
+                            <div *ngIf="contactForm.get('contactNumber')?.hasError('invalidContactNumber') && (contactForm.get('contactNumber')?.dirty || contactForm.get('contactNumber')?.touched)" class="text-danger">
+                                Please enter a 10-digit contact number.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputmessage" class="form-label">Message</label>
+                            <textarea class="form-control" name="exampleInputmessage" id="exampleInputmessage" cols="30" rows="5" formControlName="message"></textarea>
+                            <!-- Add error message handling here if needed -->
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer class="mt-4"></app-footer>
