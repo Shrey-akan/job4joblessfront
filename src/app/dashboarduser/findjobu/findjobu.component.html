@@ -49,7 +49,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 ">
+                <div class="col-md-6 scrollable-column">
                     <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
                         *ngFor="let job of filteredJobs" (click)="selectJob(job)">
                         <h1>{{ job.jobtitle }}</h1>
@@ -62,7 +62,7 @@
                         <!-- Display other relevant job information here -->
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 fixed-column">
                     <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
                         <!-- <h2>{{ selectedJob.jobid }}</h2> -->
                         <h2>{{ selectedJob.jobtitle }}</h2>
