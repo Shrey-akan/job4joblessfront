@@ -53,6 +53,7 @@ export class UpdateprofileComponent implements OnInit {
     }
 
     this.userID = this.cookie.get('uid');
+    this.fetchUserDetailById(this.userID);
     // console.log(this.userID);
     // console.log('User ID from cookie:', this.userID);
 
@@ -94,24 +95,20 @@ export class UpdateprofileComponent implements OnInit {
       this.countries = data.map(country => country.name.common);
     });
     this.uid = this.route.snapshot.paramMap.get('uid');
-    this.fetchUserDetailById();
+    // this.fetchUserDetailById();
   }
-  fetchUserDetailById() {
-    if (this.uid) {
-      this.http.get(`https://job4jobless.com:9001/fetchuserById/${this.uid}`)
-        .subscribe({
-          next: (response: any) => {
-            console.log("User Old Details",response);
-            // Assuming response has the job post data in the correct format
-            this.userform.patchValue(response);
-            // Populate form with the job details received
-          },
-          error: (error: any) => {
-            console.error('Error fetching job details', error);
-            // Handle error
-          }
-        });
-    }
+  fetchUserDetailById(userId: String) {
+    this.http.get<User>(`https://job4jobless.com:9001/fetchuserById/${userId}`)
+      .subscribe({
+        next: (response: User) => {
+          console.log("User Old Details", response);
+          this.userform.patchValue(response);
+        },
+        error: (error) => {
+          console.error('Error fetching user details', error);
+          // Optionally, handle user-facing error feedback
+        }
+      });
   }
   updateUser() {
     if (this.userform.valid) {
