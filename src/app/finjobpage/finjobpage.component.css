@@ -19,7 +19,7 @@
 }
 /* Style for the scrollable column */
 .scrollable-column {
-  max-height: 500px; /* Adjust as needed */
+  max-height: 100vh; /* Adjust as needed */
   overflow-y: auto; /* Enables vertical scrolling */
 }
 
