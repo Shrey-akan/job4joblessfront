@@ -55,6 +55,7 @@ export class ResetpassComponent implements OnInit{
   }
 
   generateOtp(payload: any) {
+    console.log("check the payload" , payload);
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: this.userpayload, email: payload.userName }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
