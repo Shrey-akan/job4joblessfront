@@ -15,7 +15,7 @@ export class ResetpassComponent implements OnInit{
   errorMessage: string | undefined;
   showWarning: boolean = false;
   userForm!: FormGroup; // Define a FormGroup for your form
-
+  userpayload: any;
   constructor(
     private userService: UserService,
     private http: HttpClient,
@@ -40,6 +40,8 @@ export class ResetpassComponent implements OnInit{
           this.errorMessage = undefined;
           console.log(payload);
           console.log(payload.uid);
+          this.userpayload = payload.uid;
+          console.log(this.userpayload);
           this.generateOtp(payload);
         },
         error: (err: any) => {
@@ -53,7 +55,7 @@ export class ResetpassComponent implements OnInit{
   }
 
   generateOtp(payload: any) {
-    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe({
+    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: this.userpayload, email: payload.userName }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
           console.log("checking the payload.uid" , payload.uid);
