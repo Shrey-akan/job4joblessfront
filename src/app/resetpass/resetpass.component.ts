@@ -62,15 +62,20 @@ export class ResetpassComponent implements OnInit{
           console.log("checking the payload.uid" , payload.uid);
           console.log(response.otpCreated);
           console.log("checking the payload.uid" , payload.uid);
-          this.router.navigate(['/checkotpuser', this.userpayload]);
+          // this.router.navigate(['/checkotpuser', this.userpayload]);
+          this.router.navigate(['/checkotp', payload.uid]);
         }
         else {
           console.error("Otp not generated");
+     
+          this.router.navigate(['/login']);
           alert("Otp not generated");
         }
       },
       error: (err: any) => {
         console.error(`Some error occurred: ${err}`);
+
+        this.router.navigate(['/']);
         alert(err);
       }
     });
