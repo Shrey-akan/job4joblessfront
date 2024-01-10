@@ -22,7 +22,7 @@ export class ResetpasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {
     this.passwordResetForm = this.formBuilder.group({
       userName: [''],
-      newPassword: ['', [Validators.required, Validators.minLength(8), this.passwordPatternValidator()]],
+      newPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
       verifyPassword: ['', Validators.required],
     });
   }

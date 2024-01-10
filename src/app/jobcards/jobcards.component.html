@@ -5,7 +5,7 @@
         <div *ngFor="let job of getJobsForCurrentPage()" class="border-2 border rounded-4 p-4 mt-3">
           <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently Hiring</span>
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <p class="fs-3 fw-bold">{{ job.jobtitle.toUpperCase }}</p>
+            <p class="fs-3 fw-bold">{{ job.jobtitle.toUpperCase() }}</p>
             <div class="btn-group dropend">
               <button type="button" class="btn rounded-pill dropdown-toggle text-white"
                 style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,7 +45,7 @@
           </div>
           <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
             <!-- Add Apply button -->
-            <button class="btn custom-pillss mt-3" (click)="applyForJob()">Apply</button>
+            <button class="btn custom-pillss rounded-pill mt-3" (click)="applyForJob()">Apply</button>
         </div>
       </div>
     </div>
