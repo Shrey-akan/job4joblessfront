@@ -19,9 +19,9 @@
                         <div class="col-md-6 d-flex justify-content-center align-items-center">
                             <div
                                 class="d-flex justify-content-center align-items-stretch flex-column px-4 rounded-3 my-3">
-                                <button class="btn btn-custom"><i class="fa-brands fa-google text-danger"></i>&nbsp;
+                                <button class="btn btn-custom"><i class="fa-brands fa-google text-danger" (click)="loginWithGoogle()"></i>&nbsp;
                                     &nbsp;Continue with google</button>
-                                <button class="btn btn-custom"><i class="fa-regular fa-envelope"></i>&nbsp;
+                                <button class="btn btn-custom"><i class="fa-regular fa-envelope" routerLink="/login"></i>&nbsp;
                                     &nbsp;Continue with email</button>
                                 <div class="text-center">
                                     <p class="fw-bold my-4 align-center">or</p>
