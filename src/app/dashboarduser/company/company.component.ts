@@ -30,25 +30,6 @@ export class CompanyComponent implements OnInit {
   totalPages!: number;
   constructor(private yourHttpService: UserService) {} // Replace with your actual service
 
-  // ngOnInit() {
-
-  //   this.yourHttpService.fetchjobpost().subscribe((data: any) => {
-  //     this.jobpostData = data;
-
-  //     this.filteredCompanies = this.jobpostData;
-  //   });
-    
-  // }
-
-  // searchCompanies() {
-
-  //   this.filteredCompanies = this.jobpostData.filter((company) => {
-  //     return (
-  //       company.jobtitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-  //       company.companyforthisjob.toLowerCase().includes(this.searchTerm.toLowerCase())
-  //     );
-  //   });
-  // }
   ngOnInit() {
     this.yourHttpService.fetchjobpost().subscribe((data: any) => {
       this.jobpostData = data;
@@ -58,6 +39,7 @@ export class CompanyComponent implements OnInit {
   }
 
   searchCompanies() {
+    this.currentPage = 1;
     this.filterCompanies();
   }
 
@@ -67,8 +49,22 @@ export class CompanyComponent implements OnInit {
   }
 
   filterCompanies(): void {
+    // Filter the data based on the search term
+    const filteredData = this.jobpostData.filter((company) => {
+      return (
+        company.jobtitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        company.companyforthisjob.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    });
+
+    // Update total pages based on the filtered data
+    this.totalPages = Math.ceil(filteredData.length / this.itemsPerPage);
+
+    // Calculate start and end index based on pagination
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.filteredCompanies = this.jobpostData.slice(startIndex, endIndex);
+
+    // Slice the data for the current page
+    this.filteredCompanies = filteredData.slice(startIndex, endIndex);
   }
 }
