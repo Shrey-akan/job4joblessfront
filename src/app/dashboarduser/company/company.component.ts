@@ -1,6 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/auth/user.service';
 
+interface Job {
+  jobid: string;
+  jobtitle: string;
+  companyforthisjob: string;
+  numberofopening: string;
+  locationjob: string;
+  descriptiondata: string[];
+  jobtype: string;
+  schedulejob: string;
+  payjob: string;
+  payjobsup: string;
+  empid: string;
+}
+
+
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
