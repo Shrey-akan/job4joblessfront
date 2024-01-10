@@ -10,7 +10,7 @@
               <button type="button" class="btn rounded-pill dropdown-toggle text-white"
                 style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
                 Options
-              </button>
+              </button>`
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Appreciate job</a></li>
@@ -52,12 +52,19 @@
     </div>
   </div>
 </div>
-<div class="pagination">
-  <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
-    Previous
-  </button>
-  <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
-  <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
-    Next
-  </button>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="pagination text-center">
+        <button class="btn custom-pills mx-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+          Previous
+        </button>
+        <span class="page-info mx-2">{{ currentPage }} / {{ totalPages }}</span>
+        <button class="btn custom-pills mx-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
