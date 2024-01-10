@@ -15,7 +15,7 @@ import { QuestionpaperComponent } from './questionpaper/questionpaper.component'
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { authGuard } from '../auth.guard';
-
+import { JobcardsComponent } from '../jobcards/jobcards.component';
 const routes: Routes = [
   {
     path: '', component: HeaderuserComponent,

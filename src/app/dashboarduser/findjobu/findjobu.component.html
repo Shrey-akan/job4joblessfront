@@ -21,12 +21,6 @@
       </div>
     </div>
   </div>
-  
-  
-
-<div class="container text-center mb-4">
-    <p><b>Post your resume</b> - It only takes a few seconds</p>
-</div>
 
 <div class="container">
     <div class="row">
@@ -48,53 +42,7 @@
         <div class="col-md-6">
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
-                        *ngFor="let job of filteredJobs" (click)="selectJob(job)">
-                        <h1>{{ job.jobtitle }}</h1>
-                        <h2>{{ job.companyforthisjob }}</h2>
-                        <h4><strong>Number of Openings:</strong> {{ job.numberofopening }}</h4>
-                        <h4><strong>Location:</strong> {{ job.locationjob }}</h4>
-               
-                        <h4><strong>Schedule:</strong> {{ job.schedulejob }}</h4>
-                        <h4><strong>Pay:</strong> {{ job.payjob }}</h4>
-                        <!-- Display other relevant job information here -->
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
-                        <!-- <h2>{{ selectedJob.jobid }}</h2> -->
-                        <h2>{{ selectedJob.jobtitle }}</h2>
-                        <h3>{{ selectedJob.companyforthisjob }}</h3>
-                        <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
-                        <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
-                        <!-- <p>{{ selectedJob.location }}</p> -->
-                        <button type="button" class="btn btn-primary" (click)="navigateToSignIn()">Apply Now</button>
-                        <ul>
-                            <!-- <li>{{ selectedJob.descriptiondata }}</li> -->
-                        </ul>
-                    </div>
-
-                    <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
-                        <h2>{{ selectedJob.jobtitle }}</h2>
-                        <h3>{{ selectedJob.companyforthisjob }}</h3>
-                        <h4><strong>Number of Openings:</strong> {{ selectedJob.numberofopening }}</h4>
-                        <h4><strong>Location:</strong> {{ selectedJob.locationjob }}</h4>
-                        <h4><strong>Job Type:</strong> {{ selectedJob.jobtype }}</h4>
-                        <h4><strong>Schedule:</strong> {{ selectedJob.schedulejob }}</h4>
-                        <h4><strong>Pay:</strong> {{ selectedJob.payjob }}</h4>
-                        <h4><strong>Pay Job Sup:</strong> {{ selectedJob.payjobsup }}</h4>
-                        <ul>
-                            <li *ngFor="let description of selectedJob.descriptiondata">{{ description }}</li>
-                        </ul>
-                    </div>
-                    
-
-
-
-                </div>
-            </div>
+            <app-jobcardu></app-jobcardu>
         </div>
     </div>
 </div>

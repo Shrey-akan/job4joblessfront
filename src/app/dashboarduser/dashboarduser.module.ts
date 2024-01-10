@@ -21,6 +21,7 @@ import { UpdateprofileComponent } from './updateprofile/updateprofile.component'
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionpaperComponent } from './questionpaper/questionpaper.component';
 import { VideocallComponent } from './videocall/videocall.component';
+import { JobcarduComponent } from './jobcardu/jobcardu.component';
 @NgModule({
   declarations: [
     DashboarduserComponent,
@@ -37,7 +38,8 @@ import { VideocallComponent } from './videocall/videocall.component';
     MyjobsComponent,
     UpdateprofileComponent,
     QuestionpaperComponent,
-    VideocallComponent
+    VideocallComponent,
+    JobcarduComponent
     
   ],
   imports: [
