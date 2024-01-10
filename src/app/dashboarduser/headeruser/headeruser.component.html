@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav nav nav-pills me-auto">
             <li class="nav-item" >
-                <a class="nav-link" routerLinkActive="active"  aria-current="page" routerLink="/dashboarduser/">Find Jobs</a>
+                <a class="nav-link" routerLinkActive="active"  [routerLinkActiveOptions]={exact:true} aria-current="page" routerLink="/dashboarduser/">Find Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/dashboarduser/company">Company reviews</a>
