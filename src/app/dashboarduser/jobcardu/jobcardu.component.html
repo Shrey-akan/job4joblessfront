@@ -2,23 +2,18 @@
   <div class="row">
       <div class="col-md-6 col-lg-5">
           <div class="input-group">
-              <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input type="text" [(ngModel)]="searchJobTitle"
-                  class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline"
-                  placeholder="Enter job title">
+            
+              <input type="text" [(ngModel)]="searchJobTitle" class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" placeholder="Enter job title">
           </div>
       </div>
       <div class="col-md-6 col-lg-5 mt-2 mt-md-0">
           <div class="input-group">
-              <span class="input-group-text"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
-              <input type="text" [(ngModel)]="searchLocation"
-                  class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline"
-                  placeholder="Enter location">
+            
+            <input type="text" [(ngModel)]="searchLocation" class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" placeholder="Enter location">
           </div>
       </div>
       <div class="col-md-12 col-lg-2 mt-2 mt-md-0">
-          <button type="button" class="btn rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn"
-              (click)="filterJobs()">Search Jobs</button>
+        <button type="button" class="btn rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn" (click)="performSearch()">Search Jobs</button>
       </div>
   </div>
 </div>

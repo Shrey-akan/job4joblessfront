@@ -41,21 +41,22 @@ export class JobcarduComponent implements OnInit {
   constructor(private router: Router, private b1: UserService) {}
 
   performSearch() {
+    this.filterJobs();
     // Implement search logic if needed
   }
 
   onPageChange(page: number): void {
     this.currentPage = page;
+    this.filterJobs(); 
   }
   userID: String = '0';
   ngOnInit(): void {
     let response = this.b1.fetchjobpost();
     response.subscribe((data1: any) => {
       this.data1 = data1;
-      this.data = data1;
-      this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+      this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
+      this.filterJobs(); // Initial filter when data is loaded
     });
-
   }
 
   searchJobs() {
@@ -78,7 +79,7 @@ export class JobcarduComponent implements OnInit {
   getJobsForCurrentPage(): Job[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    return this.data.slice(startIndex, endIndex);
+    return this.filteredJobs.slice(startIndex, endIndex);
   }
 
   applyForJob(selectedJob: Job) {
@@ -96,16 +97,21 @@ export class JobcarduComponent implements OnInit {
     }
   }
   filterJobs(): void {
-    console.log(this.searchJobTitle ,"", this.searchLocation);
+    console.log(this.searchJobTitle, this.searchLocation);
     if (this.searchJobTitle || this.searchLocation) {
-      this.filteredJobs = this.data.filter((job) => {
+      this.filteredJobs = this.data1.filter((job: Job) => {
         const titleMatch = !this.searchJobTitle || job.jobtitle.toLowerCase().includes(this.searchJobTitle.toLowerCase());
         const locationMatch = !this.searchLocation || job.locationjob.toLowerCase().includes(this.searchLocation.toLowerCase());
         return titleMatch && locationMatch;
       });
     } else {
-      // If no search criteria entered, show all jobs
-      this.filteredJobs = this.data;
+      this.filteredJobs = this.data1;
     }
+
+    // Update total pages based on filtered data
+    this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
+
+    // Reset current page to 1 when filtering
+    this.currentPage = 1;
   }
 }
