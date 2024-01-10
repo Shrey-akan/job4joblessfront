@@ -108,6 +108,7 @@ export class FindjobuComponent {
   }
 
   filterJobs(): void {
+    console.log(this.searchJobTitle ,"", this.searchLocation);
     if (this.searchJobTitle || this.searchLocation) {
       this.filteredJobs = this.data.filter((job) => {
         const titleMatch = !this.searchJobTitle || job.jobtitle.toLowerCase().includes(this.searchJobTitle.toLowerCase());
