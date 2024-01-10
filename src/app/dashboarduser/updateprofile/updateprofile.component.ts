@@ -30,7 +30,7 @@ export class UpdateprofileComponent implements OnInit {
   countries: string[]=[];
   userData1: any;
   abc: any;
-
+  uid!: string | null;
   constructor(
     private formBuilder: FormBuilder,
     private b1: UserService,
@@ -53,6 +53,7 @@ export class UpdateprofileComponent implements OnInit {
     }
 
     this.userID = this.cookie.get('uid');
+    this.fetchUserDetailById(this.userID);
     // console.log(this.userID);
     // console.log('User ID from cookie:', this.userID);
 
@@ -93,8 +94,22 @@ export class UpdateprofileComponent implements OnInit {
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common);
     });
+    this.uid = this.route.snapshot.paramMap.get('uid');
+    // this.fetchUserDetailById();
   }
-
+  fetchUserDetailById(userId: String) {
+    this.http.get<User>(`https://job4jobless.com:9001/fetchuserById/${userId}`)
+      .subscribe({
+        next: (response: User) => {
+          console.log("User Old Details", response);
+          this.userform.patchValue(response);
+        },
+        error: (error) => {
+          console.error('Error fetching user details', error);
+          // Optionally, handle user-facing error feedback
+        }
+      });
+  }
   updateUser() {
     if (this.userform.valid) {
       // Extract updated user data from the form

@@ -17,7 +17,7 @@ export class UpdateempprofileComponent implements OnInit {
   countries: string[]=[];
   empDetail: any;
   abc: any;
-
+  empid!: string | null;
   constructor(
     private formBuilder: FormBuilder,
     private b1: UserService,
@@ -78,11 +78,28 @@ if (innputElement) {
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common);
     });
-
+    this.empid = this.route.snapshot.paramMap.get('empid');
+    this.fetchUserDetailById();
 
   }
-
-  updateEmployee() {
+  fetchUserDetailById() {
+    if (this.empid) {
+      this.http.get(`https://job4jobless.com:9001/fetchempById/${this.empid}`)
+        .subscribe({
+          next: (response: any) => {
+            console.log("Employer Old Details",response);
+            // Assuming response has the job post data in the correct format
+            this.employeeForm.patchValue(response);
+            // Populate form with the job details received
+          },
+          error: (error: any) => {
+            console.error('Error fetching job details', error);
+            // Handle error
+          }
+        });
+    }
+  }
+  updateEmployee() {  
     if (this.employeeForm.valid) {
       // Extract updated employee data from the form
       const updatedEmployee = this.employeeForm.value;

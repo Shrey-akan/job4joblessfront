@@ -13,18 +13,7 @@
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
             Password
           </a>
-          <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#privacy-safety" role="tab">
-            Privacy and safety
-          </a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#email-notifications" role="tab">
-            Email notifications
-          </a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-            Web notifications
-          </a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#web-widgets" role="tab">
-            Widgets
-          </a> -->
+   
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#userdata" role="tab">
             Your data
           </a>
@@ -106,7 +95,7 @@
                   <label for="inputPasswordNew2">Verify password</label>
                   <input type="password" class="form-control" id="inputPasswordNew2" formControlName="verifyPassword">
                 </div>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn custom-pillss mt-3 rounded-pillv">Save Paassword</button>
               </form>
               <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
               <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -232,7 +221,7 @@
                   <!-- Add more properties as needed -->
                 </tbody>
               </table>
-              <button class="btn btn-primary" (click)="openUpdateProfileForm()">Update Profile</button>
+              <button class="btn custom-pillss mt-3 rounded-pill" (click)="openUpdateProfileForm()">Update Profile</button>
 
             </div>
           </div>
