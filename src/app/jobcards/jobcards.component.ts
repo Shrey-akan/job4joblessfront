@@ -34,6 +34,7 @@ export class JobcardsComponent implements OnInit {
   itemsPerPage = 5;
   currentPage = 1;
   totalPages!: number;
+  
 
   constructor(private router: Router, private b1: UserService) {}
 
@@ -87,4 +88,7 @@ export class JobcardsComponent implements OnInit {
   //   schedulejob: "Day Shift",
   //   payjob: "25000 - 45000",
   // }
+  applyForJob(){
+    this.router.navigate(['/login']);
+  }
 }

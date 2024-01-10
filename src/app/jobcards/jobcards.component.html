@@ -21,7 +21,7 @@
           <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
             <p class="rounded-pill px-2 py-1 mx-2 custom-pills">{{ job.numberofopening }} openings(s)</p>
             <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{ job.locationjob }}</p>
-            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.schedulejob }}</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.jobtype }}</p>
           </div>
           <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
           <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -37,16 +37,15 @@
                 <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
                   <p>
                     About Us:
-                    [Company Name] is a cutting-edge [industry/technology] company dedicated to [mission or purpose]. We
-                    pride ourselves on fostering a collaborative and innovative work environment, where talented
-                    individuals can thrive and contribute to the development of impactful solutions. As we continue to
-                    grow, we are seeking a skilled Software Developer to join our dynamic team.
+                    {{job.companyforthisjob}} {{job.descriptiondata}}
                   </p>
                 </div>
               </div>
             </div>
           </div>
           <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
+            <!-- Add Apply button -->
+            <button class="btn btn-success mt-3" (click)="applyForJob()">Apply</button>
         </div>
       </div>
     </div>
