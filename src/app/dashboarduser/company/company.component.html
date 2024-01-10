@@ -12,13 +12,13 @@
         <form (ngSubmit)="searchCompanies()">
           <div class="form-group">
             <label for="cnoj">Company name or job title</label>
-            <input type="text" id="cnoj" name="cnoj" class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" [(ngModel)]="searchTerm">
+            <input type="text" id="cnoj" name="cnoj" placeholder="Search Companies" class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" [(ngModel)]="searchTerm">
 
           </div>
         </form>
       </div>
       <div class="col-md-2" style="margin-top: 20px;">
-        <button type="button" class="btn rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn" (click)="searchCompanies()">Find Companies</button>
+        <button type="button" class="btn custom-pillss mt-3 rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn" (click)="searchCompanies()">Find Companies</button>
       </div>
       
     </div>                                  
@@ -46,6 +46,22 @@
                 <a routerLink="/dashboarduser" class="btn-anchor">Open jobs</a>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-center mt-4 mb-4">
+        <div class="col-md-6">
+          <div class="pagination d-flex justify-content-center align-items-center">
+            <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="page-info mx-2">{{ currentPage }} / {{ totalPages }}</span>
+            <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+              <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </div>

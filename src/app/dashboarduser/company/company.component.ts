@@ -25,26 +25,50 @@ export class CompanyComponent implements OnInit {
   jobpostData: any[] = []; // Variable to store jobpost data
   searchTerm: string = ''; // Property to store the search term
   filteredCompanies: any[] = []; // Declare filteredCompanies as an empty array
-
+  itemsPerPage = 6;
+  currentPage = 1;
+  totalPages!: number;
   constructor(private yourHttpService: UserService) {} // Replace with your actual service
 
+  // ngOnInit() {
+
+  //   this.yourHttpService.fetchjobpost().subscribe((data: any) => {
+  //     this.jobpostData = data;
+
+  //     this.filteredCompanies = this.jobpostData;
+  //   });
+    
+  // }
+
+  // searchCompanies() {
+
+  //   this.filteredCompanies = this.jobpostData.filter((company) => {
+  //     return (
+  //       company.jobtitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+  //       company.companyforthisjob.toLowerCase().includes(this.searchTerm.toLowerCase())
+  //     );
+  //   });
+  // }
   ngOnInit() {
-    // Fetch jobpost data and store it in jobpostData
     this.yourHttpService.fetchjobpost().subscribe((data: any) => {
       this.jobpostData = data;
-      // Initially, show all companies
-      this.filteredCompanies = this.jobpostData;
+      this.totalPages = Math.ceil(this.jobpostData.length / this.itemsPerPage);
+      this.filterCompanies();
     });
   }
 
   searchCompanies() {
-    // Filter the data based on the search term
-    this.filteredCompanies = this.jobpostData.filter((company) => {
-      return (
-        company.jobtitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        company.companyforthisjob.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    });
+    this.filterCompanies();
   }
-  
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.filterCompanies();
+  }
+
+  filterCompanies(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.filteredCompanies = this.jobpostData.slice(startIndex, endIndex);
+  }
 }
