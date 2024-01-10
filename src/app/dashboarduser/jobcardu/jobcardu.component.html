@@ -26,15 +26,22 @@
             <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently Hiring</span>
             <div class="d-flex justify-content-between align-items-center mt-3">
               <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
-              <div class="btn-group dropend">
-                <button type="button" class="btn rounded-pill dropdown-toggle text-white"
-                  style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
-                  Options
-                </button>`
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Appreciate job</a></li>
-                </ul>
+       
+
+              <div class="d-flex justify-content-center align-items-center">
+                <div *ngIf="liked">
+                  <span class="rounded-circle mx-3 border-0" style="background-color: #fca5a5; color: #b91c1c; padding: 10px 15px;"><i class="fa-solid fa-bookmark"></i></span>
+                </div>
+                <div class="btn-group dropend">
+                  <button type="button" class="btn rounded-pill dropdown-toggle text-white"
+                    style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
+                    Options
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
+                  </ul>
+                </div>
+                
               </div>
             </div>
             <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}</p>

@@ -21,6 +21,7 @@ interface Job {
   styleUrls: ['./jobcardu.component.css']
 })
 export class JobcarduComponent implements OnInit {
+  liked: boolean = true;
   data1: any;
   companies = [
     // ... existing companies data
