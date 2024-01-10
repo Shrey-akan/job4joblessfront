@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-md-6 col-lg-5">
         <div class="dropdown">
-          <input type="text" class="form-control" [(ngModel)]="searchJobTitle" (click)="toggleJobTitleDropdown()" placeholder="Enter job title">
+          <input type="text" class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" [(ngModel)]="searchJobTitle" (click)="toggleJobTitleDropdown()" placeholder="Enter job title">
           <ul class="dropdown-menu" [ngClass]="{ 'show': showJobTitleDropdown }">
             <li *ngFor="let title of allJobTitles" (click)="selectJobTitle(title)">{{ title }}</li>
           </ul>
@@ -10,14 +10,14 @@
       </div>
       <div class="col-md-6 col-lg-5 mt-2 mt-md-0">
         <div class="dropdown">
-          <input type="text" class="form-control" [(ngModel)]="searchLocation" (click)="toggleLocationDropdown()" placeholder="Enter location">
+          <input type="text" class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" [(ngModel)]="searchLocation" (click)="toggleLocationDropdown()" placeholder="Enter location">
           <ul class="dropdown-menu" [ngClass]="{ 'show': showLocationDropdown }">
             <li *ngFor="let location of allLocations" (click)="selectLocation(location)">{{ location }}</li>
           </ul>
         </div>
       </div>
       <div class="col-md-12 col-lg-2 mt-2 mt-md-0">
-        <button type="button" class="btn custom-pills w-100" (click)="filterJobs()">Search Jobs</button>
+        <button type="button" class="btn rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn" (click)="filterJobs()">Search Jobs</button>
       </div>
     </div>
   </div>
