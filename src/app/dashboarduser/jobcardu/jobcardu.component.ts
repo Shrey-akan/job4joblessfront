@@ -34,7 +34,9 @@ export class JobcarduComponent implements OnInit {
   itemsPerPage = 5;
   currentPage = 1;
   totalPages!: number;
-  
+  searchJobTitle: string = ''; // Add this property for job title search
+  searchLocation: string = ''; // Add this property for location search
+  filteredJobs: Job[] = [];
 
   constructor(private router: Router, private b1: UserService) {}
 
@@ -45,7 +47,7 @@ export class JobcarduComponent implements OnInit {
   onPageChange(page: number): void {
     this.currentPage = page;
   }
-
+  userID: String = '0';
   ngOnInit(): void {
     let response = this.b1.fetchjobpost();
     response.subscribe((data1: any) => {
@@ -78,16 +80,7 @@ export class JobcarduComponent implements OnInit {
     const endIndex = startIndex + this.itemsPerPage;
     return this.data.slice(startIndex, endIndex);
   }
-  // public job: Job = {
-  //   jobtitle: "Software Developer",
-  //   companyforthisjob: "Orage Technologies",
-  //   numberofopening: "12",
-  //   locationjob: "Noida, Uttar Pradesh",
-  //   descriptiondata: ["meow", "sekiro"],
-  //   jobtype: "Remote",
-  //   schedulejob: "Day Shift",
-  //   payjob: "25000 - 45000",
-  // }
+
   applyForJob(selectedJob: Job) {
     if (selectedJob) {
       // Set the selected job details before navigating
@@ -102,5 +95,17 @@ export class JobcarduComponent implements OnInit {
       console.error('No job selected.');
     }
   }
-  
+  filterJobs(): void {
+    console.log(this.searchJobTitle ,"", this.searchLocation);
+    if (this.searchJobTitle || this.searchLocation) {
+      this.filteredJobs = this.data.filter((job) => {
+        const titleMatch = !this.searchJobTitle || job.jobtitle.toLowerCase().includes(this.searchJobTitle.toLowerCase());
+        const locationMatch = !this.searchLocation || job.locationjob.toLowerCase().includes(this.searchLocation.toLowerCase());
+        return titleMatch && locationMatch;
+      });
+    } else {
+      // If no search criteria entered, show all jobs
+      this.filteredJobs = this.data;
+    }
+  }
 }
