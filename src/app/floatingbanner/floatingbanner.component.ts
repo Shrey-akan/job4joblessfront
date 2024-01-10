@@ -39,4 +39,8 @@ export class FloatingbannerComponent implements OnInit {
         // console.error('Authentication Error:', error);
       });
   }
+
+  navigateToRegister(){
+    this.router.navigate(['/register']);
+  }
 }
