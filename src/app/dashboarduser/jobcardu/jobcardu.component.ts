@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CookieService } from 'ngx-cookie-service';
 interface Job {
   jobid: string;
   jobtitle: string;
@@ -14,6 +15,8 @@ interface Job {
   payjob: string;
   payjobsup: string;
   empid: string;
+  status:boolean;
+  uid:string; 
 }
 @Component({
   selector: 'app-jobcardu',
@@ -39,7 +42,7 @@ export class JobcarduComponent implements OnInit {
   searchLocation: string = ''; // Add this property for location search
   filteredJobs: Job[] = [];
 
-  constructor(private router: Router, private b1: UserService) {}
+  constructor(private router: Router, private b1: UserService , private cookie:CookieService) {}
 
   performSearch() {
     this.filterJobs();
@@ -58,6 +61,8 @@ export class JobcarduComponent implements OnInit {
       this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
       this.filterJobs(); // Initial filter when data is loaded
     });
+
+    this.userID = this.cookie.get('uid');
   }
 
   searchJobs() {
