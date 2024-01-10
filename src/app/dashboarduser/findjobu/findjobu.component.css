@@ -1,8 +1,4 @@
-.custom-box {
-    transition: box-shadow 0.3s ease, cursor 0.3s ease;
-}
-
-.custom-box:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
+.custom-pills {
+    color: white;
+    background-color: #1e2e5c;
 }

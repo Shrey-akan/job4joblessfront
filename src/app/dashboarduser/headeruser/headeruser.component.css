@@ -14,4 +14,7 @@
     border-color: #007BFF; /* Change the color as needed */
     font-weight: bold; /* Bold for active link */
   }
-  
+  .btn-custom {
+    background-color: #1E2E5C;
+    color: white;
+}
