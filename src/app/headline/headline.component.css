@@ -1,0 +1,18 @@
+.banner {
+    font-size: 7vw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin: 0.5em auto;
+    color: #1E2E5C;
+    text-align: left;
+}
+
+.banner-below {
+    font-size: 7vw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin: 0.5em auto;
+    color: #1E2E5C;
+    text-align: left;
+    opacity: 0.8;
+}

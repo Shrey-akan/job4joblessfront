@@ -39,6 +39,13 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 import { MessagingService } from './firebase/messaging.service';
+import { CoresearchComponent } from './coresearch/coresearch.component';
+import { SearchboxComponent } from './searchbox/searchbox.component';
+import { SearchfiltersComponent } from './searchfilters/searchfilters.component';
+import { HeadlineComponent } from './headline/headline.component';
+import { FloatingbannerComponent } from './floatingbanner/floatingbanner.component';
+import { JobcardsComponent } from './jobcards/jobcards.component';
+import { MobileappComponent } from './mobileapp/mobileapp.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -61,7 +68,14 @@ import { MessagingService } from './firebase/messaging.service';
     ResetpasswordComponent,
     Job4joblesspComponent,
     PagenotfoundComponent,
-    FinjobpageComponent
+    FinjobpageComponent,
+    CoresearchComponent,
+    SearchboxComponent,
+    SearchfiltersComponent,
+    HeadlineComponent,
+    FloatingbannerComponent,
+    JobcardsComponent,
+    MobileappComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 custom-font">
+      <div class="d-flex flex-column justify-content-center align-items-stretch">
+        <div class="border-2 border rounded-4 p-4 mt-3">
+          <!-- <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
+          *ngFor="let job of getJobsForCurrentPage()" (click)="selectJob(job)"> -->
+          <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently
+            Hiring</span>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
+            <div class="btn-group dropend">
+              <button type="button" class="btn rounded-pill dropdown-toggle text-white"
+                style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
+                Options
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Appreciate
+                    job</a></li>
+              </ul>
+            </div>
+          </div>
+          <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}
+          </p>
+          <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills">{{ job.numberofopening }} openings(s)</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{
+              job.locationjob }}</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.schedulejob
+              }}</p>
+          </div>
+          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
+          <!-- accordion open -->
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item mx-1 my-0 rounded-3">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-pills" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
+                  Job Description
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
+                  <p>
+                    About Us:
+                    [Company Name] is a cutting-edge [industry/technology] company dedicated to [mission or purpose]. We
+                    pride ourselves on fostering a collaborative and innovative work environment, where talented
+                    individuals can thrive and contribute to the development of impactful solutions. As we continue to
+                    grow, we are seeking a skilled Software Developer to join our dynamic team.
+
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- accordian close -->
+          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="border-2 border rounded-4 p-4 mt-3">
+          <!-- <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
+          *ngFor="let job of getJobsForCurrentPage()" (click)="selectJob(job)"> -->
+          <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently
+            Hiring</span>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
+            <div class="btn-group dropend">
+              <button type="button" class="btn rounded-pill dropdown-toggle text-white"
+                style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
+                Options
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Appreciate
+                    job</a></li>
+              </ul>
+            </div>
+          </div>
+          <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}
+          </p>
+          <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills">{{ job.numberofopening }} openings(s)</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{
+              job.locationjob }}</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.schedulejob
+              }}</p>
+          </div>
+          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
+          <!-- accordion open -->
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item mx-1 my-0 rounded-3">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-pills" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
+                  Job Description
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
+                  <p>
+                    About Us:
+                    [Company Name] is a cutting-edge [industry/technology] company dedicated to [mission or purpose]. We
+                    pride ourselves on fostering a collaborative and innovative work environment, where talented
+                    individuals can thrive and contribute to the development of impactful solutions. As we continue to
+                    grow, we are seeking a skilled Software Developer to join our dynamic team.
+
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- accordian close -->
+          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="border-2 border rounded-4 p-4 mt-3">
+          <!-- <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
+          *ngFor="let job of getJobsForCurrentPage()" (click)="selectJob(job)"> -->
+          <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently
+            Hiring</span>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
+            <div class="btn-group dropend">
+              <button type="button" class="btn rounded-pill dropdown-toggle text-white"
+                style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
+                Options
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Appreciate
+                    job</a></li>
+              </ul>
+            </div>
+          </div>
+          <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}
+          </p>
+          <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills">{{ job.numberofopening }} openings(s)</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{
+              job.locationjob }}</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.schedulejob
+              }}</p>
+          </div>
+          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
+          <!-- accordion open -->
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item mx-1 my-0 rounded-3">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-pills" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
+                  Job Description
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
+                  <p>
+                    About Us:
+                    [Company Name] is a cutting-edge [industry/technology] company dedicated to [mission or purpose]. We
+                    pride ourselves on fostering a collaborative and innovative work environment, where talented
+                    individuals can thrive and contribute to the development of impactful solutions. As we continue to
+                    grow, we are seeking a skilled Software Developer to join our dynamic team.
+
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- accordian close -->
+          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
+        </div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pagination">
+  <!-- <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+        Previous
+    </button>
+    <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
+    <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)"
+        [disabled]="currentPage === totalPages">
+        Next
+    </button> -->
+</div>

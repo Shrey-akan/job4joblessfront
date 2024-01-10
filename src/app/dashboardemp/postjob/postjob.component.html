@@ -1,6 +1,15 @@
-<div class="container">
+<div class="container shadow">
   <div class="row">
-    <h2 class="text-dark text-center"><b>Create A Job Post</b></h2>
+    <div class="card">
+      <div class="card-body">
+        <div class="col">
+          <h2 class="text-dark text-center"><b>Create A Job Post</b></h2>
+        </div>
+        <div class="col text-center">
+          <img src="/assets/pictureindeed-removebg-preview.png" alt="">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -48,18 +57,15 @@
       <div class="mb-3">
         <label class="form-label">Schedule *</label>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="morningShift"
-            (change)="updateSchedule($event, 'Morning Shift')" formControlName="schedulejob">
+          <input class="form-check-input" type="checkbox" id="morningShift" (change)="updateSchedule($event, 'Morning Shift')" formControlName="schedulejob">
           <label class="form-check-label" for="morningShift">Morning Shift</label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="nightShift"
-            (change)="updateSchedule($event, 'Night Shift')" formControlName="schedulejob">
+          <input class="form-check-input" type="checkbox" id="nightShift" (change)="updateSchedule($event, 'Night Shift')" formControlName="schedulejob">
           <label class="form-check-label" for="nightShift">Night Shift</label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="dayNightShift"
-            (change)="updateSchedule($event, 'Day-Night Shift')" formControlName="schedulejob">
+          <input class="form-check-input" type="checkbox" id="dayNightShift" (change)="updateSchedule($event, 'Day-Night Shift')" formControlName="schedulejob">
           <label class="form-check-label" for="dayNightShift">Day-Night Shift</label>
         </div>
         <div *ngIf="jobPostForm.get('schedule')?.hasError('required')" class="text-danger">

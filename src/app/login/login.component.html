@@ -1,66 +1,44 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-8">
-      <div class="container-fluid">
-        <div class="container login-container mt-5" style="padding: 20px;">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="container">
-                <div class="text-center">
-                  <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" class="img-fluid" width="100%"  onclick="window.location.href = '/'">
-                  <h2>Sign in to job4jobless as Job Seeker</h2>
-                </div>
+<div class="container d-flex justify-content-center align-items-center">
+  <button routerLink="/" class="position-absolute top-0 start-0 btn rounded-pill m-4" style="background-color: #1E2E5C; color: white;"><i class="fa-solid fa-chevron-left"></i>&nbsp; &nbsp; Go back to home</button>
+  <div class="border shadow border-2 rounded-3 d-flex justify-content-center align-items-center flex-column"
+    style="max-width: 30em; margin-top: 10vh;">
+    <div class="text-center my-4">
+      <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" style="width: 100%;"
+        onclick="window.location.href = '/'">
+    </div>
+    <p>Sign in to job4jobless as Job Seeker</p>
 
-                <!-- Sign-In Form -->
-                <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
-                  <div class="form-group">
-                    <input type="text" class="form-control rounded-pill" formControlName="userName" id="userName"
-                      placeholder="Username or Email"
-                      [ngClass]="{ 'is-invalid': loginform.get('userName')?.invalid && loginform.get('userName')?.touched }" />
-                    <div class="invalid-feedback" *ngIf="loginform.get('userName')?.hasError('required')">
-                      Username or Email is required.
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control rounded-pill" formControlName="userPassword" id="userPassword"
-                      placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
-                    <div class="form-group text-right">
-                      <span class="password-toggle-ico" (click)="togglePasswordVisibility()">
-                        {{ passwordVisible ? 'Hide' : 'Show' }} Password
-                      </span>
-                    </div>
-                  </div>
-                  <div class="form-group text-right">
-                    <a class="forgot-password-link" routerLink="/resetpass">Forgot your password?</a>
-                  </div>
-                  <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                  </div>
-                  <div class="create-account-link text-center">
-                    Don't have an account? <a routerLink="/register">Create Account.</a>
-                    <!-- <button class="btn btn-block rounded-pill" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
-                      <i class="fab fa-google"></i> Sign In with Google
-                    </button> -->
-                  </div>
-                  <div class="create-account-link text-center">
-                    <button class="btn btn-block rounded-pill" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
-                      <i class="fab fa-google"></i> Sign In with Google
-                    </button>
-                  </div>
-         
-                </form>
-              </div>
-            </div>
-            <!-- <div class="container p-4 ">
-              
-              <button class="btn btn-block rounded-pill" style="background-color: #FF5733; color: #fff;" (click)="loginWithGoogle()">
-                <i class="fab fa-google"></i> Sign In with Google
-              </button>
-            </div> -->
-          </div>
+    <!-- Sign-In Form -->
+    <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
+      <div class="form-group">
+        <input type="text" class="form-control px-4 rounded-pill" formControlName="userName" id="userName"
+          placeholder="Username or Email"
+          [ngClass]="{ 'is-invalid': loginform.get('userName')?.invalid && loginform.get('userName')?.touched }" />
+        <div class="invalid-feedback" *ngIf="loginform.get('userName')?.hasError('required')">
+          Username or Email is required.
         </div>
       </div>
-    </div>
+      <div class="form-group d-flex justify-content-between align-items-center">
+        <input type="password" class="form-control px-4 rounded-pill" formControlName="userPassword" id="userPassword"
+          placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
+        <div (click)="togglePasswordVisibility()" class="px-2">
+          <div *ngIf="passwordVisible; else hidePassword">
+            <i class="fa-solid fa-eye-slash"></i>
+          </div>
+          <ng-template #hidePassword>
+            <i class="fa-solid fa-eye"></i>
+          </ng-template>
+        </div>
+      </div>
+      <div class="form-group d-flex flex-column justify-content-center align-items-stretch">
+        <a class="text-decoration-none text-center" routerLink="/resetpass" style="color: #1E2E5C;">Forgot your password?</a>
+        <button type="submit" class="btn rounded-pill my-3" style="background-color: #1E2E5C; color: white;">Sign In</button>
+        <p>Don't have an account? <a routerLink="/register" class="text-decoration-none" style="color: #1E2E5C;">Create Account.</a></p>
+        <button class="btn rounded-pill custom-google"
+          (click)="loginWithGoogle()">
+          <i class="fab fa-google"></i>&nbsp; &nbsp;Sign In with Google
+        </button>
+      </div>
+    </form>
   </div>
 </div>

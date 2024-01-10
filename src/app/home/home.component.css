@@ -1,12 +1,7 @@
 img{
     width: 100%;
 }
-.card-title{
-    color: blue;
-}
-.card-text{
-    color: rgb(81, 81, 160);
-}
+
 .testimonial {
     padding: 20px;
     background-color: #f9f9f9;
@@ -131,4 +126,12 @@ img{
 
 .text-justify{
   text-align: justify;
+}
+
+h1 {
+ font-family: 'Poppins', sans-serif; 
+}
+
+.custom-font {
+  font-family: 'Poppins', sans-serif;
 }

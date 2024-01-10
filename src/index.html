@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Job4JobLess - Find Your Dream Job</title>
-  <meta name="description" content="Job4JobLess is a leading job search platform to help you find your dream job. Explore job listings, post your resume, and connect with employers.">
+  <meta name="description"
+    content="Job4JobLess is a leading job search platform to help you find your dream job. Explore job listings, post your resume, and connect with employers.">
   <meta name="keywords" content="jobs, employment, job search, job listings, career, hiring, job seekers">
   <meta name="author" content="Job4JobLess">
   <base href="/">
@@ -12,29 +14,43 @@
   <meta name="robots" content="noindex, nofollow">
   <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
   <link rel="icon" type="image/png" href="assets/favicon-01.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <link rel="manifest" href="./manifest.json" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 </head>
+
 <body class="mat-typography">
   <app-root></app-root>
 </body>
 <script>
-  
-let menuicn = document.querySelector(".menuicn");
-let nav = document.querySelector(".navcontainer");
- 
-menuicn.addEventListener("click", () => {
+
+  let menuicn = document.querySelector(".menuicn");
+  let nav = document.querySelector(".navcontainer");
+
+  menuicn.addEventListener("click", () => {
     nav.classList.toggle("navclose");
-})
+  })
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -58,11 +74,11 @@ menuicn.addEventListener("click", () => {
   });
 
   // Function to handle Sign In button click
- function navigateToSignIn() {
-  // Add your logic to handle Sign In button click
+  function navigateToSignIn() {
+    // Add your logic to handle Sign In button click
 
-  
-    
+
+
     // Navigate to the login page
     window.location.href = '/login';
   }
@@ -70,19 +86,19 @@ menuicn.addEventListener("click", () => {
   function navigateToSignUp() {
     // Add your logic to handle Register button click
 
-    
+
     // Navigate to the register page
     window.location.href = '/register';
-}
+  }
 
-function navigateToSignInEmp(){
-  window.location.href = '/employer/empsign';
+  function navigateToSignInEmp() {
+    window.location.href = '/employer/empsign';
 
   }
 
-  function navigateToSignUpEmp(){
+  function navigateToSignUpEmp() {
     window.location.href = '/employer/empregister';
-   
+
   }
 </script>
 

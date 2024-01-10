@@ -32,24 +32,8 @@ export class UpdatejobComponent implements OnInit {
     });
     
     this.jobid = this.route.snapshot.paramMap.get('jobid');
-    this.fetchJobDetails();
   }
-  fetchJobDetails() {
-    if (this.jobid) {
-      this.http.get(`https://job4jobless.com:9001/fetchJobPostById/${this.jobid}`)
-        .subscribe({
-          next: (response: any) => {
-            // Assuming response has the job post data in the correct format
-            this.jobForm.patchValue(response);
-            // Populate form with the job details received
-          },
-          error: (error: any) => {
-            console.error('Error fetching job details', error);
-            // Handle error
-          }
-        });
-    }
-  }
+
   updateJob() {
     const formData = this.jobForm.value;
 

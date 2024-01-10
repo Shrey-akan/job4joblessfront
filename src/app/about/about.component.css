@@ -27,12 +27,19 @@
 .client-card:hover .testimonial {
     display: block;
 }
+
 .card:hover {
     border: 2px solid #007bff;
 }
+
 .card {
     height: 100%;
 }
-p{
+
+p {
     text-align: justify;
-  }
+}
+
+.jumbotron {
+    font-family: 'Poppins', sans-serif;
+}

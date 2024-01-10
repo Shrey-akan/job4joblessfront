@@ -223,17 +223,6 @@ cursor: pointer;
     }
   }
 
-  /* Style for the scrollable column */
-.scrollable-column {
-  max-height: 100vh; /* Adjust as needed */
-  overflow-y: auto; /* Enables vertical scrolling */
-}
-
-/* Style for the fixed column */
-.fixed-column {
-  position: sticky;
-  top: 0; /* Adjust if you have a header */
-}
-.scrollable-column::-webkit-scrollbar {
-  display: none;
+h1 {
+  font-family: "Poppins", sans-serif;
 }

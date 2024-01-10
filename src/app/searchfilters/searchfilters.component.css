@@ -1,0 +1,21 @@
+p {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 0.5em;
+}
+
+i {
+    font-size: 5vw !important;
+    padding: 5vw 6vw !important;
+    color: #1E2E5C;
+}
+
+.hovercard {
+    transition: 0.2s ease-in-out;
+    background-color: white;
+    cursor: pointer;
+}
+
+.hovercard:hover {
+    transform: scale(1.1);
+}

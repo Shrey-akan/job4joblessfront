@@ -1,0 +1,17 @@
+.custom-font {
+    font-family: 'Poppins', sans-serif;
+}
+
+.custom-pills {
+    color: black;
+    border: 2px solid #1E2E5C;
+    background-color: #1e2e5c41;
+}
+
+.custom-pills-btn {
+    color: white !important;
+    border: 2px solid #1E2E5C !important;
+    background-color: #1E2E5C !important;
+    border: none;
+    outline: none;
+}

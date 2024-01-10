@@ -76,7 +76,7 @@ throw new Error('Method not implemented.');
   showJobSearches = false;
   selectedJob: Job | null = null;
   data: Job[] = [];
-  itemsPerPage = 5; // Number of items to display per page
+  itemsPerPage = 3; // Number of items to display per page
   currentPage = 1; // Current page number
   totalPages!: number; // Total number of pages
   images = [

@@ -21,20 +21,20 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 scrollable-column">
+                <div class="col-md-6 ">
                     <div class="custom-box clickable" style="margin: 10px 0px; border-radius: 20px;"
                         *ngFor="let job of jobs" (click)="selectJob(job)">
                         <h1>{{ job.jobtitle }}</h1>
                         <h2>{{ job.companyforthisjob }}</h2>
                         <h4><strong>Number of Openings:</strong> {{ job.numberofopening }}</h4>
                         <h4><strong>Location:</strong> {{ job.locationjob }}</h4>
-               
+
                         <h4><strong>Schedule:</strong> {{ job.schedulejob }}</h4>
                         <h4><strong>Pay:</strong> {{ job.payjob }}</h4>
                         <!-- Display other relevant job information here -->
                     </div>
                 </div>
-                <div class="col-md-6 fixed-column">
+                <div class="col-md-6">
                     <div class="container custom-box" style="border-radius: 20px;" *ngIf="selectedJob">
                         <h2>{{ selectedJob.jobtitle }}</h2>
                         <h3>{{ selectedJob.companyforthisjob }}</h3>
@@ -60,7 +60,7 @@
                             <li *ngFor="let description of selectedJob.descriptiondata">{{ description }}</li>
                         </ul>
                     </div>
-                    
+
 
 
 
@@ -76,7 +76,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <h2>Trending Searches</h2>
-        
+
             <button (click)="toggleTrending()" class="btn btn-primary text-center mt-4">
                 {{ showTrending ? 'Show Less' : 'Show More' }}
             </button>
