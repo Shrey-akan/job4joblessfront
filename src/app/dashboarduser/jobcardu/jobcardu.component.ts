@@ -126,12 +126,22 @@ jobIdLikedStatusMap: { [key: string]: boolean } = {};
 
 toggleLikedStatus(jobId: string): void {
   const uid = this.cookie.get('uid');
-  this.b1.updateJobStatus(jobId, {uid}).subscribe(
+  console.log(uid);
+  console.log(jobId);
+  
+  this.b1.updateJobStatus(jobId, { uid }).subscribe(
     (response: any) => {
-      this.jobIdLikedStatusMap[jobId] = response.status;
+      console.log('Check the values', response);
+
+      if (response.status) {
+        console.log('Job status updated successfully.');
+        this.jobIdLikedStatusMap[jobId] = true;
+      } else {
+        console.error('Job status update failed.');
+      }
     },
     (error) => {
-      console.error('Error updating liked status:', error);
+      console.error('Error updating job status:', error);
     }
   );
 }
