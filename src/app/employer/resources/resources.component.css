@@ -72,3 +72,8 @@ a{
 .very-bold {
   font-weight: 900; /* Adjust the value as needed for the desired boldness */
 }
+
+.custom-pillss {
+  color: white;
+  background-color: #1e2e5c;
+}
