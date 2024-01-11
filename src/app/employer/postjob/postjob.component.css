@@ -1,63 +1,167 @@
 .content {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s;
-    border-radius: 20px; /* Reduced border-radius for a more subtle effect */
-    padding: 20px; /* Adjusted padding for a balanced look */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* transition: box-shadow 0.3s; */
+  border-radius: 20px; /* Reduced border-radius for a more subtle effect */
+  padding: 20px; /* Adjusted padding for a balanced look */
 }
 
 /* Optional: Add hover effect */
 .content:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Adjusted box-shadow on hover */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Adjusted box-shadow on hover */
 }
 .contentbox{
-    margin: 80px auto;
-    padding: 50px;
-    background-color: #DCF2F1;
+  margin: 80px auto;
+  padding: 50px;
+  background-color: #708090;
 }
 .contentboxf{
-    margin: 80px auto;
+  margin: 80px auto;
 }
 .contentget{
-    margin: 80px auto;
-    
+  margin: 80px auto;
+  
 }
 
-  /* my-component.component.css */
+/* my-component.component.css */
 .my-container {
-    margin-top: 80px;
+  margin-top: 80px;
+}
+
+.my-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 30px;
+  background-color: #ffffff;
+}
+
+.my-text-container h1 {
+  font-size: 24px;
+  color: #333;
+  margin-top: 20px; /* Adjust the margin-top to position the text down */
+}
+
+.my-image-container img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .my-text-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 30px;
-    background-color: #ffffff;
+  to {
+    opacity: 1;
   }
-  
-  .my-text-container h1 {
-    font-size: 24px;
-    color: #333;
-    margin-top: 20px; /* Adjust the margin-top to position the text down */
-  }
-  
-  .my-image-container img {
-    width: 100%;
-    height: auto;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .fade-in {
-    animation: fadeIn 1s ease-out;
-  }
-  
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+
+/* Define keyframe animation */
+@keyframes fadeInUp {
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+/* Apply animation to the text */
+.animated-text {
+animation: fadeInUp 4s ease forwards;
+opacity: 0; /* Initially hide the text to be revealed by the animation */
+}
+/* Add this CSS to your styles.css file */
+
+/* styles.css */
+
+/* Apply styles to the advertisement container */
+.advertisement-container {
+margin: 50px auto;
+}
+
+/* Apply styles to the blinking text */
+.blink-text {
+color: #2f4f4f;
+animation: blink 1s infinite;
+}
+
+/* Define the blink animation */
+@keyframes blink {
+0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0;
+}
+100% {
+    opacity: 1;
+}
+}
+
+
+.bold-text {
+font-weight: bold;
+}
+
+@keyframes typing {
+from {
+  width: 0;
+}
+to {
+  width: 100%;
+}
+}
+
+.bold-text {
+font-weight: bold;
+}
+
+.typing-text {
+overflow: hidden;
+border-right: 0.15em solid orange; /* The typewriter cursor */
+white-space: nowrap; /* Keeps the content on a single line */
+margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+letter-spacing: 0.15em; /* Adjust as needed */
+animation: typing 10s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+from, to {
+  border-color: transparent;
+}
+50% {
+  border-color: orange;
+}
+}
+
+.custom-container {
+background-color: #708090;
+padding: 40px 0;
+}
+
+.custom-text-container {
+color: #fff;
+}
+
+.custom-text-container h1 {
+font-size: 24px;
+font-weight: bold;
+line-height: 1.5;
+}
+.showPostJob {
+background-color: #1c1c1c;
+transition: background-color 0.3s ease;
+}
+
+.showPostJob:hover {
+background-color: #708090;
+}
