@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
     <!-- <h1 class="text-center" style="font-size: 1.5rem;  color: black;">Ready to take the next step?</h1> -->
@@ -52,7 +51,8 @@
                   <input type="{{ empPasswordVisible ? 'text' : 'password' }}" id="emppass" formControlName="emppass"
                     class="form-control" required />
                   <div class="input-group-append">
-                    <span class="input-group-text password-toggle" (click)="toggleEmpPasswordVisibility()" style="cursor: pointer;">
+                    <span class="input-group-text password-toggle" (click)="toggleEmpPasswordVisibility()"
+                      style="cursor: pointer;">
                       <i class="fa" [ngClass]="empPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
                     </span>
                   </div>
@@ -61,12 +61,12 @@
                   Password should must have 8 characters with one special character, one uppercase and one lowercase.
                 </div>
                 <div *ngIf="employerdetails.get('emppass')?.hasError('pattern')" class="text-danger">
-                  
+
                 </div>
               </div>
-              
 
-              
+
+
               <div class="form-group">
                 <label for="empcountry">Country:*</label>
                 <select id="empcountry" formControlName="empcountry" class="form-control" required>
@@ -93,7 +93,7 @@
                     </div>
                     <input type="tel" id="empphone" class="form-control" formControlName="empphone"
                       placeholder="Enter Phone" required>
-  
+
                   </div>
                   <div *ngIf="employerdetails.get('empphone')?.hasError('pattern')" class="text-danger">
                     Please enter a valid 10-digit phone number.
@@ -107,14 +107,14 @@
               </div>
 
               <div class="form-group">
-              
+
               </div>
 
 
 
-           
 
-          
+
+
 
               <div class="form-group">
                 <label for="empcity">City:*</label>
@@ -144,4 +144,16 @@
 
     </div>
   </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="showWarning" class="alert alert-warning">
+        Warning: User does not exist
+      </div>
+    </div>
+  </div>
+
 </div>

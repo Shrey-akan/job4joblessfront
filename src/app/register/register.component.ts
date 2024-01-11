@@ -92,7 +92,7 @@ if (innputElement) {
     if (this.userregister.valid) {
       this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe(
         (payload: any) => {
-          this.successMessage = 'User registered successfully!';
+          this.successMessage = 'User registered successfully! Please Wait..';
           this.generateOtp(payload);
         },
         (err) => {

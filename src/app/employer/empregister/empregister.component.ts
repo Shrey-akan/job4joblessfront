@@ -16,6 +16,8 @@ export class EmpregisterComponent {
   formSubmitted: any;
   empPasswordVisible: boolean = false;
   data1: any;
+  successMessage: string | null = null;
+  showWarning: boolean = false; 
 
   loading: boolean = false; // Added loading flag
   constructor(private formBuilder: FormBuilder , private router:Router , private b1:UserService , private http:HttpClient) {
@@ -39,22 +41,16 @@ export class EmpregisterComponent {
  
 
   }
-
-
   empRegisteration(): void {
-    // console.log(this.employerdetails);
     this.http.post('https://job4jobless.com:9001/insertEmployer', this.employerdetails.getRawValue()).subscribe({
       next: (payload: any) => {
-      
-          // console.log(payload);
-          // console.log(payload.empid);
-          this.generateOtp(payload);
-        
+        this.successMessage = 'Employer registered successfully! Please Wait...';
+        this.generateOtp(payload);
       },
       error: (err) => {
-        console.error(`Some error occured: ${err}`);
+        console.error(`Some error occurred: ${err}`);
       }
-    })
+    });
   }
 
   loginWithGoogle() {
@@ -85,22 +81,18 @@ export class EmpregisterComponent {
 
 
   generateOtp(payload: any) {
-    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', {uid: payload.empid, email:payload.empmailid}).subscribe({
-      next:(response: any) => {
-        if(response.otpCreated) {
-          // console.log(response.otpCreated);
-
-this.router.navigate(['/employer/optverify', payload.empid]);
-          
-        }
-        else {
-          console.error("Otp not generated");
+    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.empid, email: payload.empmailid }).subscribe({
+      next: (response: any) => {
+        if (response.otpCreated) {
+          this.router.navigate(['/employer/optverify', payload.empid]);
+        } else {
+          console.error('Otp not generated');
         }
       },
-      error: (err: any) => { 
-        console.error(`Some error occured: ${err}`);
+      error: (err: any) => {
+        console.error(`Some error occurred: ${err}`);
       }
-    })
+    });
   }
 
   toggleEmpPasswordVisibility() {

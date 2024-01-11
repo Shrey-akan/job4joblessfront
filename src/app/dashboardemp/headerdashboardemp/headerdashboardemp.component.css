@@ -1,0 +1,20 @@
+.btn-custom {
+    color: #1E2E5C;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+
+.active {
+    border-radius: 50px !important;
+    color: #1E2E5C !important;
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    padding: 0.7em 2em !important;
+    font-weight: bold;
+}
+
+a{
+    color: white;
+}

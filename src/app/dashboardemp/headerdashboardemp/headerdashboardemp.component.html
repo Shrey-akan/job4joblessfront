@@ -1,14 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="showNavbaremp">
-  <div class="container">
-    <img src="assets/Asset 1@4x-8.png" alt="" width="15%" onclick="window.location.href = '/dashboardemp'">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="showNavbaremp">
+      <div class="container">
+          <a class="navbar-brand" routerLink="/dashboardemp">
+              <img src="assets/Asset 1@4x-8.png" width="200" class="image-thumbnail d-inline-block">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <!-- <span class="navbar-toggler-icon"></span> -->
+              <i class="fa-solid fa-bars-staggered"></i>
+          </button>
+
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboardemp/" routerLinkActive="active">Post Job</a>
+          <a class="nav-link" routerLink="/dashboardemp/" [routerLinkActiveOptions]={exact:true} routerLinkActive="active">Post Job</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboardemp/alljobs" routerLinkActive="active">Job Posted</a>

@@ -26,7 +26,7 @@
           <p><strong>Profile:</strong> {{ application.profileupdate }}</p>
           <div class="btn-group">
             <input type="text" [(ngModel)]="application.selectedOption" class="form-control" (click)="toggleDropdown(application)" />
-            <button type="button" class="btn btn-secondary dropdown-toggle" (click)="toggleDropdown(application)">
+            <button type="button" class="btn custom-pillss rounded-pill dropdown-toggle" (click)="toggleDropdown(application)">
               Toggle Dropdown
             </button>
             <div class="dropdown-menu" [ngClass]="{'show': application.isOpen}">
@@ -37,7 +37,7 @@
               </ul>
             </div>
           </div>
-          <button class="btn btn-primary btn-block mt-2" (click)="updateProfileUpdate(application)">
+          <button class="btn custom-pillss rounded-pill mt-2" (click)="updateProfileUpdate(application)">
             Update Profile
           </button>
         </div>
@@ -54,26 +54,26 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12">
-                <button class="btn btn-primary btn-block mt-2" (click)="navigateToMessage(application.uid)">
+                <button class="btn custom-pillss rounded-pill btn-block mt-2" (click)="navigateToMessage(application.uid)">
                   <i class="fa fa-envelope"></i> Message
                 </button>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12">
-                <button class="btn btn-primary btn-block mt-2" (click)="navigateToVideo(application.uid)">
+                <button class="btn custom-pillss rounded-pill btn-block mt-2" (click)="navigateToVideo(application.uid)">
                   <i class="fa fa-video-camera"></i> Video Call
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <button class="btn btn-primary btn-block mt-2" (click)="showMoreInfo(application)">More Info</button>
+        <button class="btn custom-pillss rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">More Info</button>
       </div>
     </div>
   </div>
 </div>
 <!-- Toggle Table Button -->
 <div class="text-center my-4">
-  <button class="btn btn-primary" (click)="toggleTableVisibility()">
+  <button class="btn custom-pillss rounded-pill "(click)="toggleTableVisibility()">
     {{ isTableVisible ? 'Hide Table' : 'Show Table' }}
   </button>
 </div>
@@ -132,5 +132,5 @@
 
 <!-- Download Table Button -->
 <div class="text-center">
-  <button class="btn btn-primary" *ngIf="isTableVisible" (click)="generateTablePDF()">Download Table</button>
+  <button class="btn custom-pillss rounded-pill" *ngIf="isTableVisible" (click)="generateTablePDF()">Download Table</button>
 </div>

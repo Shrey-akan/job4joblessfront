@@ -27,3 +27,7 @@ button.btn-primary:hover {
   transform: scale(1.1); /* Scale the button when hovered */
   transition: transform 0.2s ease; /* Add a smooth transition */
 }
+.custom-pillss {
+  color: white;
+  background-color: #1e2e5c;
+}
