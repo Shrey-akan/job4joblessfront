@@ -3,32 +3,57 @@
     <div class="col-md-12 custom-font">
       <div class="d-flex flex-column justify-content-center align-items-stretch">
         <div *ngFor="let job of getJobsForCurrentPage()" class="border-2 border rounded-4 p-4 mt-3">
-          <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently Hiring</span>
+          <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">Urgently
+            Hiring</span>
           <div class="d-flex justify-content-between align-items-center mt-3">
             <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
-            <div class="btn-group dropend">
+            <!-- <div class="btn-group dropend">
               <button type="button" class="btn rounded-pill dropdown-toggle text-white"
                 style="background-color: #1E2E5C;" data-bs-toggle="dropdown" aria-expanded="false">
                 Options
               </button>`
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;Save job</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Appreciate job</a></li>
               </ul>
+            </div> -->
+            <div class="d-flex justify-content-center align-items-center">
+              <!-- <div *ngIf="liked">
+                <span class="rounded-circle mx-3 border-0"
+                  style="background-color: #fca5a5; color: #b91c1c; padding: 10px 15px;"><i
+                    class="fa-solid fa-bookmark"></i></span>
+              </div> -->
+              <div *ngIf="liked; else notLiked">
+                <!-- Content to display when liked is true -->
+                <span class="rounded-circle mx-3 border-0"
+                      style="background-color: black; color: #1e2e5c41; padding: 10px 15px;">
+                  <i class="fa-solid fa-bookmark"></i>
+                </span>
+              </div>
+              <ng-template #notLiked>
+                <!-- Content to display when liked is false -->
+                <span class="rounded-circle mx-3 border-0"
+                      style="background-color: #1e2e5c41; color: black; padding: 10px 15px;">
+                  <i class="fa-solid fa-heart"></i>
+                </span>
+              </ng-template>
             </div>
           </div>
-          <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}</p>
+          <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}
+          </p>
           <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
             <p class="rounded-pill px-2 py-1 mx-2 custom-pills">{{ job.numberofopening }} openings(s)</p>
-            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{ job.locationjob }}</p>
-            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.jobtype }}</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{
+              job.locationjob }}</p>
+            <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.jobtype }}
+            </p>
           </div>
           <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item mx-1 my-0 rounded-3">
               <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-pillss" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
                   Job Description
                 </button>
               </h2>
@@ -44,8 +69,8 @@
             </div>
           </div>
           <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
-            <!-- Add Apply button -->
-            <button class="btn custom-pillss rounded-pill mt-3" (click)="applyForJob()">Apply</button>
+          <!-- Add Apply button -->
+          <button class="btn custom-pillss rounded-pill mt-3" (click)="applyForJob()">Apply</button>
         </div>
       </div>
     </div>
@@ -55,17 +80,16 @@
   <div class="row justify-content-center mt-4 mb-4">
     <div class="col-md-6">
       <div class="pagination d-flex justify-content-center align-items-center">
-        <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+        <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage - 1)"
+          [disabled]="currentPage === 1">
           <i class="fas fa-chevron-left"></i>
         </button>
         <span class="page-info mx-2">{{ currentPage }} / {{ totalPages }}</span>
-        <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+        <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage + 1)"
+          [disabled]="currentPage === totalPages">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>
     </div>
   </div>
 </div>
-
-
-

@@ -21,6 +21,7 @@ interface Job {
 })
 
 export class JobcardsComponent implements OnInit {
+  liked: boolean = false;
   data1: any;
   companies = [
     // ... existing companies data
