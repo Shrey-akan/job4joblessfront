@@ -833,7 +833,7 @@ export class UserService {
   
   updateJobStatus(jobId: string, data: any): Observable<any> {
     const url = `https://job4jobless.com:9001/updateJobStatus/${jobId}`;
-    return this.h1.post(url, data);
+    return this.h1.put(url, data);
   }
   
 }
