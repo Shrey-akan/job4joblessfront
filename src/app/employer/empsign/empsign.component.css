@@ -1,76 +1,20 @@
-/* your-component.css */
-.custom-button {
-  background-color: #FF5733;
+
+p,
+a,
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-google {
+  background-color: white;
+  color: #1E2E5C;
+    background-color: #1E2E5C;
   color: white;
-  border: none;
-}
-.custom-button:hover {
-  background-color: #E64A2E;
-}
-.error {
-  border: 1px solid red;
-}
-/* Style the eye icon for the employer password toggle */
-.fa-eye {
-cursor: pointer;
+  outline: 2px solid #1E2E5C;
 }
 
-.fa-eye-slash {
-cursor: pointer;
-}
-
-/* Add these styles to your existing CSS file or create a new one */
-
-/* Container styles */
-.container {
-padding-top: 50px;
-}
-
-/* Logo styles */
-.img-fluid {
-max-width: 100%;
-height: auto;
-}
-
-/* Custom box styles */
-.custom-box {
-background-color: #f8f9fa; /* Light gray background color */
-border-radius: 10px;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Clickable box styles */
-.clickable {
-cursor: pointer;
-}
-
-/* Padding for the clickable box */
-.custom-box.clickable {
-padding: 20px;
-}
-
-/* Center text in the box */
-.custom-box h1,
-.custom-box p {
-text-align: center;
-}
-
-/* Button styles */
-.btn-primary {
-background-color: #007bff; /* Primary button color */
-color: #fff; /* Text color */
-}
-
-/* Password input styles */
-.input-group {
-position: relative;
-}
-
-/* Eye toggle button styles */
-.toggle-password {
-position: absolute;
-top: 50%;
-right: 10px;
-transform: translateY(-50%);
-cursor: pointer;
+.custom-google:hover {
+  background-color: white;
+  color: #1E2E5C;
+  outline: 2px solid #1E2E5C;
 }

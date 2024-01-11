@@ -1,59 +1,45 @@
-<div class="container text-center my-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <img src="assets/Job4jobless & Hustleforwork-01.png" alt="Your Logo" class="img-fluid">
+
+
+<div class="container d-flex justify-content-center align-items-center">
+    <!-- <button routerLink="/employer" class="position-absolute top-0 start-0 btn rounded-pill m-4" style="background-color: #1E2E5C; color: white;"><i class="fa-solid fa-chevron-left"></i>&nbsp; &nbsp; Go back to home</button> -->
+    <div class="border shadow border-2 rounded-3 d-flex justify-content-center align-items-center flex-column"
+      style="max-width: 40em; margin-top: 10vh; background-color: #1c1c1c; padding: 30px;">
+      <div class="text-center my-4">
+        <img src="assets/Asset 1@4x-8.png" alt="job4jobless" width="200">
+      </div>
+      <p style="color: white;">Sign in to job4jobless as Recruiter</p>
+  
+      <!-- Sign-In Form -->
+      <form [formGroup]="empsignin" (ngSubmit)="empCheckInfo()" action="">
+        <div class="form-group">
+          <input type="text" class="form-control px-4 rounded-pill" formControlName="empmailid" id="empmailid"
+            placeholder="empmailid or Email"
+            [ngClass]="{ 'is-invalid': empsignin.get('empmailid')?.invalid && empsignin.get('empmailid')?.touched }" />
+          <div class="invalid-feedback" *ngIf="empsignin.get('empmailid')?.hasError('required')">
+            empmailid or Email is required.
+          </div>
         </div>
-    </div>
-</div>
-
-<div class="container" id="jbfeed">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="custom-box clickable p-4">
-                <h1 class="text-center mb-4">Ready to take the next step?</h1>
-                <p class="text-center mb-4"><a routerLink="/employer/empregister">Create an account</a> or sign in.</p>
-                <!-- <p class="text-center mb-4">
-                    By creating an account or logging in, you understand and agree to Indeed's <a href="#">Terms</a>. You also acknowledge our <a href="#">Cookie</a> and <a href="#">Privacy</a> policies. You will receive marketing messages from Indeed and may opt out at any time by following the unsubscribe link in our messages, or as detailed in our terms.
-                </p> -->
-                <div class="text-center mb-4">
-                    <button class="btn btn-lg btn-primary" (click)="loginWithGoogle()">
-                        <i class="fab fa-google"></i> Sign In with Google
-                    </button>
-                </div>
-
-                <div class="custom-box clickable p-4">
-                    <h1 class="text-center mb-4">Sign in Employer</h1>
-                    <form [formGroup]="empsignin" (ngSubmit)="empCheckInfo()">
-                        <div class="form-group mb-4">
-                            <label for="empmailid1"><b>Email: </b></label>
-                            <input type="email" id="empmailid1" formControlName="empmailid" class="form-control" required>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="emppass1"><b> Password:</b></label>
-                            <div class="input-group">
-                                <input type="{{ empPasswordVisible ? 'text' : 'password' }}" id="emppass1" formControlName="emppass"
-                                    class="form-control" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text toggle-password" (click)="toggleEmpPasswordVisibility()"
-                                        style="cursor: pointer;">
-                                        <i class="fa" [ngClass]="empPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mb-4">
-                            <a routerLink="/employer/resetpass">Forgot password</a>
-                        </div>
-                        <div class="text-center mb-4">
-                            <button class="btn btn-primary">Sign in</button>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" (click)="insertemp()" class="btn btn-success">Register</button>
-                        </div>
-                    </form>
-                </div>
+        <div class="form-group d-flex justify-content-between align-items-center">
+          <input type="password" class="form-control px-4 rounded-pill" formControlName="emppass" id="emppass"
+            placeholder="Password" [type]="empPasswordVisible ? 'text' : 'password'" />
+          <div (click)="toggleEmpPasswordVisibility()" class="px-2" style="color: white;">
+            <div *ngIf="empPasswordVisible; else hidePassword">
+              <i class="fa-solid fa-eye-slash"></i>
             </div>
+            <ng-template #hidePassword>
+              <i class="fa-solid fa-eye"></i>
+            </ng-template>
+          </div>
         </div>
+        <div class="form-group d-flex flex-column justify-content-center align-items-stretch">
+          <a class="text-decoration-none text-center" routerLink="/employer/resetpass" style="color: white;">Forgot your password?</a>
+          <button type="submit" class="btn rounded-pill my-3" style="background-color: white; color: #1E2E5C;">Sign In</button>
+          <p style="color: white;">Don't have an account? <a (click)="insertemp()" class="text-decoration-none" style="color: white;">Create Account.</a></p>
+          <button class="btn rounded-pill custom-google"
+            (click)="loginWithGoogle()">
+            <i class="fab fa-google"></i>&nbsp; &nbsp;Sign In with Google
+          </button>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
