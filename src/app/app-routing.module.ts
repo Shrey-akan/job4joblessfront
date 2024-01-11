@@ -17,6 +17,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { authGuard } from './auth.guard';
 import { FinjobpageComponent } from './finjobpage/finjobpage.component';
 import { FindjobuComponent } from './dashboarduser/findjobu/findjobu.component';
+import { PolicypageComponent } from './policypage/policypage.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,9 @@ const routes: Routes = [
     path: 'dashboarduser',
     loadChildren: () => import('./dashboarduser/dashboarduser.module').then(m => m.DashboarduserModule),
     canActivate: [authGuard]
+  },
+  {
+    path:'policypage' , component:PolicypageComponent
   },
   {
     path: 'dashboardemp',

@@ -46,6 +46,7 @@ import { HeadlineComponent } from './headline/headline.component';
 import { FloatingbannerComponent } from './floatingbanner/floatingbanner.component';
 import { JobcardsComponent } from './jobcards/jobcards.component';
 import { MobileappComponent } from './mobileapp/mobileapp.component';
+import { PolicypageComponent } from './policypage/policypage.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -75,7 +76,8 @@ import { MobileappComponent } from './mobileapp/mobileapp.component';
     HeadlineComponent,
     FloatingbannerComponent,
     JobcardsComponent,
-    MobileappComponent
+    MobileappComponent,
+    PolicypageComponent
   ],
   imports: [
     BrowserModule,
