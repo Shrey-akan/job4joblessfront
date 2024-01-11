@@ -16,7 +16,10 @@
     </div>
 
     <div class="col-md-12 col-lg-2 mt-2 mt-md-0">
-      <button class="custom-pillss rounded-pill"><i class="fa-solid fa-sliders"></i></button>
+      <button class="btn custom-pillss rounded-circle"><i class="fa-solid fa-sliders fa-2x"></i></button>
+    </div>
+    <div class="col-md-12 col-lg-2 mt-2 mt-md-0">
+
       <button type="button" class="btn rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn"
         (click)="performSearch()">Search Jobs</button>
     </div>
@@ -61,14 +64,13 @@
               <!-- Assuming you have a property 'jobId' in your job object -->
               <div (click)="toggleLikedStatus(job.jobid)">
                 <div *ngIf="job.status; else notLiked">
-           
-                  <span class="rounded-circle mx-3 border-0"
-                    style="background-color: #1e2e5c41; padding: 10px 15px;">
+
+                  <span class="rounded-circle mx-3 border-0" style="background-color: #1e2e5c41; padding: 10px 15px;">
                     <i class="fa-regular fa-bookmark"></i>
                   </span>
                 </div>
                 <ng-template #notLiked>
-           
+
                   <span class="rounded-circle mx-3 border-0"
                     style="background-color: #0a194741; color: black; padding: 10px 15px;">
                     <i class="fa-solid fa-bookmark"></i>
@@ -103,17 +105,16 @@
             <div class="accordion-item mx-1 my-0 rounded-3">
               <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-pillss" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                  aria-controls="flush-collapseOne">
+                  (click)="toggleDescriptionVisibility(job)" aria-expanded="false">
                   Job Description
                 </button>
               </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                data-bs-parent="#accordionFlushExample">
+              <div *ngIf="job.isDescriptionVisible" class="accordion-collapse collapse"
+                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
                   <p>
                     About Us:
-                    {{job.companyforthisjob}} {{job.descriptiondata}}
+                    {{ job.companyforthisjob }} {{ job.descriptiondata }}
                   </p>
                 </div>
               </div>

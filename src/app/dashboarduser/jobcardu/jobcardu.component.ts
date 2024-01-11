@@ -17,6 +17,7 @@ interface Job {
   empid: string;
   status:boolean;
   uid:string; 
+  isDescriptionVisible: boolean;
 }
 @Component({
   selector: 'app-jobcardu',
@@ -59,9 +60,12 @@ export class JobcarduComponent implements OnInit {
     response.subscribe((data1: any) => {
       this.data1 = data1;
       this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
-      this.filterJobs(); // Initial filter when data is loaded
+      this.filterJobs(); 
+      
     });
-
+    this.data1.forEach((job: Job) => {
+      job.isDescriptionVisible = false;
+    });
     this.userID = this.cookie.get('uid');
   }
 
@@ -76,7 +80,9 @@ export class JobcarduComponent implements OnInit {
   navigateToSignIn() {
     this.router.navigate(['/login']);
   }
-
+  toggleDescriptionVisibility(job: Job): void {
+    job.isDescriptionVisible = !job.isDescriptionVisible;
+  }
   navigateToSignUp() {
     this.router.navigate(['/register']);
   }
