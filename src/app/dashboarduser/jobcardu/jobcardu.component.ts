@@ -136,6 +136,7 @@ toggleLikedStatus(jobId: string): void {
       if (response.status) {
         console.log('Job status updated successfully.');
         this.jobIdLikedStatusMap[jobId] = true;
+        this.filterJobs();
       } else {
         console.error('Job status update failed.');
       }
