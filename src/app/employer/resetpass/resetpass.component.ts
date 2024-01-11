@@ -26,7 +26,7 @@ export class ResetpassComponent  implements OnInit{
   }
   ngOnInit(): void {
     this.employerForm = this.formBuilder.group({
-      empmailid: ['', [Validators.required, Validators.email, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
+      empmailid: ['', [Validators.required, Validators.email,Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]]
     });
   }
 
