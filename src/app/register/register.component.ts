@@ -17,13 +17,11 @@ export class RegisterComponent implements OnInit {
   passwordVisible: boolean = false;
   data: any;
   loading: boolean = false; // Added loading flag
-
+  successMessage: string | null = null; // Added success message
+  showWarning: boolean = false; // Added warning flag
   constructor(private formBuilder: FormBuilder, private router: Router, private userservice: UserService, private http: HttpClient) {
   }
-
-
-
-
+  
   ngOnInit(): void {
 
 
@@ -92,44 +90,35 @@ if (innputElement) {
 
   userRegisteration(): void {
     if (this.userregister.valid) {
-      this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe({
-        next: (payload: any) => {
-
-          // console.log(payload);
-          // console.log(payload.uid);
+      this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe(
+        (payload: any) => {
+          this.successMessage = 'User registered successfully!';
           this.generateOtp(payload);
-
         },
-        error: (err) => {
-          // console.error(`Some error occurred: ${err}`);
+        (err) => {
+          console.error('Some error occurred:', err);
         }
-      });
+      );
     } else {
-      // Handle form validation errors, e.g., display error messages or prevent submission.
-      this.userregister.markAllAsTouched(); // Mark all fields as touched to trigger error messages.
+      this.userregister.markAllAsTouched();
     }
   }
 
-
   generateOtp(payload: any) {
-    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe({
-      next: (response: any) => {
+    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe(
+      (response: any) => {
         if (response.otpCreated) {
-          // console.log(response.otpCreated);
-
           this.router.navigate(['/checkotp', payload.uid]);
-
-        }
-        else {
-          // console.error("Otp not generated");
-          alert("Otp not generated");
+        } else {
+          console.error('Otp not generated');
+          alert('Otp not generated');
         }
       },
-      error: (err) => {
-        // console.error(`Some error occured: ${err}`);
+      (err) => {
+        console.error('Some error occurred:', err);
         alert(err);
       }
-    })
+    );
   }
 
   login(usersignin: { value: any; }) {
@@ -152,7 +141,5 @@ if (innputElement) {
     this.passwordVisible = !this.passwordVisible;
   }
 }
-function loginWithGoogle() {
-  throw new Error('Function not implemented.');
-}
+  
 

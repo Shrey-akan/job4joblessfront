@@ -47,15 +47,15 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="locationjob" class="form-label">Location</label>
+        <label for="locationjob" class="form-label">Location*</label>
         <input type="text" class="form-control" id="locationjob" formControlName="locationjob">
       </div>
       <div class="mb-3">
-        <label for="jobtype" class="form-label">Job Type</label>
+        <label for="jobtype" class="form-label">Job Type*</label>
         <input type="text" class="form-control" id="jobtype" formControlName="jobtype">
       </div>
       <div class="mb-3">
-        <label class="form-label">Schedule *</label>
+        <label class="form-label">Schedule*</label>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="morningShift" (change)="updateSchedule($event, 'Morning Shift')" formControlName="schedulejob">
           <label class="form-check-label" for="morningShift">Morning Shift</label>
@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="descriptiondata" class="form-label">Description data</label>
+        <label for="descriptiondata" class="form-label">Description data*</label>
         <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea>
         <div *ngIf="jobPostForm.get('descriptiondata')?.hasError('required')" class="text-danger">
           Descriptiondata is required.

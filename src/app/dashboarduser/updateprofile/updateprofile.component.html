@@ -8,25 +8,25 @@
     <input type="hidden" formControlName="userName" [value]="abc" />
 
     <div class="form-group">
-      <label for="empfname">First Name</label>
+      <label for="empfname">First Name*</label>
       <input type="text" id="empfname" formControlName="userFirstName" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="emplname">Last Name</label>
+      <label for="emplname">Last Name*</label>
       <input type="text" id="emplname" formControlName="userLastName" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="empcompany">Company</label>
+      <label for="empcompany">Company*</label>
       <input type="text" id="empcompany" formControlName="companyuser" class="form-control" required>
     </div>
  
     <div class="form-group">
-      <label for="empphone">Phone</label>
+      <label for="empphone">Phone*</label>
       <!-- <input type="tel" id="empphone" formControlName="userphone" class="form-control" required> -->
       <input type="tel" id="empphone" class="form-control" formControlName="userphone" placeholder="Enter Phone" required>
     </div>
     <div class="form-group">
-      <label for="empcountry">Country:</label>
+      <label for="empcountry">Country*</label>
       <select id="empcountry" formControlName="usercountry" class="form-control" required>
         <option value="">Select your country</option>
         <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
@@ -36,15 +36,15 @@
       Country is required.
     </div>
     <div class="form-group">
-      <label for="empstate">State</label>
+      <label for="empstate">State*</label>
       <input type="text" id="empstate" formControlName="userstate" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="empcity">City</label>
+      <label for="empcity">City*</label>
       <input type="text" id="empcity" formControlName="usercity" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="websiteuser">Website</label>
+      <label for="websiteuser">Website*</label>
       <input type="text" id="websiteuser" formControlName="websiteuser" class="form-control" required>
     </div>
     <button type="submit" class="btn custom-pillss mt-3 rounded-pill">Save Profile</button>

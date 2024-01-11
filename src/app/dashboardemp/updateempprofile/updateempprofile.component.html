@@ -2,25 +2,25 @@
   <h2>Update Employee Profile</h2>
   <form [formGroup]="employeeForm" (submit)="updateEmployee()">
     <div class="form-group">
-      <label for="empfname">First Name</label>
+      <label for="empfname">First Name*</label>
       <input type="text" id="empfname" formControlName="empfname" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="emplname">Last Name</label>
+      <label for="emplname">Last Name*</label>
       <input type="text" id="emplname" formControlName="emplname" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="empcompany">Company</label>
+      <label for="empcompany">Company*</label>
       <input type="text" id="empcompany" formControlName="empcompany" class="form-control" required>
     </div>
 
     <div class="form-group">
-      <label for="empphone">Phone</label>
+      <label for="empphone">Phone*</label>
       <!-- <input type="tel" id="empphone" formControlName="empphone" class="form-control" required> -->
       <input type="tel" id="empphone" class="form-control" formControlName="empphone" placeholder="Enter Phone" required>
     </div>
     <div class="form-group">
-      <label for="empcountry">Country:</label>
+      <label for="empcountry">Country*</label>
       <select id="empcountry" formControlName="empcountry" class="form-control" required>
         <option value="">Select your country</option>
         <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
@@ -31,15 +31,15 @@
       Country is required.
     </div>
     <div class="form-group">
-      <label for="empstate">State</label>
+      <label for="empstate">State*</label>
       <input type="text" id="empstate" formControlName="empstate" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="empcity">City</label>
+      <label for="empcity">City*</label>
       <input type="text" id="empcity" formControlName="empcity" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="descriptionemp">Description</label>
+      <label for="descriptionemp">Description*</label>
       <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" required></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Save Profile</button>

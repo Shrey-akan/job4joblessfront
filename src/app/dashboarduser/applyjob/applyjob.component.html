@@ -18,11 +18,11 @@
                           <input type="hidden" [formControlName]="'jucompny'" />
                         </div>
                         <div class="mb-3">
-                          <label class="form-label">Name:</label>
+                          <label class="form-label">Name:*</label>
                           <input type="text" class="form-control" formControlName="juname">
                         </div>
                         <div class="mb-3">
-                          <label class="form-label">Email:</label>
+                          <label class="form-label">Email:*</label>
                           <input type="email" class="form-control" formControlName="jumail">
                         
                           <div *ngIf="myformsubmission.get('jumail')?.hasError('required')" class="text-danger">
@@ -37,7 +37,7 @@
                         </div>
                         
                         <div class="mb-3">
-                          <label class="form-label" for="resume">Upload Resume:</label>
+                          <label class="form-label" for="resume">Upload Resume:*</label>
                           <input type="file" id="resume" class="form-control" formControlName="juresume" (change)="onFileSelected($event)" />
                           <!-- <input type="file" id="resume" class="form-control" formControlName="juresume"  (change)="onImageSelect($event)"> -->
                         </div>

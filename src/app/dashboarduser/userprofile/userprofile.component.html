@@ -80,19 +80,19 @@
               <h5 class="card-title">Password</h5>
               <form [formGroup]="passwordResetForm" (submit)="submitForm()">
                 <div class="form-group">
-                  <label for="inputUserName">Username</label>
+                  <label for="inputUserName">Email*</label>
                   <input type="text" class="form-control" id="inputUserName" formControlName="userName">
                 </div>
                 <div class="form-group">
-                  <label for="inputPasswordCurrent">Current password</label>
+                  <label for="inputPasswordCurrent">Current password*</label>
                   <input type="password" class="form-control" id="inputPasswordCurrent" formControlName="oldPassword">
                 </div>
                 <div class="form-group">
-                  <label for="inputPasswordNew">New password</label>
+                  <label for="inputPasswordNew">New password*</label>
                   <input type="password" class="form-control" id="inputPasswordNew" formControlName="newPassword">
                 </div>
                 <div class="form-group">
-                  <label for="inputPasswordNew2">Verify password</label>
+                  <label for="inputPasswordNew2">Verify password*</label>
                   <input type="password" class="form-control" id="inputPasswordNew2" formControlName="verifyPassword">
                 </div>
                 <button type="submit" class="btn custom-pillss mt-3 rounded-pillv">Save Paassword</button>

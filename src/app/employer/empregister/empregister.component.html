@@ -17,24 +17,24 @@
 
 
               <div class="form-group">
-                <label for="empfname">First Name:</label>
+                <label for="empfname">First Name:*</label>
                 <input type="text" id="empfname" formControlName="empfname" class="form-control" required>
               </div>
 
 
               <div class="form-group">
-                <label for="emplname">Last Name:</label>
+                <label for="emplname">Last Name:*</label>
                 <input type="text" id="emplname" formControlName="emplname" class="form-control" required>
               </div>
 
 
               <div class="form-group">
-                <label for="empcompany">Company Name:</label>
+                <label for="empcompany">Company Name:*</label>
                 <input type="text" id="empcompany" formControlName="empcompany" class="form-control" required>
               </div>
 
               <div class="form-group">
-                <label for="empmailid">Email:</label>
+                <label for="empmailid">Email:*</label>
                 <input type="email" id="empmailid" formControlName="empmailid" class="form-control" required>
                 <div
                   *ngIf="employerdetails.get('empmailid')?.hasError('email') && !employerdetails.get('empmailid')?.hasError('pattern')"
@@ -47,7 +47,7 @@
               </div>
 
               <div class="form-group">
-                <label for="emppass">Password:</label>
+                <label for="emppass">Password:*</label>
                 <div class="input-group">
                   <input type="{{ empPasswordVisible ? 'text' : 'password' }}" id="emppass" formControlName="emppass"
                     class="form-control" required />
@@ -68,7 +68,7 @@
 
               
               <div class="form-group">
-                <label for="empcountry">Country:</label>
+                <label for="empcountry">Country:*</label>
                 <select id="empcountry" formControlName="empcountry" class="form-control" required>
                   <option value="">Select your country</option>
                   <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
@@ -87,7 +87,7 @@
 
               <div class="form-group row">
                 <div class="col">
-                  <label for="empphone">Phone:</label>
+                  <label for="empphone">Phone:*</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                     </div>
@@ -100,7 +100,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <label for="empstate">State:</label>
+                  <label for="empstate">State:*</label>
                   <input type="text" id="empstate" formControlName="empstate" class="form-control" required
                     placeholder="Enter your state">
                 </div>
@@ -117,7 +117,7 @@
           
 
               <div class="form-group">
-                <label for="empcity">City:</label>
+                <label for="empcity">City:*</label>
                 <input type="text" id="empcity" formControlName="empcity" class="form-control" required
                   placeholder="Enter your city">
               </div>
@@ -125,7 +125,7 @@
 
 
               <div class="form-group">
-                <label for="descriptionemp">Description:</label>
+                <label for="descriptionemp">Description:*</label>
                 <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" rows="4"
                   required></textarea>
               </div>
