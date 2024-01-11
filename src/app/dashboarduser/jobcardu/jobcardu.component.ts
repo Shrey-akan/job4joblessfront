@@ -24,7 +24,7 @@ interface Job {
   styleUrls: ['./jobcardu.component.css']
 })
 export class JobcarduComponent implements OnInit {
-  liked: boolean = true;
+  liked: boolean = false;
   data1: any;
   companies = [
     // ... existing companies data
@@ -120,4 +120,19 @@ export class JobcarduComponent implements OnInit {
     // Reset current page to 1 when filtering
     this.currentPage = 1;
   }
+
+
+jobIdLikedStatusMap: { [key: string]: boolean } = {};
+
+toggleLikedStatus(jobId: string): void {
+  const uid = this.cookie.get('uid');
+  this.b1.updateJobStatus(jobId, {uid}).subscribe(
+    (response: any) => {
+      this.jobIdLikedStatusMap[jobId] = response.status;
+    },
+    (error) => {
+      console.error('Error updating liked status:', error);
+    }
+  );
+}
 }
