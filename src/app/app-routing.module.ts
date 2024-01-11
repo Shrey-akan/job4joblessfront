@@ -18,6 +18,7 @@ import { authGuard } from './auth.guard';
 import { FinjobpageComponent } from './finjobpage/finjobpage.component';
 import { FindjobuComponent } from './dashboarduser/findjobu/findjobu.component';
 import { PolicypageComponent } from './policypage/policypage.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,9 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path:'terms' , component:TermsComponent
   },
   {
     path: 'register', component: RegisterComponent
