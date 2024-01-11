@@ -1,12 +1,86 @@
 /* Style the eye icon for the password toggle */
 .fa-eye {
-    cursor: pointer;
-  }
-  
-  .fa-eye-slash {
-    cursor: pointer;
-  }
-  .custom-pillss {
-    color: white;
-    background-color: #1e2e5c;
+  cursor: pointer;
+}
+
+.fa-eye-slash {
+  cursor: pointer;
+}
+.custom-pillss {
+  color: white;
+  background-color: #1e2e5c;
+}
+
+/* Add these styles to your existing CSS file or create a new one */
+
+/* Container */
+.container-fluid.registerform {
+padding: 20px;
+background-color: #f4f4f4; /* Light gray background color */
+}
+
+/* Heading */
+h1 {
+font-size: 1.5rem;
+text-shadow: 3px 3px 5px #888;
+color: black;
+}
+
+/* Form Container */
+.form-container {
+background-color: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Inputs */
+.form-group {
+margin-bottom: 20px;
+}
+
+/* Text Inputs */
+.form-control {
+border-radius: 8px;
+}
+
+/* Form Buttons */
+.btn.custom-pillss {
+border-radius: 50px;
+padding: 10px 30px;
+background-color: #007bff;
+color: #fff;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.btn.custom-pillss:hover {
+background-color: #0056b3;
+}
+
+/* Sign Up with Google Button */
+.btn.custom-button {
+background-color: #dd4b39;
+color: #fff;
+border: none;
+padding: 10px 20px;
+border-radius: 8px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.btn.custom-button:hover {
+background-color: #c53727;
+}
+
+/* Responsive Image */
+.img-fluid {
+max-width: 100%;
+height: auto;
+}
+
+.custom-pillss {
+  color: white;
+  background-color: #1e2e5c;
 }

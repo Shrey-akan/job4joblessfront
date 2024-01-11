@@ -1,12 +1,107 @@
 /* Style the eye icon for the employer password toggle */
 .fa-eye {
-    cursor: pointer;
-  }
-  
-  .fa-eye-slash {
-    cursor: pointer;
-  }
-  .custom-pillss {
-    color: white;
-    background-color: #1e2e5c;
+  cursor: pointer;
+}
+
+.fa-eye-slash {
+  cursor: pointer;
+}
+
+
+/* Custom styles for the registration form */
+.container {
+margin-top: 50px;
+}
+
+.custom-box {
+background-color: #f4f4f4;
+padding: 20px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-button {
+background-color: #1c1c1c;
+color: #ffffff;
+margin-bottom: 15px;
+}
+
+.custom-button:hover {
+background-color: #357ae8;
+}
+
+.text-center {
+text-align: center;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.input-group-text {
+cursor: pointer;
+}
+
+.input-group-text:hover {
+background-color: #eeeeee;
+}
+
+.text-danger {
+color: #dc3545;
+font-size: 0.875rem;
+}
+
+
+.btn-primary:hover {
+background-color: #0056b3;
+border-color: #0056b3;
+}
+
+.btn-lg {
+padding: 10px 20px;
+font-size: 1.25rem;
+}
+
+.btn-block {
+display: block;
+width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+.custom-box {
+  padding: 15px;
+}
+}
+
+@media (max-width: 576px) {
+.col-md-6 {
+  margin-top: 20px;
+}
+}
+/* Move the password toggle inside the input group */
+.input-group {
+position: relative;
+}
+
+.password-toggle {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+right: 10px; /* Adjust the right position as needed */
+z-index: 10; /* Ensure the toggle appears above the input */
+}
+.form-control {
+border-radius: 5px; /* Adjust the radius as needed */
+}
+
+/* Change the background color of the submit button */
+.btn-primary {
+background-color: #1c1c1c; /* Change to the desired color */
+border-color: #1c1c1c; /* Optional: Change border color to match */
+}
+
+.btn-primary:hover {
+background-color: #000000; /* Change to the desired hover color */
+border-color: #000000; /* Optional: Change border color on hover */
 }

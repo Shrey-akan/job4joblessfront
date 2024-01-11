@@ -1,6 +1,7 @@
+
 <div class="container">
   <div class="row">
-    <h1 class="text-center" style="font-size: 1.5rem; text-shadow: 3px 3px 5px #888; color: black;">Ready to take the next step?</h1>
+    <!-- <h1 class="text-center" style="font-size: 1.5rem;  color: black;">Ready to take the next step?</h1> -->
     <div class="col-md-3">
 
     </div>
@@ -41,10 +42,9 @@
                   Please enter a valid email address.
                 </div>
                 <div *ngIf="employerdetails.get('empmailid')?.hasError('pattern')" class="text-danger">
-                  Email must be a valid Gmail address.
+                  Email must be a valid gmail address.
                 </div>
               </div>
-
 
               <div class="form-group">
                 <label for="emppass">Password:</label>
@@ -52,18 +52,21 @@
                   <input type="{{ empPasswordVisible ? 'text' : 'password' }}" id="emppass" formControlName="emppass"
                     class="form-control" required />
                   <div class="input-group-append">
-                    <span class="input-group-text" (click)="toggleEmpPasswordVisibility()" style="cursor: pointer;">
+                    <span class="input-group-text password-toggle" (click)="toggleEmpPasswordVisibility()" style="cursor: pointer;">
                       <i class="fa" [ngClass]="empPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
                     </span>
                   </div>
                 </div>
                 <div *ngIf="employerdetails.get('emppass')?.hasError('minlength')" class="text-danger">
-                  Password must be at least 8 characters long.
+                  Password should must have 8 characters with one special character, one uppercase and one lowercase.
                 </div>
                 <div *ngIf="employerdetails.get('emppass')?.hasError('pattern')" class="text-danger">
-                  Password must contain both letters and numbers.
+                  
                 </div>
               </div>
+              
+
+              
               <div class="form-group">
                 <label for="empcountry">Country:</label>
                 <select id="empcountry" formControlName="empcountry" class="form-control" required>
@@ -128,7 +131,7 @@
               </div>
 
 
-              <button type="submit" class="btn custom-pillss rounded-pill btn-block mt-3" [disabled]="loading">
+              <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
                 <span *ngIf="!loading">Register</span>
                 <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
               </button>

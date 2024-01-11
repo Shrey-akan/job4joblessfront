@@ -1,11 +1,13 @@
 <div class="container-fluid registerform my-5">
+  
   <div class="row">
     <div class="col-12 col-md-8 offset-md-2">
-      <h1 class="text-center" style="font-size: 1.5rem; text-shadow: 3px 3px 5px #888; color: black;">Ready to take the next step?</h1>
+      <!-- <h1 class="text-center" style="font-size: 1.5rem; text-shadow: 3px 3px 5px #888; color: black;">Ready to take the next step?</h1> -->
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="container form-container bg-white p-4 rounded">
             <h2 class="h4 mb-4">Registration</h2>
+            
             <form [formGroup]="userregister" (ngSubmit)="userRegisteration()">
               <div class="form-group row">
                 <div class="col">
@@ -116,7 +118,7 @@
                 <span *ngIf="!loading">Register</span>
                 <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
               </button> -->
-              <button type="submit" class="btn custom-pillss rounded-pill mt-3" [disabled]="loading">
+              <button type="submit" class="btn custom-pillss rounded-pill mt-3" style=" background-color: #1e2e5c;  color: white;" [disabled]="loading">
                 <span *ngIf="!loading">Register</span>
                 <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
               </button>
@@ -127,13 +129,15 @@
         </div>
         <div class="col-12 col-md-6 text-center">
           <div class="container bg-white p-4 rounded">
-            <h2 class="h4 mb-4">Sign Up with Google</h2>
-            <button class="btn custom-button btn-lg" (click)="loginWithGoogle()">
+            <button class="btn custom-button btn-lg" (click)="loginWithGoogle()" style="display: block; margin: 0 auto;">
               <i class="fab fa-google"></i> Sign Up with Google
             </button>
             <img src="assets/SignUP-01.jpg" alt="" width="100%">
           </div>
         </div>
+        
+        
+      
       </div>
     </div>
   </div>
