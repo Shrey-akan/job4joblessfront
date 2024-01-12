@@ -6,7 +6,7 @@
 .fa-eye-slash {
   cursor: pointer;
 }
-.custom-pillss {
+.custom-btn {
   color: white;
   background-color: #1e2e5c;
 }
@@ -45,7 +45,7 @@ border-radius: 8px;
 }
 
 /* Form Buttons */
-.btn.custom-pillss {
+.btn.custom-btn {
 border-radius: 50px;
 padding: 10px 30px;
 background-color: #007bff;
@@ -55,7 +55,7 @@ cursor: pointer;
 transition: background-color 0.3s ease;
 }
 
-.btn.custom-pillss:hover {
+.btn.custom-btn:hover {
 background-color: #0056b3;
 }
 
@@ -80,7 +80,7 @@ max-width: 100%;
 height: auto;
 }
 
-.custom-pillss {
+.custom-btn {
   color: white;
   background-color: #1e2e5c;
 }

@@ -45,8 +45,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
         ]
       ],
-      companyuser: [''],
-      websiteuser: [''],
+
       userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       usercountry: ['', Validators.required],
       userstate: ['', Validators.required],

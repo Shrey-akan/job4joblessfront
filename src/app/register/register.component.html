@@ -53,27 +53,10 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="companyuser">Company Name:</label>
-                <input type="text" class="form-control" formControlName="companyuser" placeholder="Enter Company Name">
-                <div
-                  *ngIf="userregister.get('companyuser')?.hasError('required') && userregister.get('companyuser')?.touched"
-                  class="text-danger">Company Name is required.
-                </div>
-              </div>
+       
 
               <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="websiteuser">Website URL:</label>
-                    <input type="text" class="form-control" formControlName="websiteuser"
-                      placeholder="Enter Website URL">
-                    <div
-                      *ngIf="userregister.get('websiteuser')?.hasError('required') && userregister.get('websiteuser')?.touched"
-                      class="text-danger">Website URL is required.
-                    </div>
-                  </div>
-                </div>
+           
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="userphone">Phone:</label>
@@ -89,19 +72,22 @@
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="form-group">
-                <label for="usercountry">Country:</label>
-                <select class="form-control" formControlName="usercountry" placeholder="Select your country">
-                  <option value="">Select a country</option>
-                  <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
-                </select>
-                <div
-                  *ngIf="userregister.get('usercountry')?.hasError('required') && userregister.get('usercountry')?.touched"
-                  class="text-danger">Country is required.
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="usercountry">Country:</label>
+                    <select class="form-control" formControlName="usercountry" placeholder="Select your country">
+                      <option value="">Select a country</option>
+                      <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                    </select>
+                    <div
+                      *ngIf="userregister.get('usercountry')?.hasError('required') && userregister.get('usercountry')?.touched"
+                      class="text-danger">Country is required.
+                    </div>
+                  </div>
                 </div>
               </div>
+
+          
 
               <div class="form-group">
                 <label for="userstate">State:</label>
@@ -124,7 +110,7 @@
                 <span *ngIf="!loading">Register</span>
                 <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
               </button> -->
-              <button type="submit" class="btn custom-pillss rounded-pill mt-3"
+              <button type="submit" class="btn custom-btn rounded-pill mt-3"
                 style=" background-color: #1e2e5c;  color: white;" [disabled]="loading">
                Register
               </button>
