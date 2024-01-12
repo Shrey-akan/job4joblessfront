@@ -50,6 +50,18 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent
   },
   {
+    path: 'resetpass', component: ResetpassComponent
+  },
+  {
+    path: 'checkotpuser/:uid', component: CheckotpuserComponent
+  },
+  {
+    path: 'resetpassword', component: ResetpasswordComponent
+  },
+  {
+    path: 'job4joblessp/:id', component: Job4joblesspComponent
+  },
+  {
     path: 'employer',
     loadChildren: () => import('./employer/employer.module').then(m => m.EmployerModule)
   },
@@ -70,18 +82,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
-  {
-    path: 'resetpass', component: ResetpassComponent
-  },
-  {
-    path: 'checkotpuser/:uid', component: CheckotpuserComponent
-  },
-  {
-    path: 'resetpassword', component: ResetpasswordComponent
-  },
-  {
-    path: 'job4joblessp/:id', component: Job4joblesspComponent
-  },
+
   {
     path: '**', // This route will match any URL
     component: PagenotfoundComponent
