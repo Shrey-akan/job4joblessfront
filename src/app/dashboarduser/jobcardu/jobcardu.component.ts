@@ -52,7 +52,7 @@ export class JobcarduComponent implements OnInit {
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.filterJobs(); 
+    // this.filterJobs(); 
   }
   userID: String = '0';
   ngOnInit(): void {
