@@ -725,7 +725,7 @@ export class UserService {
     return this.h1.post(this.inserturlapplyjob, data).subscribe({
       next: (resp: any) => {
         // console.log(resp);
-
+        localStorage.removeItem('applyJobFormData');
         // console.log("Data inserted");
       },
       error: (err: any) => {
