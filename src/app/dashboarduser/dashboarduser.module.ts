@@ -22,11 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuestionpaperComponent } from './questionpaper/questionpaper.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { JobcarduComponent } from './jobcardu/jobcardu.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-
-
 @NgModule({
   declarations: [
     DashboarduserComponent,
@@ -51,9 +46,6 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     DashboarduserRoutingModule,
     ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
     // NgbAccordionModule,
     FormsModule
   ]

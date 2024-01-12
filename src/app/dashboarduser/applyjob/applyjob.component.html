@@ -114,19 +114,12 @@
                         <label class="form-label">How many years of JSP experience do you have?</label>
                         <input type="number" class="form-control" formControlName="juexpjsp">
                       </div>
-                      <!-- <div class="mb-3">
+                      <div class="mb-3">
                         <label class="form-label">Please list 2-3 dates and time ranges that you could do an
                           interview.(optional)</label>
                         <textarea type="text" class="form-control" formControlName="juinterviewdate"
                           name="juinterviewdate" id="" cols="30" rows="5"></textarea>
-                      </div> -->
-                      <div class="mb-3">
-                        <label class="form-label">Please mention date that you could do an interview (optional)</label>
-                        <input class="form-control" matInput [matDatepicker]="picker" formControlName="juinterviewdate" name="juinterviewdate" (dateChange)="onDateChange($event)">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
                       </div>
-                      
                       <div class="mb-3">
                         <label class="form-label">Do you have a valid Java?</label>
                         <div class="form-check">
