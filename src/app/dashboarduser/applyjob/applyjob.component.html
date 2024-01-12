@@ -1,199 +1,203 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-  
-  
-     
-        <div class="form-container">
-          <form [formGroup]="myformsubmission" (ngSubmit)="insertUserForma(myformsubmission)">
-            <div class="container mt-5">
-              <div class="row justify-content-center">
-                <div class="col-md-8">
-                  <div class="card">
-                    <div class="card-body">
-                      <div *ngIf="currentStep === 1">
-                        <h1 class="card-title">Add a CV for the employer</h1>
-                        <div class="mb-3">
-                          <!-- <label class="form-label">Company Name:</label> -->
-                          <input type="hidden" [formControlName]="'jucompny'" />
+  <div class="row">
+    <div class="col-md-6">
+
+
+
+      <div class="form-container">
+        <form [formGroup]="myformsubmission" (ngSubmit)="insertUserForma(myformsubmission)">
+          <div class="container mt-5">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-body">
+                    <div *ngIf="currentStep === 1">
+                      <h1 class="card-title">Add a CV for the employer</h1>
+                      <div class="mb-3">
+                        <!-- <label class="form-label">Company Name:</label> -->
+                        <input type="hidden" [formControlName]="'jucompny'" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Name:*</label>
+                        <input type="text" class="form-control" formControlName="juname">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Email:*</label>
+                        <input type="email" class="form-control" formControlName="jumail">
+
+                        <div *ngIf="myformsubmission.get('jumail')?.hasError('required')" class="text-danger">
+                          Email is required.
                         </div>
-                        <div class="mb-3">
-                          <label class="form-label">Name:*</label>
-                          <input type="text" class="form-control" formControlName="juname">
+                        <div *ngIf="myformsubmission.get('jumail')?.hasError('email')" class="text-danger">
+                          Please enter a valid email address.
                         </div>
-                        <div class="mb-3">
-                          <label class="form-label">Email:*</label>
-                          <input type="email" class="form-control" formControlName="jumail">
-                        
-                          <div *ngIf="myformsubmission.get('jumail')?.hasError('required')" class="text-danger">
-                            Email is required.
-                          </div>
-                          <div *ngIf="myformsubmission.get('jumail')?.hasError('email')" class="text-danger">
-                            Please enter a valid email address.
-                          </div>
-                          <div *ngIf="myformsubmission.get('jumail')?.hasError('pattern')" class="text-danger">
-                            Email must be a valid Gmail address.
-                          </div>
+                        <div *ngIf="myformsubmission.get('jumail')?.hasError('pattern')" class="text-danger">
+                          Email must be a valid Gmail address.
                         </div>
-                        
-                        <div class="mb-3">
+                      </div>
+
+                      <!-- <div class="mb-3">
                           <label class="form-label" for="resume">Upload Resume:*</label>
                           <input type="file" id="resume" class="form-control" formControlName="juresume" (change)="onFileSelected($event)" />
-                          <!-- <input type="file" id="resume" class="form-control" formControlName="juresume"  (change)="onImageSelect($event)"> -->
-                        </div>
-                        <button class="btn btn-primary" (click)="nextStep(); uploadFile()">Next & Upload File</button>
+                        </div> -->
+                      <div class="mb-3">
+                        <label class="form-label" for="resume">Upload Resume:*</label>
+                        <input type="file" id="resume" class="form-control" formControlName="juresume"
+                          (change)="onFileSelected($event)" accept=".pdf"/>
                       </div>
-  
-                      <div *ngIf="currentStep === 2">
-                        <h2 class="card-title">Questions from the employer</h2>
-                        <div class="container">
-                          <div class="row" style="background-color: aquamarine;">
-                            <p>To save time, we may start with your previous responses</p>
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Will you be able to reliably commute or relocate to Anywhere for this
-                            job?</label>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" id="commute" name="jurelocation" value="commute"
-                              formControlName="jurelocation">
-                            <label class="form-check-label" for="commute">
-                              Yes, I can make the commute
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" id="relocate" name="jurelocation"
-                              value="relocate" formControlName="jurelocation">
-                            <label class="form-check-label" for="relocate">
-                              Yes, I am planning to relocate
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" id="relocate-assistance" name="jurelocation"
-                              value="relocate-assistance" formControlName="jurelocation">
-                            <label class="form-check-label" for="relocate-assistance">
-                              Yes, but I need your location assistance
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" id="no" name="jurelocation" value="no"
-                              formControlName="jurelocation">
-                            <label class="form-check-label" for="no">
-                              No
-                            </label>
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">What is the highest level of education you have completed?</label>
-                          <select class="form-select" formControlName="jueducation">
-                            <option value="" disabled selected>Select an option</option>
-                            <option value="none">NONE</option>
-  
-                            <option value="secondary">Secondary(10ThPass)</option>
-                            <option value="higher-secondary">Higher Secondary(12ThPas)</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="bachelor">Bachelor's</option>
-                            <option value="master">Master's</option>
-                            <option value="doctorate">Doctorate</option>
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">How many years of total work experience do you have?</label>
-                          <input type="number" class="form-control" formControlName="juexperience">
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">How many years of Java experience do you have?</label>
-                          <input type="number" class="form-control" formControlName="juexpinjava">
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">How many years of JSP experience do you have?</label>
-                          <input type="number" class="form-control" formControlName="juexpjsp">
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Please list 2-3 dates and time ranges that you could do an
-                            interview.(optional)</label>
-                          <textarea type="text" class="form-control" formControlName="juinterviewdate"
-                            name="juinterviewdate" id="" cols="30" rows="5"></textarea>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Do you have a valid Java?</label>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" id="validjavayes" name="jujavavalid"
-                              value="validjavayes" formControlName="jujavavalid">
-                            <label class="form-check-label" for="validjavayes">
-                              Yes
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" id="validjavano" name="jujavavalid"
-                              value="validjavano" formControlName="jujavavalid">
-                            <label class="form-check-label" for="validjavano">
-                              No
-                            </label>
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                          <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
-                          <button class="btn btn-primary" (click)="nextStep()">Next</button>
-                        </div>
-                      </div>
-                      <div *ngIf="currentStep === 3">
-                        <h1 class="card-title">Enter a past job that shows relevant experience</h1>
-                        <div class="container" style="background-color:aquamarine ;">
-                          <div class="row">
-                            <p>Review pre-filled fields to make sure they are correct for this application.</p>
-                          </div>
-                        </div>
-                        <div class="container">
-                          <div class="row">
-                            <h4>Relevant experience(optional)</h4>
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Job title</label>
-                          <input type="text" class="form-control" formControlName="jujobtitle" placeholder="Job title">
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="jucompanyname">Company</label>
-                          <input type="text" id="jucompanyname" class="form-control" placeholder="Company Name"
-                            formControlName="jucompanyname">
-                        </div>
-                        <div class="d-flex justify-content-between">
-                          <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
-                          <button class="btn btn-success" type="submit" >Submit</button>
-                        </div>
-  
-                      </div>
-  
-  
-  
-  
-  
-  
+
+                      <button class="btn btn-primary" (click)="nextStep(); uploadFile()">Next & Upload File</button>
                     </div>
+
+                    <div *ngIf="currentStep === 2">
+                      <h2 class="card-title">Questions from the employer</h2>
+                      <div class="container">
+                        <div class="row" style="background-color: aquamarine;">
+                          <p>To save time, we may start with your previous responses</p>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Will you be able to reliably commute or relocate to Anywhere for this
+                          job?</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="commute" name="jurelocation" value="commute"
+                            formControlName="jurelocation">
+                          <label class="form-check-label" for="commute">
+                            Yes, I can make the commute
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="relocate" name="jurelocation"
+                            value="relocate" formControlName="jurelocation">
+                          <label class="form-check-label" for="relocate">
+                            Yes, I am planning to relocate
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="relocate-assistance" name="jurelocation"
+                            value="relocate-assistance" formControlName="jurelocation">
+                          <label class="form-check-label" for="relocate-assistance">
+                            Yes, but I need your location assistance
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="no" name="jurelocation" value="no"
+                            formControlName="jurelocation">
+                          <label class="form-check-label" for="no">
+                            No
+                          </label>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">What is the highest level of education you have completed?</label>
+                        <select class="form-select" formControlName="jueducation">
+                          <option value="" disabled selected>Select an option</option>
+                          <option value="none">NONE</option>
+
+                          <option value="secondary">Secondary(10ThPass)</option>
+                          <option value="higher-secondary">Higher Secondary(12ThPas)</option>
+                          <option value="diploma">Diploma</option>
+                          <option value="bachelor">Bachelor's</option>
+                          <option value="master">Master's</option>
+                          <option value="doctorate">Doctorate</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">How many years of total work experience do you have?</label>
+                        <input type="number" class="form-control" formControlName="juexperience">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">How many years of Java experience do you have?</label>
+                        <input type="number" class="form-control" formControlName="juexpinjava">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">How many years of JSP experience do you have?</label>
+                        <input type="number" class="form-control" formControlName="juexpjsp">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Please list 2-3 dates and time ranges that you could do an
+                          interview.(optional)</label>
+                        <textarea type="text" class="form-control" formControlName="juinterviewdate"
+                          name="juinterviewdate" id="" cols="30" rows="5"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Do you have a valid Java?</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="validjavayes" name="jujavavalid"
+                            value="validjavayes" formControlName="jujavavalid">
+                          <label class="form-check-label" for="validjavayes">
+                            Yes
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="validjavano" name="jujavavalid"
+                            value="validjavano" formControlName="jujavavalid">
+                          <label class="form-check-label" for="validjavano">
+                            No
+                          </label>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
+                        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                      </div>
+                    </div>
+                    <div *ngIf="currentStep === 3">
+                      <h1 class="card-title">Enter a past job that shows relevant experience</h1>
+                      <div class="container" style="background-color:aquamarine ;">
+                        <div class="row">
+                          <p>Review pre-filled fields to make sure they are correct for this application.</p>
+                        </div>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <h4>Relevant experience(optional)</h4>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Job title</label>
+                        <input type="text" class="form-control" formControlName="jujobtitle" placeholder="Job title">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="jucompanyname">Company</label>
+                        <input type="text" id="jucompanyname" class="form-control" placeholder="Company Name"
+                          formControlName="jucompanyname">
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                      </div>
+
+                    </div>
+
+
+
+
+
+
                   </div>
                 </div>
               </div>
             </div>
-  
-  
-            <!-- Add more sections for additional steps as needed -->
-  
-          </form>
-        </div>
+          </div>
+
+
+          <!-- Add more sections for additional steps as needed -->
+
+        </form>
       </div>
-      <div class="col-md-6">
-        <div class="container mt-5">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-body">
-                  <h4>Job Title: {{ jobTitle }}</h4>
-                  <p>Company Name: {{ companyName }}</p>
-             
-                  
-                
-                </div>
+    </div>
+    <div class="col-md-6">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <h4>Job Title: {{ jobTitle }}</h4>
+                <p>Company Name: {{ companyName }}</p>
+
+
+
               </div>
             </div>
           </div>
@@ -201,3 +205,4 @@
       </div>
     </div>
   </div>
+</div>
