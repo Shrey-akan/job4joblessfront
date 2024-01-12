@@ -17,8 +17,8 @@ export class LoginadminComponent implements OnInit {
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
       adminMail: ['', [Validators.required, Validators.email]],
-      adminPass: ['', [Validators.required, Validators.minLength(6)]],
-      rememberMe: false
+      adminPass: ['', [Validators.required, Validators.minLength(6)]]
+
     });
   }
 
