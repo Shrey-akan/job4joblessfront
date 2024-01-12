@@ -61,6 +61,7 @@ export class ResetpassComponent implements OnInit{
         if (response.otpCreated) {
           console.log(response.otpCreated);
           console.log(payload.uid);
+          console.log("checking router is not working");
           this.router.navigate(['/checkotpuser', payload.uid]);
         }
         else {
