@@ -10,7 +10,7 @@ import { AdminserviceService } from '../adminauth/adminservice.service';
 })
 export class LoginadminComponent implements OnInit {
   myForm!: FormGroup;
-
+  public passwordVisible: boolean = false;
   showFooter = false;
   constructor(private formBuilder: FormBuilder, private router: Router,private adminauth:AdminserviceService) { }
 
@@ -43,5 +43,7 @@ export class LoginadminComponent implements OnInit {
       );
     }
   }
-
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
 }

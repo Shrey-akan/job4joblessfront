@@ -50,11 +50,19 @@
         <label for="locationjob" class="form-label">Location*</label>
         <input type="text" class="form-control" id="locationjob" formControlName="locationjob">
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="jobtype" class="form-label">Job Type*</label>
         <input type="text" class="form-control" id="jobtype" formControlName="jobtype">
-      </div>
+      </div> -->
       <div class="mb-3">
+        <label for="jobtype" class="form-label">Job Type*</label>
+        <select class="form-select" id="jobtype" formControlName="jobtype">
+          <option value="fulltime">Full Time</option>
+          <option value="parttime">Part Time</option>
+          <option value="remote">Remote</option>
+        </select>
+      </div>
+      <!-- <div class="mb-3">
         <label class="form-label">Schedule*</label>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="morningShift" (change)="updateSchedule($event, 'Morning Shift')" formControlName="schedulejob">
@@ -71,7 +79,20 @@
         <div *ngIf="jobPostForm.get('schedule')?.hasError('required')" class="text-danger">
           Schedule is required.
         </div>
+      </div> -->
+      <div class="mb-3">
+        <label class="form-label">Schedule*</label>
+        <select class="form-select" formControlName="schedulejob">
+          <option value="" disabled selected>Select Schedule</option>
+          <option value="Morning Shift">Morning Shift</option>
+          <option value="Day Shift">Day Shift</option>
+          <option value="Night Shift">Night Shift</option>
+        </select>
+        <div *ngIf="jobPostForm.get('schedulejob')?.hasError('required')" class="text-danger">
+          Schedule is required.
+        </div>
       </div>
+      
       <div class="mb-3">
         <label for="payjob" class="form-label">Pay*</label>
         <input type="text" class="form-control" id="payjob" formControlName="payjob" required>
