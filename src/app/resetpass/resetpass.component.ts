@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { UserService } from '../auth/user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +20,8 @@ export class ResetpassComponent implements OnInit{
     private userService: UserService,
     private http: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private zone: NgZone
   ) {
  
   }
@@ -54,15 +55,16 @@ export class ResetpassComponent implements OnInit{
   }
 
   generateOtp(payload: any) {
-    console.log("checking the payload",payload);
+    console.log("checking the payload", payload);
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe({
       next: (response: any) => {
-        console.log("checking the responce",response);
+        console.log("checking the response", response);
         if (response.otpCreated) {
           console.log(response.otpCreated);
-          this.router.navigate(['/checkotpuser', payload.uid]);
-        }
-        else {
+          this.zone.run(() => {
+            this.router.navigate(['/checkotpuser', payload.uid]);
+          });
+        } else {
           console.error("Otp not generated");
           alert("Otp not generated");
         }
@@ -73,4 +75,5 @@ export class ResetpassComponent implements OnInit{
       }
     });
   }
+  
 }
