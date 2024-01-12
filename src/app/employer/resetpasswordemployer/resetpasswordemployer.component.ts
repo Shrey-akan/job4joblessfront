@@ -38,6 +38,7 @@ export class ResetpasswordemployerComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.passwordResetForm);
     if (this.passwordResetForm.valid) {
       const formData = this.passwordResetForm.value;
 
