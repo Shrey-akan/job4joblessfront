@@ -32,8 +32,9 @@ export class ResetpassComponent implements OnInit{
 
 
   checkUser() {
+    console.log("checking the user details ", this.userForm);
     if (this.userForm.valid) {
-      console.log("checking the user name", this.userForm.value.userName); // Access the userName field from userForm.value
+      console.log("checking the user name", this.userForm.value.userName); 
       this.userService.checkUser(this.userForm.value.userName).subscribe({
         next: (payload: any) => {
           this.user = payload.userName;
