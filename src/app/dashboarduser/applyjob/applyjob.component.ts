@@ -11,6 +11,7 @@ import { UserService } from 'src/app/auth/user.service';
   styleUrls: ['./applyjob.component.css']
 })
 export class ApplyjobComponent implements OnInit {
+  selectedInterviewDate: Date | null = null;
   selectedFile: File | null = null;
   jobTitle: string | null = null;
   companyName: string | null = null;
@@ -143,9 +144,9 @@ export class ApplyjobComponent implements OnInit {
   uploadFile() {
      // Get the 'uid' from the cookie
   this.uid = this.cookie.get('uid');
-// console.log("checking the selected file ",this.selectedFile);
+console.log("checking the selected file ",this.selectedFile);
     if (this.selectedFile && this.uid) {
-      // console.log("checking the selected file ",this.selectedFile);
+      console.log("checking the selected file ",this.selectedFile);
       const formData = new FormData();
       formData.append('file', this.selectedFile);
       formData.append('uid', this.uid);
@@ -153,7 +154,7 @@ export class ApplyjobComponent implements OnInit {
       this.http.post('https://job4jobless.com:9001/uploadPdf', formData).subscribe(
    {
     next:     (response:any) => {
-      // console.log('File uploaded successfully');
+      console.log('File uploaded successfully');
     },
     error:(error:any) => {
       console.error('File upload failed:', error);
@@ -162,6 +163,9 @@ export class ApplyjobComponent implements OnInit {
       );
     }
   }
-
+  onDateChange(event: any): void {
+    this.selectedInterviewDate = event.value;
+    this.myformsubmission.get('juinterviewdate')?.setValue(this.selectedInterviewDate);
+  }
 
 }

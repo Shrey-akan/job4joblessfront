@@ -49,6 +49,8 @@ import { MobileappComponent } from './mobileapp/mobileapp.component';
 import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { TermsComponent } from './terms/terms.component';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonModule,
     MatSelectModule
     // NgbModule
