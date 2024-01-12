@@ -42,8 +42,10 @@ export class EmpregisterComponent {
 
   }
   empRegisteration(): void {
+    console.log(this.employerdetails);
     this.http.post('https://job4jobless.com:9001/insertEmployer', this.employerdetails.getRawValue()).subscribe({
       next: (payload: any) => {
+        console.log("Checking after running the api",this.employerdetails);
         this.successMessage = 'Employer registered successfully! Please Wait...';
         this.generateOtp(payload);
       },

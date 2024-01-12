@@ -90,8 +90,10 @@ if (innputElement) {
 
   userRegisteration(): void {
     if (this.userregister.valid) {
+      console.log(this.userregister);
       this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe(
         (payload: any) => {
+          console.log("checking after running api",this.userregister);
           this.successMessage = 'User registered successfully! Please Wait..';
           this.generateOtp(payload);
         },

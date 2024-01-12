@@ -126,8 +126,7 @@
               </button> -->
               <button type="submit" class="btn custom-pillss rounded-pill mt-3"
                 style=" background-color: #1e2e5c;  color: white;" [disabled]="loading">
-                <span *ngIf="!loading">Register</span>
-                <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
+               Register
               </button>
 
 
@@ -149,17 +148,15 @@
 
       </div>
     </div>
-  </div>
-  <!-- Add this at the appropriate place in your HTML -->
-  <div class="row mt-4">
-    <div class="col-md-6">
-      <div *ngIf="successMessage" class="alert alert-success">
-        {{ successMessage }}
-      </div>
-      <div *ngIf="showWarning" class="alert alert-warning">
-         User had not created!
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div *ngIf="successMessage" class="alert alert-success">
+          {{ successMessage }}
+        </div>
+        <div *ngIf="showWarning" class="alert alert-warning">
+           User had not created!
+        </div>
       </div>
     </div>
   </div>
-
 </div>
