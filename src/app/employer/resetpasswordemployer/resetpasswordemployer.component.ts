@@ -32,18 +32,15 @@ export class ResetpasswordemployerComponent implements OnInit{
 
   submitForm() {
     if (this.passwordResetForm.valid) {
-      // console.log(this.abc);
-      // Set empmailid field in formData to the value of abc
-      // this.passwordResetForm.patchValue({ empmailid: this.abc });
-
       const formData = this.passwordResetForm.value;
-      // Make a POST request to your backend for password reset
+      console.log(formData);
       this.http.post('https://job4jobless.com:9001/resetPasswordEmpverify', formData)
         .subscribe(
           {
             next: (response: any) => {
+              console.log(formData);
               // Handle success
-              // console.log(response);
+              console.log(response);                                  
               this.successMessage = 'Password updated successfully';
               this.errorMessage = '';
               alert('Password updated successfully');
