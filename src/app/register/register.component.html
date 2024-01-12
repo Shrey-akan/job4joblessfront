@@ -11,7 +11,7 @@
             <form [formGroup]="userregister" (ngSubmit)="userRegisteration()">
               <div class="form-group row">
                 <div class="col">
-                  <label for="userFirstName">First Name:</label>
+                  <label for="userFirstName">First Name:*</label>
                   <input type="text" class="form-control" formControlName="userFirstName"
                     placeholder="Enter First Name">
                   <div
@@ -20,7 +20,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <label for="userLastName">Last Name:</label>
+                  <label for="userLastName">Last Name:*</label>
                   <input type="text" class="form-control" formControlName="userLastName" placeholder="Enter Last Name">
                   <div
                     *ngIf="userregister.get('userLastName')?.hasError('required') && userregister.get('userLastName')?.touched"
@@ -30,7 +30,7 @@
               </div>
 
               <div class="form-group">
-                <label for="userName">Email:</label>
+                <label for="userName">Email:*</label>
                 <input type="email" class="form-control" formControlName="userName" placeholder="Enter Email">
                 <div *ngIf="userregister.get('userName')?.hasError('required') && userregister.get('userName')?.touched"
                   class="text-danger">Email is required.
@@ -41,7 +41,7 @@
               </div>
 
               <div class="form-group">
-                <label for="userPassword">Password:</label>
+                <label for="userPassword">Password:*</label>
                 <input type="password" class="form-control" formControlName="userPassword" placeholder="Enter Password">
                 <div
                   *ngIf="userregister.get('userPassword')?.hasError('required') && userregister.get('userPassword')?.touched"
@@ -59,7 +59,7 @@
            
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="userphone">Phone:</label>
+                    <label for="userphone">Phone:*</label>
                     <input type="tel" id="phone" class="form-control" formControlName="userphone"
                       placeholder="Enter Phone" />
                     <div
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="usercountry">Country:</label>
+                    <label for="usercountry">Country:*</label>
                     <select class="form-control" formControlName="usercountry" placeholder="Select your country">
                       <option value="">Select a country</option>
                       <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
@@ -90,7 +90,7 @@
           
 
               <div class="form-group">
-                <label for="userstate">State:</label>
+                <label for="userstate">State:*</label>
                 <input type="text" class="form-control" formControlName="userstate" placeholder="Enter your state">
                 <div
                   *ngIf="userregister.get('userstate')?.hasError('required') && userregister.get('userstate')?.touched"
@@ -99,7 +99,7 @@
               </div>
 
               <div class="form-group">
-                <label for="usercity">City:</label>
+                <label for="usercity">City:*</label>
                 <input type="text" class="form-control" formControlName="usercity" placeholder="Enter your city">
                 <div *ngIf="userregister.get('usercity')?.hasError('required') && userregister.get('usercity')?.touched"
                   class="text-danger">City is required.
