@@ -21,12 +21,12 @@ export class RegisterComponent implements OnInit {
   showWarning: boolean = false; // Added warning flag
   constructor(private formBuilder: FormBuilder, private router: Router, private userservice: UserService, private http: HttpClient) {
   }
-  
+
   ngOnInit(): void {
 
 
     const innputElement = document.getElementById("phone");
-if (innputElement) {
+    if (innputElement) {
       intelInput(innputElement, {
         initialCountry: "In",
         separateDialCode: true,
@@ -55,9 +55,13 @@ if (innputElement) {
     // let responce = this.b1.viewuserdetailservice();
     // responce.subscribe((data1: any)=>this.data=data1);
 
+    // this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
+    //   this.countries = data.map(country => country.name.common);
+    // });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
-      this.countries = data.map(country => country.name.common);
+      this.countries = data.map(country => country.name.common).sort();
     });
+
 
   }
 
@@ -76,7 +80,7 @@ if (innputElement) {
           const username = user.email;
           const userFirstName = user.displayName;
           // console.log(userName);
-          this.userservice.createOrGetUser(userName,userFirstName);
+          this.userservice.createOrGetUser(userName, userFirstName);
         }
         else {
           // console.error('User email is null. Handle this case as needed.');
@@ -93,7 +97,7 @@ if (innputElement) {
       console.log(this.userregister);
       this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe(
         (payload: any) => {
-          console.log("checking after running api",this.userregister);
+          console.log("checking after running api", this.userregister);
           this.successMessage = 'User registered successfully! Please Wait..';
           this.generateOtp(payload);
         },
@@ -143,5 +147,5 @@ if (innputElement) {
     this.passwordVisible = !this.passwordVisible;
   }
 }
-  
+
 

@@ -27,7 +27,7 @@ interface User {
 })
 export class UpdateprofileComponent implements OnInit {
   userform!: FormGroup;
-  countries: string[]=[];
+  countries: string[] = [];
   userData1: any;
   abc: any;
   uid!: string | null;
@@ -37,19 +37,20 @@ export class UpdateprofileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public cookie: CookieService,
-    private http:HttpClient
-  ) {}
+    private http: HttpClient
+  ) { }
 
   userID: String = "0";
 
   ngOnInit() {
 
-    const innputElement=document.getElementById("empphone");
-    if(innputElement)
-    {
-      intelInput(innputElement,{initialCountry:"US",
-    separateDialCode:true,
-  utilsScript:"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.0/js/utils.js"})
+    const innputElement = document.getElementById("empphone");
+    if (innputElement) {
+      intelInput(innputElement, {
+        initialCountry: "US",
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.0/js/utils.js"
+      })
     }
 
     this.userID = this.cookie.get('uid');
@@ -81,19 +82,24 @@ export class UpdateprofileComponent implements OnInit {
       userFirstName: ['', Validators.required],
       userLastName: ['', Validators.required],
       companyuser: ['', Validators.required],
-    
+
       userphone: ['', Validators.required],
       usercountry: ['', Validators.required],
       userstate: ['', Validators.required],
       usercity: ['', Validators.required],
       websiteuser: ['', Validators.required]
       // Set the default value for userName using abc
-    // This line sets the default value for userName
+      // This line sets the default value for userName
     });
 
+    // this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
+    //   this.countries = data.map(country => country.name.common);
+    // });
+
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
-      this.countries = data.map(country => country.name.common);
+      this.countries = data.map(country => country.name.common).sort();
     });
+
     this.uid = this.route.snapshot.paramMap.get('uid');
     // this.fetchUserDetailById();
   }

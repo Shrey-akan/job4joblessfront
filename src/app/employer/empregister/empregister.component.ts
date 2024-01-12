@@ -11,41 +11,41 @@ import * as intelInput from "intl-tel-input";
 })
 export class EmpregisterComponent {
   isHovered = false;
-  countries: string[]=[];
+  countries: string[] = [];
   employerdetails: FormGroup;
   formSubmitted: any;
   empPasswordVisible: boolean = false;
   data1: any;
   successMessage: string | null = null;
-  showWarning: boolean = false; 
+  showWarning: boolean = false;
 
   loading: boolean = false; // Added loading flag
-  constructor(private formBuilder: FormBuilder , private router:Router , private b1:UserService , private http:HttpClient) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private b1: UserService, private http: HttpClient) {
     this.employerdetails = this.formBuilder.group({
       empfname: ['', Validators.required],
       emplname: ['', Validators.required],
       empmailid: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
-      emppass: ['',         [
+      emppass: ['', [
         Validators.required,
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
       ]],
-      empphone: ['',  [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
+      empphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       empcompany: [''],
       descriptionemp: [''],
-     empcountry: ['', Validators.required],
+      empcountry: ['', Validators.required],
       empstate: ['', Validators.required],
       empcity: ['', Validators.required]
     });
 
- 
+
 
   }
   empRegisteration(): void {
     console.log(this.employerdetails);
     this.http.post('https://job4jobless.com:9001/insertEmployer', this.employerdetails.getRawValue()).subscribe({
       next: (payload: any) => {
-        console.log("Checking after running the api",this.employerdetails);
+        console.log("Checking after running the api", this.employerdetails);
         this.successMessage = 'Employer registered successfully! Please Wait...';
         this.generateOtp(payload);
       },
@@ -65,13 +65,13 @@ export class EmpregisterComponent {
         const empmailid = user.email;
         const empfname = user.displayName;
         // console.log(empmailid);
-        if(user.email && user.displayName){
+        if (user.email && user.displayName) {
           const empmailid = user.email;
           const empfname = user.displayName;
           // console.log(empmailid);
-          this.b1.createOrGetEmployer(empmailid , empfname );
+          this.b1.createOrGetEmployer(empmailid, empfname);
         }
-        else{
+        else {
           console.error('Employer email is null. Handle this case as needed.');
         }
       })
@@ -103,7 +103,7 @@ export class EmpregisterComponent {
   ngOnInit(): void {
 
     const innputElement = document.getElementById("empphone");
-if (innputElement) {
+    if (innputElement) {
       intelInput(innputElement, {
         initialCountry: "In",
         separateDialCode: true,
@@ -111,9 +111,13 @@ if (innputElement) {
       })
     }
 
+    // this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
+    //   this.countries = data.map(country => country.name.common);
+    // });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
-      this.countries = data.map(country => country.name.common);
+      this.countries = data.map(country => country.name.common).sort();
     });
-    }
+
+  }
 
 }
