@@ -50,17 +50,13 @@ export class PostjobComponent implements OnInit {
      }
  
   }
-
+  
   applyCommand(command: string): void {
     document.execCommand(command, false, '');
   }
 
   jobdetailsform(jobPostForm: { value: any }) {
   
-    const scheduleString = jobPostForm.value.schedulejob.join(', ');
-
-    jobPostForm.value.schedulejob = scheduleString;
-
     this.jobPostService.saveFormData(jobPostForm.value);
 
     if (this.currentStep === this.totalSteps) {
