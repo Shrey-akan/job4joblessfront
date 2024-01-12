@@ -95,14 +95,14 @@
       
       <div class="mb-3">
         <label for="payjob" class="form-label">Pay*</label>
-        <input type="text" class="form-control" id="payjob" formControlName="payjob" required>
+        <input type="number" class="form-control" id="payjob" formControlName="payjob" required>
         <div *ngIf="jobPostForm.get('payjob')?.hasError('required')" class="text-danger">
           Pay is required.
         </div>
       </div>
       <div class="mb-3">
-        <label for="payjobsup" class="form-label">Supplemental Pay*</label>
-        <input type="text" class="form-control" id="payjobsup" formControlName="payjobsup" required>
+        <label for="payjobsup" class="form-label">Supplemental Pay</label>
+        <input type="number" class="form-control" id="payjobsup" formControlName="payjobsup" required>
         <div *ngIf="jobPostForm.get('payjobsup')?.hasError('required')" class="text-danger">
           Supplemental Pay is required.
         </div>

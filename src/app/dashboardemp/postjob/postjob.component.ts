@@ -28,22 +28,21 @@ export class PostjobComponent implements OnInit {
 
 
     this.jobPostForm = this.formbuilder.group({
-
       jobtitle: ['', Validators.required],
       companyforthisjob: ['', Validators.required],
       numberofopening: ['', Validators.required],
-      locationjob: [''],
-      jobtype: [''],
-      schedulejob: this.formbuilder.array([]), // For checkboxes
-      payjob: [''],
+      locationjob: ['',Validators.required],
+      jobtype: ['', Validators.required],
+      schedulejob: ['', Validators.required],
+      payjob: ['', Validators.required],
       payjobsup: [''],
-      descriptiondata: [''],
+      descriptiondata: ['', Validators.required],
       empid: ['', Validators.required],
     });
     this.abc = this.cookie.get('emp');
-    // console.log(this.abc);
+
     this.jobPostForm.get('empid')?.setValue(this.abc);
-     // Load saved data from the service (if available)
+
      const savedData = this.jobPostService.loadFormData();
      if (savedData) {
        this.jobPostForm.setValue(savedData);
@@ -57,28 +56,24 @@ export class PostjobComponent implements OnInit {
   }
 
   jobdetailsform(jobPostForm: { value: any }) {
-    // Join the 'schedule' array into a comma-separated string
+  
     const scheduleString = jobPostForm.value.schedulejob.join(', ');
-    
-    // Update the 'schedule' field in the form data
+
     jobPostForm.value.schedulejob = scheduleString;
-  
-    // Save the form data to local storage
+
     this.jobPostService.saveFormData(jobPostForm.value);
-  
+
     if (this.currentStep === this.totalSteps) {
-      // Submit the form
+
       this.b1.jobpostinsert(jobPostForm.value).subscribe({
         next: (resp: any) => {
-          // console.log(resp);
-          // console.log("Data inserted");
-          // Clear the saved data from local storage after a successful submission
+        
           this.jobPostService.clearFormData();
           this.router.navigate(['/dashboardemp/alljobs']);
         },
         error: (err: any) => {
           console.error(err);
-          // Handle the error appropriately, e.g., display an error message to the user.
+       
         }
       });
     }
@@ -91,10 +86,10 @@ export class PostjobComponent implements OnInit {
     if (this.currentStep < this.totalSteps) {
       this.currentStep++;
     }
-    // Save the form data to local storage when clicking "Next"
+  
     this.jobPostService.saveFormData({
       ...this.jobPostForm.value,
-      currentStep: this.currentStep, // Save the current step
+      currentStep: this.currentStep, 
     });
   }
 
@@ -102,10 +97,10 @@ export class PostjobComponent implements OnInit {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
-    // Save the form data to local storage when clicking "Previous"
+   
     this.jobPostService.saveFormData({
       ...this.jobPostForm.value,
-      currentStep: this.currentStep, // Save the current step
+      currentStep: this.currentStep, 
     });
   }
 
