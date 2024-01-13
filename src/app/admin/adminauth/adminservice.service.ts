@@ -16,9 +16,7 @@ export class AdminserviceService {
   // }
 
   loginCheck(formData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.http.post(`${this.apiUrl}adminLoginCheck`, formData, { headers }).pipe(
+    return this.http.post(`${this.apiUrl}adminLoginCheck`, formData).pipe(
       map((response: any) => response),
       catchError((error) => {
         console.error('Error during loginCheck:', error);
