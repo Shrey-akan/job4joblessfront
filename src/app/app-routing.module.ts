@@ -72,7 +72,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path:'privacypolicy/' , component:PrivacypolicyComponent
+    path:'privacypolicy' , component:PrivacypolicyComponent
   },
   {
     path: 'dashboardemp',
