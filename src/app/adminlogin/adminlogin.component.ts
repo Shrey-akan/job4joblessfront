@@ -68,7 +68,7 @@ export class AdminloginComponent implements OnInit {
             this.cookie.set('accessToken', response.accessToken);
             this.cookie.set('adminid', response.adminid);
             this.cookie.set('refreshToken', response.refreshToken);
-         
+            
             const accessToken = response.accessToken; 
             AuthInterceptor.accessToken = accessToken;
     

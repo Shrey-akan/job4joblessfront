@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
             
 
             // Redirect the user based on their role (user or employer)
-            this.redirectToDashboard(response.role, response.uid, response.empid,response.accessToken);
+            this.redirectToDashboard(response.role, response.uid, response.empid,response.adminid , response.accessToken);
 
           }
         },
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
     this.requestPermission();
     this.listen();
   }
-  redirectToDashboard(role: string, uid: string, empid: string,accessToken:string) {
+  redirectToDashboard(role: string, uid: string, empid: string, adminid:string ,accessToken:string) {
     if (role === 'user') {
       AuthInterceptor.accessToken = accessToken;
       this.cookie.set('accessToken', accessToken);
@@ -60,8 +60,13 @@ export class AppComponent implements OnInit {
     } else if (role === 'employer') {
       AuthInterceptor.accessToken = accessToken;
       this.cookie.set('accessToken', accessToken);
-      this.cookie.set('emp', empid); // Set the emp cookie for employers
+      this.cookie.set('emp', empid); 
       this.router.navigate(['/dashboardemp']);
+    } else if(role === 'admin'){
+      AuthInterceptor.accessToken = accessToken;
+      this.cookie.set('accessToken', accessToken);
+      this.cookie.set('adminid', adminid); 
+      this.router.navigate(['/admin/dashboardadmin']);
     }
   }
   
