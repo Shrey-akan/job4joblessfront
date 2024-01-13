@@ -34,7 +34,7 @@ const routes: Routes = [
         path:'resources',component:ResourcesComponent
       },
       {
-        path:'helpcenter',component:HelpcenterComponent
+        path:'help-center',component:HelpcenterComponent
       },
       {
         path:'optverify/:empid',component:OptverifyComponent
