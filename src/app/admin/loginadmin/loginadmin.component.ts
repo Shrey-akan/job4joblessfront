@@ -72,7 +72,7 @@ export class LoginadminComponent implements OnInit {
             const accessToken = response.accessToken; 
             AuthInterceptor.accessToken = accessToken;
     
-            const isAuthenticated = response.accessToken && response.uid;
+            const isAuthenticated = response.accessToken && response.adminid;
     
             if (isAuthenticated) {
               alert('Login Successful!');
