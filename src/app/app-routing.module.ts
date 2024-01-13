@@ -20,6 +20,7 @@ import { FindjobuComponent } from './dashboarduser/findjobu/findjobu.component';
 import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
 
 const routes: Routes = [
   {
@@ -81,8 +82,18 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [authGuard]
   },
+  // {
+  //   path: 'admin',
+  //   loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  // },
+
+  {
+    path:'adminlogin' , component:AdminloginComponent
+  },
+
 
   {
     path: '**', // This route will match any URL

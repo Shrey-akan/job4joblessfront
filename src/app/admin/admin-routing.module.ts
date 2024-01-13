@@ -16,7 +16,8 @@ import { QuestionComponent } from './question/question.component';
 const routes: Routes = [
   {
     path: '', component: LoginadminComponent
-  }, {
+  },
+   {
     path: 'dashboardadmin', component: DashboardadminComponent,
     children: [
       {

@@ -49,6 +49,7 @@ import { MobileappComponent } from './mobileapp/mobileapp.component';
 import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -81,7 +82,8 @@ import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component'
     MobileappComponent,
     PolicypageComponent,
     TermsComponent,
-    PrivacypolicyComponent
+    PrivacypolicyComponent,
+    AdminloginComponent
   ],
   imports: [
     BrowserModule,

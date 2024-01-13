@@ -1,0 +1,40 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <button routerLink="/" class="position-absolute top-0 start-0 btn rounded-pill m-4" style="background-color: #1E2E5C; color: white;"><i class="fa-solid fa-chevron-left"></i>&nbsp; &nbsp; Go back to home</button>
+    <div class="border shadow border-2 rounded-3 d-flex justify-content-center align-items-center flex-column"
+      style="max-width: 30em; margin-top: 10vh;">
+      <div class="text-center my-4">
+        <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" style="width: 100%;"
+          onclick="window.location.href = '/'">
+      </div>
+      <p>Sign in to job4jobless as Admin</p>
+  
+      <!-- Sign-In Form -->
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()" action="">
+        <div class="form-group">
+          <input type="text" class="form-control px-4 rounded-pill" formControlName="adminMail" id="exampleInputEmail1"
+            placeholder="Email"
+            [ngClass]="{ 'is-invalid': myForm.get('exampleInputEmail1')?.invalid && myForm.get('exampleInputEmail1')?.touched }" />
+          <div class="invalid-feedback" *ngIf="myForm.get('exampleInputEmail1')?.hasError('required')">
+            exampleInputEmail1 or Email is required.
+          </div>
+        </div>
+        <div class="form-group d-flex justify-content-between align-items-center">
+          <input type="password" class="form-control px-4 rounded-pill" formControlName="adminPass" id="exampleInputPassword1"
+            placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
+          <div (click)="togglePasswordVisibility()" class="px-2">
+            <div *ngIf="passwordVisible; else hidePassword">
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+            <ng-template #hidePassword>
+              <i class="fa-solid fa-eye"></i>
+            </ng-template>
+          </div>
+        </div>
+        <div class="form-group d-flex flex-column justify-content-center align-items-stretch">
+         
+          <button type="submit" class="btn rounded-pill my-3" style="background-color: #1E2E5C; color: white;">Sign In</button>
+  
+        </div>
+      </form>
+    </div>
+  </div>
