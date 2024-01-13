@@ -29,14 +29,14 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'about', component: AboutComponent
+    path: 'about-us', component: AboutComponent
   },
   { path: 'finjobpage/:locationjob', component: FinjobpageComponent },
 
   
   { path: 'finjobpage', component: FinjobpageComponent , pathMatch: 'full' },
   {
-    path: 'contact', component: ContactComponent
+    path: 'contact-us', component: ContactComponent
   },
   {
     path: 'checkotp/:uid', component: CheckotpComponent
@@ -72,7 +72,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path:'privacypolicy' , component:PrivacypolicyComponent
+    path:'privacy-policy' , component:PrivacypolicyComponent
   },
   {
     path: 'dashboardemp',
