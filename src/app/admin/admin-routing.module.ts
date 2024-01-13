@@ -12,13 +12,13 @@ import { NotificationComponent } from '../dashboarduser/notification/notificatio
 import { NotifyComponent } from './notify/notify.component';
 import { ProfileComponent } from './profile/profile.component';
 import { QuestionComponent } from './question/question.component';
+import { authGuard } from '../auth.guard';
 
 const routes: Routes = [
-  {
-    path: '', component: LoginadminComponent
-  },
+
    {
     path: 'dashboardadmin', component: DashboardadminComponent,
+    canActivate: [authGuard], 
     children: [
       {
         path: '', component: DashhomeComponent
