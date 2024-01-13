@@ -73,7 +73,7 @@ export class LoginadminComponent implements OnInit {
             AuthInterceptor.accessToken = accessToken;
     
             const isAuthenticated = response.accessToken && response.adminid;
-    
+            console.log(isAuthenticated);
             if (isAuthenticated) {
               alert('Login Successful!');
               this.router.navigate(['/admin/dashboardadmin']);
