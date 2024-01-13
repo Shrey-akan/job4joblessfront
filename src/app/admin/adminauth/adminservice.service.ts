@@ -12,14 +12,14 @@ export class AdminserviceService {
   constructor(private http: HttpClient) {}
 
   loginCheck(formData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}admin/logincheck`, formData);
+    return this.http.post(`${this.apiUrl}adminLoginCheck`, formData);
   }
-  // Add a method to fetch admin data
+
   fetchAdminData(): Observable<any> {
     return this.http.get(`${this.apiUrl}fetchadmin`);
   }
 
- // Define a method to fetch data from the backend
+
  fetchContacts(): Observable<any[]> {
   return this.http.get<any[]>(`${this.apiUrl}fetchcontactfront`);
 }

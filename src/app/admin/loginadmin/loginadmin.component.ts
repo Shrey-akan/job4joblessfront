@@ -23,6 +23,7 @@ export class LoginadminComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.myForm);
     if (this.myForm.valid) {
       const formData = this.myForm.value;
       this.adminauth.loginCheck(formData).subscribe(
