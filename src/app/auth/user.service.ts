@@ -185,33 +185,26 @@ export class UserService {
     return this.h1.post(this.logincheckurl, data).subscribe({
       next: (resp: any) => {
 
-        // console.log("Access Token Generated" + resp.accessToken);
+      
         const mainres: User = resp;
-        // console.log(`Login response from the server: ${mainres}`);
-
-        // Store the access token and uid in cookies
         this.cookie.set('accessToken', resp.accessToken);
         this.cookie.set('uid', resp.uid);
         this.cookie.set('refreshToken', resp.refreshToken);
-        // console.log("refresh token saved ", resp.refreshToken);
-        // Inside your logincheckgmail function
-        const accessToken = resp.accessToken; // Assuming this is where you get the access token
+     
+        const accessToken = resp.accessToken; 
         AuthInterceptor.accessToken = accessToken;
-        // Check if both accessToken and uid are present to determine authentication
+
         const isAuthenticated = resp.accessToken && resp.uid;
 
         if (isAuthenticated) {
-          // console.log("Server responded with an object of the user");
-
-          // Redirect to the dashboard if the response is true
           alert('Login Successful!');
           this.router.navigate(['/dashboarduser']);
         } else {
-          // Handle other response statuses or errors
+         
           alert('Incorrect Credentials!');
           this.router.navigate(['/login']);
         }
-        // console.log("Data checked");
+  
       },
       error: (err: any) => {
         // console.log(err);
