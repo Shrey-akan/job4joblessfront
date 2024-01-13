@@ -82,19 +82,20 @@ export class VideocallComponent implements OnInit {
   }
 
   sendMessage() {
+    console.log(this.messageForm);
     if (this.messageForm.valid) {
       const messageToSend = this.messageForm.value;
 
-      // Make an HTTP POST request to send the message
+    
       this.http
         .post<SendMessage>('https://job4jobless.com:9001/send', messageToSend)
         .subscribe({
           next: (response: any) => {
             console.log('Message sent successfully:', response);
-            // Optionally, reset the form
+      
             this.messageForm.patchValue({
               message: '',
-              previousMessage: response.message, // Set previousMessage to the sent message
+              previousMessage: response.message, 
             });
             this.fetchMessages();
             

@@ -48,6 +48,7 @@ import { JobcardsComponent } from './jobcards/jobcards.component';
 import { MobileappComponent } from './mobileapp/mobileapp.component';
 import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -79,7 +80,8 @@ import { TermsComponent } from './terms/terms.component';
     JobcardsComponent,
     MobileappComponent,
     PolicypageComponent,
-    TermsComponent
+    TermsComponent,
+    PrivacypolicyComponent
   ],
   imports: [
     BrowserModule,

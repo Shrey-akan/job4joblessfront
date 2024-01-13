@@ -19,6 +19,7 @@ import { FinjobpageComponent } from './finjobpage/finjobpage.component';
 import { FindjobuComponent } from './dashboarduser/findjobu/findjobu.component';
 import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 
 const routes: Routes = [
   {
@@ -71,7 +72,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path:'policypage' , component:PolicypageComponent
+    path:'privacypolicy/' , component:PrivacypolicyComponent
   },
   {
     path: 'dashboardemp',

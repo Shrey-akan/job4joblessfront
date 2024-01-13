@@ -107,7 +107,10 @@ animation: blink 1s infinite;
 }
 }
 
-
+.custom-btn {
+  color: white;
+  background-color: #1e2e5c;
+}
 .bold-text {
 font-weight: bold;
 }

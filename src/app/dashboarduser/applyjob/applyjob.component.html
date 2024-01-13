@@ -46,7 +46,7 @@
                           (change)="onFileSelected($event)" accept=".pdf"/>
                       </div>
 
-                      <button class="btn btn-primary" (click)="nextStep(); uploadFile()">Next & Upload File</button>
+                      <button class="btn custom-btn rounded-pill" (click)="nextStep(); uploadFile()">Next & Upload File</button>
                     </div>
 
                     <div *ngIf="currentStep === 2">
@@ -138,8 +138,8 @@
                         </div>
                       </div>
                       <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
-                        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                        <button class="btn custom-btn rounded-pill" (click)="prevStep()">Previous</button>
+                        <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next</button>
                       </div>
                     </div>
                     <div *ngIf="currentStep === 3">
@@ -164,8 +164,8 @@
                           formControlName="jucompanyname">
                       </div>
                       <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" (click)="prevStep()">Previous</button>
-                        <button class="btn btn-success" type="submit">Submit</button>
+                        <button class="btn custom-btn rounded-pill" (click)="prevStep()">Previous</button>
+                        <button class="btn custom-btn rounded-pill" type="submit">Submit</button>
                       </div>
 
                     </div>

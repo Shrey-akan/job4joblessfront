@@ -6,13 +6,13 @@
       <img src="assets/Job4jobless & Hustleforwork-01.png" alt="job4jobless" style="width: 100%;"
         onclick="window.location.href = '/'">
     </div>
-    <p>Sign in to job4jobless as Job Seeker</p>
+    <p>Sign in to job4jobless as Admin</p>
 
     <!-- Sign-In Form -->
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()" action="">
       <div class="form-group">
-        <input type="text" class="form-control px-4 rounded-pill" formControlName="exampleInputEmail1" id="exampleInputEmail1"
-          placeholder="exampleInputEmail1 or Email"
+        <input type="text" class="form-control px-4 rounded-pill" formControlName="adminMail" id="exampleInputEmail1"
+          placeholder="Email"
           [ngClass]="{ 'is-invalid': myForm.get('exampleInputEmail1')?.invalid && myForm.get('exampleInputEmail1')?.touched }" />
         <div class="invalid-feedback" *ngIf="myForm.get('exampleInputEmail1')?.hasError('required')">
           exampleInputEmail1 or Email is required.
