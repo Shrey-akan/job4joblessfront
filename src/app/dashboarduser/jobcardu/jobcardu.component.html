@@ -64,7 +64,6 @@
               <!-- Assuming you have a property 'jobId' in your job object -->
               <div (click)="toggleLikedStatus(job.jobid)">
                 <div *ngIf="job.status; else notLiked">
-
                   <span class="rounded-circle mx-3 border-0" style="background-color: #1e2e5c41; padding: 10px 15px;">
                     <i class="fa-regular fa-bookmark"></i>
                   </span>

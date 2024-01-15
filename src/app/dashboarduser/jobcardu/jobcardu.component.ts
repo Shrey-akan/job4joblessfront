@@ -39,8 +39,8 @@ export class JobcarduComponent implements OnInit {
   itemsPerPage = 5;
   currentPage = 1;
   totalPages!: number;
-  searchJobTitle: string = ''; // Add this property for job title search
-  searchLocation: string = ''; // Add this property for location search
+  searchJobTitle: string = '';
+  searchLocation: string = '';
   filteredJobs: Job[] = [];
 
   constructor(private router: Router, private b1: UserService , private cookie:CookieService) {}
