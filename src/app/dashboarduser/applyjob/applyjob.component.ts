@@ -19,6 +19,7 @@ export class ApplyjobComponent implements OnInit {
   imageSrc: string = 'https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png';
   myformsubmission!: FormGroup; // Initialize with an empty group
   currentStep = 1;
+  totalSteps: number = 3;
   // router: any;
   data: any;
   uid!: string;

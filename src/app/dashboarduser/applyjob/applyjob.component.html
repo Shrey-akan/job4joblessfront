@@ -5,6 +5,11 @@
 
 
       <div class="form-container">
+        <div class="mb-4">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" [style.width]="(currentStep / totalSteps * 100) + '%'"></div>
+          </div>
+        </div>
         <form [formGroup]="myformsubmission" (ngSubmit)="insertUserForma(myformsubmission)">
           <div class="container mt-5">
             <div class="row justify-content-center">
