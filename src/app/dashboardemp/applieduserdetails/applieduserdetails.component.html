@@ -20,7 +20,7 @@
         <div class="card-body">
           <p><strong>Name:</strong> {{ application.juname }}</p>
           <p><strong>Email:</strong> {{ application.jumail }}</p>
-          <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid">Open Resume</a></p>
+          <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
 
           <p><strong>Company:</strong> {{ application.jucompny }}</p>
           <p><strong>Profile:</strong> {{ application.profileupdate }}</p>
