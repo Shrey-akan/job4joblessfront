@@ -23,7 +23,7 @@ export class MyjobsComponent implements OnInit{
 
   userID: String = "0";
   ngOnInit(): void {
-    this.showFloatingGifAfterDelay();
+    // this.showFloatingGifAfterDelay();
     this.userID = this.cookie.get('uid');
     let response = this.b1.fetchuser();
     response.subscribe((data1: any) => {
