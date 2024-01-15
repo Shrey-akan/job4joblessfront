@@ -14,7 +14,7 @@
         <div class="card-footer" *ngIf="showDetails">
           <p class="card-text"><strong>Experience:</strong> {{ application.juexperience }}</p>
           <p class="card-text"><strong>Relocation:</strong> {{ application.jurelocation }}</p>
-          <p class="card-text"><strong>Resume:</strong> <a href="{{ application.juresume }}" target="_blank">View Resume</a></p>
+          <p class="card-text"><strong>Resume:</strong>  <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid">View Resume</a></p>
           <p class="card-text"><strong>Java Experience:</strong> {{ application.juexpinjava }}</p>
           <p class="card-text"><strong>JSP Experience:</strong> {{ application.juexpjsp }}</p>
           <p class="card-text"><strong>Interview Date:</strong> {{ application.juinterviewdate }}</p>
