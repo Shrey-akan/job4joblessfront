@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/auth/user.service';
   styleUrls: ['./myjobs.component.css']
 })
 export class MyjobsComponent implements OnInit{
-
+  showFloatingGif = false;
   data:any
   userData1!: any;
   abc:any;
@@ -19,34 +19,36 @@ export class MyjobsComponent implements OnInit{
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }
-  constructor(public cookie:CookieService , private b1:UserService , private router:Router) {}
+  constructor(public cookie:CookieService , private b1:UserService , private router:Router,private elRef: ElementRef, private renderer: Renderer2) {}
 
   userID: String = "0";
   ngOnInit(): void {
-    // Check if the userID is correctly retrieved from the cookie
+    this.showFloatingGifAfterDelay();
     this.userID = this.cookie.get('uid');
-    // console.log(this.userID);
-    // console.log('User ID from cookie:', this.userID);
-  
     let response = this.b1.fetchuser();
-  
     response.subscribe((data1: any) => {
-      // Debugging: Log the data received from the API
-      // console.log('Data from API:', data1);
       const uuid=this.userID;
-      // console.log(uuid);
-      
-      // Filter the data array to include only the user with the matching userID
-      // this.data = data1.find((user: any) => user.uid === uuid);
       this.userData1 = data1.find((user: any) => user.uid == uuid);
-      // console.log(this.userData1);
-      // Debugging: Log the filtered data
-      // console.log("hello");
-      // console.log('Filtered Data:', this.userData1);
       this.abc = this.userData1.userName;
-      // console.log(this.abc);
       this.fetchApplyJob();
     });
+  }
+
+  showFloatingGifAfterDelay() {
+    setTimeout(() => {
+      this.showFloatingGif = true;
+    }, 2000);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const clickedInside = this.renderer
+      .parentNode(event.target)
+      .classList.contains('floating-gif-container');
+
+    if (!clickedInside) {
+      this.showFloatingGif = false;
+    }
   }
   fetchApplyJob() {
     let response = this.b1.fetchapplyform();
