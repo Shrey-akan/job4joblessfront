@@ -1,0 +1,39 @@
+.banner {
+    font-size: 2.5vw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin: 0.5em auto;
+    color: #1E2E5C;
+    text-align: center;
+}
+
+.banner1 {
+    font-size: 2vw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin: 0.5em auto;
+    color: #1E2E5C;
+    text-align: center;
+}
+
+
+ol {
+    list-style-type: none;
+}
+
+ol li {
+    padding-left: 1.5em;
+    text-indent: -1.5em;
+    margin-bottom: 8px;
+    position: relative;
+    font-size: large;
+}
+
+ol li::before {
+    content: "\2022";
+    color: #007BFF;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: absolute;
+    left: 0;
+}
