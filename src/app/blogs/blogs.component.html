@@ -1,6 +1,6 @@
 <div class="container d-flex flex-column align-items-center">
   <div class="row">
-    <h1 class="banner">Best Career Options After 12th Science (PCM)</h1>
+    <h1 class="head_text">Best Career Options After 12th Science (PCM)</h1>
   </div>
   <div class="row">
     <h2>Have you cleared your 12th PCM with good marks and a stunning CGPA? Are you looking for the best career options
@@ -14,7 +14,7 @@
     <img src="assets/bestcareeroptionblog.jpg" alt="" class="img-fluid" style="max-width: 60%; height: auto;">
   </div>
   <div class="row" style="max-width: 60%;">
-    <h1 class="banner">What is 12th PCM?</h1>
+    <h1 class="head_text">What is 12th PCM?</h1>
     <h2>After the 10th standard, students are given the option to choose their desired subject stream based on their
       interests and merit.</h2>
     <h2>Students who choose, study, and complete their senior intermediate (10+2) certification with science (Physics,
@@ -32,10 +32,11 @@
     <img src="assets/careerblogoptionblog2.jpg" alt="" class="img-fluid" style="max-width: 60%; height: auto;">
   </div>
   <div class="row">
-    <h1 class="banner1">How To Choose The Right Course After 12th PCM?</h1>
+    <h1 class="sub_head_text">How To Choose The Right Course After 12th PCM?</h1>
   </div>
   <div class="row" style="max-width: 60%;">
-    <h2>Selecting the best career option after 12th PCM requires you to think carefully about your interest and select a high-paying course. Given that, here is what you should focus on:-</h2>
+    <h2>Selecting the best career option after 12th PCM requires you to think carefully about your interest and select a
+      high-paying course. Given that, here is what you should focus on:-</h2>
     <ol>
       <li>Consider your likable subjects and interests.</li>
       <li>Explore different courses after 12th PCM that interest you.</li>
@@ -46,12 +47,15 @@
       <li>Assess the course's potential future value and potential pay packages.</li>
     </ol>
   </div>
-  <!-- <div class="row">
-    <h1 class="banner1">High Salary Courses After 12th PCM</h1>
+  <div class="row">
+    <h1 class="sub_head_text">High Salary Courses After 12th PCM</h1>
+  </div>
+  <div class="row justify-content-center">
+    <img src="assets/careeroptionblog2.jpg" alt="" class="img-fluid" style="max-width: 60%; height: auto;">
   </div>
   <div class="row" style="max-width: 60%;">
     <h2>Here is a list of the courses that you can take after 12th PCM:-</h2>
-    <ul>
+    <ol>
       <li>B.Tech (Bachelor of Technology)</li>
       <li>B.Sc. Nautical Science</li>
       <li>B.E. Marine Engineering</li>
@@ -72,9 +76,32 @@
       <li>BSc in Data Science/ Data Analytics</li>
       <li>BDes Product Design</li>
       <li>BDes Industrial Design/Vehicle Design</li>
-    </ul>
-  </div> -->
+    </ol>
+  </div>
+  <div class="row" style="max-width: 60%;">
+    <h1 class="sub_head_text">Top Career Options After 12th PCM</h1>
+    <h2>Here is the list of the Top Career Options After 12th PCM:-</h2>
+    <div *ngFor="let careerOption of careerOptions; let i = index">
+      <h1 class="sub_head_text">{{i+1}}. {{ careerOption.title }}</h1>
+      <h2>{{ careerOption.description }}</h2>
+      <h2 class="subheading">Requirements:</h2>
+      <div *ngFor="let requirement of careerOption.requirements" class="requirements">
+        <h2>{{ requirement }}</h2>
+      </div>
+      <h2 class="subheading">Average salary:</h2>
+      <h2>{{ careerOption.averageSalary }}</h2>
+    </div>
 
+  </div>
+  <div class="row" style="max-width: 60%;">
+    <h2 class="sub_head_text">Conclusion</h2>
+    <h2>12th PCM is one of the most scoping career options that you can take if you have an interest in science and
+      technology. There are many courses and professions that pay high salary packages and improve the future.
+      However, it is a highly competitive field that requires you to make informed decisions, such as choosing the right
+      course and college. Not only this, but you will have to search for the right job opportunity afterward.
+    </h2>
+    <h2>This article explores some job/career options that you can choose after completing 12th Science (PCM). </h2>
+  </div>
 </div>
-
+<app-bloglist></app-bloglist>
 <app-footer></app-footer>

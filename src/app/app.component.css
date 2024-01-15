@@ -24,4 +24,6 @@
     opacity: 1; /* Show the footer with full opacity */
     max-height: none; /* Remove the maximum height to reveal the footer */
   }
-  
+  h1,p,h2{
+    font-family: 'Poppins', sans-serif;
+  }

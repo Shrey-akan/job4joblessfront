@@ -22,6 +22,8 @@ import { TermsComponent } from './terms/terms.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { BlogsComponent } from './blogs/blogs.component';
+import { BlogComponent } from './blog/blog.component';
+import { BloglistComponent } from './bloglist/bloglist.component';
 
 const routes: Routes = [
   {
@@ -64,8 +66,14 @@ const routes: Routes = [
   {
     path: 'resetpassword', component: ResetpasswordComponent
   },
+  // {
+  //   path: 'job4joblessp/:id', component: Job4joblesspComponent
+  // },
   {
-    path: 'job4joblessp/:id', component: Job4joblesspComponent
+    path: 'blog/:id', component: BlogComponent
+  },
+  {
+    path: 'bloglist', component: BloglistComponent
   },
   {
     path: 'employer',

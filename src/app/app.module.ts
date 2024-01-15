@@ -51,6 +51,8 @@ import { TermsComponent } from './terms/terms.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { BlogsComponent } from './blogs/blogs.component';
+import { BlogComponent } from './blog/blog.component';
+import { BloglistComponent } from './bloglist/bloglist.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -85,7 +87,9 @@ import { BlogsComponent } from './blogs/blogs.component';
     TermsComponent,
     PrivacypolicyComponent,
     AdminloginComponent,
-    BlogsComponent
+    BlogsComponent,
+    BlogComponent,
+    BloglistComponent
   ],
   imports: [
     BrowserModule,
