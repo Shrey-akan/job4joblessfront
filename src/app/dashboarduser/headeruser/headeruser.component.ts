@@ -26,38 +26,27 @@ export class HeaderuserComponent implements OnInit {
     });
   }
   logout() {
-    // Retrieve the refresh token from the cookie
+
     const refreshToken = this.cookie.get('refreshToken');
-    // console.log('Refresh token:', refreshToken);
-  
-    // Ensure refreshToken is not empty
+
     if (!refreshToken) {
-      // console.log('Refresh token is missing.');
       return;
     }
   
-    // Make the logout request with the refresh token as a request parameter
+ 
     this.http.post('https://job4jobless.com:9001/logout', null, {
-      responseType: 'text' // Specify the response type as 'text'
+      responseType: 'text' 
     }).subscribe({
       next: (response: string) => {
-        // console.log('Logout response:', response);
-        
-        // Assuming the response is a simple message like "Logout successful"
         if (response === 'Logout successful') {
     this.cookie.delete('accessToken');
         this.cookie.delete('refreshToken');
         this.cookie.delete('uid');
-          // Handle the successful logout response
-          // console.log('Logout successful');
-          
-        
-          alert("LogOut Successfull");
-          // Navigate to the login page or any other desired route
+          // alert("LogOut Successfull");
+
           this.router.navigate(['/login']);
         } else {
-          // Handle other responses or errors
-          // console.log('Logout failed:', response);
+
         }
       },
       error: (error) => {

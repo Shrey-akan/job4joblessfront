@@ -50,6 +50,7 @@ import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { BlogsComponent } from './blogs/blogs.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -83,7 +84,8 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
     PolicypageComponent,
     TermsComponent,
     PrivacypolicyComponent,
-    AdminloginComponent
+    AdminloginComponent,
+    BlogsComponent
   ],
   imports: [
     BrowserModule,

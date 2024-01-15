@@ -21,6 +21,7 @@ import { PolicypageComponent } from './policypage/policypage.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { BlogsComponent } from './blogs/blogs.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,9 @@ const routes: Routes = [
   },
   {
     path: 'resetpass', component: ResetpassComponent
+  },
+  {
+    path: 'blogs', component: BlogsComponent
   },
   {
     path: 'checkotpuser/:uid', component: CheckotpuserComponent

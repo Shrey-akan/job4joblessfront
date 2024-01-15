@@ -2,3 +2,20 @@
     color: white;
     background-color: #1e2e5c;
 }
+
+a{
+    color: #1E2E5C;
+  }
+    
+  
+    .btn-custom {
+      background-color: #1E2E5C;
+      color: white;
+  }
+  
+  .active {
+    border-radius: 50px !important;
+    color: white !important;
+    background-color: #1E2E5C !important;
+    padding: 0.7em 2em !important;
+  }
