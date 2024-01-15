@@ -57,49 +57,17 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
 <script>
-  // Function to open the Bootstrap modal
+
   function openPopup() {
     $('#popupModal').modal('show');
   }
-
-  // Open the modal when the website is loaded
   $(document).ready(function () {
     openPopup();
   });
-
-  // Handle modal close button click
   $('#popupModal').on('hidden.bs.modal', function () {
-    // Add your logic when the modal is closed
     alert('Modal closed');
   });
 
-  // Function to handle Sign In button click
-  function navigateToSignIn() {
-    // Add your logic to handle Sign In button click
-
-
-
-    // Navigate to the login page
-    window.location.href = '/login';
-  }
-
-  function navigateToSignUp() {
-    // Add your logic to handle Register button click
-
-
-    // Navigate to the register page
-    window.location.href = '/register';
-  }
-
-  function navigateToSignInEmp() {
-    window.location.href = '/employer/empsign';
-
-  }
-
-  function navigateToSignUpEmp() {
-    window.location.href = '/employer/empregister';
-
-  }
 </script>
 
 <!-- Bootstrap JS scripts -->
