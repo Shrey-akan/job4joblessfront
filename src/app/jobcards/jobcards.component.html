@@ -31,9 +31,12 @@
     <div class="col-md-12 custom-font">
       <div class="d-flex flex-column justify-content-center align-items-stretch">
         <div *ngFor="let job of getJobsForCurrentPage()" class="border-2 border rounded-4 p-4 mt-3">
-          <span class="rounded-4 border-0 px-2 py-1" [ngIf]="job.numberofopening > 10" style="background-color: #86efac; color: #166534;">
-            Urgently Hiring
-        </span>        
+          <div *ngIf="job.numberofopening > 10">
+            <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">
+              Urgently Hiring
+            </span>
+          </div>
+
           <div class="d-flex justify-content-between align-items-center mt-3">
             <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
 
@@ -66,14 +69,14 @@
               <div *ngIf="liked; else notLiked">
                 <!-- Content to display when liked is true -->
                 <span class="rounded-circle mx-3 border-0"
-                      style="background-color: #1e2e5c41; color: white; padding: 10px 15px;">
+                  style="background-color: #1e2e5c41; color: white; padding: 10px 15px;">
                   <i class="fa-solid fa-bookmark"></i>
                 </span>
               </div>
               <ng-template #notLiked>
                 <!-- Content to display when liked is false -->
                 <span class="rounded-circle mx-3 border-0"
-                      style="background-color: #1e2e5c41; color: black; padding: 10px 15px;">
+                  style="background-color: #1e2e5c41; color: black; padding: 10px 15px;">
                   <i class="fa-solid fa-bookmark"></i>
                 </span>
               </ng-template>

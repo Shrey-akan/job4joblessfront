@@ -665,8 +665,6 @@ export class UserService {
   //Job Post
 
   public jobpostinsert(data: any): Observable<any> {
-    // console.log("Data sent to server:", data);
-    // console.log("done and check the data is coming or not ", data);
     return this.h1.post(this.inserturljobpost, data, { responseType: 'text' });
   }
 

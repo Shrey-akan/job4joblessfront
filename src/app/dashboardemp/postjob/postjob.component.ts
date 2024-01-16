@@ -63,13 +63,12 @@ export class PostjobComponent implements OnInit {
 
       this.b1.jobpostinsert(jobPostForm.value).subscribe({
         next: (resp: any) => {
-        
+          localStorage.removeItem('jobPostForm');
           this.jobPostService.clearFormData();
           this.router.navigate(['/dashboardemp/alljobs']);
         },
         error: (err: any) => {
           console.error(err);
-       
         }
       });
     }
