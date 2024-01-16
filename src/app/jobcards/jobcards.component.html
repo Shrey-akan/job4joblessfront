@@ -112,10 +112,10 @@
                   Job Description
                 </button> -->
                 <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-btn" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                  aria-controls="flush-collapseOne" (click)="toggleDescriptionVisibility(job)">
-                  Job Description
-                </button>
+                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"
+                (click)="toggleDescriptionVisibility(job)">
+                Job Description
+              </button>
 
               </h2>
               <!-- <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -129,13 +129,13 @@
                 </div>
               </div> -->
               <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                data-bs-parent="#job.jobid" [ngClass]="{ 'show': job.jobid === currentlyExpandedJobId }">
-                <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
-                  <p>
-                    {{ job.companyforthisjob }} {{ job.descriptiondata }}
-                  </p>
-                </div>
+              data-bs-parent="#job.jobid" [ngClass]="{ 'show': selectedJob === job }">
+              <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
+                <p>
+                  {{ job.companyforthisjob }} {{ job.descriptiondata }}
+                </p>
               </div>
+            </div>
             </div>
           </div>
           <p class="rounded-3 px-2 py-1 mx-2">

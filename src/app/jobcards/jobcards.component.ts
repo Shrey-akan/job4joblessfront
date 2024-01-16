@@ -43,7 +43,7 @@ export class JobcardsComponent implements OnInit {
   searchJobTitle: string = '';
   searchLocation: string = '';
   filteredJobs: Job[] = [];
-  currentlyExpandedJobId: string | null = null;
+
 
   constructor(private router: Router, private b1: UserService) {}
 
@@ -87,7 +87,13 @@ export class JobcardsComponent implements OnInit {
   navigateToSignIn() {
     this.router.navigate(['/login']);
   }
-
+  toggleDescriptionVisibility(job: Job): void {
+    if (this.selectedJob === job) {
+      this.selectedJob = null;
+    } else {
+      this.selectedJob = job;
+    }
+  }
   navigateToSignUp() {
     this.router.navigate(['/register']);
   }
@@ -131,11 +137,7 @@ export class JobcardsComponent implements OnInit {
     // Reset current page to 1 when filtering
     this.currentPage = 1;
   }
-  toggleDescriptionVisibility(job: Job): void {
-    if (this.currentlyExpandedJobId === job.jobid) {
-      this.currentlyExpandedJobId = null;
-    } else {
-      this.currentlyExpandedJobId = job.jobid;
-    }
-  }
+
+
+
 }
