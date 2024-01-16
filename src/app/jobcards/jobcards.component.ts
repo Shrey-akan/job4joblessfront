@@ -103,6 +103,7 @@ export class JobcardsComponent implements OnInit {
       this.b1.setJobId(selectedJob.jobid);
       this.router.navigate(['/dashboarduser/questionpaper']);
     } else {
+      this.router.navigate(['/login']);
       console.error('No job selected.');
     }
   }
