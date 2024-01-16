@@ -106,17 +106,32 @@
           <div class="accordion accordion-flush" id="job.jobid">
             <div class="accordion-item mx-1 my-0 rounded-3">
               <h2 class="accordion-header" id="flush-headingOne">
+                <!-- <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-btn" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
+                  Job Description
+                </button> -->
                 <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-btn" type="button"
-                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                aria-controls="flush-collapseOne">
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne" (click)="toggleDescriptionVisibility(job)">
                   Job Description
                 </button>
-              </h2><div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-              data-bs-parent="#job.jobid">
-             
+
+              </h2>
+              <!-- <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#job.jobid">
+
                 <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
                   <p>
-                  
+
+                    {{ job.companyforthisjob }} {{ job.descriptiondata }}
+                  </p>
+                </div>
+              </div> -->
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#job.jobid" [ngClass]="{ 'show': job.jobid === currentlyExpandedJobId }">
+                <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
+                  <p>
                     {{ job.companyforthisjob }} {{ job.descriptiondata }}
                   </p>
                 </div>

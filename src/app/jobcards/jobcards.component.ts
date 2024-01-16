@@ -43,7 +43,7 @@ export class JobcardsComponent implements OnInit {
   searchJobTitle: string = '';
   searchLocation: string = '';
   filteredJobs: Job[] = [];
-  
+  currentlyExpandedJobId: string | null = null;
 
   constructor(private router: Router, private b1: UserService) {}
 
@@ -87,9 +87,7 @@ export class JobcardsComponent implements OnInit {
   navigateToSignIn() {
     this.router.navigate(['/login']);
   }
-  toggleDescriptionVisibility(job: Job): void {
-    job.isDescriptionVisible = !job.isDescriptionVisible;
-  }
+
   navigateToSignUp() {
     this.router.navigate(['/register']);
   }
@@ -133,30 +131,11 @@ export class JobcardsComponent implements OnInit {
     // Reset current page to 1 when filtering
     this.currentPage = 1;
   }
-
-
-// jobIdLikedStatusMap: { [key: string]: boolean } = {};
-
-// toggleLikedStatus(jobId: string): void {
-//   const uid = this.cookie.get('uid');
-//   console.log(uid);
-//   console.log(jobId);
-  
-//   this.b1.updateJobStatus(jobId, { uid }).subscribe(
-//     (response: any) => {
-//       console.log('Check the values', response);
-
-//       if (response.status) {
-//         console.log('Job status updated successfully.');
-//         this.jobIdLikedStatusMap[jobId] = true;
-//         this.filterJobs();
-//       } else {
-//         console.error('Job status update failed.');
-//       }
-//     },
-//     (error) => {
-//       console.error('Error updating job status:', error);
-//     }
-//   );
-// }
+  toggleDescriptionVisibility(job: Job): void {
+    if (this.currentlyExpandedJobId === job.jobid) {
+      this.currentlyExpandedJobId = null;
+    } else {
+      this.currentlyExpandedJobId = job.jobid;
+    }
+  }
 }
