@@ -60,8 +60,12 @@ export class JobcardsComponent implements OnInit {
   ngOnInit(): void {
     let response = this.b1.fetchjobpost();
     response.subscribe((data1: any) => {
-      // this.data1 = data1;
-      this.data1 = this.sortJobsBySendTime(this.data1);
+      this.data1 = data1;
+      this.data1.sort((a: Job, b: Job) => {
+        const dateA = new Date(a.sendTime);
+        const dateB = new Date(b.sendTime);
+        return dateB.getTime() - dateA.getTime();
+      });
       this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
       this.filterJobs(); 
       
@@ -71,13 +75,6 @@ export class JobcardsComponent implements OnInit {
     });
     // this.userID = this.cookie.get('uid');
   }
-
-  sortJobsBySendTime(jobs: Job[]): Job[] {
-    return jobs.sort((a, b) => {
-      return new Date(b.sendTime).getTime() - new Date(a.sendTime).getTime();
-    });
-  }
-  
 
   searchJobs() {
     this.data = this.data1.filter((job: Job) => {
@@ -129,11 +126,12 @@ export class JobcardsComponent implements OnInit {
     } else {
       this.filteredJobs = this.data1;
     }
-    // this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
-    // this.currentPage = 1;
-  this.filteredJobs = this.sortJobsBySendTime(this.filteredJobs);
-  this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
-  this.currentPage = 1;
+
+    // Update total pages based on filtered data
+    this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
+
+    // Reset current page to 1 when filtering
+    this.currentPage = 1;
   }
 
 
