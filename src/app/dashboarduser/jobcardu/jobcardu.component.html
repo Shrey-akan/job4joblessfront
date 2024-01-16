@@ -65,20 +65,38 @@
                     </span>
                   </ng-template> -->
               <!-- Assuming you have a property 'jobId' in your job object -->
-              <div (click)="toggleLikedStatus(job.jobid)">
+              <!-- <div (click)="toggleLikedStatus(job.jobid)">
                 <div *ngIf="job.status; else notLiked">
+                  <span class="rounded-circle mx-3 border-0"
+                  style="background-color: #0a194741; color: black; padding: 10px 15px;">
+                  <i class="fa-solid fa-bookmark"></i>
+                </span>
+                </div>
+                <ng-template #notLiked>
                   <span class="rounded-circle mx-3 border-0" style="background-color: #1e2e5c41; padding: 10px 15px;">
                     <i class="fa-regular fa-bookmark"></i>
                   </span>
+                
+                </ng-template>
+              </div> -->
+              <div (click)="toggleLikedStatus(job.jobid)">
+                <div *ngIf="job.status; else notLiked">
+                  <span class="rounded-circle mx-3 border-0"
+                        [style.background-color]="job.status ? '#0a194741' : '#1e2e5c41'"
+                        [style.color]="job.status ? 'black' : ''"
+                        style="padding: 10px 15px;">
+                    <i class="fa-solid fa-bookmark"></i>
+                  </span>
                 </div>
                 <ng-template #notLiked>
-
                   <span class="rounded-circle mx-3 border-0"
-                    style="background-color: #0a194741; color: black; padding: 10px 15px;">
-                    <i class="fa-solid fa-bookmark"></i>
+                        [style.background-color]="job.status ? '' : '#1e2e5c41'"
+                        style="padding: 10px 15px;">
+                    <i class="fa-regular fa-bookmark"></i>
                   </span>
                 </ng-template>
               </div>
+              
 
             </div>
             <!-- <div class="btn-group dropend">

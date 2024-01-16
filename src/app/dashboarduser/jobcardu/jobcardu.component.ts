@@ -60,6 +60,11 @@ export class JobcarduComponent implements OnInit {
     let response = this.b1.fetchjobpost();
     response.subscribe((data1: any) => {
       this.data1 = data1;
+      this.data1.sort((a: Job, b: Job) => {
+        const dateA = new Date(a.sendTime);
+        const dateB = new Date(b.sendTime);
+        return dateB.getTime() - dateA.getTime();
+      });
       this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
       this.filterJobs(); 
       
