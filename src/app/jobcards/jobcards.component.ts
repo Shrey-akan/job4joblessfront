@@ -15,6 +15,7 @@ interface Job {
   payjob: number;
   payjobsup: number;
   empid: string;
+  sendTime:Date;
   isDescriptionVisible: boolean;
 }
 
