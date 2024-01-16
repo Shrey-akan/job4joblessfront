@@ -122,8 +122,9 @@
               </div>
             </div>
           </div>
-          <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;5 January 2024</p>
-          <!-- Add Apply button -->
+          <p class="rounded-3 px-2 py-1 mx-2">
+            <i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;{{ job.sendTime | date: 'd MMMM yyyy' }}
+          </p>
           <button class="btn custom-btn mt-3 rounded-pill" (click)="applyForJob(job)">Apply</button>
         </div>
       </div>
