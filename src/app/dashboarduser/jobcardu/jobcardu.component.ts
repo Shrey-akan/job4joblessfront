@@ -7,13 +7,13 @@ interface Job {
   jobid: string;
   jobtitle: string;
   companyforthisjob: string;
-  numberofopening: string;
+  numberofopening: number;
   locationjob: string;
   descriptiondata: string[];
   jobtype: string;
   schedulejob: string;
-  payjob: string;
-  payjobsup: string;
+  payjob: number;
+  payjobsup: number;
   empid: string;
   status:boolean;
   uid:string; 
