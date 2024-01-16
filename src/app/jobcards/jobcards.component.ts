@@ -29,7 +29,6 @@ export class JobcardsComponent implements OnInit {
   liked: boolean = false;
   data1: any;
   companies = [
-    // ... existing companies data
   ];
   searchQuery: string = '';
   showFooter = true;
@@ -49,12 +48,10 @@ export class JobcardsComponent implements OnInit {
 
   performSearch() {
     this.filterJobs();
-    // Implement search logic if needed
   }
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    // this.filterJobs(); 
   }
   userID: String = '0';
   ngOnInit(): void {
@@ -73,7 +70,7 @@ export class JobcardsComponent implements OnInit {
     this.data1.forEach((job: Job) => {
       job.isDescriptionVisible = false;
     });
-    // this.userID = this.cookie.get('uid');
+
   }
 
   searchJobs() {
@@ -83,7 +80,6 @@ export class JobcardsComponent implements OnInit {
       return titleMatch || locationMatch;
     });
   }
-
   navigateToSignIn() {
     this.router.navigate(['/login']);
   }
@@ -93,14 +89,11 @@ export class JobcardsComponent implements OnInit {
   navigateToSignUp() {
     this.router.navigate(['/register']);
   }
-
-
   getJobsForCurrentPage(): Job[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.filteredJobs.slice(startIndex, endIndex);
   }
-
   applyForJob(selectedJob: Job) {
     if (selectedJob) {
       // Set the selected job details before navigating
@@ -108,8 +101,6 @@ export class JobcardsComponent implements OnInit {
       this.b1.setCompanyName(selectedJob.companyforthisjob);
       this.b1.setEmpId(selectedJob.empid);
       this.b1.setJobId(selectedJob.jobid);
-  
-      // Navigate to the '/dashboarduser/questionpaper' route
       this.router.navigate(['/dashboarduser/questionpaper']);
     } else {
       console.error('No job selected.');
@@ -126,11 +117,7 @@ export class JobcardsComponent implements OnInit {
     } else {
       this.filteredJobs = this.data1;
     }
-
-    // Update total pages based on filtered data
     this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
-
-    // Reset current page to 1 when filtering
     this.currentPage = 1;
   }
 

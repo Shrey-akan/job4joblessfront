@@ -87,7 +87,7 @@ export class JobcarduComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   toggleDescriptionVisibility(job: Job): void {
-    job.isDescriptionVisible = !job.isDescriptionVisible;
+    this.selectedJob = this.selectedJob === job ? null : job;
   }
   navigateToSignUp() {
     this.router.navigate(['/register']);
