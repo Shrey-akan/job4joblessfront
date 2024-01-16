@@ -88,11 +88,7 @@ export class JobcardsComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   toggleDescriptionVisibility(job: Job): void {
-    if (this.selectedJob === job) {
-      this.selectedJob = null;
-    } else {
-      this.selectedJob = job;
-    }
+    this.selectedJob = this.selectedJob === job ? null : job;
   }
   navigateToSignUp() {
     this.router.navigate(['/register']);

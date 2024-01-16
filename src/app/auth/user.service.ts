@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ApplyJob } from 'src/app/apply-job';
+import { backendUrl } from '../constant';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import {
   Auth,
@@ -14,7 +15,8 @@ import { AuthInterceptor } from '../interceptors/auth.interceptor';
 import { JobPostService } from './job-post.service';
 
 // Define your API base URL as a constant variable
-const API_BASE_URL = 'https://job4jobless.com:9001/';
+// const API_BASE_URL = '${API_BASE_URL}';
+const API_BASE_URL = `${backendUrl}`;
 interface User {
   uid: Number;
   userName: String;
@@ -269,7 +271,7 @@ export class UserService {
 
 
   fetchapplyformbyjobid(empid: string, jobid: string): Observable<any> {
-    const url = `https://job4jobless.com:9001/fetchapplyformbyjobid?empid=${empid}&jobid=${jobid}`;
+    const url = `${API_BASE_URL}fetchapplyformbyjobid?empid=${empid}&jobid=${jobid}`;
     return this.h1.get(url).pipe(
       catchError(error => {
         console.error('Error fetching apply form by job id:', error);
@@ -331,7 +333,7 @@ export class UserService {
     });
 
     this.h1
-      .post<Map<string, Object>>('https://job4jobless.com:9001/createOrGetUser', requestBody, {
+      .post<Map<string, Object>>('${API_BASE_URL}createOrGetUser', requestBody, {
         headers,
         observe: 'response', // to access the full HTTP response, including headers
       })
@@ -509,7 +511,7 @@ export class UserService {
     });
 
     this.h1
-      .post<Map<string, Object>>('https://job4jobless.com:9001/createOrGetEmployer', requestBody, {
+      .post<Map<string, Object>>('${API_BASE_URL}createOrGetEmployer', requestBody, {
         headers,
         observe: 'response', // to access the full HTTP response, including headers
       })
@@ -823,7 +825,7 @@ export class UserService {
   }
   
   updateJobStatus(jobId: string, data: any): Observable<any> {
-    const url = `https://job4jobless.com:9001/updateJobStatus/${jobId}`;
+    const url = `${API_BASE_URL}updateJobStatus/${jobId}`;
     return this.h1.put(url, data);
   }
   
