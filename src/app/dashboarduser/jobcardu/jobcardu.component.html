@@ -121,19 +121,20 @@
             </p>
           </div>
           <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
-          <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion accordion-flush" id="job.jobid">
             <div class="accordion-item mx-1 my-0 rounded-3">
               <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-btn" type="button"
-                  (click)="toggleDescriptionVisibility(job)" aria-expanded="false">
+                <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-pills" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                  aria-controls="flush-collapseOne">
                   Job Description
                 </button>
               </h2>
-              <div *ngIf="job.isDescriptionVisible" class="accordion-collapse collapse"
-                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+              data-bs-parent="#job.jobid">
                 <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
                   <p>
-                    About Us:
+           
                     {{ job.companyforthisjob }} {{ job.descriptiondata }}
                   </p>
                 </div>
