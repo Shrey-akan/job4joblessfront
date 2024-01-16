@@ -319,8 +319,112 @@
 
 </ng-container>
 
-
-
-
+<ng-container *ngIf="postId === 'careeroptionaftr12'">
+<div class="container d-flex flex-column align-items-center">
+    <div class="row">
+      <h1 class="head_text">Best Career Options After 12th Science (PCM)</h1>
+    </div>
+    <div class="row">
+      <h2>Have you cleared your 12th PCM with good marks and a stunning CGPA? Are you looking for the best career options
+        after your school? Do you wish to take admission to the best courses that offer hefty salary packages? </h2>
+    </div>
+    <div class="row">
+      <h2>If yes, you have come to the right place. Today, we will highlight some of the best career options along 12th
+        Science (PCM) With Salary packages. But first, you should know a few things about PCM.</h2>
+    </div>
+    <div class="row justify-content-center">
+      <img src="assets/bestcareeroptionblog.jpg" alt="" class="img-fluid" style="max-width: 60%; height: auto;">
+    </div>
+    <div class="row" style="max-width: 60%;">
+      <h1 class="head_text">What is 12th PCM?</h1>
+      <h2>After the 10th standard, students are given the option to choose their desired subject stream based on their
+        interests and merit.</h2>
+      <h2>Students who choose, study, and complete their senior intermediate (10+2) certification with science (Physics,
+        Chemistry, and Mathematics) as their major are called 12th PCM students. 12th Class is a turning point for
+        students because it symbolizes the end of their teen or school years and the start of their careers. Knowing your
+        employment possibilities will help you make wise decisions and pursue admission into the best possible course that
+        has your interest.
+      </h2>
+      <h2>Choosing the right profession that you enjoy practicing is really important. This is because you will have it
+        for the rest of your life. Following 12th PCM, there are numerous career options that you can look into, namely,
+        in technology, healthcare, planning, multimedia, and infrastructure.
+      </h2>
+    </div>
+    <div class="row justify-content-center">
+      <img src="assets/careerblogoptionblog2.jpg" alt="" class="img-fluid" style="max-width: 60%; height: auto;">
+    </div>
+    <div class="row">
+      <h1 class="sub_head_text">How To Choose The Right Course After 12th PCM?</h1>
+    </div>
+    <div class="row" style="max-width: 60%;">
+      <h2>Selecting the best career option after 12th PCM requires you to think carefully about your interest and select a
+        high-paying course. Given that, here is what you should focus on:-</h2>
+      <ol>
+        <li>Consider your likable subjects and interests.</li>
+        <li>Explore different courses after 12th PCM that interest you.</li>
+        <li>Sort your list based on relevance to your career path, competitive salary, and position.</li>
+        <li>List the top colleges and universities after 12th PCM.</li>
+        <li>Examine their background, faculty, fee structure, and national/international ranking.</li>
+        <li>Examine the complete course syllabus for relevance to your career objective.</li>
+        <li>Assess the course's potential future value and potential pay packages.</li>
+      </ol>
+    </div>
+    <div class="row">
+      <h1 class="sub_head_text">High Salary Courses After 12th PCM</h1>
+    </div>
+    <div class="row justify-content-center">
+      <img src="assets/careeroptionblog2.jpg" alt="" class="img-fluid" style="max-width: 60%; height: auto;">
+    </div>
+    <div class="row" style="max-width: 60%;">
+      <h2>Here is a list of the courses that you can take after 12th PCM:-</h2>
+      <ol>
+        <li>B.Tech (Bachelor of Technology)</li>
+        <li>B.Sc. Nautical Science</li>
+        <li>B.E. Marine Engineering</li>
+        <li>BCA (Bachelor of Computer Application)</li>
+        <li>BS (Bachelor of Science in Computer Engineering)</li>
+        <li>B.E. Civil Engineering</li>
+        <li>B.E. Electrical & Electronics Engineering</li>
+        <li>B.Sc in Aviation</li>
+        <li>BSc Maths</li>
+        <li>BTech Mechanical Engineering</li>
+        <li>BTech Chemical Engineering</li>
+        <li>BTech Aeronautical Engineering</li>
+        <li>BTech Information Technology</li>
+        <li>BTech Instrumentation & Control Engineering</li>
+        <li>BSc Physics</li>
+        <li>BSc Chemistry</li>
+        <li>BSc in Statistics</li>
+        <li>BSc in Data Science/ Data Analytics</li>
+        <li>BDes Product Design</li>
+        <li>BDes Industrial Design/Vehicle Design</li>
+      </ol>
+    </div>
+    <div class="row" style="max-width: 60%;">
+      <h1 class="sub_head_text">Top Career Options After 12th PCM</h1>
+      <h2>Here is the list of the Top Career Options After 12th PCM:-</h2>
+      <div *ngFor="let careerOption of careerOptions; let i = index">
+        <h1 class="sub_head_text">{{i+1}}. {{ careerOption.title }}</h1>
+        <h2>{{ careerOption.description }}</h2>
+        <h2 class="subheading">Requirements:</h2>
+        <div *ngFor="let requirement of careerOption.requirements" class="requirements">
+          <h2>{{ requirement }}</h2>
+        </div>
+        <h2 class="subheading">Average salary:</h2>
+        <h2>{{ careerOption.averageSalary }}</h2>
+      </div>
+  
+    </div>
+    <div class="row" style="max-width: 60%;">
+      <h2 class="sub_head_text">Conclusion</h2>
+      <h2>12th PCM is one of the most scoping career options that you can take if you have an interest in science and
+        technology. There are many courses and professions that pay high salary packages and improve the future.
+        However, it is a highly competitive field that requires you to make informed decisions, such as choosing the right
+        course and college. Not only this, but you will have to search for the right job opportunity afterward.
+      </h2>
+      <h2>This article explores some job/career options that you can choose after completing 12th Science (PCM). </h2>
+    </div>
+  </div>
+</ng-container>
 
 <app-footer></app-footer>
