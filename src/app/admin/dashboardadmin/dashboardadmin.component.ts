@@ -34,13 +34,13 @@ constructor( private cookie:CookieService , private http: HttpClient){
         this.cookie.delete('refreshToken');
         this.cookie.delete('adminid');
           // alert("LogOut Successfull");
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/adminlogin']);
         } else {
           this.cookie.delete('accessToken');
           this.cookie.delete('refreshToken');
           this.cookie.delete('adminid');
             // alert("LogOut Successfull");
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/adminlogin']);
         }
       },
       error: (error) => {
