@@ -39,10 +39,11 @@ ol {
 
 ol li {
     padding-left: 1.5em;
-    text-indent: -1.5em;
+    /* text-indent: -1.5em; */
     margin-bottom: 8px;
     position: relative;
     font-size: large;
+    text-align: left;
     font-family: 'Poppins', sans-serif;
 }
 
