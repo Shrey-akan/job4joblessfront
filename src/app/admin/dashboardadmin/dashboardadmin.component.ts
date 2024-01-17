@@ -36,7 +36,11 @@ constructor( private cookie:CookieService , private http: HttpClient){
           // alert("LogOut Successfull");
           this.router.navigate(['/admin']);
         } else {
-
+          this.cookie.delete('accessToken');
+          this.cookie.delete('refreshToken');
+          this.cookie.delete('adminid');
+            // alert("LogOut Successfull");
+            this.router.navigate(['/admin']);
         }
       },
       error: (error) => {
