@@ -76,7 +76,7 @@ export class AdminloginComponent implements OnInit {
             console.log(isAuthenticated);
             if (isAuthenticated) {
               alert('Login Successful!');
-              this.router.navigate(['/admin/dashboardadmin']);
+              this.router.navigate(['/admin']);
             } else {
              
               alert('Incorrect Credentials!');

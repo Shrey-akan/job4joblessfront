@@ -35,10 +35,8 @@ const routes: Routes = [
   {
     path: 'about-us', component: AboutComponent
   },
-  { path: 'finjobpage/:locationjob', component: FinjobpageComponent },
 
-  
-  { path: 'finjobpage', component: FinjobpageComponent , pathMatch: 'full' },
+  { path: 'findjobpage', component: FinjobpageComponent , pathMatch: 'full' },
   {
     path: 'contact-us', component: ContactComponent
   },
@@ -66,9 +64,6 @@ const routes: Routes = [
   {
     path: 'resetpassword', component: ResetpasswordComponent
   },
-  // {
-  //   path: 'job4joblessp/:id', component: Job4joblesspComponent
-  // },
   {
     path: 'blog/:id', component: BlogComponent
   },
@@ -97,11 +92,6 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate: [authGuard]
   },
-  // {
-  //   path: 'admin',
-  //   loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-  // },
-
   {
     path:'adminlogin' , component:AdminloginComponent
   },
