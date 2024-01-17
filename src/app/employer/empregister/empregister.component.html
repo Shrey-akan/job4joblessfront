@@ -126,7 +126,9 @@
 
               <div class="form-group">
                 <label for="descriptionemp">Description:*</label>
-                  <angular-editor id="descriptionemp" formControlName="descriptionemp" [config]="config" [(ngModel)]="htmlContent"></angular-editor>
+                <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" rows="4"
+                  required></textarea>
+                  <angular-editor [config]="config" [(ngModel)]="htmlContent"></angular-editor>
                   <div [innerHTML]="htmlContent" style="margin: 20pz;"></div>
               </div>
 
