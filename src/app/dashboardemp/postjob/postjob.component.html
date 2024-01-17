@@ -60,9 +60,11 @@
       <div class="mb-3">
         <label for="jobtype" class="form-label">Job Type*</label>
         <select class="form-select" id="jobtype" formControlName="jobtype">
-          <option value="fulltime">Full Time</option>
-          <option value="parttime">Part Time</option>
-          <option value="remote">Remote</option>
+          <option value="Full-Time">Full-Time</option>
+          <option value="Part-Time">Part-Time</option>
+          <option value="Remote">Remote</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="Freelance">Freelance</option>
         </select>
       </div>
       <!-- <div class="mb-3">
@@ -89,6 +91,7 @@
           <option value="" disabled selected>Select Schedule</option>
           <option value="Morning Shift">Morning Shift</option>
           <option value="Day Shift">Day Shift</option>
+          <option value="Flexible">Flexible Hours</option>
           <option value="Night Shift">Night Shift</option>
         </select>
         <div *ngIf="jobPostForm.get('schedulejob')?.hasError('required')" class="text-danger">

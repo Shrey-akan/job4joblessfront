@@ -105,3 +105,14 @@ border-color: #1c1c1c; /* Optional: Change border color to match */
 background-color: #000000; /* Change to the desired hover color */
 border-color: #000000; /* Optional: Change border color on hover */
 }
+
+
+
+angular-editor {
+  display: block;
+  margin-bottom: 10px;
+}
+
+h4 {
+  margin-top: 20px;
+}

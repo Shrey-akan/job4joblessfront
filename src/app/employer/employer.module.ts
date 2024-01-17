@@ -20,7 +20,7 @@ import { CheckotpemployerComponent } from './checkotpemployer/checkotpemployer.c
 import { ResetpasswordemployerComponent } from './resetpasswordemployer/resetpasswordemployer.component';
 import { FootercComponent } from './footerc/footerc.component';
 import { OvercomingComponent } from './overcoming/overcoming.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
     EmployerComponent,
@@ -44,7 +44,8 @@ import { OvercomingComponent } from './overcoming/overcoming.component';
     CommonModule,
     EmployerRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularEditorModule
   ],
   bootstrap:[
     EmployerComponent
