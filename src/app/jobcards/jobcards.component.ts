@@ -26,6 +26,17 @@ interface Job {
 })
 
 export class JobcardsComponent implements OnInit {
+  formatDate(sendTime: Date): string {
+    if (!sendTime) return '';
+
+    // Parse ISO 8601 date string
+    const date = new Date(sendTime);
+
+    // Format the date (adjust the format as needed)
+    const formattedDate = date.getDate() + ' ' + date.toLocaleString('default', { month: 'long' }) + ' ' + date.getFullYear();
+
+    return formattedDate;
+  }
   liked: boolean = false;
   data1: any;
   companies = [
