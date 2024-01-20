@@ -26,17 +26,7 @@ interface Job {
 })
 
 export class JobcardsComponent implements OnInit {
-  formatDate(sendTime: Date): string {
-    if (!sendTime) return '';
 
-    // Parse ISO 8601 date string
-    const date = new Date(sendTime);
-
-    // Format the date (adjust the format as needed)
-    const formattedDate = date.getDate() + ' ' + date.toLocaleString('default', { month: 'long' }) + ' ' + date.getFullYear();
-
-    return formattedDate;
-  }
   liked: boolean = false;
   data1: any;
   companies = [
@@ -133,6 +123,21 @@ export class JobcardsComponent implements OnInit {
     this.currentPage = 1;
   }
 
+  formatDate(sendTime: Date): Date | null {
+    if (!sendTime) return null;
 
+    const date = new Date(sendTime);
+
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+        console.error('Invalid date format:', sendTime);
+        return null;
+    }
+
+    // Extract only the date part
+    const extractedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    return extractedDate;
+}
 
 }

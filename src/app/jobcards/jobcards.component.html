@@ -77,8 +77,9 @@
             <i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;{{ job.sendTime | date: 'd MMMM yyyy' }}
           </p> -->
           <p class="rounded-3 px-2 py-1 mx-2">
-            <i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;{{ formatDate(job.sendTime) }}
+            <i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;{{ formatDate(job.sendTime) | date: 'd MMMM yyyy' }}
         </p>
+        
           <button class="btn custom-btn mt-3 rounded-pill" routerLink="/login">Apply</button>
         </div>
       </div>
