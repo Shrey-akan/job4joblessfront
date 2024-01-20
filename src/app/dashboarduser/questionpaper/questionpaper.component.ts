@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
     interface UserAnswer {
-      questionId: number;
+      questionId: string;
       userResponse: string; // Ensure this matches the property name in your component
     }
     
@@ -28,14 +28,11 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
     
         let response = this.http.fetchquestion();
         response.subscribe((data1: any) => {
-          // Initialize userAnswers with empty responses for each question
           this.userAnswers = data1.map((question: any) => ({
             questionId: question.id,
-            userResponse: '' // Ensure it matches the property name in your HTML template
+            userResponse: '' 
           }));
           this.data = data1;
-    
-          // Dynamically create form controls for each question
           data1.forEach((question: any) => {
             this.form.addControl(`question${question.id}`, new FormControl(''));
           });
@@ -43,12 +40,16 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
       }
     
       submitAnswers() {
-        // Iterate over the form controls and update userAnswers
         Object.keys(this.form.controls).forEach(key => {
-          const questionId = parseInt(key.replace('question', ''), 10);
-          const userResponse = this.form.get(key)?.value;
-          const userAnswer = this.userAnswers.find(answer => answer.questionId === questionId);
-    
+          // const questionId = parseInt(key.replace('question', ''), 10);
+          // const userResponse = this.form.get(key)?.value;
+          // const userAnswer = this.userAnswers.find(answer => answer.questionId === questionId);
+  
+
+        const questionId = key.replace('question', '');  // No need to parse if it's a string
+        const userResponse = this.form.get(key)?.value;
+        const userAnswer = this.userAnswers.find(answer => answer.questionId === questionId);
+
           if (userAnswer) {
             userAnswer.userResponse = userResponse;
           }
