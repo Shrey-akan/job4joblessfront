@@ -20,7 +20,6 @@ export class EmpregisterComponent {
   successMessage: string | null = null;
   showWarning: boolean = false;
   htmlContent = '';
-
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -71,9 +70,6 @@ export class EmpregisterComponent {
       empstate: ['', Validators.required],
       empcity: ['', Validators.required]
     });
-
-
-
   }
   empRegisteration(): void {
     console.log(this.employerdetails);
@@ -88,21 +84,17 @@ export class EmpregisterComponent {
       }
     });
   }
-
   loginWithGoogle() {
     this.b1.loginWithGoogle()
       .then((userCredential) => {
-        // User is successfully authenticated
         const user = userCredential.user;
         console.log('Authenticated');
         console.log('User Info:', user);
         const empmailid = user.email;
         const empfname = user.displayName;
-        // console.log(empmailid);
         if (user.email && user.displayName) {
           const empmailid = user.email;
           const empfname = user.displayName;
-          // console.log(empmailid);
           this.b1.createOrGetEmployer(empmailid, empfname);
         }
         else {
@@ -111,11 +103,8 @@ export class EmpregisterComponent {
       })
       .catch((error: any) => {
         console.error('Authentication Error:', error);
-        // Handle authentication errors here
       });
   }
-
-
   generateOtp(payload: any) {
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.empid, email: payload.empmailid }).subscribe({
       next: (response: any) => {
@@ -130,12 +119,10 @@ export class EmpregisterComponent {
       }
     });
   }
-
   toggleEmpPasswordVisibility() {
     this.empPasswordVisible = !this.empPasswordVisible;
   }
   ngOnInit(): void {
-
     const innputElement = document.getElementById("empphone");
     if (innputElement) {
       intelInput(innputElement, {
@@ -144,14 +131,8 @@ export class EmpregisterComponent {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.0/js/utils.js"
       })
     }
-
-    // this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
-    //   this.countries = data.map(country => country.name.common);
-    // });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
     });
-
   }
-
 }

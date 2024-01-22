@@ -32,21 +32,15 @@ export class LoginComponent implements OnInit {
   loginWithGoogle() {
     this.userservice.loginWithGoogle()
       .then((userCredential) => {
-     
         const user = userCredential.user;
-      
         if (user.email) {
-       
           const userName = user.email;
-        
           this.b1.logincheckgmail(userName);
-       
         } else {
           console.error('User email is null. Handle this case as needed.');
         }
       })
       .catch((error) => {
-        // console.error('Authentication Error:', error);
       });
   }
 }

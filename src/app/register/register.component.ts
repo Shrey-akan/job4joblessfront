@@ -16,15 +16,12 @@ export class RegisterComponent implements OnInit {
   formSubmitted: any;
   passwordVisible: boolean = false;
   data: any;
-  loading: boolean = false; // Added loading flag
-  successMessage: string | null = null; // Added success message
-  showWarning: boolean = false; // Added warning flag
+  loading: boolean = false;
+  successMessage: string | null = null;
+  showWarning: boolean = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private userservice: UserService, private http: HttpClient) {
   }
-
   ngOnInit(): void {
-
-
     const innputElement = document.getElementById("phone");
     if (innputElement) {
       intelInput(innputElement, {
@@ -45,7 +42,6 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
         ]
       ],
-
       userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       usercountry: ['', Validators.required],
       userstate: ['', Validators.required],
@@ -54,17 +50,11 @@ export class RegisterComponent implements OnInit {
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
     });
-
-
   }
-
   loginWithGoogle() {
     this.userservice.loginWithGoogle()
       .then((userCredential) => {
-        // User is successfully authenticated
         const user = userCredential.user;
-        // console.log('Authenticated');
-        // console.log('User Info:', user);
         const userName = user.email;
         const userFirstName = user.displayName;
         console.log(userName);
@@ -72,19 +62,14 @@ export class RegisterComponent implements OnInit {
         if (user.email && user.displayName) {
           const username = user.email;
           const userFirstName = user.displayName;
-          // console.log(userName);
           this.userservice.createOrGetUser(userName, userFirstName);
         }
         else {
-          // console.error('User email is null. Handle this case as needed.');
         }
       })
       .catch((error: any) => {
-        // console.error('Authentication Error:', error);
-        // Handle authentication errors here
       });
   }
-
   userRegisteration(): void {
     if (this.userregister.valid) {
       console.log(this.userregister);
@@ -102,7 +87,6 @@ export class RegisterComponent implements OnInit {
       this.userregister.markAllAsTouched();
     }
   }
-
   generateOtp(payload: any) {
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe(
       (response: any) => {
@@ -119,26 +103,17 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
   login(usersignin: { value: any; }) {
     const empemail = usersignin.value.userNamec;
     const emppassword = usersignin.value.passuserc;
-
     const empmatch = this.data.find((data1: any) => data1.userName === empemail && data1.passuser === emppassword);
-
     if (empmatch) {
       this.router.navigate(['/seeker/']);
-      // console.log(usersignin.value);
     } else {
-      // console.log(usersignin.value);
-      // console.log("Invalid login");
       alert("Invalid Details");
-      // Optionally, show an error message to the user
     }
   }
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
   }
 }
-
-

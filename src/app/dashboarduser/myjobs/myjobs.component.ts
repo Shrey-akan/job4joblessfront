@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Renderer2, HostListener } from '@angular
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
-
+import { ApplyJob } from 'src/app/apply-job';
 @Component({
   selector: 'app-myjobs',
   templateUrl: './myjobs.component.html',
@@ -10,15 +10,39 @@ import { UserService } from 'src/app/auth/user.service';
 })
 export class MyjobsComponent implements OnInit{
   showFloatingGif = false;
-  data:any
+  // data:any
   userData1!: any;
   abc:any;
   user: any;
   showDetails = false;
 
-  toggleDetails() {
-    this.showDetails = !this.showDetails;
+  statusOptions: string[] = ['All', 'Selected', 'Rejected', 'Reviewed', 'Waiting'];
+  selectedStatus: string = 'All';
+  selectedOption: string = '';
+  isOpen: boolean = false;
+  options: string[] = ['Selected', 'Reviewed', 'Waiting', 'Rejected'];
+  empDetail: any;
+
+  logval: any;
+  data: ApplyJob[] = [];
+  filteredData: ApplyJob[] = [];
+  public chatEmail: string = "";
+  isTableVisible: boolean = false;
+  exportedData: string = '';
+
+  // Function to toggle the table visibility
+  toggleTableVisibility() {
+    this.isTableVisible = !this.isTableVisible;
   }
+  // Define a property to keep track of the expanded user profile
+  expandedUser: any | null = null;
+
+
+
+
+  // toggleDetails() {
+  //   this.showDetails = !this.showDetails;
+  // }
   constructor(public cookie:CookieService , private b1:UserService , private router:Router,private elRef: ElementRef, private renderer: Renderer2) {}
 
   userID: String = "0";
@@ -30,36 +54,116 @@ export class MyjobsComponent implements OnInit{
       const uuid=this.userID;
       this.userData1 = data1.find((user: any) => user.uid == uuid);
       this.abc = this.userData1.userName;
-      this.fetchApplyJob();
+      this.fetchJobapplieddetails();
     });
   }
 
-  showFloatingGifAfterDelay() {
-    setTimeout(() => {
-      this.showFloatingGif = true;
-    }, 2000);
+  // fetchApplyJob() {
+  //   let response = this.b1.fetchapplyform();
+  //   response
+  //     .subscribe((data1: any) => {
+  //       this.data = data1.filter((apply: any) => apply.uid == this.userID);
+  //     });
+  // }
+
+
+
+  fetchJobapplieddetails() {
+    let response: any = this.b1.fetchapplyform();
+    response.subscribe((data1: any) => {
+      this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
+      this.filteredData = this.data;
+    });
   }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event): void {
-    const clickedInside = this.renderer
-      .parentNode(event.target)
-      .classList.contains('floating-gif-container');
-
-    if (!clickedInside) {
-      this.showFloatingGif = false;
+  filterApplications(status: string) {
+    this.selectedStatus = status;
+    if (status === 'All') {
+      this.filteredData = this.data;
+    } else {
+      this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
     }
   }
-  fetchApplyJob() {
-    let response = this.b1.fetchapplyform();
+  
 
-    response
-      .subscribe((data1: any) => {
-        this.data = data1.filter((apply: any) => apply.uid == this.userID);
-        // console.log('Filtered Data:', this.data);
-      });
+  showMoreInfo(user: any) {
+    this.expandedUser = this.expandedUser === user ? null : user;
   }
+
+
+  selectOption(application: any, option: string) {
+    this.selectedOption = option; // Update the selected option
+    application.isOpen = false;
+    // console.log('Selected option:', this.selectedOption); 
+  }
+  generateTablePDF() {
+    const table = document.getElementById('dataTable');
+    if (table) {
+      const pdfWindow = window.open('', '_blank');
+      if (pdfWindow) {
+        pdfWindow.document.open();
+        pdfWindow.document.write('<html><body>');
+        pdfWindow.document.write('<table>' + table.innerHTML + '</table>');
+        pdfWindow.document.write('</body></html>');
+        pdfWindow.document.close();
+        setTimeout(() => {
+          pdfWindow.print();
+        }, 500);
+      } else {
+        console.error('Failed to open a new window for the PDF.');
+      }
+    } else {
+      console.error('Table element is not available.');
+    }
+  }
+  
+  convertToCSV(data: any[]): string {
+    const header = Object.keys(data[0]).join(',');
+    const rows = data.map(item => Object.values(item).join(','));
+    return header + '\n' + rows.join('\n');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   navigateTo(){
     this.router.navigate(['/dashboarduser']);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

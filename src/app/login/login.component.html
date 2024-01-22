@@ -7,8 +7,6 @@
         onclick="window.location.href = '/'">
     </div>
     <p>Sign in to job4jobless as Job Seeker</p>
-
-    <!-- Sign-In Form -->
     <form [formGroup]="loginform" (ngSubmit)="login(loginform)" action="">
       <div class="form-group">
         <input type="text" class="form-control px-4 rounded-pill" formControlName="userName" id="userName"

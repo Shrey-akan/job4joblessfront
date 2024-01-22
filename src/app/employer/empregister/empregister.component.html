@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row">
-    <!-- <h1 class="text-center" style="font-size: 1.5rem;  color: black;">Ready to take the next step?</h1> -->
     <div class="col-md-3">
-
     </div>
     <div class="col-md-6">
       <div class="container custom-box">
@@ -13,25 +11,18 @@
           </button>
           <div class="col-md 6">
             <form [formGroup]="employerdetails" (ngSubmit)="empRegisteration()">
-
-
               <div class="form-group">
                 <label for="empfname">First Name:*</label>
                 <input type="text" id="empfname" formControlName="empfname" class="form-control" required>
               </div>
-
-
               <div class="form-group">
                 <label for="emplname">Last Name:*</label>
                 <input type="text" id="emplname" formControlName="emplname" class="form-control" required>
               </div>
-
-
               <div class="form-group">
                 <label for="empcompany">Company Name:*</label>
                 <input type="text" id="empcompany" formControlName="empcompany" class="form-control" required>
               </div>
-
               <div class="form-group">
                 <label for="empmailid">Email:*</label>
                 <input type="email" id="empmailid" formControlName="empmailid" class="form-control" required>
@@ -44,7 +35,6 @@
                   Email must be a valid gmail address.
                 </div>
               </div>
-
               <div class="form-group">
                 <label for="emppass">Password:*</label>
                 <div class="input-group">
@@ -61,12 +51,8 @@
                   Password should must have 8 characters with one special character, one uppercase and one lowercase.
                 </div>
                 <div *ngIf="employerdetails.get('emppass')?.hasError('pattern')" class="text-danger">
-
                 </div>
               </div>
-
-
-
               <div class="form-group">
                 <label for="empcountry">Country:*</label>
                 <select id="empcountry" formControlName="empcountry" class="form-control" required>
@@ -74,17 +60,11 @@
                   <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
                 </select>
               </div>
-
-
-
-
               <div
                 *ngIf="employerdetails.get('empcountry')?.hasError('required') && employerdetails.get('empcountry')?.touched"
                 class="text-danger">
                 Country is required.
               </div>
-
-
               <div class="form-group row">
                 <div class="col">
                   <label for="empphone">Phone:*</label>
@@ -93,7 +73,6 @@
                     </div>
                     <input type="tel" id="empphone" class="form-control" formControlName="empphone"
                       placeholder="Enter Phone" required>
-
                   </div>
                   <div *ngIf="employerdetails.get('empphone')?.hasError('pattern')" class="text-danger">
                     Please enter a valid 10-digit phone number.
@@ -105,46 +84,28 @@
                     placeholder="Enter your state">
                 </div>
               </div>
-
               <div class="form-group">
-
               </div>
-
-
-
-
-
-
-
               <div class="form-group">
                 <label for="empcity">City:*</label>
                 <input type="text" id="empcity" formControlName="empcity" class="form-control" required
                   placeholder="Enter your city">
               </div>
-
-
-
               <div class="form-group">
                 <label for="descriptionemp">Description:*</label>
                 <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" rows="4"
                   required></textarea>
-                  <!-- <angular-editor [config]="config" formControlName="descriptionemp"></angular-editor> -->
-                  <!-- <div [innerHTML]="htmlContent" style="margin: 20pz;"></div> -->
               </div>
               <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
                 <span *ngIf="!loading">Register</span>
                 <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
               </button>
-              <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
             </form>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
-
   <div class="row mt-4">
     <div class="col-md-6">
       <div *ngIf="successMessage" class="alert alert-success">
@@ -155,5 +116,4 @@
       </div>
     </div>
   </div>
-
 </div>
