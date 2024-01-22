@@ -85,7 +85,7 @@ export class MyjobsComponent implements OnInit{
   }
   
 
-  showMoreInfo(user: any) {
+  showMoreInfo(user: ApplyJob):void {
     this.expandedUser = this.expandedUser === user ? null : user;
   }
 

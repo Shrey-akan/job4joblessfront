@@ -1,53 +1,7 @@
-<!-- <div *ngIf="showFloatingGif" class="floating-gif-container">
-  <img src="assets/submissioni.gif" alt="Floating GIF">
-</div>
-
-
-<div class="container">
-  <div class="row" *ngIf="data.length > 0; else noApplications">
-    <div class="col-md-6" *ngFor="let application of data">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">{{ application.juname }}</h2>
-        </div>
-        <div class="card-body">
-          <p class="card-text"><strong>Mail:</strong> {{ application.jumail }}</p>
-          <p class="card-text"><strong>Education:</strong> {{ application.jueducation }}</p>
-          <button class="btn btn-link" (click)="toggleDetails()">Read More</button>
-        </div>
-        <div class="card-footer" *ngIf="showDetails">
-          <p class="card-text"><strong>Experience:</strong> {{ application.juexperience }}</p>
-          <p class="card-text"><strong>Relocation:</strong> {{ application.jurelocation }}</p>
-          <p class="card-text"><strong>Resume:</strong>  <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">View Resume</a></p>
-          <p class="card-text"><strong>Java Experience:</strong> {{ application.juexpinjava }}</p>
-          <p class="card-text"><strong>JSP Experience:</strong> {{ application.juexpjsp }}</p>
-          <p class="card-text"><strong>Interview Date:</strong> {{ application.juinterviewdate }}</p>
-          <p class="card-text"><strong>Java Validity:</strong> {{ application.jujavavalid }}</p>
-          <p class="card-text"><strong>Job Title:</strong> {{ application.jujobtitle }}</p>
-          <p class="card-text"><strong>Company Name:</strong> {{ application.jucompanyname }}</p>
-          <button class="btn btn-link" (click)="toggleDetails()">Read Less</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <ng-template #noApplications>
-    <div class="text-center">
-      <img src="assets/Job4jobless & Hustleforwork-01.png" alt="No Jobs Available Image" width="100%">
-      <h2>No job applications available</h2>
-      <p>Sorry, there are currently no job applications to display.</p>
-      <a routerLink="/dashboarduser/"> 
-        <button class="btn custom-btn rounded-pill" (click)="navigateTo()">Find Jobs</button>
-      </a>
-    </div>
-  </ng-template>
-</div> -->
-
-
-
 <div class="container mt-5">
   <!-- Filter by Status -->
   <div class="status-filter">
-    <h3>Filter by Status</h3>
+    <h1>Filter by Status</h1>
     <ul class="list-inline">
       <li (click)="filterApplications('All')" class="list-inline-item status-option">All Applications</li>
       <li (click)="filterApplications('Selected')" class="list-inline-item status-option">Selected</li>
@@ -62,11 +16,11 @@
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let application of filteredData">
       <div class="card mb-4">
-        <div class="card-body">
-          <h2><strong>Name:</strong> {{ application.jucompny }}</h2>
-          <h2><strong>Email:</strong> {{ application.jutitle }}</h2>
+        <div class="card-body" style="flex-grow: 1;">
+          <h2>{{ application.jucompny }}</h2>
+          <h2>{{ application.jutitle }}</h2>
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
-          <p><strong>Company:</strong> {{ application.jucompny }}</p>
+          <p><strong>Mail:</strong> {{ application.jumail }}</p>
           <p><strong>Profile:</strong> {{ application.profileupdate }}</p>
         </div>
         <div class="card-footer" *ngIf="expandedUser === application">
@@ -80,7 +34,7 @@
           <p><strong>Job Title:</strong> {{ application.jujobtitle }}</p>
           <p><strong>Company Name:</strong> {{ application.jucompanyname }}</p>
         </div>
-        <button class="btn custom-btn rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">More Info</button>
+        <button class="btn custom-btn rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">    {{ expandedUser === application ? 'Less Info' : 'More Info' }}</button>
       </div>
     </div>
   </div>

@@ -1,7 +1,6 @@
 <div class="container mt-5">
-  <!-- Filter by Status -->
   <div class="status-filter">
-    <h3>Filter by Status</h3>
+    <h1>Filter by Status</h1>
     <ul class="list-inline">
       <li (click)="filterApplications('All')" class="list-inline-item status-option">All Applications</li>
       <li (click)="filterApplications('Selected')" class="list-inline-item status-option">Selected</li>
@@ -64,7 +63,7 @@
             </div>
           </div>
         </div>
-        <button class="btn custom-btn rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">More Info</button>
+        <button class="btn custom-btn rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">    {{ expandedUser === application ? 'Less Info' : 'More Info' }}</button>
       </div>
     </div>
   </div>
