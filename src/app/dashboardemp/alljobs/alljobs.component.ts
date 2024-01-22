@@ -54,9 +54,9 @@ export class AlljobsComponent implements OnInit {
   showMoreInfo(job: any): void {
     job.showDetails = !job.showDetails;
 
-    if (job.showDetails) {
-      this.fetchAppliedUsers(job.empid, job.jobid);
-    }
+    // if (job.showDetails) {
+    //   this.fetchAppliedUsers(job.empid, job.jobid);
+    // }
 
     this.cdr.detectChanges();
   }
