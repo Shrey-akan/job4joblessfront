@@ -15,16 +15,18 @@
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let application of filteredData">
       <div class="card mb-4">
-        <div class="card-body">
+        <div class="card-body" style="flex-grow: 1;">
+          <h1>{{application.jutitle}}</h1>
+          <h2>{{application.jucompny}}</h2>
           <p><strong>Name:</strong> {{ application.juname }}</p>
           <p><strong>Email:</strong> {{ application.jumail }}</p>
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
-          <p><strong>Company:</strong> {{ application.jucompny }}</p>
+       
           <p><strong>Profile:</strong> {{ application.profileupdate }}</p>
           <div class="btn-group">
             <input type="text" [(ngModel)]="application.selectedOption" class="form-control" (click)="toggleDropdown(application)" />
             <button type="button" class="btn custom-btn rounded-pill dropdown-toggle" (click)="toggleDropdown(application)">
-              Toggle Dropdown
+              Update Status
             </button>
             <div class="dropdown-menu" [ngClass]="{'show': application.isOpen}">
               <ul class="list-group">
