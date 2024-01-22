@@ -333,7 +333,7 @@ export class UserService {
     });
 
     this.h1
-      .post<Map<string, Object>>('${API_BASE_URL}createOrGetUser', requestBody, {
+      .post<Map<string, Object>>('https://job4jobless.com:9001/createOrGetUser', requestBody, {
         headers,
         observe: 'response', // to access the full HTTP response, including headers
       })
@@ -459,50 +459,6 @@ export class UserService {
     });
   }
 
-
-  // createOrGetEmployer(empmailid: any) {
-  //   const data = { empmailid };
-
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-
-  //   this.h1.post(this.insertgmailemp, empmailid, { headers }).subscribe({
-  //     next: (resp: any) => {
-
-  //       console.log("Access Token Generated" + resp.accessToken);
-  //       const mainres: Employer = resp;
-  //       console.log(`Login response from server: ${mainres}`);
-  //       this.cookie.set('emp', resp.empid);
-  //       this.cookie.set('accessToken', resp.accessToken); // Store access token in a cookie
-  //       this.cookie.set('refreshToken', resp.refreshToken);
-  //       console.log("refresh token saved ", resp.refreshToken);
-  //       // Inside your logincheckgmail function
-  //       const accessToken = resp.accessToken; // Assuming this is where you get the access token
-  //       AuthInterceptor.accessToken = accessToken;
-  //       // Check if both accessToken and empid are present to determine authentication
-  //       // Check if both accessToken and empid are present to determine authentication
-  //       const isAuthenticated = resp.accessToken && resp.empid;
-
-  //       if (isAuthenticated) {
-  //         console.log("Server responded with an object of employer");
-
-  //         // Redirect to the dashboard if the response is true
-  //         alert('Login Successful!');
-  //         this.router.navigate(['/dashboardemp']);
-  //       } else {
-  //         // Handle other response statuses or errors
-  //         alert('Incorrect Credentials!');
-  //         this.router.navigate(['/employer']);
-  //       }
-  //     },
-  //     error: (err: any) => {
-  //       console.log(err);
-  //       alert('Incorrect Credentials!');
-  //       this.router.navigate(['/employer']);
-  //     }
-  //   });
-  // }
   createOrGetEmployer(empmailid: string , empfname:string) {
     const requestBody = { empmailid , empfname };
     console.log(requestBody);
@@ -511,47 +467,32 @@ export class UserService {
     });
 
     this.h1
-      .post<Map<string, Object>>('${API_BASE_URL}createOrGetEmployer', requestBody, {
+      .post<Map<string, Object>>('https://job4jobless.com:9001/createOrGetEmployer', requestBody, {
         headers,
-        observe: 'response', // to access the full HTTP response, including headers
+        observe: 'response',
       })
       .subscribe(
         {
           next: (response: any) => {
             if (response.status === 200) {
-              // API call was successful
               const responseBody = response.body;
-              // console.log('API Response:', responseBody);
-              // console.log("Response", response.accessToken);
-
-              // You can access the data from the response as needed, e.g., responseBody.accessToken
               const accessToken = responseBody.accessToken;
               const empid = responseBody.empid;
-              // console.log("AccessToken", accessToken);
-              // console.log("empid", empid);
-              // Handle the response data here
+              console.log("AccessToken", accessToken);
+              console.log("empid", empid);
               if (accessToken && empid) {
-                // console.log("Access Token Generated" + accessToken);
                 const mainres: Employer = response;
-                // console.log(`Login response from server: ${mainres}`);
                 this.cookie.set('emp', empid);
                 this.cookie.set('accessToken', accessToken);
                 this.cookie.set('refreshToken', responseBody.refreshToken);
-                // console.log('Refresh Token Saved:', responseBody.refreshToken);
-                // Inside your logincheckgmail function
-
+                console.log('Refresh Token Saved:', responseBody.refreshToken);
                 AuthInterceptor.accessToken = accessToken;
-                // Check if both accessToken and empid are present to determine authentication
-                // Check if both accessToken and empid are present to determine authentication
                 const isAuthenticated = accessToken && empid;
                 if (isAuthenticated) {
-                  // console.log("Server responded with an object of employer");
-
-                  // Redirect to the dashboard if the response is true
+                  console.log("Server responded with an object of employer");
                   alert('Login Successful!');
                   this.router.navigate(['/dashboardemp']);
                 } else {
-                  // Handle other response statuses or errors
                   alert('Incorrect Credentials!');
                   this.router.navigate(['/employer']);
                 }

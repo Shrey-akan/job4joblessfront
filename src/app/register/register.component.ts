@@ -51,12 +51,6 @@ export class RegisterComponent implements OnInit {
       userstate: ['', Validators.required],
       usercity: ['', Validators.required]
     });
-    // let responce = this.b1.viewuserdetailservice();
-    // responce.subscribe((data1: any)=>this.data=data1);
-
-    // this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
-    //   this.countries = data.map(country => country.name.common);
-    // });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
     });

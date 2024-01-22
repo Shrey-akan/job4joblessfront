@@ -128,8 +128,8 @@
                 <label for="descriptionemp">Description:*</label>
                 <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" rows="4"
                   required></textarea>
-                  <!-- <angular-editor [config]="config" formControlName="descriptionemp" [(ngModel)]="htmlContent"></angular-editor>
-                  <div [innerHTML]="htmlContent" style="margin: 20pz;"></div> -->
+                  <angular-editor [config]="config" formControlName="descriptionemp"></angular-editor>
+                  <!-- <div [innerHTML]="htmlContent" style="margin: 20pz;"></div> -->
               </div>
               <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
                 <span *ngIf="!loading">Register</span>
