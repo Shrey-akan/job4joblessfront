@@ -91,4 +91,7 @@ export class AlljobsComponent implements OnInit {
   redirectToDashboardEmp() {
     this.router.navigate(['/dashboardemp']);
   }
+  showAllApplicantsDetails(){
+    this.router.navigate(['/dashboardemp/applieduserdetails'])
+  }
 }
