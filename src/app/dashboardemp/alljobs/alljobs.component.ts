@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ApplyJob } from 'src/app/apply-job';
 import { UserService } from 'src/app/auth/user.service';
 
 declare var $: any;
@@ -15,7 +16,7 @@ export class AlljobsComponent implements OnInit {
   empDetail: any;
   abc: any;
   selectedJob: any;
-
+  jobTitleFilter: string = '';
   constructor(
     public cookie: CookieService,
     private b1: UserService,
@@ -50,7 +51,15 @@ export class AlljobsComponent implements OnInit {
       });
     });
   }
-
+  filterByJobTitle() {
+    if (!this.jobTitleFilter) {
+      this.data = this.data;
+    } else {
+      this.data = this.data.filter((application: ApplyJob) =>
+        application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
+      );
+    }
+  }
   showMoreInfo(job: any): void {
     job.showDetails = !job.showDetails;
 
