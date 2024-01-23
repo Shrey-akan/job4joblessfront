@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
       AuthInterceptor.accessToken = accessToken;
       this.cookie.set('accessToken', accessToken);
       this.cookie.set('adminid', adminid); 
-      this.router.navigate(['/admin/dashboardadmin']);
+      this.router.navigate(['/admin']);
     }
   }
   

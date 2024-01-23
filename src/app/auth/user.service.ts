@@ -676,7 +676,7 @@ export class UserService {
         // console.log(resp);
 
         // console.log("Data inserted");
-        this.router.navigate(['/admin/dashboardadmin']);
+        this.router.navigate(['/admin']);
       },
       error: (err: any) => {
         // console.log(err);
