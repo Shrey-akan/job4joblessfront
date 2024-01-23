@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
 import { ApplyJob } from 'src/app/apply-job';
+
 @Component({
   selector: 'app-applieduserdetails',
   templateUrl: './applieduserdetails.component.html',
@@ -23,16 +24,17 @@ export class ApplieduserdetailsComponent implements OnInit {
   public chatEmail: string = "";
   isTableVisible: boolean = false;
   exportedData: string = '';
+  jobTitleFilter: string = '';
 
   // Function to toggle the table visibility
   toggleTableVisibility() {
     this.isTableVisible = !this.isTableVisible;
   }
+
   // Define a property to keep track of the expanded user profile
   expandedUser: any | null = null;
+
   constructor(private router: Router, private formbuilder: FormBuilder, private b1: UserService, public cookie: CookieService) { }
-
-
 
   empId: String = "0";
 
@@ -57,6 +59,7 @@ export class ApplieduserdetailsComponent implements OnInit {
       this.filteredData = this.data;
     });
   }
+
   filterApplications(status: string) {
     this.selectedStatus = status;
     if (status === 'All') {
@@ -65,16 +68,36 @@ export class ApplieduserdetailsComponent implements OnInit {
       this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
     }
   }
-  
+
+  // Filter data by job title
+  // filterByJobTitle() {
+  //   if (!this.jobTitleFilter) {
+  //     this.filteredData = this.data; // Display all applications when the filter is empty
+  //   } else {
+  //     this.filteredData = this.data.filter((application: ApplyJob) =>
+  //       application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
+  //     );
+  //   }
+  // }
+  filterByJobTitle() {
+    if (!this.jobTitleFilter) {
+      this.filteredData = this.data; // Display all applications when the filter is empty
+    } else {
+      this.filteredData = this.data.filter((application: ApplyJob) =>
+        application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
+      );
+    }
+  }
 
   navigateToMessage(uid: string) {
-
     // Use the passed email as a parameter when navigating
     this.router.navigate(['/dashboardemp/empmessage/', uid]);
   }
+
   navigateToVideo(uid: string) {
     this.router.navigate(['/dashboardemp/videocall/', uid]);
   }
+
   // Define the showMoreInfo method
   showMoreInfo(user: any) {
     // Toggle the expandedUser property to show/hide additional information
@@ -91,6 +114,7 @@ export class ApplieduserdetailsComponent implements OnInit {
       // console.log('Profile updated:', updatedApplication);
     });
   }
+
   toggleDropdown(application: any) {
     application.isOpen = !application.isOpen;
   }
@@ -100,6 +124,7 @@ export class ApplieduserdetailsComponent implements OnInit {
     application.isOpen = false;
     // console.log('Selected option:', this.selectedOption); 
   }
+
   generateTablePDF() {
     const table = document.getElementById('dataTable');
     if (table) {
@@ -110,7 +135,7 @@ export class ApplieduserdetailsComponent implements OnInit {
         pdfWindow.document.write('<table>' + table.innerHTML + '</table>');
         pdfWindow.document.write('</body></html>');
         pdfWindow.document.close();
-  
+
         // Optionally, give it a moment to load and then print
         setTimeout(() => {
           pdfWindow.print();
@@ -122,7 +147,6 @@ export class ApplieduserdetailsComponent implements OnInit {
       console.error('Table element is not available.');
     }
   }
-  
 
   // Function to convert data to CSV format
   convertToCSV(data: any[]): string {
@@ -131,4 +155,3 @@ export class ApplieduserdetailsComponent implements OnInit {
     return header + '\n' + rows.join('\n');
   }
 }
-
