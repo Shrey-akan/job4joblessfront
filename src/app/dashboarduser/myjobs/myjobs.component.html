@@ -23,7 +23,7 @@
           <h2>{{ application.jutitle }}</h2>
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
           <p><strong>Mail:</strong> {{ application.jumail }}</p>
-          <div style="position: absolute; top: 10px; right: 10px;">
+       
             <div *ngIf="application.profileupdate === 'Reviewed'">
               <i class="fa-solid fa-circle-check fa-2x" style="color: #fb9379;"></i>
               <span style="color: #fb9379;"> Reviewed</span>
@@ -40,7 +40,7 @@
               <i class="fa-solid fa-circle-xmark fa-2x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
             </div>
-          </div>
+        
         </div>
         <div class="card-footer" *ngIf="expandedUser === application">
           <p><strong>Location:</strong> {{ application.jurelocation }}</p>
