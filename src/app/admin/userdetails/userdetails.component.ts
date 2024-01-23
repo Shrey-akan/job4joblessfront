@@ -17,6 +17,6 @@ export class UserdetailsComponent implements OnInit{
   }
   sendNotification(userId: string) {
     // Navigate to the notification component with the user ID as a parameter
-    this.router.navigate(['/admin/notify', userId]);
+    this.router.navigate(['/admin/notify/', userId]);
   }
 }
