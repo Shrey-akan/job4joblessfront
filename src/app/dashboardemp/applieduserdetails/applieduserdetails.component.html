@@ -7,18 +7,7 @@
       <li (click)="filterApplications('Rejected')" class="list-inline-item status-option">Rejected</li>
       <li (click)="filterApplications('Reviewed')" class="list-inline-item status-option">Reviewed</li>
       <li (click)="filterApplications('Waiting')" class="list-inline-item status-option">Waiting</li>
-      <li (click)="filterbyjobtitle()" class="list-inline-item status-option">Show in Table</li>
-      <button type="button" class="btn custom-btn rounded-pill dropdown-toggle" (click)="toggleTitleDropdown()">
-        Filter by Title
-      </button>
-      <div class="dropdown-menu">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let title of titleOptions" (click)="selectTitle(title)">
-            {{ title }}
-          </li>
-        </ul>
-      </div>
-
+      <li (click)="toggleTableVisibility()" class="list-inline-item status-option">Show in Table</li>
     </ul>
   </div>
 
