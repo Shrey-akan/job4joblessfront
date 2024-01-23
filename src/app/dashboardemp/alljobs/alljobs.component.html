@@ -1,9 +1,10 @@
-<div class="form-group mt-3">
-  <label for="jobTitleFilter">Filter by Job Title:</label>
-  <input type="text" class="form-control" id="jobTitleFilter" [(ngModel)]="jobTitleFilter" (input)="filterByJobTitle()" />
-</div>
+
 <div class="container">
   <h1 class="text-center mb-4">Job Listings</h1>
+  <div class="form-group mt-3">
+    <label for="jobTitleFilter">Filter by Job Title:</label>
+    <input type="text" class="form-control" id="jobTitleFilter" [(ngModel)]="jobTitleFilter" (input)="filterByJobTitle()" />
+  </div>
   <div class="row">
     <ng-container *ngIf="data.length > 0; else noJobsContent">
       <div class="col">
