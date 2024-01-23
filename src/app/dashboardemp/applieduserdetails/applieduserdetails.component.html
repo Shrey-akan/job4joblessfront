@@ -23,7 +23,8 @@
           <h1>{{application.jutitle}}</h1>
           <h2>{{application.jucompny}}</h2>
           <p><strong>Name:</strong> {{ application.juname }}</p>
-          <p><strong>Email:</strong> {{ application.jumail }}</p>
+          <p><strong>Mail:</strong> <a [href]="'mailto:' + application.jumail">{{ application.jumail }}</a></p>
+          <!-- <p><strong>Email:</strong> {{ application.jumail }}</p> -->
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
        
           <p><strong>Profile:</strong> {{ application.profileupdate }}</p>
