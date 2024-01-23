@@ -13,6 +13,7 @@ export class ApplieduserdetailsComponent implements OnInit {
   statusOptions: string[] = ['All', 'Selected', 'Rejected', 'Reviewed', 'Waiting'];
   selectedStatus: string = 'All';
   selectedOption: string = '';
+  selectedTitle: string = '';
   isOpen: boolean = false;
   options: string[] = ['Selected', 'Reviewed', 'Waiting', 'Rejected'];
   empDetail: any;
@@ -23,7 +24,9 @@ export class ApplieduserdetailsComponent implements OnInit {
   public chatEmail: string = "";
   isTableVisible: boolean = false;
   exportedData: string = '';
+  titleOptions: string[] = [];
 
+  isTitleDropdownOpen:boolean=false;
   // Function to toggle the table visibility
   toggleTableVisibility() {
     this.isTableVisible = !this.isTableVisible;
@@ -55,14 +58,37 @@ export class ApplieduserdetailsComponent implements OnInit {
       this.data = data1.filter((applyjobf: any) => applyjobf.empid == this.empId);
       // Initially, display all applications
       this.filteredData = this.data;
+      this.titleOptions = this.getUniqueTitles(this.data);
     });
   }
+
+  getUniqueTitles(data: ApplyJob[]): string[] {
+    const uniqueTitles = [...new Set(data.map(application => application.jutitle))];
+    return uniqueTitles;
+  }
+
+
+
+  // filterApplications(status: string) {
+  //   this.selectedStatus = status;
+  //   if (status === 'All') {
+  //     this.filteredData = this.data; // Display all applications
+  //   } else {
+  //     this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
+  //   }
+  // }
+
   filterApplications(status: string) {
-    this.selectedStatus = status;
-    if (status === 'All') {
+    // Apply status filter
+    if (this.selectedStatus === 'All') {
       this.filteredData = this.data; // Display all applications
     } else {
       this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
+    }
+
+    // Apply 'jutitle' filter
+    if (this.selectedTitle !== 'All') {
+      this.filteredData = this.filteredData.filter((application: ApplyJob) => application.jutitle === this.selectedTitle);
     }
   }
   
@@ -130,5 +156,22 @@ export class ApplieduserdetailsComponent implements OnInit {
     const rows = data.map(item => Object.values(item).join(','));
     return header + '\n' + rows.join('\n');
   }
+
+    // Function to filter applications by job title
+    filterbyjobtitle() {
+      this.isTitleDropdownOpen = !this.isTitleDropdownOpen; // Toggle dropdown visibility
+    }
+  
+    // Function to select a job title from the dropdown
+    selectTitle(title: string) {
+      this.selectedTitle = title;
+      this.isTitleDropdownOpen = false;
+      this.filterApplications(title);
+    }
+  
+    // Function to close the title dropdown
+    toggleTitleDropdown() {
+      this.isTitleDropdownOpen = !this.isTitleDropdownOpen;
+    }
 }
 
