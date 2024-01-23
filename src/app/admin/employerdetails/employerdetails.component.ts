@@ -22,5 +22,4 @@ export class EmployerdetailsComponent implements OnInit{
        // Navigate to the notification component with the user ID as a parameter
     this.router.navigate(['/admin/notify', empId]);
   }
-
 }
