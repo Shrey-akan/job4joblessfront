@@ -1,8 +1,24 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { ApplyJob } from 'src/app/apply-job';
+
 import { UserService } from 'src/app/auth/user.service';
+export interface PostJob {
+  jobid: string;
+  jobtitle: string;
+  companyforthisjob: string;
+  numberofopening: number;
+  locationjob: string;
+  jobtype: string;
+  schedulejob: string;
+  payjob: number;
+  payjobsup: number;
+  descriptiondata: string;
+  empid: string;
+  sendTime: Date;
+  uid: string;
+  status: boolean;
+}
 
 declare var $: any;
 
@@ -17,6 +33,8 @@ export class AlljobsComponent implements OnInit {
   abc: any;
   selectedJob: any;
   jobTitleFilter: string = '';
+  isTableVisible: boolean = false;
+  filteredData: any[] = [];
   constructor(
     public cookie: CookieService,
     private b1: UserService,
@@ -46,27 +64,24 @@ export class AlljobsComponent implements OnInit {
 
     response.subscribe((data1: any) => {
       this.data = data1.filter((job: any) => job.empid == this.abc);
-      this.data.forEach((job: any) => {
-        job.showDetails = false;
-      });
+      // this.data.forEach((job: any) => {
+      //   job.showDetails = false;
+      // });
+      // this.filteredData = this.data;
+      this.filteredData = this.data.map((job: any) => ({ ...job, showDetails: false }));
     });
   }
   filterByJobTitle() {
     if (!this.jobTitleFilter) {
-      this.data = this.data;
+      this.filteredData = this.data;
     } else {
-      this.data = this.data.filter((application: ApplyJob) =>
-        application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
+      this.filteredData = this.data.filter((application: PostJob) =>
+        application.jobtitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
       );
     }
   }
   showMoreInfo(job: any): void {
     job.showDetails = !job.showDetails;
-
-    // if (job.showDetails) {
-    //   this.fetchAppliedUsers(job.empid, job.jobid);
-    // }
-
     this.cdr.detectChanges();
   }
 
@@ -103,4 +118,8 @@ export class AlljobsComponent implements OnInit {
   showAllApplicantsDetails(){
     this.router.navigate(['/dashboardemp/applieduserdetails'])
   }
+  toggleTableVisibility() {
+    this.isTableVisible = !this.isTableVisible;
+  }
+
 }
