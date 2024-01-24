@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-updatejob',
@@ -15,7 +15,8 @@ export class UpdatejobComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -61,6 +62,7 @@ export class UpdatejobComponent implements OnInit {
         next: (response:any) => {
           // console.log('Job updated successfully', response);
           alert("JOB UPDATED SUCCESSFULLY");
+          this.router.navigate(['/dashboardemp/alljobs']);
           // Handle success (e.g., show a success message)
         },
         error:(error:any) => {
