@@ -5,6 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { CookieService } from 'ngx-cookie-service';
 interface Job {
   jobid: string;
+  empEmail:string;
   jobtitle: string;
   companyforthisjob: string;
   numberofopening: number;
