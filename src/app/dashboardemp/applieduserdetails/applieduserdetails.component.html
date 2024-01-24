@@ -3,10 +3,10 @@
     <h1>Filter by Status</h1>
     <ul class="list-inline">
       <li (click)="filterApplications('All')" class="list-inline-item status-option">All Applications</li>
-      <li (click)="filterApplications('Selected')" class="list-inline-item status-option">Selected</li>
-      <li (click)="filterApplications('Rejected')" class="list-inline-item status-option">Rejected</li>
-      <li (click)="filterApplications('Reviewed')" class="list-inline-item status-option">Reviewed</li>
-      <li (click)="filterApplications('Waiting')" class="list-inline-item status-option">Waiting</li>
+      <li (click)="filterApplications('Selected')" class="list-inline-item status-option">Selected <i class="fa-solid fa-circle-check fa-1x" style="color: #388a53;"></i></li>
+      <li (click)="filterApplications('Rejected')" class="list-inline-item status-option">Rejected   <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i></li>
+      <li (click)="filterApplications('Reviewed')" class="list-inline-item status-option">Reviewed <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i></li>
+      <li (click)="filterApplications('Waiting')" class="list-inline-item status-option">Waiting<i class="fa-solid fa-clock fa-1x"></i></li>
       <li (click)="toggleTableVisibility()" class="list-inline-item status-option">Show in Table</li>
     </ul>
   </div>
@@ -27,7 +27,22 @@
           <!-- <p><strong>Email:</strong> {{ application.jumail }}</p> -->
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
        
-          <p><strong>Profile:</strong> {{ application.profileupdate }}</p>
+          <div *ngIf="application.profileupdate === 'Reviewed'">
+            <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i>
+            <span style="color: #fb9379;"> Reviewed</span>
+          </div>
+          <div *ngIf="application.profileupdate === 'Selected'">
+            <i class="fa-solid fa-circle-check fa-1x" style="color: #388a53;"></i>
+            <span style="color: #388a53;"> Selected</span>
+          </div>
+          <div *ngIf="application.profileupdate === 'Waiting'">
+            <i class="fa-solid fa-clock fa-1x"></i>
+            <span> Waiting</span>
+          </div>
+          <div *ngIf="application.profileupdate === 'Rejected'">
+            <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
+            <span style="color: #ac2402;"> Rejected</span>
+          </div>
           <div class="btn-group">
             <input type="text" [(ngModel)]="application.selectedOption" class="form-control" (click)="toggleDropdown(application)" />
             <button type="button" class="btn custom-btn rounded-pill dropdown-toggle" (click)="toggleDropdown(application)">
