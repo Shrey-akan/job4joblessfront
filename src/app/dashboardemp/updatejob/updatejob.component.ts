@@ -21,6 +21,8 @@ export class UpdatejobComponent implements OnInit {
   ngOnInit() {
     this.jobForm = this.fb.group({
       jobtitle: ['', Validators.required],
+      empName:['',Validators.required],
+      empEmail:['',Validators.required ,  Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)],
       companyforthisjob: ['', Validators.required],
       numberofopening: ['', Validators.required],
       locationjob: ['', Validators.required],
