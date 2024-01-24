@@ -29,8 +29,8 @@ export class PostjobComponent implements OnInit {
 
     this.jobPostForm = this.formbuilder.group({
       jobtitle: ['', Validators.required],
-      name:['',Validators.required],
-      email:['',Validators.required ,  Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)],
+      empName:['',Validators.required],
+      empEmail:['',Validators.required ,  Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)],
       companyforthisjob: ['', Validators.required],
       numberofopening: ['', Validators.required],
       locationjob: ['',Validators.required],

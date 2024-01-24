@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
 export interface PostJob {
   jobid: string;
+  empName:string;
+  empEmail:string;
   jobtitle: string;
   companyforthisjob: string;
   numberofopening: number;
