@@ -73,7 +73,7 @@
               </div>
             </div>
           </div>
-          <p class="px-2 py-1 mx-2">Send your resume at &nbsp; <a [href]="'mailto:' + job.empEmail">{{ job.empEmail }}</a> to apply</p>
+          <p class="px-2 py-1 mx-2">Send your resume at <a [href]="'mailto:' + job.empEmail">{{ job.empEmail }}</a> to apply</p>
 
           <p class="rounded-3 px-2 py-1 mx-2">
             <i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;{{ formatDate(job.sendTime) | date: 'd MMMM yyyy' }}
