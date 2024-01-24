@@ -12,7 +12,6 @@
     </div>
   </div>
 </div>
-
 <div class="container mt-5">
   <div class="progress mb-4">
     <div class="progress-bar" role="progressbar" [style.width]="(currentStep / totalSteps * 100) + '%'"></div>
@@ -35,11 +34,24 @@
           Company Name is required.
         </div>
       </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name*</label>
+        <input type="text" class="form-control" id="name" formControlName="name" required>
+        <div *ngIf="jobPostForm.get('name')?.hasError('required')" class="text-danger">
+          Name is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" class="form-control" id="email" formControlName="email" required>
+        <div *ngIf="jobPostForm.get('email')?.hasError('required')" class="text-danger">
+          Email is required.
+        </div>
+      </div>
       <div class="d-flex justify-content-end">
         <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next</button>
       </div>
     </div>
-
     <div *ngIf="currentStep === 2">
       <!-- Step 2: Job Details -->
       <div class="mb-3">
@@ -53,10 +65,6 @@
         <label for="locationjob" class="form-label">Location*</label>
         <input type="text" class="form-control" id="locationjob" formControlName="locationjob">
       </div>
-      <!-- <div class="mb-3">
-        <label for="jobtype" class="form-label">Job Type*</label>
-        <input type="text" class="form-control" id="jobtype" formControlName="jobtype">
-      </div> -->
       <div class="mb-3">
         <label for="jobtype" class="form-label">Job Type*</label>
         <select class="form-select" id="jobtype" formControlName="jobtype">
@@ -67,24 +75,6 @@
           <option value="Freelance">Freelance</option>
         </select>
       </div>
-      <!-- <div class="mb-3">
-        <label class="form-label">Schedule*</label>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="morningShift" (change)="updateSchedule($event, 'Morning Shift')" formControlName="schedulejob">
-          <label class="form-check-label" for="morningShift">Morning Shift</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="nightShift" (change)="updateSchedule($event, 'Night Shift')" formControlName="schedulejob">
-          <label class="form-check-label" for="nightShift">Night Shift</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="dayNightShift" (change)="updateSchedule($event, 'Day-Night Shift')" formControlName="schedulejob">
-          <label class="form-check-label" for="dayNightShift">Day-Night Shift</label>
-        </div>
-        <div *ngIf="jobPostForm.get('schedule')?.hasError('required')" class="text-danger">
-          Schedule is required.
-        </div>
-      </div> -->
       <div class="mb-3">
         <label class="form-label">Schedule*</label>
         <select class="form-select" formControlName="schedulejob">
@@ -98,7 +88,6 @@
           Schedule is required.
         </div>
       </div>
-      
       <div class="mb-3">
         <label for="payjob" class="form-label">Pay*</label>
         <input type="number" class="form-control" id="payjob" formControlName="payjob" required>

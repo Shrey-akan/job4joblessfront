@@ -43,17 +43,12 @@ export class ApplyjobComponent implements OnInit {
       jurelocation: ['', [Validators.required]],
       jueducation: ['', [Validators.required]],
       juexperience: ['', [Validators.required]],
-      // juexpinjava: ['', [Validators.required]],
-      // juexpjsp: ['', [Validators.required]],
       juinterviewdate: [''],
-      // jujavavalid: ['', [Validators.required]],
-
-
       jujobtitle: ['', Validators.required],
       jucompanyname: ['', Validators.required],
       empid: ['', Validators.required],
       jobid: ['', Validators.required],
-      uid: this.uid // Add the user ID to the form
+      uid: this.uid 
     })
     // Add more steps as needed
     this.b1.jobTitle$.subscribe((jobTitle) => {
