@@ -15,7 +15,7 @@ export class MyjobsComponent implements OnInit{
   abc:any;
   user: any;
   showDetails = false;
-
+  jobTitleFilter: string = '';
   statusOptions: string[] = ['All', 'Selected', 'Rejected', 'Reviewed', 'Waiting'];
   selectedStatus: string = 'All';
   selectedOption: string = '';
@@ -83,7 +83,15 @@ export class MyjobsComponent implements OnInit{
       this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
     }
   }
-  
+  filterByJobTitle() {
+    if (!this.jobTitleFilter) {
+      this.filteredData = this.data;
+    } else {
+      this.filteredData = this.data.filter((application: ApplyJob) =>
+        application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
+      );
+    }
+  }
 
   showMoreInfo(user: ApplyJob):void {
     this.expandedUser = this.expandedUser === user ? null : user;
