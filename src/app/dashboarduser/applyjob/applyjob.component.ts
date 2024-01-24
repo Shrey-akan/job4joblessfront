@@ -43,10 +43,10 @@ export class ApplyjobComponent implements OnInit {
       jurelocation: ['', [Validators.required]],
       jueducation: ['', [Validators.required]],
       juexperience: ['', [Validators.required]],
-      juexpinjava: ['', [Validators.required]],
-      juexpjsp: ['', [Validators.required]],
+      // juexpinjava: ['', [Validators.required]],
+      // juexpjsp: ['', [Validators.required]],
       juinterviewdate: [''],
-      jujavavalid: ['', [Validators.required]],
+      // jujavavalid: ['', [Validators.required]],
 
 
       jujobtitle: ['', Validators.required],
