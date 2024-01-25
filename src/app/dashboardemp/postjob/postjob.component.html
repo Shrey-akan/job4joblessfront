@@ -17,7 +17,7 @@
     <div class="progress-bar" role="progressbar" [style.width]="(currentStep / totalSteps * 100) + '%'"></div>
   </div>
   <h2 class="text-center mb-4">Job Details</h2>
-  <form [formGroup]="jobPostForm" (ngSubmit)="jobdetailsform(jobPostForm)">
+  <form [formGroup]="jobPostForm" (ngSubmit)="jobDetailsForm(jobPostForm)">
     <div *ngIf="currentStep === 1">
       <!-- Step 1: Job Title and Company Name -->
       <div class="mb-3">
