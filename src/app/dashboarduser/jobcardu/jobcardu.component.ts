@@ -162,19 +162,19 @@ jobIdLikedStatusMap: { [key: string]: boolean } = {};
 //   );
 // }
 
-toggleLikedStatus(jobId: string): void {
+toggleLikedStatus(jobid: string): void {
   const uid = this.cookie.get('uid');
   console.log(uid);
-  console.log(jobId);
+  console.log(jobid);
 
   // Assuming this.b1 is an instance of your service
-  this.b1.updateSavedJobStatus(jobId, uid, this.jobStatus).subscribe(
+  this.b1.updateSavedJobStatus(jobid, uid, this.jobStatus).subscribe(
     (response: any) => {
       console.log('Check the values', response);
 
       if (response.saveStatus != null) {
         console.log('Job status updated successfully.');
-        this.jobIdLikedStatusMap[jobId] = response.saveStatus;
+        this.jobIdLikedStatusMap[jobid] = response.saveStatus;
         this.filterJobs();
       } else {
         console.error('Job status update failed.');
