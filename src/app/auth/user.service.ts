@@ -49,6 +49,7 @@ interface Employer {
   providedIn: 'root'
 })
 export class UserService {
+  apiUrl: any;
   getUser() {
     throw new Error('Method not implemented.');
   }
@@ -617,7 +618,10 @@ export class UserService {
     return this.h1.get(this.fetchjobposturl);
   }
 
-
+  fetchJobPostsWithStatus(uid: string | null): Observable<any> {
+    const url = uid ? `${API_BASE_URL}fetchjobpoststatus?uid=${uid}` : this.apiUrl;
+    return this.h1.get(url);
+  }
 
 
   //Conatct
@@ -765,9 +769,13 @@ export class UserService {
     });
   }
   
-  updateJobStatus(jobId: string, data: any): Observable<any> {
-    const url = `${API_BASE_URL}updateJobStatus/${jobId}`;
-    return this.h1.put(url, data);
+  // updateJobStatus(jobId: string, data: any): Observable<any> {
+  //   const url = `${API_BASE_URL}updateJobStatus/${jobId}`;
+  //   return this.h1.put(url, data);
+  // }
+  updateSavedJobStatus(jobid: string, uid: string, status: boolean): Observable<any> {
+    const url = `${API_BASE_URL}update-status?jobid=${jobid}&uid=${uid}&status=${status}`;
+    return this.h1.put(url, {});
   }
   
 }

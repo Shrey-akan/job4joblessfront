@@ -33,17 +33,17 @@
             <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
             <div class="d-flex justify-content-center align-items-center">
               <div (click)="toggleLikedStatus(job.jobid)">
-                <div *ngIf="job.status; else notLiked">
+                <div *ngIf="job.saveStatus; else notLiked">
                   <span class="rounded-circle mx-3 border-0"
-                        [style.background-color]="job.status ? '#0a194741' : '#1e2e5c41'"
-                        [style.color]="job.status ? 'black' : ''"
+                        [style.background-color]="job.saveStatus ? '#0a194741' : '#1e2e5c41'"
+                        [style.color]="job.saveStatus ? 'black' : ''"
                         style="padding: 10px 15px;">
                     <i class="fa-solid fa-bookmark"></i>
                   </span>
                 </div>
                 <ng-template #notLiked>
                   <span class="rounded-circle mx-3 border-0"
-                        [style.background-color]="job.status ? '' : '#1e2e5c41'"
+                        [style.background-color]="job.saveStatus ? '' : '#1e2e5c41'"
                         style="padding: 10px 15px;">
                     <i class="fa-regular fa-bookmark"></i>
                   </span>

@@ -16,7 +16,7 @@ interface Job {
   payjob: number;
   payjobsup: number;
   empid: string;
-  status:boolean;
+  saveStatus:boolean;
   uid:string; 
   sendTime:Date;
   isDescriptionVisible: boolean;
@@ -44,7 +44,8 @@ export class JobcarduComponent implements OnInit {
   searchJobTitle: string = '';
   searchLocation: string = '';
   filteredJobs: Job[] = [];
-
+  private jobStatus: boolean = false;
+  uid!: string;
   constructor(private router: Router, private b1: UserService , private cookie:CookieService) {}
 
   performSearch() {
@@ -58,7 +59,9 @@ export class JobcarduComponent implements OnInit {
   }
   userID: String = '0';
   ngOnInit(): void {
-    let response = this.b1.fetchjobpost();
+
+    this.uid = this.cookie.get('uid');
+    let response = this.b1.fetchJobPostsWithStatus(this.uid);
     response.subscribe((data1: any) => {
       this.data1 = data1;
       this.data1.sort((a: Job, b: Job) => {
@@ -68,7 +71,6 @@ export class JobcarduComponent implements OnInit {
       });
       this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
       this.filterJobs(); 
-      
     });
     this.data1.forEach((job: Job) => {
       job.isDescriptionVisible = false;
@@ -137,18 +139,42 @@ export class JobcarduComponent implements OnInit {
 
 jobIdLikedStatusMap: { [key: string]: boolean } = {};
 
+// toggleLikedStatus(jobId: string): void {
+//   const uid = this.cookie.get('uid');
+//   console.log(uid);
+//   console.log(jobId);
+  
+//   this.b1.updateJobStatus(jobId, { uid }).subscribe(
+//     (response: any) => {
+//       console.log('Check the values', response);
+
+//       if (response.status) {
+//         console.log('Job status updated successfully.');
+//         this.jobIdLikedStatusMap[jobId] = true;
+//         this.filterJobs();
+//       } else {
+//         console.error('Job status update failed.');
+//       }
+//     },
+//     (error) => {
+//       console.error('Error updating job status:', error);
+//     }
+//   );
+// }
+
 toggleLikedStatus(jobId: string): void {
   const uid = this.cookie.get('uid');
   console.log(uid);
   console.log(jobId);
-  
-  this.b1.updateJobStatus(jobId, { uid }).subscribe(
+
+  // Assuming this.b1 is an instance of your service
+  this.b1.updateSavedJobStatus(jobId, uid, this.jobStatus).subscribe(
     (response: any) => {
       console.log('Check the values', response);
 
-      if (response.status) {
+      if (response.saveStatus != null) {
         console.log('Job status updated successfully.');
-        this.jobIdLikedStatusMap[jobId] = true;
+        this.jobIdLikedStatusMap[jobId] = response.saveStatus;
         this.filterJobs();
       } else {
         console.error('Job status update failed.');
