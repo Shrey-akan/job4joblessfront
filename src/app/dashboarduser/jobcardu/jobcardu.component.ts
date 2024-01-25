@@ -44,7 +44,7 @@ export class JobcarduComponent implements OnInit {
   searchJobTitle: string = '';
   searchLocation: string = '';
   filteredJobs: Job[] = [];
-  private jobStatus: boolean = false;
+  private jobStatus: boolean = true;
   uid!: string;
   constructor(private router: Router, private b1: UserService , private cookie:CookieService) {}
 
