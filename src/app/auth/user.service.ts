@@ -773,7 +773,7 @@ export class UserService {
   //   const url = `${API_BASE_URL}updateJobStatus/${jobId}`;
   //   return this.h1.put(url, data);
   // }
-  updateSavedJobStatus(jobid: string, uid: string, status: boolean): Observable<any> {
+  updateSavedJobStatus(jobid: string, uid: string): Observable<any> {
     const url = `${API_BASE_URL}update-status?jobid=${jobid}&uid=${uid}&status=${status}`;
     return this.h1.put(url, {});
   }

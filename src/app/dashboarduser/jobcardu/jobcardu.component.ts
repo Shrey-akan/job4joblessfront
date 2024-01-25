@@ -167,8 +167,7 @@ toggleLikedStatus(jobid: string): void {
   console.log(uid);
   console.log(jobid);
 
-  // Assuming this.b1 is an instance of your service
-  this.b1.updateSavedJobStatus(jobid, uid, this.jobStatus).subscribe(
+  this.b1.updateSavedJobStatus(jobid, uid).subscribe(
     (response: any) => {
       console.log('Check the values', response);
 
