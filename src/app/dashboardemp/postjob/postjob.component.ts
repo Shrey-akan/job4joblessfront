@@ -104,13 +104,5 @@ export class PostjobComponent implements OnInit {
     });
   }
 
-  updateSchedule(event: any, value: string) {
-    const scheduleArray = this.jobPostForm.get('schedule') as FormArray;
-    if (event.target.checked) {
-      scheduleArray.push(this.formbuilder.control(value));
-    } else {
-      const index = scheduleArray.value.indexOf(value);
-      scheduleArray.removeAt(index);
-    }
-  }
+
 }
