@@ -67,7 +67,10 @@ export class PostjobComponent implements OnInit {
         next: (resp: any) => {
           localStorage.removeItem('jobPostForm');
           this.jobPostService.clearFormData();
-          this.router.navigate(['/dashboardemp/alljobs']);
+          console.log(resp.jobid);
+          const jobid = resp.jobid;
+          // this.router.navigate(['/dashboardemp/alljobs']);
+          this.router.navigate(['/dashboardemp/question', jobid]);
         },
         error: (err: any) => {
           console.error(err);

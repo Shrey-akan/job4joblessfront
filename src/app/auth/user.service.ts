@@ -778,4 +778,10 @@ export class UserService {
     return this.h1.put(url, {});
   }
   
+
+
+  addQuestion(questionData: any): Observable<any> {
+    const url = `${API_BASE_URL}add`;
+    return this.h1.post(url, questionData);
+  }
 }
