@@ -29,9 +29,6 @@ interface Job {
 export class JobcarduComponent implements OnInit {
   liked: boolean = false;
   data1: any;
-  companies = [
-    // ... existing companies data
-  ];
   searchQuery: string = '';
   showFooter = true;
   showJobFeed = true;
@@ -50,16 +47,14 @@ export class JobcarduComponent implements OnInit {
 
   performSearch() {
     this.filterJobs();
-    // Implement search logic if needed
   }
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    // this.filterJobs(); 
+
   }
   userID: String = '0';
   ngOnInit(): void {
-
     this.uid = this.cookie.get('uid');
     let response = this.b1.fetchJobPostsWithStatus(this.uid);
     response.subscribe((data1: any) => {
@@ -77,7 +72,6 @@ export class JobcarduComponent implements OnInit {
     });
     this.userID = this.cookie.get('uid');
   }
-
   searchJobs() {
     this.data = this.data1.filter((job: Job) => {
       const titleMatch = job.jobtitle.toLowerCase().includes(this.searchQuery.toLowerCase());
@@ -85,7 +79,6 @@ export class JobcarduComponent implements OnInit {
       return titleMatch || locationMatch;
     });
   }
-
   navigateToSignIn() {
     this.router.navigate(['/login']);
   }
@@ -95,23 +88,17 @@ export class JobcarduComponent implements OnInit {
   navigateToSignUp() {
     this.router.navigate(['/register']);
   }
-
-
   getJobsForCurrentPage(): Job[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.filteredJobs.slice(startIndex, endIndex);
   }
-
   applyForJob(selectedJob: Job) {
     if (selectedJob) {
-      // Set the selected job details before navigating
       this.b1.setJobTitle(selectedJob.jobtitle);
       this.b1.setCompanyName(selectedJob.companyforthisjob);
       this.b1.setEmpId(selectedJob.empid);
       this.b1.setJobId(selectedJob.jobid);
-  
-      // Navigate to the '/dashboarduser/questionpaper' route
       this.router.navigate(['/dashboarduser/questionpaper']);
     } else {
       console.error('No job selected.');
@@ -128,49 +115,17 @@ export class JobcarduComponent implements OnInit {
     } else {
       this.filteredJobs = this.data1;
     }
-
-    // Update total pages based on filtered data
     this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
-
-    // Reset current page to 1 when filtering
     this.currentPage = 1;
   }
-
-
 jobIdLikedStatusMap: { [key: string]: boolean } = {};
-
-// toggleLikedStatus(jobId: string): void {
-//   const uid = this.cookie.get('uid');
-//   console.log(uid);
-//   console.log(jobId);
-  
-//   this.b1.updateJobStatus(jobId, { uid }).subscribe(
-//     (response: any) => {
-//       console.log('Check the values', response);
-
-//       if (response.status) {
-//         console.log('Job status updated successfully.');
-//         this.jobIdLikedStatusMap[jobId] = true;
-//         this.filterJobs();
-//       } else {
-//         console.error('Job status update failed.');
-//       }
-//     },
-//     (error) => {
-//       console.error('Error updating job status:', error);
-//     }
-//   );
-// }
-
 toggleLikedStatus(jobid: string): void {
   const uid = this.cookie.get('uid');
   console.log(uid);
   console.log(jobid);
-
   this.b1.updateSavedJobStatus(jobid, uid).subscribe(
     (response: any) => {
       console.log('Check the values', response);
-
       if (response.saveStatus != null) {
         console.log('Job status updated successfully.');
         this.jobIdLikedStatusMap[jobid] = response.saveStatus;

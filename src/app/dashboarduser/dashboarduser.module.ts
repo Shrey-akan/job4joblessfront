@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuestionpaperComponent } from './questionpaper/questionpaper.component';
 import { VideocallComponent } from './videocall/videocall.component';
 import { JobcarduComponent } from './jobcardu/jobcardu.component';
+import { SavedjobComponent } from './savedjob/savedjob.component';
 @NgModule({
   declarations: [
     DashboarduserComponent,
@@ -39,7 +40,8 @@ import { JobcarduComponent } from './jobcardu/jobcardu.component';
     UpdateprofileComponent,
     QuestionpaperComponent,
     VideocallComponent,
-    JobcarduComponent
+    JobcarduComponent,
+    SavedjobComponent
     
   ],
   imports: [

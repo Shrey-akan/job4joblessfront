@@ -16,6 +16,7 @@ import { UpdateprofileComponent } from './updateprofile/updateprofile.component'
 import { VideocallComponent } from './videocall/videocall.component';
 import { authGuard } from '../auth.guard';
 import { JobcardsComponent } from '../jobcards/jobcards.component';
+import { SavedjobComponent } from './savedjob/savedjob.component';
 const routes: Routes = [
   {
     path: '', component: HeaderuserComponent,
@@ -28,7 +29,7 @@ const routes: Routes = [
         path: 'company', component: CompanyComponent
       },
       {
-        path: 'salary', component: SalaryComponent
+        path: 'savedjob', component: SalaryComponent
       },
       {
         path: 'message', component: MessageComponent
@@ -48,6 +49,9 @@ const routes: Routes = [
       {
         path: 'myjobs', component: MyjobsComponent
       },
+      // {
+      //   path: 'savedjob', component: SavedjobComponent
+      // },
       {
         path: 'resume', component: ResumeComponent
       },

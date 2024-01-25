@@ -1,9 +1,114 @@
 <div class="container-fluid" style="border-bottom-right-radius: 40px; background-color: #1e2e5c; padding: 50px;  ">
     <div class="row" style="color:white;text-align:center;">
-        <h1> <b>Find a career you'll love</b></h1>
+        <h1> <b>View your saved jobs</b></h1>
     </div>
     <div class="row" style="color:white;text-align:center;">
-        <p>Explore which careers have the highest job satisfaction, best salaries and more</p>
+     <p>Apply for the jobs that offer opportunities that you desire </p>
     </div>
 </div>
-<app-jobcardu></app-jobcardu>
+<div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col-md-6 col-lg-5">
+        <div class="input-group">
+          <input type="text" [(ngModel)]="searchJobTitle"
+            class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" placeholder="Enter job title">
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-5 mt-2 mt-md-0">
+        <div class="input-group">
+          <input type="text" [(ngModel)]="searchLocation"
+            class="rounded-pill m-2 px-4 py-3 w-100 shadow-lg border-0 custom-outline" placeholder="Enter location">
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-2 mt-2 mt-md-0">
+        <button type="button" class="btn rounded-pill px-4 py-3 shadow-lg mx-1 findjobbtn"
+          (click)="performSearch()">Search Jobs</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 custom-font">
+        <div class="d-flex flex-column justify-content-center align-items-stretch">
+          <div *ngFor="let job of getJobsForCurrentPage()" class="border-2 border rounded-4 p-4 mt-3">
+            <div *ngIf="job.numberofopening > 10">
+              <span class="rounded-4 border-0 px-2 py-1" style="background-color: #86efac; color: #166534;">
+                Urgently Hiring
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <p class="fs-3 fw-bold">{{ job.jobtitle }}</p>
+              <div class="d-flex justify-content-center align-items-center">
+                <div (click)="toggleLikedStatus(job.jobid)">
+                  <div *ngIf="job.saveStatus; else notLiked">
+                    <span class="rounded-circle mx-3 border-0"
+                          [style.background-color]="job.saveStatus ? '#0a194741' : '#1e2e5c41'"
+                          [style.color]="job.saveStatus ? 'black' : ''"
+                          style="padding: 10px 15px;">
+                      <i class="fa-solid fa-bookmark"></i>
+                    </span>
+                  </div>
+                  <ng-template #notLiked>
+                    <span class="rounded-circle mx-3 border-0"
+                          [style.background-color]="job.saveStatus ? '' : '#1e2e5c41'"
+                          style="padding: 10px 15px;">
+                      <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+            <p class="rounded-pill px-2 py-1 mx-2"><i class="fa-solid fa-building"></i>&nbsp;{{ job.companyforthisjob }}
+            </p>
+            <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+              <p class="rounded-pill px-2 py-1 mx-2 custom-pills">{{ job.numberofopening }} openings(s)</p>
+              <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-location-dot"></i>&nbsp;{{
+                job.locationjob }}</p>
+              <p class="rounded-pill px-2 py-1 mx-2 custom-pills"><i class="fa-solid fa-sun"></i>&nbsp;{{ job.jobtype }}
+              </p>
+            </div>
+            <p class="rounded-3 px-2 py-1 mx-2"><i class="fa-solid fa-dollar-sign"></i>&nbsp;{{ job.payjob }}</p>
+            <div class="accordion accordion-flush" id="job.jobid">
+              <div class="accordion-item mx-1 my-0 rounded-3">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed custom-font py-2 rounded-pill custom-btn" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"
+                  (click)="toggleDescriptionVisibility(job)">
+                  Job Description
+                </button>
+                </h2>
+                <div *ngIf="selectedJob === job" id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#job.jobid">
+                  <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
+                    <p>{{ job.companyforthisjob }} {{ job.descriptiondata }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="px-2 py-1 mx-2">Send your resume at <a [href]="'mailto:' + job.empEmail">{{ job.empEmail }}</a> to apply</p>
+            <p class="rounded-3 px-2 py-1 mx-2">
+              <i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;{{ job.sendTime | date: 'd MMMM yyyy' }}
+            </p>
+            <button class="btn custom-btn mt-3 rounded-pill" (click)="applyForJob(job)">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center mt-4 mb-4">
+      <div class="col-md-6">
+        <div class="pagination d-flex justify-content-center align-items-center">
+          <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage - 1)"
+            [disabled]="currentPage === 1">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="page-info mx-2">{{ currentPage }} / {{ totalPages }}</span>
+          <button class="btn custom-pills rounded-circle mx-2" (click)="onPageChange(currentPage + 1)"
+            [disabled]="currentPage === totalPages">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
