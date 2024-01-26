@@ -86,7 +86,7 @@ export class PostjobComponent implements OnInit {
 
     if (this.currentStep === this.totalSteps) {
       this.userService.jobpostinsert(jobPostForm.value).subscribe({
-        next: (resp: any) => {
+        next: (resp: PostJob) => {
           localStorage.removeItem('jobPostForm');
           this.jobPostService.clearFormData();
           console.log(resp);
