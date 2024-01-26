@@ -5,6 +5,24 @@ import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { JobPostService } from 'src/app/auth/job-post.service';
 import { UserService } from 'src/app/auth/user.service';
+interface PostJob {
+  jobid: string;
+  empName:string;
+  empEmail:string;
+  jobtitle: string;
+  companyforthisjob: string;
+  numberofopening: number;
+  locationjob: string;
+  jobtype: string;
+  schedulejob: string;
+  payjob: number;
+  payjobsup: number;
+  descriptiondata: string;
+  empid: string;
+  sendTime: Date;
+  uid: string;
+  status: boolean;
+}
 
 @Component({
   selector: 'app-postjob',
