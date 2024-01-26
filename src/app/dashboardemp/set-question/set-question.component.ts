@@ -43,20 +43,50 @@ console.log(this.jobid);
     });
   }
 
+  // submitForm(): void {
+  //   if (this.questionForm.valid && this.currentQuestionIndex < 5) {
+  //     const questionData = {
+  //       jobid: this.jobid,
+  //       ...this.questionForm.value
+  //     };
+  //     this.b1.addQuestion(this.jobid, questionData).subscribe(
+  //       (response: any) => {
+  //         console.log('Question added successfully:', response);
+       
+  //         this.currentQuestionIndex++;
+  //         this.questionForm.reset();
+  //         if (this.currentQuestionIndex === 5) {
+  //           console.log('All 5 questions added. Redirecting...');
+  //           this.router.navigate(['/dashboardemp/alljobs']);
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error('Error adding question:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Form is invalid or reached the limit of 5 questions.');
+  //   }
+  // }
+
   submitForm(): void {
     if (this.questionForm.valid && this.currentQuestionIndex < 5) {
-      // const questionData = this.questionForm.value;
       const questionData = {
         jobid: this.jobid,
         ...this.questionForm.value
       };
+  
       this.b1.addQuestion(this.jobid, questionData).subscribe(
         (response: any) => {
           console.log('Question added successfully:', response);
-       
+  
           this.currentQuestionIndex++;
           this.questionForm.reset();
-          if (this.currentQuestionIndex === 5) {
+  
+          if (this.currentQuestionIndex < 5) {
+            // If there are more questions, submit the next one
+            this.submitForm();
+          } else {
             console.log('All 5 questions added. Redirecting...');
             this.router.navigate(['/dashboardemp/alljobs']);
           }
@@ -65,10 +95,14 @@ console.log(this.jobid);
           console.error('Error adding question:', error);
         }
       );
+    } else if (this.currentQuestionIndex === 5) {
+      console.log('All 5 questions already added. Redirecting...');
+      this.router.navigate(['/dashboardemp/alljobs']);
     } else {
-      console.error('Form is invalid or reached the limit of 5 questions.');
+      console.error('Form is invalid.');
     }
   }
+  
 
   skipQuestion(): void {
     this.router.navigate(['/dashboardemp/alljobs']);
