@@ -72,9 +72,9 @@ export class PostjobComponent implements OnInit {
           localStorage.removeItem('jobPostForm');
           this.jobPostService.clearFormData();
           console.log(resp);
-          console.log("checking the response for jobid",resp.jobid);
-          console.log(resp.jobid);
-          const jobid = resp.jobid;
+          console.log('Complete Response:', resp);
+          console.log('checking the response for jobid', resp?.jobid);
+          const jobid = resp?.jobid;
           this.router.navigate(['/dashboardemp/set-question', jobid]);
         },
         error: (err: any) => {
