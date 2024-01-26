@@ -12,7 +12,8 @@ import { NotificationempComponent } from './notificationemp/notificationemp.comp
 import { VideocallComponent } from './videocall/videocall.component';
 import { UpdatejobComponent } from './updatejob/updatejob.component';
 import { authGuard } from '../auth.guard';
-import { QuestionComponent } from '../dashboardemp/question/question.component';
+import { SetQuestionComponent } from './set-question/set-question.component';
+
 
 
 const routes: Routes = [
@@ -38,10 +39,9 @@ const routes: Routes = [
       {
         path: 'notificationemp', component: NotificationempComponent
       },
-      {
-        path: 'question/:jobid',
-        component: QuestionComponent, // Replace with the actual component that displays questions
-    },
+{
+path:'set-question/:jobid',component:SetQuestionComponent
+},
       {
         path:'videocall/:uid', component:VideocallComponent
       },

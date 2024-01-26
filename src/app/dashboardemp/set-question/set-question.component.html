@@ -1,0 +1,46 @@
+<!-- add-question.component.html -->
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between">
+      <h2>Add Question</h2>
+      <div>
+        <span class="badge rounded-pill custom-pills">Question {{ currentQuestionIndex + 1 }} of 5</span>
+        <button class="btn rounded-pill custom-btn ms-2" (click)="skipQuestion()">Skip</button>
+      </div>
+    </div>
+    <hr>
+  
+    <form [formGroup]="questionForm" (ngSubmit)="submitForm()">
+      <div class="mb-3">
+        <label for="question" class="form-label">Question:</label>
+        <input type="text" id="question" class="form-control" formControlName="question" />
+      </div>
+      <div class="mb-3">
+        <label for="optionA" class="form-label">Option A:</label>
+        <input type="text" id="optionA" class="form-control" formControlName="optionA" />
+      </div>
+      <div class="mb-3">
+        <label for="optionB" class="form-label">Option B:</label>
+        <input type="text" id="optionB" class="form-control" formControlName="optionB" />
+      </div>
+      <div class="mb-3">
+        <label for="optionC" class="form-label">Option C:</label>
+        <input type="text" id="optionC" class="form-control" formControlName="optionC" />
+      </div>
+      <div class="mb-3">
+        <label for="optionD" class="form-label">Option D:</label>
+        <input type="text" id="optionD" class="form-control" formControlName="optionD" />
+      </div>
+      <div class="mb-3">
+        <label for="correctAnswer" class="form-label">Correct Answer:</label>
+        <input type="text" id="correctAnswer" class="form-control" formControlName="correctAnswer" />
+      </div>
+      <div class="mb-3">
+        <input type="hidden" id="jobid" class="form-control" formControlName="jobid" />
+      </div>
+      <div>
+        <button type="submit" class="btn rounded-pill custom-btn">Submit Question</button>
+      </div>
+    </form>
+  </div>
+  
