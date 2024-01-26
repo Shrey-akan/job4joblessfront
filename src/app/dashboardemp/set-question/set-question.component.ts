@@ -10,6 +10,7 @@ import { UserService } from 'src/app/auth/user.service';
 })
 export class SetQuestionComponent implements OnInit {
   jobid!: string;
+  initialJobid!: string;
   questionForm!: FormGroup;
   currentQuestionIndex: number = 0;
   private questionCounter = 0;
@@ -24,6 +25,7 @@ export class SetQuestionComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.jobid = params['jobid'];
+      this.initialJobid = this.jobid; 
 console.log(this.jobid);
       // Initialize the form with jobid as a hidden field
       this.initializeForm();
@@ -81,7 +83,7 @@ console.log(this.jobid);
           console.log('Question added successfully:', response);
   
           this.currentQuestionIndex++;
-          this.questionForm.reset();
+          this.questionForm.reset({ jobid: this.initialJobid });
   
           if (this.currentQuestionIndex < 5) {
             // If there are more questions, submit the next one
