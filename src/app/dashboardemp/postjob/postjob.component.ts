@@ -5,10 +5,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { JobPostService } from 'src/app/auth/job-post.service';
 import { UserService } from 'src/app/auth/user.service';
+
 interface PostJob {
   jobid: string;
-  empName:string;
-  empEmail:string;
+  empName: string;
+  empEmail: string;
   jobtitle: string;
   companyforthisjob: string;
   numberofopening: number;
@@ -20,9 +21,8 @@ interface PostJob {
   descriptiondata: string;
   empid: string;
   sendTime: Date;
-  uid: string;
-  status: boolean;
 }
+
 
 @Component({
   selector: 'app-postjob',
@@ -89,7 +89,7 @@ export class PostjobComponent implements OnInit {
         next: (resp: PostJob) => {
           console.log('Complete Response:', resp);
         
-          if (resp && resp.jobid !== undefined) {
+          if (resp && resp.jobid !== null && resp.jobid !== undefined) {
             this.jobid = resp.jobid;
             console.log('checking the response for jobid', this.jobid);
         
@@ -99,9 +99,10 @@ export class PostjobComponent implements OnInit {
             localStorage.removeItem('jobPostForm');
             this.jobPostService.clearFormData();
           } else {
-            console.error('Jobid is undefined in the response.');
+            console.error('Jobid is null or undefined in the response.');
           }
         },
+        
         error: (err: any) => {
           console.error(err);
         }
