@@ -44,7 +44,7 @@ console.log(this.jobid);
   }
 
   submitForm(): void {
-    if (this.questionForm.valid && this.questionCounter < 5) {
+    if (this.questionForm.valid && this.currentQuestionIndex < 5) {
       // const questionData = this.questionForm.value;
       const questionData = {
         jobid: this.jobid,
@@ -53,10 +53,10 @@ console.log(this.jobid);
       this.b1.addQuestion(this.jobid, questionData).subscribe(
         (response: any) => {
           console.log('Question added successfully:', response);
-          this.questionCounter++;
+       
           this.currentQuestionIndex++;
           this.questionForm.reset();
-          if (this.questionCounter === 5) {
+          if (this.currentQuestionIndex === 5) {
             console.log('All 5 questions added. Redirecting...');
             this.router.navigate(['/dashboardemp/alljobs']);
           }
