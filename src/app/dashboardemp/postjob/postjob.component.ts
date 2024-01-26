@@ -87,13 +87,20 @@ export class PostjobComponent implements OnInit {
     if (this.currentStep === this.totalSteps) {
       this.userService.jobpostinsert(jobPostForm.value).subscribe({
         next: (resp: PostJob) => {
-      
-      
-          this.jobid = resp.jobid;
-          console.log('checking the response for jobid', this.jobid);
-          localStorage.removeItem('jobPostForm');
-          this.jobPostService.clearFormData();
-          this.router.navigate(['/dashboardemp/set-question', this.jobid]);
+          console.log('Complete Response:', resp);
+        
+          if (resp && resp.jobid !== undefined) {
+            this.jobid = resp.jobid;
+            console.log('checking the response for jobid', this.jobid);
+        
+            // Move the navigation inside the subscription callback
+            this.router.navigate(['/dashboardemp/set-question', this.jobid]);
+        
+            localStorage.removeItem('jobPostForm');
+            this.jobPostService.clearFormData();
+          } else {
+            console.error('Jobid is undefined in the response.');
+          }
         },
         error: (err: any) => {
           console.error(err);
