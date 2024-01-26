@@ -24,7 +24,7 @@ export class SetQuestionComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.jobid = params['jobid'];
-
+console.log(this.jobid);
       // Initialize the form with jobid as a hidden field
       this.initializeForm();
     });
@@ -45,8 +45,12 @@ export class SetQuestionComponent implements OnInit {
 
   submitForm(): void {
     if (this.questionForm.valid && this.questionCounter < 5) {
-      const questionData = this.questionForm.value;
-      this.b1.addQuestion(questionData).subscribe(
+      // const questionData = this.questionForm.value;
+      const questionData = {
+        jobid: this.jobid,
+        ...this.questionForm.value
+      };
+      this.b1.addQuestion(this.jobid, questionData).subscribe(
         (response: any) => {
           console.log('Question added successfully:', response);
           this.questionCounter++;

@@ -779,9 +779,9 @@ export class UserService {
   }
   
 
-
-  addQuestion(questionData: any): Observable<any> {
-    const url = `${API_BASE_URL}add`;
+  addQuestion(jobid: string, questionData: any): Observable<any> {
+    const url = `${API_BASE_URL}add?jobid=${jobid}`;
     return this.h1.post(url, questionData);
   }
+  
 }
