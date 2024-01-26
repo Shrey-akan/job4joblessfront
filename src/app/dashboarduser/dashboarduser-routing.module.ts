@@ -56,7 +56,7 @@ const routes: Routes = [
         path: 'resume', component: ResumeComponent
       },
       {
-        path: 'questionpaper', component: QuestionpaperComponent
+        path: 'questionpaper/:jobid', component: QuestionpaperComponent
       },
       {
         path: 'settinguser', component: SettinguserComponent
