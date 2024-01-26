@@ -86,11 +86,11 @@ export class PostjobComponent implements OnInit {
 
     if (this.currentStep === this.totalSteps) {
       this.userService.jobpostinsert(jobPostForm.value).subscribe({
-        next: (resp: PostJob) => {
+        next: (resp: any) => {
           console.log('Complete Response:', resp);
         
-          if (resp && resp.jobid !== null && resp.jobid !== undefined) {
-            this.jobid = resp.jobid;
+          if (resp !== null ) {
+            this.jobid = resp;
             console.log('checking the response for jobid', this.jobid);
         
             // Move the navigation inside the subscription callback
