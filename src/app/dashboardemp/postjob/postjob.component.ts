@@ -34,7 +34,7 @@ export class PostjobComponent implements OnInit {
   currentStep = 1;
   totalSteps = 3;
   abc: any;
-
+  jobid!:string;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -87,14 +87,13 @@ export class PostjobComponent implements OnInit {
     if (this.currentStep === this.totalSteps) {
       this.userService.jobpostinsert(jobPostForm.value).subscribe({
         next: (resp: PostJob) => {
-          console.log('checking the response for jobid', resp?.jobid);
+      
+      
+          this.jobid = resp.jobid;
+          console.log('checking the response for jobid', this.jobid);
           localStorage.removeItem('jobPostForm');
           this.jobPostService.clearFormData();
-          console.log(resp);
-          console.log('Complete Response:', resp);
-          console.log('checking the response for jobid', resp?.jobid);
-          const jobid = resp?.jobid;
-          this.router.navigate(['/dashboardemp/set-question', jobid]);
+          this.router.navigate(['/dashboardemp/set-question', this.jobid]);
         },
         error: (err: any) => {
           console.error(err);
