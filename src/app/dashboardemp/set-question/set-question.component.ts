@@ -87,7 +87,7 @@ console.log(this.jobid);
   
           if (this.currentQuestionIndex < 5) {
             // If there are more questions, submit the next one
-            this.submitForm();
+            // this.submitForm();
           } else {
             console.log('All 5 questions added. Redirecting...');
             this.router.navigate(['/dashboardemp/alljobs']);

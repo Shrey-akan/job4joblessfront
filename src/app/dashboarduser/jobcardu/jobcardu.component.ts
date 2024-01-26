@@ -5,7 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { CookieService } from 'ngx-cookie-service';
 interface Job {
   jobid: string;
-  empEmail:string;
+  empEmail: string;
   jobtitle: string;
   companyforthisjob: string;
   numberofopening: number;
@@ -16,9 +16,9 @@ interface Job {
   payjob: number;
   payjobsup: number;
   empid: string;
-  saveStatus:boolean;
-  uid:string; 
-  sendTime:Date;
+  saveStatus: boolean;
+  uid: string;
+  sendTime: Date;
   isDescriptionVisible: boolean;
 }
 @Component({
@@ -43,7 +43,7 @@ export class JobcarduComponent implements OnInit {
   filteredJobs: Job[] = [];
   private jobStatus: boolean = true;
   uid!: string;
-  constructor(private router: Router, private b1: UserService , private cookie:CookieService) {}
+  constructor(private router: Router, private b1: UserService, private cookie: CookieService) { }
 
   performSearch() {
     this.filterJobs();
@@ -65,7 +65,7 @@ export class JobcarduComponent implements OnInit {
         return dateB.getTime() - dateA.getTime();
       });
       this.totalPages = Math.ceil(this.data1.length / this.itemsPerPage);
-      this.filterJobs(); 
+      this.filterJobs();
     });
     this.data1.forEach((job: Job) => {
       job.isDescriptionVisible = false;
@@ -93,17 +93,49 @@ export class JobcarduComponent implements OnInit {
     const endIndex = startIndex + this.itemsPerPage;
     return this.filteredJobs.slice(startIndex, endIndex);
   }
+  // applyForJob(selectedJob: Job) {
+  //   if (selectedJob) {
+  //     this.b1.setJobTitle(selectedJob.jobtitle);
+  //     this.b1.setCompanyName(selectedJob.companyforthisjob);
+  //     this.b1.setEmpId(selectedJob.empid);
+  //     this.b1.setJobId(selectedJob.jobid);
+  //     this.router.navigate(['/dashboarduser/questionpaper']);
+  //   } else {
+  //     console.error('No job selected.');
+  //   }
+  // }
+
+
   applyForJob(selectedJob: Job) {
-    if (selectedJob) {
+    if (selectedJob && selectedJob.jobid) {
+      // Assuming jobid is a required field for a job
       this.b1.setJobTitle(selectedJob.jobtitle);
       this.b1.setCompanyName(selectedJob.companyforthisjob);
       this.b1.setEmpId(selectedJob.empid);
       this.b1.setJobId(selectedJob.jobid);
-      this.router.navigate(['/dashboarduser/questionpaper']);
+
+      // Check if jobid exists
+      this.b1.checkJobIdExists(selectedJob.jobid).subscribe(
+        {
+          next: (exists: boolean) => {
+            if (exists) {
+              this.router.navigate(['/dashboarduser/questionpaper', selectedJob.jobid]);
+            } else {
+              console.error('Selected jobid does not exist.');
+              this.router.navigate(['/dashboarduser/applyjob']);
+            }
+          },
+          error: (error) => {
+            console.error('Error checking jobid:', error);
+            this.router.navigate(['/dashboarduser/applyjob']);
+          }
+        });
     } else {
       console.error('No job selected.');
+      this.router.navigate(['/dashboarduser/applyjob']);
     }
   }
+
   filterJobs(): void {
     console.log(this.searchJobTitle, this.searchLocation);
     if (this.searchJobTitle || this.searchLocation) {
@@ -118,25 +150,25 @@ export class JobcarduComponent implements OnInit {
     this.totalPages = Math.ceil(this.filteredJobs.length / this.itemsPerPage);
     this.currentPage = 1;
   }
-jobIdLikedStatusMap: { [key: string]: boolean } = {};
-toggleLikedStatus(jobid: string): void {
-  const uid = this.cookie.get('uid');
-  console.log(uid);
-  console.log(jobid);
-  this.b1.updateSavedJobStatus(jobid, uid).subscribe(
-    (response: any) => {
-      console.log('Check the values', response);
-      if (response.saveStatus != null) {
-        console.log('Job status updated successfully.');
-        this.jobIdLikedStatusMap[jobid] = response.saveStatus;
-        this.filterJobs();
-      } else {
-        console.error('Job status update failed.');
+  jobIdLikedStatusMap: { [key: string]: boolean } = {};
+  toggleLikedStatus(jobid: string): void {
+    const uid = this.cookie.get('uid');
+    console.log(uid);
+    console.log(jobid);
+    this.b1.updateSavedJobStatus(jobid, uid).subscribe(
+      (response: any) => {
+        console.log('Check the values', response);
+        if (response.saveStatus != null) {
+          console.log('Job status updated successfully.');
+          this.jobIdLikedStatusMap[jobid] = response.saveStatus;
+          this.filterJobs();
+        } else {
+          console.error('Job status update failed.');
+        }
+      },
+      (error) => {
+        console.error('Error updating job status:', error);
       }
-    },
-    (error) => {
-      console.error('Error updating job status:', error);
-    }
-  );
-}
+    );
+  }
 }

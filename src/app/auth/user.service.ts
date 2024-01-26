@@ -783,5 +783,14 @@ export class UserService {
     const url = `${API_BASE_URL}add?jobid=${jobid}`;
     return this.h1.post(url, questionData);
   }
-  
+  checkJobIdExists(jobid: string): Observable<boolean> {
+    const url = `${API_BASE_URL}checkjobid?jobid=${jobid}`;
+    return this.h1.get<boolean>(url);
+  }
+
+
+  fetchQuestionsByJobId(jobid: string): Observable<any> {
+    const url = `${API_BASE_URL}fetchquestionbyjobid?jobid=${jobid}`;
+    return this.h1.get(url);
+  }
 }
