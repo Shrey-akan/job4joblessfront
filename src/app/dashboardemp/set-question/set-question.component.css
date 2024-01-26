@@ -1,0 +1,45 @@
+.custom-font {
+    font-family: 'Poppins', sans-serif;
+}
+
+.custom-pills {
+    color: black;
+    border: 2px solid #1E2E5C;
+    background-color: #1e2e5c41;
+}
+
+.custom-pills-btn {
+    color: white !important;
+    border: 2px solid #1E2E5C !important;
+    background-color: #1E2E5C !important;
+    border: none;
+    outline: none;
+}
+.custom-btn {
+    color: white;
+    background-color: #1e2e5c;
+}
+.findjobbtn  {
+    background-color: #1e2e5c41;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    border: 2px solid #1E2E5C;
+}
+
+.findjobbtn:hover {
+    background-color: #1E2E5C;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    border: 2px solid #1E2E5C;
+    color: white;
+}
+
+.custom-outline {
+    outline: 2px solid #1E2E5C;
+}
+
+input {
+    font-family: 'Poppins', sans-serif;
+}
