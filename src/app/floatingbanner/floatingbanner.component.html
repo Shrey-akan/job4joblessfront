@@ -22,14 +22,14 @@
                                 class="d-flex justify-content-center align-items-stretch flex-column px-4 rounded-3 my-3">
                                 <button class="btn btn-custom" (click)="loginWithGoogle()"><i class="fa-brands fa-google text-danger"></i>&nbsp;
                                     &nbsp;Continue with Google</button>
-                                <button class="btn btn-custom" routerLink="/login"><i class="fa-regular fa-envelope"></i>&nbsp;
+                                <button class="btn btn-custom" (click)="navigateToLogin()"><i class="fa-regular fa-envelope"></i>&nbsp;
                                     &nbsp;Continue with Email</button>
                                 <div class="text-center">
                                     <p class="fw-bold my-4 align-center">or</p>
                                 </div>
                                 <button class="btn btn-custom" (click)="navigateToRegister()"><i class="fa-solid fa-user"></i>&nbsp;
                                     &nbsp;Create a new account</button>
-                                <button routerLink="/employer" class="btn">Try job4jobless for <span class="fw-bold text-secondary fw-6">Employers</span></button>
+                                <button (click)="navigateToEmployer()" class="btn">Try job4jobless for <span class="fw-bold text-secondary fw-6">Employers</span></button>
                             </div>
                         </div>
                     </div>

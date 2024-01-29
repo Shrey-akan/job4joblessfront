@@ -43,4 +43,11 @@ export class FloatingbannerComponent implements OnInit {
   navigateToRegister(){
     this.router.navigate(['/register']);
   }
+  navigateToEmployer(){
+    this.router.navigate(['/employer']);
+  }
+
+  navigateToLogin(){
+    this.router.navigate(['login']);
+  }
 }
