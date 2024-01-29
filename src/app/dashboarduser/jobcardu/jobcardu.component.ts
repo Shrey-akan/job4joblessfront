@@ -162,6 +162,7 @@ export class JobcarduComponent implements OnInit {
           console.log('Job status updated successfully.');
           this.jobIdLikedStatusMap[jobid] = response.saveStatus;
           this.filterJobs();
+          this.router.navigate(['/dashboarduser/savedjob']);
         } else {
           console.error('Job status update failed.');
         }

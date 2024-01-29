@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeaderuserComponent } from './headeruser/headeruser.component';
 import { FindjobuComponent } from './findjobu/findjobu.component';
 import { CompanyComponent } from './company/company.component';
-import { SalaryComponent } from './salary/salary.component';
+import { SalaryComponent } from './savedjobpage/salary.component';
 import { MessageComponent } from './message/message.component';
 import { NotificationComponent } from './notification/notification.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';

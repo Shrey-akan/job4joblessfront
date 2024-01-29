@@ -2,10 +2,10 @@
   <form [formGroup]="form">
     <div *ngFor="let question of data" class="card mb-4">
       <div class="card-header">
-        <h2 class="card-title">Question {{ question.id }}</h2>
+        <h2 class="card-title">Question {{ question.question }}</h2>
       </div>
       <div class="card-body">
-        <h2 class="card-subtitle mb-2 text-muted">{{ question.question }}</h2>
+        <!-- <h2 class="card-subtitle mb-2 text-muted">{{ question.question }}</h2> -->
         <div class="form-check">
           <input type="radio" [formControlName]="'question' + question.id" [value]="question.optionA" class="form-check-input">
           <label for="option{{ question.id }}-A" class="form-check-label">{{ question.optionA }}</label>
