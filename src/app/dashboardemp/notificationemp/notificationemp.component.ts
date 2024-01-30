@@ -14,7 +14,7 @@ export class NotificationempComponent implements OnInit {
   empId: string = "0";
   isLoading: boolean = false;
   statusOptions: string[] = ['All', 'Selected', 'Rejected', 'Reviewed', 'Waiting'];
-  selectedStatus: string = 'All';
+  selectedStatus: string = 'Waiting';
   selectedOption: string = '';
   isOpen: boolean = false;
   options: string[] = ['Selected', 'Reviewed', 'Waiting', 'Rejected'];
