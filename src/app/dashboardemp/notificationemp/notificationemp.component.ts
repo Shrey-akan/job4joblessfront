@@ -87,9 +87,9 @@ export class NotificationempComponent implements OnInit {
   //   }
   // }
   filterApplications(status: string) {
-    this.selectedStatus = status;
-    if (status === 'All') {
-      this.filteredData = this.data;
+    this.selectedStatus = "Waiting";
+    if (this.selectedStatus === 'Waiting') {
+      this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
     } else {
       this.filteredData = this.data.filter((application: ApplyJob) => {
         return status === 'Waiting' ? application.profileupdate === status : application.profileupdate === 'Waiting';
