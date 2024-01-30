@@ -37,8 +37,8 @@ export class HeaderdashboardempComponent implements OnInit {
       .subscribe({
         next: (response:ApiResponse) => {
           console.log(response);
-          this.jobWaitingCounts = response.waitingApplicationsCount;
-          console.log("checking this console",this.jobWaitingCounts);
+          this.waitingApplicationsCount = response.waitingApplicationsCount;
+          console.log("checking this console",this.waitingApplicationsCount);
         },
         error: (error) => {
           console.error('Error fetching waiting applications count:', error);
