@@ -31,18 +31,20 @@ export class HeaderdashboardempComponent implements OnInit {
   getWaitingApplicationsCount() {
     // Fetch the empid from wherever it's stored (you may need to adapt this part)
     const empid = this.empId;
-  
+
     // Make the API request to get waiting applications count
     this.http.get<ApiResponse>(`https://job4jobless.com:9001/notifyEmployer?empid=${empid}`)
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
+          console.log(response);
           // Handle the response, assuming the API returns an object with a count property
           this.waitingApplicationsCount = response.jobidWaitingCountMap ? Object.values(response.jobidWaitingCountMap).reduce((a, b) => a + b, 0) : 0;
+          console.log(this.waitingApplicationsCount);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error fetching waiting applications count:', error);
         }
-      );
+      });
   }
   logoutEmployer() {
     // Retrieve the refresh token from the cookie
