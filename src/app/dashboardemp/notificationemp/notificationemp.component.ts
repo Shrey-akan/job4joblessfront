@@ -74,7 +74,8 @@ export class NotificationempComponent implements OnInit {
     response.subscribe((data1: any) => {
       this.data = data1.filter((applyjobf: any) => applyjobf.empid == this.empId);
       // Initially, display all applications
-      this.filteredData = this.data;
+      // this.filteredData = this.data;
+      this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
     });
   }
 
