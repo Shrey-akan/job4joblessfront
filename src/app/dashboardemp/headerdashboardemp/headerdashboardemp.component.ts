@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 interface ApiResponse {
+  waitingApplicationsCount:number;
   jobidWaitingCountMap: Record<string, number>;
 }
 @Component({
@@ -12,9 +13,9 @@ interface ApiResponse {
 })
 export class HeaderdashboardempComponent implements OnInit {
   showNavbaremp = true;
-
+  waitingApplicationsCount: number = 0;
   empId: String = "0";
-  jobWaitingCounts!: Record<string, number>;
+  jobWaitingCounts!: number;
   constructor(private router: Router, private http: HttpClient, private cookie: CookieService) { }
 
   ngOnInit() {
@@ -34,9 +35,9 @@ export class HeaderdashboardempComponent implements OnInit {
 
     this.http.get<ApiResponse>(`https://job4jobless.com:9001/notifyEmployer?empid=${empid}`)
       .subscribe({
-        next: (response) => {
+        next: (response:ApiResponse) => {
           console.log(response);
-          this.jobWaitingCounts = response.jobidWaitingCountMap;
+          this.jobWaitingCounts = response.waitingApplicationsCount;
           console.log("checking this console",this.jobWaitingCounts);
         },
         error: (error) => {
@@ -45,10 +46,7 @@ export class HeaderdashboardempComponent implements OnInit {
       });
   }
 
-  getTotalWaitingApplicationsCount(): number {
-    console.log("checking this console",this.jobWaitingCounts);
-    return this.jobWaitingCounts ? Object.values(this.jobWaitingCounts).reduce((a, b) => a + b, 0) : 0;
-  }
+
 
   logoutEmployer() {
     // Retrieve the refresh token from the cookie

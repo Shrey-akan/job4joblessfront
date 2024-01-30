@@ -23,13 +23,10 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboardemp/notificationemp" routerLinkActive="active">
-            Notifications
-            <i class="fa-solid fa-bell"></i>
-            <span *ngIf="jobWaitingCounts && getTotalWaitingApplicationsCount() > 0" class="badge rounded-pill bg-danger">
-              {{ getTotalWaitingApplicationsCount() }}
-            </span>
+            Notifications<i class="fa-solid fa-bell"></i>
+            <span *ngIf="waitingApplicationsCount > 0" class="badge rounded-pill bg-danger">{{ waitingApplicationsCount }}</span>
           </a>
-        </li>        
+        </li>     
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
