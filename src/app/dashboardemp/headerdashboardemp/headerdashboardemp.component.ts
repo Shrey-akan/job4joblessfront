@@ -37,6 +37,7 @@ export class HeaderdashboardempComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.jobWaitingCounts = response.jobidWaitingCountMap;
+          console.log("checking this console",this.jobWaitingCounts);
         },
         error: (error) => {
           console.error('Error fetching waiting applications count:', error);
@@ -45,6 +46,7 @@ export class HeaderdashboardempComponent implements OnInit {
   }
 
   getTotalWaitingApplicationsCount(): number {
+    console.log("checking this console",this.jobWaitingCounts);
     return this.jobWaitingCounts ? Object.values(this.jobWaitingCounts).reduce((a, b) => a + b, 0) : 0;
   }
 
