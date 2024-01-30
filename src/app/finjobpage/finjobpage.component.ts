@@ -9,7 +9,6 @@ import { UserService } from '../auth/user.service';
 })
 export class FinjobpageComponent implements OnInit {
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
   
 }

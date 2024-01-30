@@ -18,7 +18,6 @@ interface Job {
   selector: 'app-findjob',
   templateUrl: './findjob.component.html',
   styleUrls: ['./findjob.component.css'],
-  // encapsulation: ViewEncapsulation.None, 
   animations: [
     trigger('fadeInOut', [
         state('in', style({ opacity: 1, transform: 'scale(1)' })),
@@ -30,130 +29,117 @@ interface Job {
 ],
 })
 export class FindjobComponent implements OnInit{
-performSearch() {
+// performSearch() {
 
-}
-  data1: any;
-  companies = [
-    {
-      name: 'Air Arabia PJSC',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/220715_180x70.gif'
-    },
-    {
-      name: 'MPH Technical Services',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/19769_180x70.gif'
-    },
-    {
-      name: 'Air Products (Middle East) FZE',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/147435_180x70.gif'
-    },
-    {
-      name: 'Air Products (Middle East) FZE',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/31713_180x70_v2.gif'
-    },
-    {
-      name: 'Air Arabia PJSC',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/22384_180x70_v2.gif'
-    },
-    {
-      name: 'MPH Technical Services',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/110506_180x70.gif'
-    },
-    {
-      name: 'Air Products (Middle East) FZE',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/49790_180x70_v3.gif'
-    },
-    {
-      name: 'Air Products (Middle East) FZE',
-      logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/31970_180x70_v2.gif'
-    },
-    // Add more company objects with name and logoUrl properties
-  ];
-  searchQuery: string = ''; // The search query input field value
+// }
+//   data1: any;
+//   companies = [
+//     {
+//       name: 'Air Arabia PJSC',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/220715_180x70.gif'
+//     },
+//     {
+//       name: 'MPH Technical Services',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/19769_180x70.gif'
+//     },
+//     {
+//       name: 'Air Products (Middle East) FZE',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/147435_180x70.gif'
+//     },
+//     {
+//       name: 'Air Products (Middle East) FZE',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/31713_180x70_v2.gif'
+//     },
+//     {
+//       name: 'Air Arabia PJSC',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/22384_180x70_v2.gif'
+//     },
+//     {
+//       name: 'MPH Technical Services',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/110506_180x70.gif'
+//     },
+//     {
+//       name: 'Air Products (Middle East) FZE',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/49790_180x70_v3.gif'
+//     },
+//     {
+//       name: 'Air Products (Middle East) FZE',
+//       logoUrl: 'https://static.naukimg.com/ni/nihome/logonbanner/31970_180x70_v2.gif'
+//     },
+//   ];
+//   searchQuery: string = '';
 
-  showFooter = true;
-  showJobFeed = true;
-  showJobSearches = false;
-  selectedJob: Job | null = null;
-  data: Job[] = [];
-  itemsPerPage = 3; // Number of items to display per page
-  currentPage = 1; // Current page number
-  totalPages!: number; // Total number of pages
-  images = [
-    'assets/07-image.jpg',
-    'assets/09-image.jpg',
-    'assets/01image.jpg',
-    // Add more image URLs as needed
-  ];
+//   showFooter = true;
+//   showJobFeed = true;
+//   showJobSearches = false;
+//   selectedJob: Job | null = null;
+//   data: Job[] = [];
+//   itemsPerPage = 3;
+//   currentPage = 1; 
+//   totalPages!: number; 
+//   images = [
+//     'assets/07-image.jpg',
+//     'assets/09-image.jpg',
+//     'assets/01image.jpg',
+//   ];
 
-  currentImageIndex = 0;
-  showContainer(containerId: string): void {
-    this.showJobFeed = false;
-    this.showJobSearches = false;
-
-    if (containerId === 'jbfeed') {
-      this.showJobFeed = true;
-    } else if (containerId === 'showsearches') {
-      this.showJobSearches = true;
-    }
-  }
-
+  // currentImageIndex = 0;
+  // showContainer(containerId: string): void {
+  //   this.showJobFeed = false;
+  //   this.showJobSearches = false;
+  //   if (containerId === 'jbfeed') {
+  //     this.showJobFeed = true;
+  //   } else if (containerId === 'showsearches') {
+  //     this.showJobSearches = true;
+  //   }
+  // }
   constructor(private router: Router, private b1: UserService) {}
+  // selectJob(data: any): void {
+  //   this.selectedJob = data;
+  // }
 
-  selectJob(data: any): void {
-    this.selectedJob = data;
-  }
-
-  onPageChange(page: number): void {
-    this.currentPage = page;
-  }
+  // onPageChange(page: number): void {
+  //   this.currentPage = page;
+  // }
 
   ngOnInit(): void {
-    let response = this.b1.fetchjobpost();
-    response.subscribe((data1: any) => {
-      this.data1 = data1;
-      this.data = data1; // Initialize data with all jobs initially
-      this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
-    });
-    setInterval(() => this.nextImage(), 1000);
+    // let response = this.b1.fetchjobpost();
+    // response.subscribe((data1: any) => {
+    //   this.data1 = data1;
+    //   this.data = data1;
+    //   this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+    // });
+    // setInterval(() => this.nextImage(), 1000);
   }
 
-  // Add a function to perform the search
-  searchJobs() {
-    // Filter the jobs based on the search query
-    this.data = this.data1.filter((job: Job) => {
-      const titleMatch = job.jobtitle.toLowerCase().includes(this.searchQuery.toLowerCase());
-      const locationMatch = job.locationjob.toLowerCase().includes(this.searchQuery.toLowerCase());
-      // Add more criteria for filtering if needed
-      return titleMatch || locationMatch;
-    });
-  }
+  // searchJobs() {
+  //   this.data = this.data1.filter((job: Job) => {
+  //     const titleMatch = job.jobtitle.toLowerCase().includes(this.searchQuery.toLowerCase());
+  //     const locationMatch = job.locationjob.toLowerCase().includes(this.searchQuery.toLowerCase());
+  //     return titleMatch || locationMatch;
+  //   });
+  // }
 
-  navigateToSignIn() {
-    // Replace 'sign-in' with the actual route name of your sign-in page
-    this.router.navigate(['/login']);
-  }
+  // navigateToSignIn() {
+  //   this.router.navigate(['/login']);
+  // }
 
-  navigateToSignUp() {
-    // Replace 'sign-in' with the actual route name of your sign-in page
-    this.router.navigate(['/register']);
-  }
+  // navigateToSignUp() {
+  //   this.router.navigate(['/register']);
+  // }
 
-  showTrending = false;
+  // showTrending = false;
 
-  toggleTrending() {
-    this.showTrending = !this.showTrending;
-  }
+  // toggleTrending() {
+  //   this.showTrending = !this.showTrending;
+  // }
 
-  nextImage() {
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-  }
-  getJobsForCurrentPage(): any[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.data.slice(startIndex, endIndex);
-  }
-  
-
-
+  // nextImage() {
+  //   this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+  // }
+  // getJobsForCurrentPage(): any[] {
+  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  //   const endIndex = startIndex + this.itemsPerPage;
+  //   return this.data.slice(startIndex, endIndex);
+  // }
 }

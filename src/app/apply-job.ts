@@ -8,9 +8,7 @@ export class ApplyJob {
     jurelocation: string;
     jueducation: string;
     juexperience: string;
-
     juinterviewdate: string;
-
     jujobtitle: string;
     jucompanyname: string;
     description: string;
@@ -33,9 +31,7 @@ export class ApplyJob {
       this.jurelocation = "";
       this.jueducation = "";
       this.juexperience = "";
-
       this.juinterviewdate = "";
-
       this.jujobtitle = "";
       this.jucompanyname = "";
       this.description = "";
