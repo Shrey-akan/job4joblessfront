@@ -22,7 +22,7 @@
           <a class="nav-link" routerLink="/dashboardemp/applieduserdetails" routerLinkActive="active">Applied Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboardemp/notificationemp" routerLinkActive="active">Notifications<i class="fa-solid fa-bell"></i></a>
+          <a class="nav-link" routerLink="/dashboardemp/notificationemp" routerLinkActive="active">Notifications<i class="fa-solid fa-bell"></i><span *ngIf="waitingApplicationsCount > 0" class="badge rounded-pill bg-danger">{{ waitingApplicationsCount }}</span></a>
         </li>
       </ul>
       <ul class="navbar-nav">

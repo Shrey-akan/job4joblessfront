@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
+interface ApiResponse {
+  jobidWaitingCountMap: Record<string, number>;
+}
 @Component({
   selector: 'app-headerdashboardemp',
   templateUrl: './headerdashboardemp.component.html',
@@ -10,10 +12,13 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HeaderdashboardempComponent implements OnInit {
   showNavbaremp = true;
+  waitingApplicationsCount!: number;
+  empId: String = "0";
   constructor(private router: Router, private http: HttpClient, private cookie: CookieService) { }
 
   ngOnInit() {
-
+    this.empId = this.cookie.get('emp');
+    this.getWaitingApplicationsCount();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentRoute = event.urlAfterRedirects;
@@ -22,6 +27,22 @@ export class HeaderdashboardempComponent implements OnInit {
         this.showNavbaremp = !['/employers/sign-in-checkemp'].includes(currentRoute);
       }
     });
+  }
+  getWaitingApplicationsCount() {
+    // Fetch the empid from wherever it's stored (you may need to adapt this part)
+    const empid = this.empId;
+  
+    // Make the API request to get waiting applications count
+    this.http.get<ApiResponse>(`https://job4jobless.com:9001/notifyEmployer?empid=${empid}`)
+      .subscribe(
+        (response) => {
+          // Handle the response, assuming the API returns an object with a count property
+          this.waitingApplicationsCount = response.jobidWaitingCountMap ? Object.values(response.jobidWaitingCountMap).reduce((a, b) => a + b, 0) : 0;
+        },
+        (error) => {
+          console.error('Error fetching waiting applications count:', error);
+        }
+      );
   }
   logoutEmployer() {
     // Retrieve the refresh token from the cookie
