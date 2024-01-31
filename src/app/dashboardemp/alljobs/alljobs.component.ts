@@ -72,6 +72,7 @@ export class AlljobsComponent implements OnInit {
       // });
       // this.filteredData = this.data;
       this.filteredData = this.data.map((job: any) => ({ ...job, showDetails: false }));
+      console.log(this.filteredData.values);
     });
   }
   filterByJobTitle() {
