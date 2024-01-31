@@ -20,6 +20,7 @@ export interface PostJob {
   sendTime: Date;
   uid: string;
   status: boolean;
+  applicants:number;
 }
 
 declare var $: any;

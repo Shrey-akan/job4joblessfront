@@ -1,9 +1,9 @@
-
 <div class="container">
   <h1 class="text-center mb-4">Job Listings</h1>
   <div class="form-group mt-3">
     <label for="jobTitleFilter">Filter by Job Title:</label>
-    <input type="text" class="form-control" id="jobTitleFilter" [(ngModel)]="jobTitleFilter" (input)="filterByJobTitle()" />
+    <input type="text" class="form-control" id="jobTitleFilter" [(ngModel)]="jobTitleFilter"
+      (input)="filterByJobTitle()" />
   </div>
   <div class="row">
     <ng-container *ngIf="data.length > 0; else noJobsContent">
@@ -23,9 +23,15 @@
                 <p class="card-text"><strong>Pay:</strong> {{ job.payjob }}</p>
                 <p class="card-text"><strong>Pay Support:</strong> {{ job.payjobsup }}</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <button class="btn custom-btn rounded-pill show-more" (click)="showMoreInfo(job)"> {{ isTableVisible ? 'Hide Description' : 'Show Description' }}</button>
+                  <button class="btn custom-btn rounded-pill show-more" (click)="showMoreInfo(job)"> {{ isTableVisible ?
+                    'Hide Description' : 'Show Description' }}</button>
                   <button class="btn custom-btn rounded-pill edit-button" (click)="editJob(job.jobid)">Edit</button>
-                  <button class="btn custom-btn rounded-pill apply-button" (click)="fetchAppliedUsers(job.empid, job.jobid)">View Applicants</button>
+                  <!-- <button class="btn custom-btn rounded-pill apply-button" (click)="fetchAppliedUsers(job.empid, job.jobid)">View Applicants</button> -->
+                  <button class="btn custom-btn rounded-pill apply-button"
+                    (click)="fetchAppliedUsers(job.empid, job.jobid)">
+                    View Applicants
+                    <span *ngIf="job.applicants > 0" class="badge badge-pill custom-btn">{{ job.applicants }}</span>
+                  </button>
                 </div>
               </div>
               <div class="card-footer" *ngIf="job.showDetails">
