@@ -30,7 +30,8 @@
                   <button class="btn custom-btn rounded-pill apply-button"
                     (click)="fetchAppliedUsers(job.empid, job.jobid)">
                     View Applicants
-                    <span *ngIf="job.applicants > 0" class="badge badge-pill custom-btn">{{ job.applicants }}</span>
+                    <span *ngIf="job.applicants > 0" class="badge rounded-pill bg-danger ml-2">{{ job.applicants }}</span>
+                    <!-- <span *ngIf="job.applicants > 0" class="badge badge-pill custom-btn">{{ job.applicants }}</span> -->
                   </button>
                 </div>
               </div>
