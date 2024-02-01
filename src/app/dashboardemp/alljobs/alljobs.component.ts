@@ -35,6 +35,7 @@ export class AlljobsComponent implements OnInit {
   empDetail: any;
   abc: any;
   selectedJob: any;
+  empId: string = "0";
   jobTitleFilter: string = '';
   isTableVisible: boolean = false;
   filteredData: any[] = [];
@@ -45,7 +46,7 @@ export class AlljobsComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  empId: String = "0";
+
 
   ngOnInit(): void {
     this.empId = this.cookie.get('emp');
@@ -62,16 +63,22 @@ export class AlljobsComponent implements OnInit {
     });
   }
 
-  fetchJobPostDetails() {
-    let response = this.b1.fetchjobpost();
+  // fetchJobPostDetails() {
+  //   let response = this.b1.fetchjobpost();
 
-    response.subscribe((data1: any) => {
+  //   response.subscribe((data1: any) => {
+  //     this.data = data1.filter((job: any) => job.empid == this.abc);
+  //     console.log("checking the data",this.data);
+  //     this.filteredData = this.data.map((job: any) => ({ ...job, showDetails: false }));
+  //     console.log(this.filteredData.values);
+      
+  //   });
+  // }
+
+  fetchJobPostDetails() {
+    this.b1.fetchjobpost(this.empId).subscribe((data1: any) => {
       this.data = data1.filter((job: any) => job.empid == this.abc);
       console.log("checking the data",this.data);
-      // this.data.forEach((job: any) => {
-      //   job.showDetails = false;
-      // });
-      // this.filteredData = this.data;
       this.filteredData = this.data.map((job: any) => ({ ...job, showDetails: false }));
       console.log(this.filteredData.values);
     });

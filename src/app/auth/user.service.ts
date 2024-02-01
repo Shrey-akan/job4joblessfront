@@ -13,6 +13,7 @@ import {
 } from '@angular/fire/auth';
 import { AuthInterceptor } from '../interceptors/auth.interceptor';
 import { JobPostService } from './job-post.service';
+import { PostJob } from '../dashboardemp/alljobs/alljobs.component';
 
 // Define your API base URL as a constant variable
 // const API_BASE_URL = '${API_BASE_URL}';
@@ -614,15 +615,18 @@ export class UserService {
 
 
 
-  fetchjobpost() {
-    return this.h1.get(this.fetchjobposturl);
-  }
+  // fetchjobpost() {
+  //   return this.h1.get(this.fetchjobposturl);
+  // }
 
   fetchJobPostsWithStatus(uid: string | null): Observable<any> {
     const url = uid ? `${API_BASE_URL}fetchjobpoststatus?uid=${uid}` : this.apiUrl;
     return this.h1.get(url);
   }
-
+  fetchjobpost(empid?: string): Observable<PostJob[]> {
+    const url = empid ? `${this.fetchjobposturl}?empid=${empid}` : this.fetchjobposturl;
+    return this.h1.get<PostJob[]>(url);
+  }
 
   //Conatct
   public insertcontact(data: any) {
