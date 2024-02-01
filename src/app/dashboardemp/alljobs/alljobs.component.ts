@@ -67,6 +67,7 @@ export class AlljobsComponent implements OnInit {
 
     response.subscribe((data1: any) => {
       this.data = data1.filter((job: any) => job.empid == this.abc);
+      console.log("checking the data",this.data);
       // this.data.forEach((job: any) => {
       //   job.showDetails = false;
       // });
