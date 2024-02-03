@@ -14,3 +14,9 @@ a{
   background-color: #1E2E5C !important;
   padding: 0.7em 2em !important;
 }
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
