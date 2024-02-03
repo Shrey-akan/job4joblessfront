@@ -12,7 +12,7 @@ export class HeaderuserComponent implements OnInit {
   userEmail!: string;
   accessToken: string | null;
   uid: string | null;
-
+  notificationCount: number = 0;
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private cookie: CookieService) {
     // Initialize properties from local storage
     this.accessToken = localStorage.getItem('accessToken');
@@ -24,6 +24,7 @@ export class HeaderuserComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userEmail = params['email'];
     });
+    this.fetchTrueStatusCount();
   }
   logout() {
 
@@ -60,6 +61,19 @@ export class HeaderuserComponent implements OnInit {
   }
   signto() {
     this.router.navigate(['/']);
+  }
+
+  private fetchTrueStatusCount() {
+    // Make the API call to fetch the true status count
+    this.http.get<any>(`https://job4jobless.com:9001/countTrueStatus?uid=${this.uid}`).subscribe({
+      next: (response) => {
+        // Update the waitingApplicationsCount with the received count
+        this.notificationCount = response.trueCount;
+      },
+      error: (error) => {
+        console.error('Fetch true status count error', error);
+      }
+    });
   }
 
 }
