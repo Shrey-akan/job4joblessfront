@@ -20,6 +20,7 @@ export class HeaderuserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = this.cookie.get('uid');
     // Retrieve the email from the query parameters
     this.route.queryParams.subscribe(params => {
       this.userEmail = params['email'];
