@@ -69,6 +69,7 @@ export class HeaderuserComponent implements OnInit {
       next: (response) => {
         // Update the waitingApplicationsCount with the received count
         this.notificationCount = response.trueCount;
+        console.log(this.notificationCount);
       },
       error: (error) => {
         console.error('Fetch true status count error', error);
