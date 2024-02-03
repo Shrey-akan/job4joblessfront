@@ -64,7 +64,7 @@ export class HeaderuserComponent implements OnInit {
   }
 
   private fetchTrueStatusCount() {
-    // Make the API call to fetch the true status count
+    console.log(this.uid);
     this.http.get<any>(`https://job4jobless.com:9001/countTrueStatus?uid=${this.uid}`).subscribe({
       next: (response) => {
         // Update the waitingApplicationsCount with the received count
