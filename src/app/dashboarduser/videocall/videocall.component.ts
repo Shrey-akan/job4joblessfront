@@ -42,7 +42,7 @@ export class VideocallComponent implements OnInit {
     this.uid = this.route.snapshot.paramMap.get("selectedUser");
     console.log("uid:", this.uid); 
       // Get the "to" value from the cookie (assuming "empemailid" is the cookie name)
-      this.message.messageFrom = this.cookie.get('user');
+      this.message.messageFrom = this.cookie.get('uid');
       console.log(this.message.messageFrom);
       console.log(this.uid);
   

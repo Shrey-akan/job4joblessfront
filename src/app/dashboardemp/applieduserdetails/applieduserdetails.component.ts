@@ -107,7 +107,7 @@ export class ApplieduserdetailsComponent implements OnInit {
   updateProfileUpdate(application: ApplyJob) {
     // Update the 'profileupdate' field of the selected 'application'
     application.profileupdate = this.selectedOption;
-
+    
     // Make an HTTP request to update the 'profileupdate' field in the database
     this.b1.updateProfileUpdate(application).subscribe((updatedApplication: any) => {
       // Handle the response if needed
