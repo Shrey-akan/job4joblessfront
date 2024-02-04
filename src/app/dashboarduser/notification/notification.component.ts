@@ -71,11 +71,12 @@ export class NotificationComponent implements OnInit {
   navigateTo(){
     this.router.navigate(['/dashboarduser']);
   }
+
   formatTimeAgo(date: Date | null): string {
-    if (!date) {
+    if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
       return 'No date available';
     }
-
+  
     const now = new Date();
     const timeDifference = now.getTime() - date.getTime();
     
@@ -85,7 +86,7 @@ export class NotificationComponent implements OnInit {
     const days = Math.floor(hours / 24);
     const months = Math.floor(days / 30);
     const years = Math.floor(days / 365);
-
+  
     if (years > 0) {
       return years === 1 ? 'a year ago' : `${years} years ago`;
     } else if (months > 0) {
