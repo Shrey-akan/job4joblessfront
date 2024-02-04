@@ -1,7 +1,8 @@
 <div class="container mt-5">
-  <h2 class="mt-4">Job Applications Notification</h2>
+
 
   <div class="row" *ngIf="filteredData && filteredData.length > 0">
+    <h2 class="mt-4">Job Applications Notification</h2>
     <div class="col-12" *ngFor="let application of filteredData">
       <div class="card mb-4">
         <div class="card-body" style="flex-grow: 1;">
@@ -82,7 +83,8 @@
   </div>
 </div>
 
-
+<div class="container" *ngIf="filteredData && filteredData.length > 0">
+  
 <div class="text-center my-4">
   <button class="btn custom-btn rounded-pill " (click)="toggleTableVisibility()">
     {{ isTableVisible ? 'Hide Table' : 'Show Table' }}
@@ -138,4 +140,5 @@
 <div class="text-center">
   <button class="btn custom-btn rounded-pill" *ngIf="isTableVisible" (click)="generateTablePDF()">Download
     Table</button>
+</div>
 </div>
