@@ -24,25 +24,10 @@
 
 
         <div class="container mt-5">
-          <div class="status-filter">
-            <h1>Filter by Status</h1>
-            <ul class="list-inline">
-              <!-- <li (click)="filterApplications('All')" class="list-inline-item status-option">All Applications</li>
-              <li (click)="filterApplications('Selected')" class="list-inline-item status-option">Selected <i class="fa-solid fa-circle-check fa-1x" style="color: #388a53;"></i></li>
-              <li (click)="filterApplications('Rejected')" class="list-inline-item status-option">Rejected   <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i></li>
-              <li (click)="filterApplications('Reviewed')" class="list-inline-item status-option">Reviewed <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i></li> -->
-              <li (click)="filterApplications('Waiting')" class="list-inline-item status-option">Waiting<i class="fa-solid fa-clock fa-1x"></i></li>
-              <li (click)="toggleTableVisibility()" class="list-inline-item status-option">Show in Table</li>
-            </ul>
-          </div>
-          <div class="form-group mt-3">
-            <label for="jobTitleFilter">Filter by Job Title:</label>
-            <input type="text" class="form-control" id="jobTitleFilter" [(ngModel)]="jobTitleFilter" (input)="filterByJobTitle()" />
-          </div>
-          <h2 class="mt-4">Job Applications</h2>
+          <h2 class="mt-4">Job Applications Notification</h2>
           <div class="row">
             <!-- <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let application of filteredData"> -->
-              <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let application of filteredData">
+              <div class="col-12" *ngFor="let application of filteredData">
               <div class="card mb-4">
                 <div class="card-body" style="flex-grow: 1;">
                   <h1>{{application.jutitle}}</h1>
@@ -121,7 +106,7 @@
           </button>
         </div>
         
-        <h2 class="mt-4 text-center">Job Applications</h2>
+        <h2 class="mt-4 text-center">Download Job Applications Notification List</h2>
         
         <div class="table-responsive">
           <!-- Table to Display Data -->
