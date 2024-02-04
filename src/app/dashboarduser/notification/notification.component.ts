@@ -10,8 +10,7 @@ import { UserService } from 'src/app/auth/user.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  notifications: any[] = [];
-  isLoading: boolean = true;
+
   showFloatingGif = false;
   userData1!: any;
   abc:any;
@@ -31,6 +30,7 @@ export class NotificationComponent implements OnInit {
   public chatEmail: string = "";
   isTableVisible: boolean = false;
   exportedData: string = '';
+  isLoading!: boolean;
   toggleTableVisibility() {
     this.isTableVisible = !this.isTableVisible;
   }
@@ -48,86 +48,36 @@ export class NotificationComponent implements OnInit {
       this.abc = this.userData1.userName;
       this.fetchJobapplieddetails(this.userID);
     });
-    this.fetchNotifications();
+    // this.fetchNotifications();
   }
 
-  fetchNotifications(): void {
-    this.b1.fetchnotify().subscribe({
-      next: (response: any) => {
-        this.notifications = response.filter((notification: any) => {
-          return notification.notifyuid === this.userID;
-        });
-        this.isLoading = false;
-      },
-      error: (err: any) => {
-        console.error('Error fetching notifications:', err);
-        this.isLoading = false;
-      }
-    });
-  }
+  // fetchNotifications(): void {
+  //   this.b1.fetchnotify().subscribe({
+  //     next: (response: any) => {
+  //       this.notifications = response.filter((notification: any) => {
+  //         return notification.notifyuid === this.userID;
+  //       });
+  //       this.isLoading = false;
+  //     },
+  //     error: (err: any) => {
+  //       console.error('Error fetching notifications:', err);
+  //       this.isLoading = false;
+  //     }
+  //   });
+  // }
 
   refreshNotifications() {
     this.isLoading = true;
-    this.fetchNotifications();
+
   }
-  async fetchJobapplieddetails(uid: string | null) {
+  fetchJobapplieddetails(uid: string | null) {
+    console.log(uid);
     let response: any = this.b1.fetchapplyformnotify(uid);
+    console.log(response.data);
     response.subscribe((data1: any) => {
       this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
       this.filteredData = this.data;
     });
-  }
-  filterApplications(status: string) {
-    this.selectedStatus = status;
-    if (status === 'All') {
-      this.filteredData = this.data;
-    } else {
-      this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
-    }
-  }
-  filterByJobTitle() {
-    if (!this.jobTitleFilter) {
-      this.filteredData = this.data;
-    } else {
-      this.filteredData = this.data.filter((application: ApplyJob) =>
-        application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
-      );
-    }
-  }
-
-  showMoreInfo(user: ApplyJob):void {
-    this.expandedUser = this.expandedUser === user ? null : user;
-  }
-
-
-  selectOption(application: any, option: string) {
-    this.selectedOption = option;
-    application.isOpen = false;
-  }
-  generateTablePDF() {
-    const table = document.getElementById('dataTable');
-    if (table) {
-      const pdfWindow = window.open('', '_blank');
-      if (pdfWindow) {
-        pdfWindow.document.open();
-        pdfWindow.document.write('<html><body>');
-        pdfWindow.document.write('<table>' + table.innerHTML + '</table>');
-        pdfWindow.document.write('</body></html>');
-        pdfWindow.document.close();
-        setTimeout(() => {
-          pdfWindow.print();
-        }, 500);
-      } else {
-        console.error('Failed to open a new window for the PDF.');
-      }
-    } else {
-      console.error('Table element is not available.');
-    }
-  }
-  convertToCSV(data: any[]): string {
-    const header = Object.keys(data[0]).join(',');
-    const rows = data.map(item => Object.values(item).join(','));
-    return header + '\n' + rows.join('\n');
   }
   navigateTo(){
     this.router.navigate(['/dashboarduser']);

@@ -4,16 +4,17 @@
     <h1 class="mt-4">Notification</h1>
     <div class="row">
       <div class="col-12" *ngFor="let application of filteredData">
-        <div class="new-messages">
-          <p *ngIf="application.userStatus">New Messages</p>
-          <ul>
-            <li>
-              Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
-            </li>
-          </ul>
-        </div>
+    
         <div class="card mb-4">
           <div class="card-body" style="flex-grow: 1;">
+            <div class="new-messages">
+              <p *ngIf="application.userStatus">New Messages</p>
+              <ul>
+                <li>
+                  Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
+                </li>
+              </ul>
+            </div>
             <h2>Haven't heard back?</h2>
             <p>You are more likely to hear back on your application if you follow up with a message.</p>
             <h1>{{ application.jutitle }}</h1>
