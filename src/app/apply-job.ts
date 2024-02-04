@@ -19,8 +19,10 @@ export class ApplyJob {
     uid: string;
     jobid:string;
     profileupdate: string;
+    sendTime: Date | null;
     isOpen: boolean; // Add this property
     selectedOption: string; 
+    userStatus: boolean;
     constructor() {
       this.juid = "";
       this.juname = "";
@@ -44,6 +46,8 @@ export class ApplyJob {
       this.profileupdate = "";
       this.isOpen = false;
       this.selectedOption = "";
+      this.sendTime = null;
+      this.userStatus = false;
     }
   }
   

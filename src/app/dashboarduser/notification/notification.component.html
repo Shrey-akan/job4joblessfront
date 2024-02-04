@@ -1,16 +1,23 @@
 <div class="container mt-5">
 
   <ng-container *ngIf="filteredData && filteredData.length > 0; else noNotifications">
-    <h2 class="mt-4">Job Applications Notification</h2>
-  <div class="row">
-    <div class="col-12" *ngFor="let application of filteredData">
-      <div class="card mb-4">
-        <div class="card-body" style="flex-grow: 1;">
-          <h2>{{ application.jucompny }}</h2>
-          <h2>{{ application.jutitle }}</h2>
-          <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
-          <!-- <p><strong>Mail:</strong> {{ application.jumail }}</p> -->
-          <p><strong>Mail:</strong> <a [href]="'mailto:' + application.jumail">{{ application.jumail }}</a></p>
+    <h1 class="mt-4">Notification</h1>
+    <div class="row">
+      <div class="col-12" *ngFor="let application of filteredData">
+        <div class="new-messages">
+          <p *ngIf="application.userStatus">New Messages</p>
+          <ul>
+            <li>
+              Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body" style="flex-grow: 1;">
+            <h2>Haven't heard back?</h2>
+            <p>You are more likely to hear back on your application if you follow up with a message.</p>
+            <h1>{{ application.jutitle }}</h1>
+            <h2>{{ application.jucompny }}</h2>
             <div *ngIf="application.profileupdate === 'Reviewed'">
               <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i>
               <span style="color: #fb9379;"> Reviewed</span>
@@ -27,21 +34,14 @@
               <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
             </div>
+            <button class="btn custom-btn rounded-pill mt-2 send-message-btn">
+              Send Message
+              <i class="fa-solid fa-arrow-right" style="color: black;"></i>
+            </button>
+          </div>
         </div>
-        <div class="card-footer" *ngIf="expandedUser === application">
-          <p><strong>Location:</strong> {{ application.jurelocation }}</p>
-          <p><strong>Education:</strong> {{ application.jueducation }}</p>
-          <p><strong>Experience:</strong> {{ application.juexperience }}</p>
-
-          <p><strong>Interview Date:</strong> {{ application.juinterviewdate }}</p>
-
-          <p><strong>Job Title:</strong> {{ application.jujobtitle }}</p>
-          <p><strong>Company Name:</strong> {{ application.jucompanyname }}</p>
-        </div>
-        <button class="btn custom-btn rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">    {{ expandedUser === application ? 'Less Info' : 'More Info' }}</button>
       </div>
     </div>
-  </div>
 </ng-container>
 
 <ng-template #noNotifications>
