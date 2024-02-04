@@ -4,7 +4,12 @@
     <h1 class="mt-4">Notification</h1>
     <div class="row">
       <div class="col-12" *ngFor="let application of filteredData">
-        <div class="card mb-4">
+        <div class="card mb-4" [ngClass]="{'new-message-card': application.userStatus}">
+          <div class="card-header">
+            <button class="btn btn-link close-btn">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
           <div class="card-body" style="flex-grow: 1; position: relative;">
             <div class="new-messages">
               <div *ngIf="application.userStatus">
@@ -42,6 +47,7 @@
         </div>
       </div>
     </div>
+    
     
   </ng-container>
 
