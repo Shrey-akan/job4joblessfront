@@ -73,12 +73,18 @@ export class NotificationComponent implements OnInit {
   }
 
   formatTimeAgo(date: Date | null): string {
-    if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+    if (!date) {
       return 'No date available';
     }
   
+    const parsedDate = date instanceof Date ? date : new Date(date);
+  
+    if (isNaN(parsedDate.getTime())) {
+      return 'Invalid date';
+    }
+  
     const now = new Date();
-    const timeDifference = now.getTime() - date.getTime();
+    const timeDifference = now.getTime() - parsedDate.getTime();
     
     const seconds = Math.floor(timeDifference / 1000);
     const minutes = Math.floor(seconds / 60);
@@ -101,5 +107,5 @@ export class NotificationComponent implements OnInit {
       return 'just now';
     }
   }
-
+  
 }
