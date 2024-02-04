@@ -46,11 +46,22 @@ export class MyjobsComponent implements OnInit{
       this.fetchJobapplieddetails();
     });
   }
+  // fetchJobapplieddetails() {
+  //   let response: any = this.b1.fetchapplyform();
+  //   response.subscribe((data1: any) => {
+  //     this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
+  //     this.filteredData = this.data;
+  //   });
+  // }
   fetchJobapplieddetails() {
     let response: any = this.b1.fetchapplyform();
     response.subscribe((data1: any) => {
       this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
-      this.filteredData = this.data;
+      this.filteredData = this.data.sort((a: ApplyJob, b: ApplyJob) => {
+        const dateA = new Date(a.sendTime || 0);
+        const dateB = new Date(b.sendTime || 0);
+        return dateB.getTime() - dateA.getTime(); // Sort in descending order
+      });
     });
   }
   filterApplications(status: string) {

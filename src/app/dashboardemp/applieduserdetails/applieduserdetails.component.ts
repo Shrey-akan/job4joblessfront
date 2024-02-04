@@ -55,6 +55,15 @@ export class ApplieduserdetailsComponent implements OnInit {
     let response: any = this.b1.fetchapplyform();
     response.subscribe((data1: any) => {
       this.data = data1.filter((applyjobf: any) => applyjobf.empid == this.empId);
+      
+      // Sort the data by sendTime in descending order
+      this.filteredData = this.data
+        .sort((a: ApplyJob, b: ApplyJob) => {
+          const dateA = new Date(a.sendTime || 0);
+          const dateB = new Date(b.sendTime || 0);
+          return dateB.getTime() - dateA.getTime();
+        });
+
       // Initially, display all applications
       this.filteredData = this.data;
     });
@@ -105,13 +114,10 @@ export class ApplieduserdetailsComponent implements OnInit {
   }
 
   updateProfileUpdate(application: ApplyJob) {
-    // Update the 'profileupdate' field of the selected 'application'
     application.profileupdate = this.selectedOption;
     
-    // Make an HTTP request to update the 'profileupdate' field in the database
     this.b1.updateProfileUpdate(application).subscribe((updatedApplication: any) => {
-      // Handle the response if needed
-      // console.log('Profile updated:', updatedApplication);
+
     });
   }
 

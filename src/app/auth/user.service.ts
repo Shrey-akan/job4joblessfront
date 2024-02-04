@@ -803,4 +803,14 @@ export class UserService {
     const url = `${API_BASE_URL}fetchquestionbyjobid?jobid=${jobid}`;
     return this.h1.get(url);
   }
+
+  deleteUserStatus(uid: string, juid: string): Observable<boolean> {
+    const url = `${API_BASE_URL}deleteUserStatus?uid=${uid}&juid=${juid}`;
+    return this.h1.delete<boolean>(url);
+  }
+
+  updateViewCheck(uid: string, juid: string): Observable<string> {
+    const url = `${API_BASE_URL}updateViewCheck?uid=${uid}&juid=${juid}`;
+    return this.h1.put<string>(url, {});
+  }
 }

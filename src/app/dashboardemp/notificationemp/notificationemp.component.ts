@@ -73,12 +73,19 @@ export class NotificationempComponent implements OnInit {
     let response: any = this.notificationService.fetchapplyform();
     response.subscribe((data1: any) => {
       this.data = data1.filter((applyjobf: any) => applyjobf.empid == this.empId);
-      // Initially, display all applications
-      // this.filteredData = this.data;
-      this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
+      
+      // Sort the data by sendTime in descending order
+      this.filteredData = this.data
+        .sort((a: ApplyJob, b: ApplyJob) => {
+          const dateA = new Date(a.sendTime || 0);
+          const dateB = new Date(b.sendTime || 0);
+          return dateB.getTime() - dateA.getTime();
+        });
+
+      // Filter the data based on selectedStatus
+      this.filterApplications(this.selectedStatus);
     });
   }
-
   // filterApplications(status: string) {
   //   this.selectedStatus = status;
   //   if (status === 'All') {

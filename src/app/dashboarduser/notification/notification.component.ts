@@ -56,18 +56,39 @@ export class NotificationComponent implements OnInit {
     this.isLoading = true;
 
   }
+  // fetchJobapplieddetails(uid: string | null) {
+  //   console.log(uid);
+  //   let response: any = this.b1.fetchapplyformnotify(uid);
+  //   console.log(response);
+  //   response.subscribe((data1: any) => {
+  //     console.log(this.data);
+  //     this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
+  //     console.log(this.data);
+  //     this.filteredData = this.data;
+  //     console.log(this.filteredData);
+  //   });
+  // }
   fetchJobapplieddetails(uid: string | null) {
     console.log(uid);
     let response: any = this.b1.fetchapplyformnotify(uid);
     console.log(response);
     response.subscribe((data1: any) => {
       console.log(this.data);
-      this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
+      this.data = data1
+        .filter((applyjobf: any) => applyjobf.uid == this.userID)
+        .sort((a: ApplyJob, b: ApplyJob) => {
+          const dateA = a.sendTime ? new Date(a.sendTime).getTime() : 0;
+          const dateB = b.sendTime ? new Date(b.sendTime).getTime() : 0;
+          // Sorting by sendTime in descending order
+          return dateB - dateA;
+        });
+
       console.log(this.data);
       this.filteredData = this.data;
       console.log(this.filteredData);
     });
   }
+
   navigateTo(){
     this.router.navigate(['/dashboarduser']);
   }
@@ -107,5 +128,29 @@ export class NotificationComponent implements OnInit {
       return 'just now';
     }
   }
-  
+  onDeleteButtonClick(uid: string, juid: string): void {
+    this.b1.deleteUserStatus(uid, juid).subscribe(
+      (isDeleted: boolean) => {
+        if (isDeleted) {
+          console.log('UserStatus deleted successfully.');
+        } else {
+          console.log('UserStatus not found or deletion failed.');
+        }
+      },
+      (error: any) => {
+        console.error('Error deleting UserStatus:', error);
+      }
+    );
+  }
+
+  onSendMessageButtonClick(uid: string, juid: string): void {
+    this.b1.updateViewCheck(uid, juid).subscribe(
+      (response: string) => {
+        console.log(response);
+      },
+      (error: any) => {
+        console.error('Error updating ViewCheck:', error);
+      }
+    );
+  }
 }

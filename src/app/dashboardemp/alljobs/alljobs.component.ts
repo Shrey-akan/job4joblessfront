@@ -63,24 +63,30 @@ export class AlljobsComponent implements OnInit {
     });
   }
 
-  // fetchJobPostDetails() {
-  //   let response = this.b1.fetchjobpost();
 
-  //   response.subscribe((data1: any) => {
+
+  // fetchJobPostDetails() {
+  //   this.b1.fetchjobpost(this.empId).subscribe((data1: any) => {
   //     this.data = data1.filter((job: any) => job.empid == this.abc);
   //     console.log("checking the data",this.data);
   //     this.filteredData = this.data.map((job: any) => ({ ...job, showDetails: false }));
   //     console.log(this.filteredData.values);
-      
   //   });
   // }
-
   fetchJobPostDetails() {
     this.b1.fetchjobpost(this.empId).subscribe((data1: any) => {
       this.data = data1.filter((job: any) => job.empid == this.abc);
-      console.log("checking the data",this.data);
-      this.filteredData = this.data.map((job: any) => ({ ...job, showDetails: false }));
-      console.log(this.filteredData.values);
+      
+      // Sort the data by sendTime in descending order
+      this.filteredData = this.data
+        .map((job: any) => ({ ...job, showDetails: false }))
+        .sort((a: PostJob, b: PostJob) => {
+          const dateA = new Date(a.sendTime || 0);
+          const dateB = new Date(b.sendTime || 0);
+          return dateB.getTime() - dateA.getTime();
+        });
+      
+      console.log(this.filteredData);
     });
   }
   filterByJobTitle() {

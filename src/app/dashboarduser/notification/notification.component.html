@@ -14,7 +14,7 @@
                 Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
               </p>
             </div>
-            <button class="btn btn-link close-btn">
+            <button class="btn btn-link close-btn" (click)="onDeleteButtonClick(application.uid, application.juid)">
               <i class="fa-solid fa-times"></i>
             </button>
           </div>
@@ -41,7 +41,7 @@
               <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
             </div>
-            <button class="btn mt-2 send-message-btn" style="position: absolute; bottom: 0; right: 0;">
+            <button class="btn mt-2 send-message-btn" style="position: absolute; bottom: 0; right: 0;" (click)="onSendMessageButtonClick(application.uid,application.juid)">
               Send Message
               <i class="fa-solid fa-arrow-right" style="color: black;"></i>
             </button>
