@@ -145,12 +145,27 @@ export class NotificationComponent implements OnInit {
 
   onSendMessageButtonClick(uid: string, juid: string): void {
     this.b1.updateViewCheck(uid, juid).subscribe(
-      (response: string) => {
-        console.log(response);
-      },
-      (error: any) => {
-        console.error('Error updating ViewCheck:', error);
-      }
+        {
+            next: (response: string | boolean) => {
+                if (typeof response === 'boolean') {
+                    if (response) {
+                        console.log('ViewCheck updated successfully.');
+                     
+                    } else {
+                        console.log('UserStatus not found or an error occurred.');
+                        // Handle failure as needed.
+                    }
+                } else {
+                    console.error('Unexpected response:', response);
+                    // Handle unexpected response if needed.
+                }
+            },
+            error: (error: any) => {
+                console.error('Error updating ViewCheck:', error);
+                // Handle the error as needed.
+            }
+        }
     );
-  }
+}
+
 }
