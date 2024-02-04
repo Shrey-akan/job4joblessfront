@@ -4,9 +4,8 @@
     <h1 class="mt-4">Notification</h1>
     <div class="row">
       <div class="col-12" *ngFor="let application of filteredData">
-
         <div class="card mb-4">
-          <div class="card-body" style="flex-grow: 1;">
+          <div class="card-body" style="flex-grow: 1; position: relative;">
             <div class="new-messages">
               <div *ngIf="application.userStatus">
                 <p>New Messages</p>
@@ -35,9 +34,7 @@
               <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
             </div>
-          </div>
-          <div>
-            <button class="btn custom-btn rounded-pill mt-2 send-message-btn">
+            <button class="btn custom-btn rounded-pill mt-2 send-message-btn" style="position: absolute; top: 0; right: 0;">
               Send Message
               <i class="fa-solid fa-arrow-right" style="color: black;"></i>
             </button>
@@ -45,6 +42,7 @@
         </div>
       </div>
     </div>
+    
   </ng-container>
 
   <ng-template #noNotifications>
