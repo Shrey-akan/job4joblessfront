@@ -6,11 +6,6 @@
       <div class="col-12" *ngFor="let application of filteredData">
         <div class="card mb-4" [ngClass]="{'new-message-card': application.userStatus}">
           <div class="card-header">
-            <button class="btn btn-link close-btn">
-              <i class="fa-solid fa-times"></i>
-            </button>
-          </div>
-          <div class="card-body" style="flex-grow: 1; position: relative;">
             <div class="new-messages">
               <div *ngIf="application.userStatus">
                 <p>New Messages</p>
@@ -19,6 +14,12 @@
                 Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
               </p>
             </div>
+            <button class="btn btn-link close-btn">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div class="card-body" style="flex-grow: 1; position: relative;">
+       
             <h2>Haven't heard back?</h2>
             <p>You are more likely to hear back on your application if you follow up with a message.</p>
             <h1>{{ application.jutitle }}</h1>
