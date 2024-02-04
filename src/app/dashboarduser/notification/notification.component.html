@@ -11,11 +11,9 @@
               <div *ngIf="application.userStatus">
                 <p>New Messages</p>
               </div>
-              <ul>
-                <li>
-                  Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
-                </li>
-              </ul>
+              <p>
+                Message <span class="time-ago">{{ formatTimeAgo(application.sendTime) }}</span>
+              </p>
             </div>
             <h2>Haven't heard back?</h2>
             <p>You are more likely to hear back on your application if you follow up with a message.</p>
@@ -37,6 +35,8 @@
               <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
             </div>
+          </div>
+          <div>
             <button class="btn custom-btn rounded-pill mt-2 send-message-btn">
               Send Message
               <i class="fa-solid fa-arrow-right" style="color: black;"></i>
