@@ -10,7 +10,6 @@ import { ApplyJob } from 'src/app/apply-job';
 })
 export class MyjobsComponent implements OnInit{
   showFloatingGif = false;
-  // data:any
   userData1!: any;
   abc:any;
   user: any;
@@ -29,25 +28,15 @@ export class MyjobsComponent implements OnInit{
   public chatEmail: string = "";
   isTableVisible: boolean = false;
   exportedData: string = '';
-
-  // Function to toggle the table visibility
   toggleTableVisibility() {
     this.isTableVisible = !this.isTableVisible;
   }
-  // Define a property to keep track of the expanded user profile
+
   expandedUser: any | null = null;
-
-
-
-
-  // toggleDetails() {
-  //   this.showDetails = !this.showDetails;
-  // }
   constructor(public cookie:CookieService , private b1:UserService , private router:Router,private elRef: ElementRef, private renderer: Renderer2) {}
 
   userID: String = "0";
   ngOnInit(): void {
-    // this.showFloatingGifAfterDelay();
     this.userID = this.cookie.get('uid');
     let response = this.b1.fetchuser();
     response.subscribe((data1: any) => {
@@ -57,17 +46,6 @@ export class MyjobsComponent implements OnInit{
       this.fetchJobapplieddetails();
     });
   }
-
-  // fetchApplyJob() {
-  //   let response = this.b1.fetchapplyform();
-  //   response
-  //     .subscribe((data1: any) => {
-  //       this.data = data1.filter((apply: any) => apply.uid == this.userID);
-  //     });
-  // }
-
-
-
   fetchJobapplieddetails() {
     let response: any = this.b1.fetchapplyform();
     response.subscribe((data1: any) => {
@@ -123,55 +101,12 @@ export class MyjobsComponent implements OnInit{
       console.error('Table element is not available.');
     }
   }
-  
   convertToCSV(data: any[]): string {
     const header = Object.keys(data[0]).join(',');
     const rows = data.map(item => Object.values(item).join(','));
     return header + '\n' + rows.join('\n');
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   navigateTo(){
     this.router.navigate(['/dashboarduser']);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

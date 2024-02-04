@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ApplyJob } from 'src/app/apply-job';
 import { UserService } from 'src/app/auth/user.service';
 
 @Component({
@@ -9,41 +10,128 @@ import { UserService } from 'src/app/auth/user.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  notifications: any[] = []; // Initialize with an empty array
+  notifications: any[] = [];
   isLoading: boolean = true;
+  showFloatingGif = false;
+  userData1!: any;
+  abc:any;
+  user: any;
+  showDetails = false;
+  jobTitleFilter: string = '';
+  statusOptions: string[] = ['All', 'Selected', 'Rejected', 'Reviewed', 'Waiting'];
+  selectedStatus: string = 'All';
+  selectedOption: string = '';
+  isOpen: boolean = false;
+  options: string[] = ['Selected', 'Reviewed', 'Waiting', 'Rejected'];
+  empDetail: any;
 
-  constructor(private notificationService: UserService, public cookie: CookieService, private router: Router) { }
+  logval: any;
+  data: ApplyJob[] = [];
+  filteredData: ApplyJob[] = [];
+  public chatEmail: string = "";
+  isTableVisible: boolean = false;
+  exportedData: string = '';
+  toggleTableVisibility() {
+    this.isTableVisible = !this.isTableVisible;
+  }
+
+  expandedUser: any | null = null;
+  constructor(public cookie:CookieService , private b1:UserService , private router:Router,private elRef: ElementRef, private renderer: Renderer2) {}
   userID: string = "0";
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
-    // console.log(this.userID);
-    // console.log('User ID from cookie:', this.userID);
+    let response = this.b1.fetchuser();
+    response.subscribe((data1: any) => {
+      const uuid=this.userID;
+      this.userData1 = data1.find((user: any) => user.uid == uuid);
+      this.abc = this.userData1.userName;
+      this.fetchJobapplieddetails(this.userID);
+    });
     this.fetchNotifications();
   }
 
   fetchNotifications(): void {
-    this.notificationService.fetchnotify().subscribe({
+    this.b1.fetchnotify().subscribe({
       next: (response: any) => {
-        // console.log('Fetched notifications:', response);
-        // Filter notifications based on the user ID
         this.notifications = response.filter((notification: any) => {
           return notification.notifyuid === this.userID;
         });
-        this.isLoading = false; // Set isLoading to false when data is available
+        this.isLoading = false;
       },
       error: (err: any) => {
         console.error('Error fetching notifications:', err);
-        this.isLoading = false; // Set isLoading to false on error as well
+        this.isLoading = false;
       }
     });
   }
 
   refreshNotifications() {
-    this.isLoading = true; // Set isLoading to true before fetching data
+    this.isLoading = true;
     this.fetchNotifications();
   }
+  async fetchJobapplieddetails(uid: string | null) {
+    let response: any = this.b1.fetchapplyformnotify(uid);
+    response.subscribe((data1: any) => {
+      this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
+      this.filteredData = this.data;
+    });
+  }
+  filterApplications(status: string) {
+    this.selectedStatus = status;
+    if (status === 'All') {
+      this.filteredData = this.data;
+    } else {
+      this.filteredData = this.data.filter((application: ApplyJob) => application.profileupdate === this.selectedStatus);
+    }
+  }
+  filterByJobTitle() {
+    if (!this.jobTitleFilter) {
+      this.filteredData = this.data;
+    } else {
+      this.filteredData = this.data.filter((application: ApplyJob) =>
+        application.jutitle.toLowerCase().includes(this.jobTitleFilter.toLowerCase())
+      );
+    }
+  }
 
+  showMoreInfo(user: ApplyJob):void {
+    this.expandedUser = this.expandedUser === user ? null : user;
+  }
+
+
+  selectOption(application: any, option: string) {
+    this.selectedOption = option;
+    application.isOpen = false;
+  }
+  generateTablePDF() {
+    const table = document.getElementById('dataTable');
+    if (table) {
+      const pdfWindow = window.open('', '_blank');
+      if (pdfWindow) {
+        pdfWindow.document.open();
+        pdfWindow.document.write('<html><body>');
+        pdfWindow.document.write('<table>' + table.innerHTML + '</table>');
+        pdfWindow.document.write('</body></html>');
+        pdfWindow.document.close();
+        setTimeout(() => {
+          pdfWindow.print();
+        }, 500);
+      } else {
+        console.error('Failed to open a new window for the PDF.');
+      }
+    } else {
+      console.error('Table element is not available.');
+    }
+  }
+  convertToCSV(data: any[]): string {
+    const header = Object.keys(data[0]).join(',');
+    const rows = data.map(item => Object.values(item).join(','));
+    return header + '\n' + rows.join('\n');
+  }
+  navigateTo(){
+    this.router.navigate(['/dashboarduser']);
+  }
 
 
 }

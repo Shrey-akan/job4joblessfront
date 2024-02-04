@@ -1,4 +1,4 @@
-<div class="notification-container" *ngIf="notifications && notifications.length > 0; else noNotifications">
+<!-- <div class="notification-container" *ngIf="notifications && notifications.length > 0; else noNotifications">
   <div *ngFor="let notification of notifications" class="notification">
     <h3>{{ notification.nhead }}</h3>
     <p>{{ notification.nsubhead }}</p>
@@ -6,8 +6,6 @@
     <p>{{ notification.notisend }}</p>
   </div>
 </div>
-
-<!-- Template for no notifications -->
 <ng-template #noNotifications>
   <div class="no-notifications">
     <div class="center-content">
@@ -17,4 +15,122 @@
       <button class="btn custom-btn mt-3 rounded-pill" (click)="refreshNotifications()">Refresh</button>
     </div>
   </div>
-</ng-template>
+</ng-template> -->
+
+<div class="container mt-5">
+  <!-- Filter by Status -->
+  <div class="status-filter">
+    <h1>Filter by Status</h1>
+    <ul class="list-inline">
+      <li (click)="filterApplications('All')" class="list-inline-item status-option">All Applications</li>
+      <li (click)="filterApplications('Selected')" class="list-inline-item status-option">Selected <i class="fa-solid fa-circle-check fa-1x" style="color: #388a53;"></i></li>
+      <li (click)="filterApplications('Rejected')" class="list-inline-item status-option">Rejected   <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i></li>
+      <li (click)="filterApplications('Reviewed')" class="list-inline-item status-option">Reviewed <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i></li>
+      <li (click)="filterApplications('Waiting')" class="list-inline-item status-option">Waiting<i class="fa-solid fa-clock fa-1x"></i></li>
+      <li (click)="toggleTableVisibility()" class="list-inline-item status-option">Show in Table</li>
+    </ul>
+  </div>
+  <div class="form-group mt-3">
+    <label for="jobTitleFilter">Filter by Job Title:</label>
+    <input type="text" class="form-control" id="jobTitleFilter" [(ngModel)]="jobTitleFilter" (input)="filterByJobTitle()" />
+  </div>
+  <h2 class="mt-4">Job Applications</h2>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let application of filteredData">
+      <div class="card mb-4">
+        <div class="card-body" style="flex-grow: 1;">
+          <h2>{{ application.jucompny }}</h2>
+          <h2>{{ application.jutitle }}</h2>
+          <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
+          <!-- <p><strong>Mail:</strong> {{ application.jumail }}</p> -->
+          <p><strong>Mail:</strong> <a [href]="'mailto:' + application.jumail">{{ application.jumail }}</a></p>
+            <div *ngIf="application.profileupdate === 'Reviewed'">
+              <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i>
+              <span style="color: #fb9379;"> Reviewed</span>
+            </div>
+            <div *ngIf="application.profileupdate === 'Selected'">
+              <i class="fa-solid fa-circle-check fa-1x" style="color: #388a53;"></i>
+              <span style="color: #388a53;"> Selected</span>
+            </div>
+            <div *ngIf="application.profileupdate === 'Waiting'">
+              <i class="fa-solid fa-clock fa-1x"></i>
+              <span> Waiting</span>
+            </div>
+            <div *ngIf="application.profileupdate === 'Rejected'">
+              <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
+              <span style="color: #ac2402;"> Rejected</span>
+            </div>
+        </div>
+        <div class="card-footer" *ngIf="expandedUser === application">
+          <p><strong>Location:</strong> {{ application.jurelocation }}</p>
+          <p><strong>Education:</strong> {{ application.jueducation }}</p>
+          <p><strong>Experience:</strong> {{ application.juexperience }}</p>
+
+          <p><strong>Interview Date:</strong> {{ application.juinterviewdate }}</p>
+
+          <p><strong>Job Title:</strong> {{ application.jujobtitle }}</p>
+          <p><strong>Company Name:</strong> {{ application.jucompanyname }}</p>
+        </div>
+        <button class="btn custom-btn rounded-pill  btn-block mt-2" (click)="showMoreInfo(application)">    {{ expandedUser === application ? 'Less Info' : 'More Info' }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center my-4">
+  <button class="btn custom-btn rounded-pill "(click)="toggleTableVisibility()">
+    {{ isTableVisible ? 'Hide Table' : 'Show Table' }}
+  </button>
+</div>
+
+<h2 class="mt-4 text-center">My Jobs Applications</h2>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered table-striped" *ngIf="isTableVisible" id="dataTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Company</th>
+        <th>Title</th>
+        <th>Resume</th>
+        <th>Location</th>
+        <th>Education</th>
+        <th>Experience</th>
+    
+        <th>Interview Date</th>
+    
+        <th>Job Title</th>
+        <th>Company Name</th>
+        <th>Description</th>
+        <th>Phone</th>
+        <th>Last Salary</th>
+        <th>Expected Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let application of filteredData">
+        <td>{{ application.juname }}</td>
+        <td>{{ application.jumail }}</td>
+        <td>{{ application.jucompny }}</td>
+        <td>{{ application.jutitle }}</td>
+        <td>{{ application.juresume }}</td>
+        <td>{{ application.jurelocation }}</td>
+        <td>{{ application.jueducation }}</td>
+        <td>{{ application.juexperience }}</td>
+ 
+        <td>{{ application.juinterviewdate }}</td>
+
+        <td>{{ application.jujobtitle }}</td>
+        <td>{{ application.jucompanyname }}</td>
+        <td>{{ application.description }}</td>
+        <td>{{ application.juphone }}</td>
+        <td>{{ application.julastsal }}</td>
+        <td>{{ application.juexpecsalary }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-center">
+  <button class="btn custom-btn rounded-pill" *ngIf="isTableVisible" (click)="generateTablePDF()">Download Table</button>
+</div>

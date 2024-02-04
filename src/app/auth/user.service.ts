@@ -109,6 +109,7 @@ export class UserService {
   // Apply Job
   inserturlapplyjob = `${API_BASE_URL}insertapplyjob`;
   fetchapplyjobform = `${API_BASE_URL}fetchapplyform`;
+  fetchapplyjobformnotify = `${API_BASE_URL}notificationforuser`;
   // Notification
   notificationurl = `${API_BASE_URL}insertnotification`;
   fetchnotificationurl = `${API_BASE_URL}fetchnotify`;
@@ -652,6 +653,12 @@ export class UserService {
   //Appply form data
   fetchapplyform() {
     return this.h1.get(this.fetchapplyjobform);
+  }
+
+  fetchapplyformnotify(uid: string | null) {
+    // Append uid to the URL if it's not null
+    const url = uid ? `${this.fetchapplyjobformnotify}?uid=${uid}` : this.fetchapplyjobformnotify;
+    return this.h1.get(url);
   }
 
   //update apply form by employer 
