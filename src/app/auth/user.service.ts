@@ -656,7 +656,6 @@ export class UserService {
   }
 
   fetchapplyformnotify(uid: string | null) {
-    // Append uid to the URL if it's not null
     const url = uid ? `${this.fetchapplyjobformnotify}?uid=${uid}` : this.fetchapplyjobformnotify;
     return this.h1.get(url);
   }

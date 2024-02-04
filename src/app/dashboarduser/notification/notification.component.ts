@@ -48,23 +48,9 @@ export class NotificationComponent implements OnInit {
       this.abc = this.userData1.userName;
       this.fetchJobapplieddetails(this.userID);
     });
-    // this.fetchNotifications();
+
   }
 
-  // fetchNotifications(): void {
-  //   this.b1.fetchnotify().subscribe({
-  //     next: (response: any) => {
-  //       this.notifications = response.filter((notification: any) => {
-  //         return notification.notifyuid === this.userID;
-  //       });
-  //       this.isLoading = false;
-  //     },
-  //     error: (err: any) => {
-  //       console.error('Error fetching notifications:', err);
-  //       this.isLoading = false;
-  //     }
-  //   });
-  // }
 
   refreshNotifications() {
     this.isLoading = true;
@@ -73,10 +59,13 @@ export class NotificationComponent implements OnInit {
   fetchJobapplieddetails(uid: string | null) {
     console.log(uid);
     let response: any = this.b1.fetchapplyformnotify(uid);
-    console.log(response.data);
+    console.log(response);
     response.subscribe((data1: any) => {
+      console.log(this.data);
       this.data = data1.filter((applyjobf: any) => applyjobf.uid == this.userID);
+      console.log(this.data);
       this.filteredData = this.data;
+      console.log(this.filteredData);
     });
   }
   navigateTo(){
