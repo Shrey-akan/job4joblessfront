@@ -77,6 +77,7 @@ export class AppComponent implements OnInit {
     const tokenid = generateRandomTokenId();
     this.http.post(apiUrl, { token, tokenid }).subscribe({
       next: (response: any) => {
+        console.log(response);
       },
       error: (error) => {
       }
