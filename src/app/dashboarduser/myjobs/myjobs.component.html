@@ -41,9 +41,8 @@
               <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
             </div> -->
-            <div class="status-line">
-              <div [ngClass]="getStatusIconClass(application.profileupdate)"></div>
-              <div class="status-text">{{ getStatusText(application.profileupdate) }}</div>
+            <div class="status-tracker">
+              <div class="status-segment" [ngStyle]="getStatusSegmentStyle(application.profileupdate)"></div>
             </div>
             
         </div>

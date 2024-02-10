@@ -14,35 +14,29 @@
   background-color: #1e2e5c;
 }
 
-.status-line {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.status-icon {
-  width: 20px;
+.status-tracker {
   height: 20px;
-  border-radius: 50%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.status-text {
-  margin-left: 10px;
+.status-segment {
+  height: 100%;
 }
 
-/* Define styles for different status icons */
-.status-icon.waiting {
+.status-segment.waiting {
   background-color: #ccc;
 }
 
-.status-icon.reviewed {
+.status-segment.reviewed {
   background-color: #fb9379;
 }
 
-.status-icon.selected {
+.status-segment.selected {
   background-color: #388a53;
 }
 
-.status-icon.rejected {
+.status-segment.rejected {
   background-color: #ac2402;
 }

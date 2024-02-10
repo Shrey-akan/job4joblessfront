@@ -85,35 +85,23 @@ export class MyjobsComponent implements OnInit{
   showMoreInfo(user: ApplyJob):void {
     this.expandedUser = this.expandedUser === user ? null : user;
   }
-  getStatusIconClass(status: string): string {
+  getStatusSegmentStyle(status: string): any {
+    let width = '25%'; // Default width for each segment
     switch (status) {
       case 'Waiting':
-        return 'status-icon waiting';
+        width = '25%';
+        break;
       case 'Reviewed':
-        return 'status-icon reviewed';
+        width = '50%';
+        break;
       case 'Selected':
-        return 'status-icon selected';
+        width = '75%';
+        break;
       case 'Rejected':
-        return 'status-icon rejected';
-      default:
-        return 'status-icon';
+        width = '100%';
+        break;
     }
-  }
-
-  // Method to get the status text based on the application status
-  getStatusText(status: string): string {
-    switch (status) {
-      case 'Waiting':
-        return 'Waiting';
-      case 'Reviewed':
-        return 'Reviewed';
-      case 'Selected':
-        return 'Selected';
-      case 'Rejected':
-        return 'Rejected';
-      default:
-        return '';
-    }
+    return { width: width };
   }
 
   selectOption(application: any, option: string) {
