@@ -30,13 +30,19 @@
 }
 
 .status {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: #ccc;
-  margin: 5px;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  font-weight: bold;
 }
 
 .status.active {
   background-color: #388a53; /* Active color */
+  color: #fff;
 }

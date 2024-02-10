@@ -42,10 +42,10 @@
               <span style="color: #ac2402;"> Rejected</span>
             </div> -->
             <div class="status-tracker">
-              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">Waiting</div>
-              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' }">Reviewed</div>
-              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' }">Selected</div>
-              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Rejected' }">Rejected</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">1</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' || application.profileupdate === 'Waiting' }">2</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' || application.profileupdate === 'Reviewed' || application.profileupdate === 'Waiting' }">3</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Rejected' }">4</div>
             </div>
             
         </div>
