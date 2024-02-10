@@ -23,23 +23,20 @@
   overflow: hidden;
 }
 
+.status-tracker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .status {
-  flex-grow: 1;
-  height: 100%;
-}
-
-.status.Waiting {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   background-color: #ccc;
+  margin: 5px;
 }
 
-.status.Reviewed {
-  background-color: #fb9379;
-}
-
-.status.Selected {
-  background-color: #388a53;
-}
-
-.status.Rejected {
-  background-color: #ac2402;
+.status.active {
+  background-color: #388a53; /* Active color */
 }

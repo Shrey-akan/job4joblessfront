@@ -42,7 +42,10 @@
               <span style="color: #ac2402;"> Rejected</span>
             </div> -->
             <div class="status-tracker">
-              <div class="status" [ngClass]="application.profileupdate"></div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">Waiting</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' }">Reviewed</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' }">Selected</div>
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Rejected' }">Rejected</div>
             </div>
             
         </div>
