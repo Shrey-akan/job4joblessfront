@@ -1,35 +1,20 @@
-.status-option {
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.status-option:hover {
-  background-color: #f0f0f0;
-}
-.custom-btn {
-  color: white;
-  background-color: #1e2e5c;
-}
-
-.status-tracker {
-  display: flex;
-  align-items: center;
-  height: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 .status-tracker {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.status .status-label {
+  margin-right: 5px;
+}
+
+.status .status-number {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -38,11 +23,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
   font-weight: bold;
 }
 
-.status.active {
-  background-color: #388a53; /* Active color */
+.status.active .status-number {
+  background-color: #388a53;
   color: #fff;
 }
