@@ -15,28 +15,31 @@
 }
 
 .status-tracker {
+  display: flex;
+  align-items: center;
   height: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
 }
 
-.status-segment {
+.status {
+  flex-grow: 1;
   height: 100%;
 }
 
-.status-segment.waiting {
+.status.Waiting {
   background-color: #ccc;
 }
 
-.status-segment.reviewed {
+.status.Reviewed {
   background-color: #fb9379;
 }
 
-.status-segment.selected {
+.status.Selected {
   background-color: #388a53;
 }
 
-.status-segment.rejected {
+.status.Rejected {
   background-color: #ac2402;
 }
