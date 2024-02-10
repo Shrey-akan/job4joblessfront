@@ -46,19 +46,28 @@
                 <span class="status-number">1</span>
                 <span class="status-label">Waiting</span>
               </div>
+              <hr class="vertical-line" />
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' }">
                 <span class="status-number">2</span>
                 <span class="status-label">Reviewed</span>
               </div>
+              <hr class="vertical-line" />
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' || application.profileupdate === 'Reviewed' }">
-                <span class="status-number">3</span>
+                <span class="status-number">
+                  <i class="fas fa-check" *ngIf="application.profileupdate === 'Selected'"></i>
+                  <i class="fas fa-spinner" *ngIf="application.profileupdate === 'Reviewed'"></i>
+                </span>
                 <span class="status-label">Selected</span>
               </div>
+              <hr class="vertical-line" *ngIf="application.profileupdate !== 'Rejected'" />
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Rejected' }">
-                <span class="status-number">4</span>
+                <span class="status-number">
+                  <i class="fas fa-times"></i>
+                </span>
                 <span class="status-label">Rejected</span>
               </div>
             </div>
+            
             
             
             

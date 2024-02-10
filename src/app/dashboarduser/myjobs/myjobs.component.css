@@ -20,16 +20,13 @@
 }
 
 .status {
+  position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.status .status-label {
-  margin-right: 5px;
-}
-
-.status .status-number {
+.status-number {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -39,9 +36,25 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  margin-right: 10px;
+}
+
+.status-label {
+  margin-right: 10px;
 }
 
 .status.active .status-number {
   background-color: #388a53;
   color: #fff;
+  border-color: transparent;
+}
+
+.vertical-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 1px); /* Adjust the position of the vertical line */
+  width: 2px;
+  background-color: #ccc;
+  z-index: -1;
 }
