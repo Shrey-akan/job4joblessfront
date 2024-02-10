@@ -23,9 +23,9 @@
           <h2>{{ application.jucompny }}</h2>
           <h2>{{ application.jutitle }}</h2>
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
-          <!-- <p><strong>Mail:</strong> {{ application.jumail }}</p> -->
+        
           <p><strong>Mail:</strong> <a [href]="'mailto:' + application.jumail">{{ application.jumail }}</a></p>
-            <div *ngIf="application.profileupdate === 'Reviewed'">
+            <!-- <div *ngIf="application.profileupdate === 'Reviewed'">
               <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i>
               <span style="color: #fb9379;"> Reviewed</span>
             </div>
@@ -40,7 +40,12 @@
             <div *ngIf="application.profileupdate === 'Rejected'">
               <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
               <span style="color: #ac2402;"> Rejected</span>
+            </div> -->
+            <div class="status-line">
+              <div [ngClass]="getStatusIconClass(application.profileupdate)"></div>
+              <div class="status-text">{{ getStatusText(application.profileupdate) }}</div>
             </div>
+            
         </div>
         <div class="card-footer" *ngIf="expandedUser === application">
           <p><strong>Location:</strong> {{ application.jurelocation }}</p>

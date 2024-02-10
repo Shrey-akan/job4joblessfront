@@ -85,7 +85,36 @@ export class MyjobsComponent implements OnInit{
   showMoreInfo(user: ApplyJob):void {
     this.expandedUser = this.expandedUser === user ? null : user;
   }
+  getStatusIconClass(status: string): string {
+    switch (status) {
+      case 'Waiting':
+        return 'status-icon waiting';
+      case 'Reviewed':
+        return 'status-icon reviewed';
+      case 'Selected':
+        return 'status-icon selected';
+      case 'Rejected':
+        return 'status-icon rejected';
+      default:
+        return 'status-icon';
+    }
+  }
 
+  // Method to get the status text based on the application status
+  getStatusText(status: string): string {
+    switch (status) {
+      case 'Waiting':
+        return 'Waiting';
+      case 'Reviewed':
+        return 'Reviewed';
+      case 'Selected':
+        return 'Selected';
+      case 'Rejected':
+        return 'Rejected';
+      default:
+        return '';
+    }
+  }
 
   selectOption(application: any, option: string) {
     this.selectedOption = option; // Update the selected option

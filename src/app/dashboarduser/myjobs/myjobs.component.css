@@ -13,3 +13,36 @@
   color: white;
   background-color: #1e2e5c;
 }
+
+.status-line {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.status-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.status-text {
+  margin-left: 10px;
+}
+
+/* Define styles for different status icons */
+.status-icon.waiting {
+  background-color: #ccc;
+}
+
+.status-icon.reviewed {
+  background-color: #fb9379;
+}
+
+.status-icon.selected {
+  background-color: #388a53;
+}
+
+.status-icon.rejected {
+  background-color: #ac2402;
+}
