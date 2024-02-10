@@ -43,20 +43,20 @@
             </div> -->
             <div class="status-tracker">
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">
-                <span class="status-label">Waiting</span>
                 <span class="status-number">1</span>
+                <span class="status-label">Waiting</span>
               </div>
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' }">
-                <span class="status-label">Reviewed</span>
                 <span class="status-number">2</span>
+                <span class="status-label">Reviewed</span>
               </div>
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' || application.profileupdate === 'Reviewed' }">
-                <span class="status-label">Selected</span>
                 <span class="status-number">3</span>
+                <span class="status-label">Selected</span>
               </div>
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Rejected' }">
-                <span class="status-label">Rejected</span>
                 <span class="status-number">4</span>
+                <span class="status-label">Rejected</span>
               </div>
             </div>
             
