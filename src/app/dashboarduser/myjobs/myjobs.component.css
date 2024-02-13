@@ -41,8 +41,27 @@
 
 /* Style for active status */
 .active .status-number {
-  background-color: #007bff;
   color: white;
+}
+
+/* Style for waiting status */
+.status.waiting .status-number {
+  background-color: #fb9379; /* Custom color for waiting status */
+}
+
+/* Style for reviewed status */
+.status.reviewed .status-number {
+  background-color: #f2b30c; /* Custom color for reviewed status */
+}
+
+/* Style for selected status */
+.status.selected .status-number {
+  background-color: #28a745; /* Custom color for selected status */
+}
+
+/* Style for rejected status */
+.status.rejected .status-number {
+  background-color: #dc3545; /* Custom color for rejected status */
 }
 
 /* Style for the status label */
