@@ -50,31 +50,35 @@
             <div class="status-tracker">
               <!-- Waiting Status -->
               <div class="status waiting" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">
-                <span class="status-number">
+                <span class="status-icon">
                   <i class="fas fa-clock" *ngIf="application.profileupdate === 'Waiting'"></i>
+                  <span class="status-number" *ngIf="application.profileupdate !== 'Waiting'">1</span>
                 </span>
                 <span class="status-label">Waiting</span>
               </div>
             
               <!-- Reviewed Status -->
               <div class="status reviewed" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' }">
-                <span class="status-number">
+                <span class="status-icon">
                   <i class="fas fa-eye" *ngIf="application.profileupdate === 'Reviewed'"></i>
+                  <span class="status-number" *ngIf="application.profileupdate !== 'Reviewed'">2</span>
                 </span>
                 <span class="status-label">Reviewed</span>
               </div>
             
               <!-- Selected or Rejected Status -->
               <div class="status" [ngClass]="{ 'selected': application.profileupdate === 'Selected', 'rejected': application.profileupdate === 'Rejected', 'active': application.profileupdate === 'Selected' || application.profileupdate === 'Rejected' }">
-                <span class="status-number">
+                <span class="status-icon">
                   <i class="fas fa-check" *ngIf="application.profileupdate === 'Selected'"></i>
                   <i class="fas fa-times" *ngIf="application.profileupdate === 'Rejected'"></i>
+                  <span class="status-number" *ngIf="application.profileupdate !== 'Selected' && application.profileupdate !== 'Rejected'">3</span>
                 </span>
                 <span class="status-label">
                   {{ application.profileupdate === 'Selected' ? 'Selected' : 'Rejected' }}
                 </span>
               </div>
             </div>
+            
             
 
 

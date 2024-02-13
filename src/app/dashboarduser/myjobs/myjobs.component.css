@@ -17,34 +17,35 @@
 /* Style for the status tracker */
 .status-tracker {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 /* Style for each status */
 .status {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  margin-bottom: 20px; /* Adjust as needed */
 }
 
-/* Style for the status label */
-.status-label {
-  margin-top: 8px;
+/* Style for the status icon */
+.status-icon {
+  position: relative;
 }
 
-/* Style for the icons */
-.fa-clock {
-  color: #007bff; /* Blue color for Waiting */
+/* Style for the status number */
+.status-number {
+  position: absolute;
+  top: -10px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: #007bff; /* Default color for status count */
+  padding: 5px;
+  font-size: 12px;
+  color: #fff;
 }
 
-.fa-eye {
-  color: #fb9379; /* Light orange color for Reviewed */
-}
-
-.fa-check {
-  color: #388a53; /* Green color for Selected */
-}
-
-.fa-times {
-  color: #ac2402; /* Red color for Rejected */
+/* Style for the active status */
+.active .status-number {
+  display: none;
 }
