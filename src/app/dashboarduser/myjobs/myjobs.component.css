@@ -13,48 +13,39 @@
   color: white;
   background-color: #1e2e5c;
 }
+
+/* Style for the status tracker */
 .status-tracker {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
 }
 
+/* Style for each status */
 .status {
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
 }
 
+/* Style for the status number */
 .status-number {
-  width: 30px;
-  height: 30px;
+  position: relative;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 2px solid #ccc;
-  background-color: #fff;
+  background-color: #f2f2f2;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  margin-right: 10px;
 }
 
+/* Style for active status */
+.active .status-number {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Style for the status label */
 .status-label {
-  margin-right: 10px;
-}
-
-.status.active .status-number {
-  background-color: #388a53;
-  color: #fff;
-  border-color: transparent;
-}
-
-.vertical-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(50% - 1px); /* Adjust the position of the vertical line */
-  width: 2px;
-  background-color: #ccc;
-  z-index: -1;
+  margin-top: 8px;
 }
