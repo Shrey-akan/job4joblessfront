@@ -13,39 +13,48 @@
   color: white;
   background-color: #1e2e5c;
 }
-
-/* Style for the status tracker */
 .status-tracker {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
-/* Style for each status */
 .status {
+  position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Adjust as needed */
+  margin-bottom: 20px;
 }
 
-/* Style for the status icon */
-.status-icon {
-  position: relative;
-}
-
-/* Style for the status number */
 .status-number {
-  position: absolute;
-  top: -10px; /* Adjust as needed */
-  left: 50%;
-  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: #007bff; /* Default color for status count */
-  padding: 5px;
-  font-size: 12px;
-  color: #fff;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-/* Style for the active status */
-.active .status-number {
-  display: none;
+.status-label {
+  margin-right: 10px;
+}
+
+.status.active .status-number {
+  background-color: #388a53;
+  color: #fff;
+  border-color: transparent;
+}
+
+.vertical-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 1px); /* Adjust the position of the vertical line */
+  width: 2px;
+  background-color: #ccc;
+  z-index: -1;
 }
