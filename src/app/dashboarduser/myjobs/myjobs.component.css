@@ -27,44 +27,24 @@
   align-items: center;
 }
 
-/* Style for the status number */
-.status-number {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Style for active status */
-.active .status-number {
-  color: white;
-}
-
-/* Style for waiting status */
-.status.waiting .status-number {
-  background-color: #fb9379; /* Custom color for waiting status */
-}
-
-/* Style for reviewed status */
-.status.reviewed .status-number {
-  background-color: #f2b30c; /* Custom color for reviewed status */
-}
-
-/* Style for selected status */
-.status.selected .status-number {
-  background-color: #28a745; /* Custom color for selected status */
-}
-
-/* Style for rejected status */
-.status.rejected .status-number {
-  background-color: #dc3545; /* Custom color for rejected status */
-}
-
 /* Style for the status label */
 .status-label {
   margin-top: 8px;
+}
+
+/* Style for the icons */
+.fa-clock {
+  color: #007bff; /* Blue color for Waiting */
+}
+
+.fa-eye {
+  color: #fb9379; /* Light orange color for Reviewed */
+}
+
+.fa-check {
+  color: #388a53; /* Green color for Selected */
+}
+
+.fa-times {
+  color: #ac2402; /* Red color for Rejected */
 }
