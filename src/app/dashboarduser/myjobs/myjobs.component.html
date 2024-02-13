@@ -44,32 +44,29 @@
             <div class="status-tracker">
               <!-- Waiting Status -->
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">
-                <span class="status-number">1</span>
-                <span class="status-label">Waiting</span>
+                <span class="status-number" *ngIf="application.profileupdate !== 'Waiting'">1</span>
                 <i class="fas fa-clock" *ngIf="application.profileupdate === 'Waiting'"></i>
+                <span class="status-label">Waiting</span>
               </div>
               
               <!-- Reviewed Status -->
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Reviewed' }">
-                <span class="status-number">2</span>
-                <span class="status-label">Reviewed</span>
+                <span class="status-number" *ngIf="application.profileupdate !== 'Reviewed'">2</span>
                 <i class="fas fa-spinner" *ngIf="application.profileupdate === 'Reviewed'"></i>
+                <span class="status-label">Reviewed</span>
               </div>
               
-              <!-- Selected Status -->
-              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' }">
-                <span class="status-number">3</span>
-                <span class="status-label">Selected</span>
+              <!-- Selected or Rejected Status -->
+              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Selected' || application.profileupdate === 'Rejected' }">
+                <span class="status-number" *ngIf="application.profileupdate !== 'Selected' && application.profileupdate !== 'Rejected'">3</span>
                 <i class="fas fa-check" *ngIf="application.profileupdate === 'Selected'"></i>
-              </div>
-              
-              <!-- Rejected Status -->
-              <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Rejected' }">
-                <span class="status-number">3</span>
-                <span class="status-label">Rejected</span>
                 <i class="fas fa-times" *ngIf="application.profileupdate === 'Rejected'"></i>
+                <span class="status-label">
+                  {{ application.profileupdate === 'Selected' ? 'Selected' : 'Rejected' }}
+                </span>
               </div>
             </div>
+            
             
             
         </div>
