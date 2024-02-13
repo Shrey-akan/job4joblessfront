@@ -49,6 +49,10 @@
                   <i class="fas fa-clock"></i>
                 </span>
                 <span class="status-label">Waiting</span>
+                <!-- Content for Waiting -->
+                <div class="status-content" *ngIf="application.profileupdate === 'Waiting'">
+                  Your application is being reviewed again as your skills and experience are found appropriate for this role of [Position] in [Company]. You can wait for the best response!
+                </div>
               </div>
               
               <!-- Reviewed Status -->
@@ -58,6 +62,10 @@
                   <i class="fas fa-spinner"></i>
                 </span>
                 <span class="status-label">Reviewed</span>
+                <!-- Content for Reviewed -->
+                <div class="status-content" *ngIf="application.profileupdate === 'Reviewed'">
+                  Your application is being reviewed! 
+                </div>
               </div>
               
               <!-- Selected or Rejected Status -->
@@ -72,8 +80,18 @@
                 <span class="status-label">
                   {{ application.profileupdate === 'Selected' ? 'Selected' : 'Rejected' }}
                 </span>
+                <!-- Content for Selected or Rejected -->
+                <div class="status-content" *ngIf="application.profileupdate === 'Selected' || application.profileupdate === 'Rejected'">
+                  <ng-container *ngIf="application.profileupdate === 'Selected'">
+                    Congratulations! Your CV has been shortlisted, and we're excited to invite you for an interview for the [Position] role at [Company Name]. Please ensure you bring all the necessary documents. We look forward to meeting you!
+                  </ng-container>
+                  <ng-container *ngIf="application.profileupdate === 'Rejected'">
+                    Thank you for your interest in [Your Job Portal Company]. After careful consideration, we regret to inform you that your application for the [Position] has not been shortlisted. We appreciate your effort and wish you all the best in your future endeavors.
+                  </ng-container>
+                </div>
               </div>
             </div>
+            
             
             
             
