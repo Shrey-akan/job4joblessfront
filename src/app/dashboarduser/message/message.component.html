@@ -1,4 +1,5 @@
-<div class="container mt-5" style="background: url('assets/chat-here-banner.jpg') center center/cover; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); padding: 20px;">
+<!-- <div class="container mt-5"> -->
+  <div class="container mt-5" style="background: url('assets/chat-here-banner.jpg') center center/cover; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); padding: 20px;">
   <h2 class="text-center">Chat Here!</h2>
   <div class="row">
     <!-- Employers List Column -->
@@ -21,6 +22,7 @@
           </button>
         </h3>
 
+
         <div *ngIf="messages.length === 0; else chatContent">
           <i class="fa-solid fa-message"></i>
           <h4>No messages available</h4>
@@ -32,7 +34,7 @@
         <ng-template #chatContent>
           <div class="messages-list-container">
             <div class="messages-list">
-              <div *ngFor="let message of messages" class="message mb-2"
+              <div *ngFor="let message of filteredMessages" class="message mb-2"
                 [ngClass]="{'sent': message.messageFrom === abc, 'received': message.messageFrom !== abc}">
                 <div class="message-content">
                   <div class="message-text">{{ message.message }}</div>

@@ -1,9 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { OtpService } from 'src/app/auth/otp.service';
 import { UserService } from 'src/app/auth/user.service';
-import { io } from 'socket.io-client';
+// Sample User and Message classes
+class User {
+  constructor(public id: number, public name: string) { }
+}
 
 class SendMessage {
   constructor(public messageTo: string, public messageFrom: string, public message: string) { }
@@ -19,26 +23,16 @@ export class MessageComponent implements OnInit {
   employerNames: { [messageFrom: string]: string } = {};
   messages: SendMessage[] = [];
   selectedUser: string | null = null;
+  filteredMessages: SendMessage[] = [];
   userID: any;
   userData1: any;
   abc: any;
   newMessage: string = '';
-  socket: any;
-  filteredMessages: SendMessage[] = [];
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, public cookie: CookieService, private b1: UserService) { }
+  constructor(private http: HttpClient,private  router:Router, public cookie: CookieService, private b1: UserService) { }
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
-    this.socket = io('http://164.92.121.188:4444');
-
-    this.socket.on('connect', () => {
-      console.log('Connected to Socket.IO server');
-    });
-
-    this.socket.on('disconnect', () => {
-      console.log('Disconnected from Socket.IO server');
-    });
 
     let response = this.b1.fetchuser();
 
@@ -56,30 +50,36 @@ export class MessageComponent implements OnInit {
 
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter((message) => {
-        if (!uniqueNames.has(message.messageFrom) && (message.messageTo == this.userID)) {
+        // console.log('message from', message.messageFrom);
+        // console.log('message to' , message.messageTo);
+        // console.log('userID', this.userID);
+
+        if (!uniqueNames.has(message.messageFrom)&&(message.messageTo == this.userID)) {
           uniqueNames.add(message.messageFrom);
+                // console.log(message.messageTo === this.userID);
+                // console.log(message.messageTo === this.abc);
           return message.messageTo === this.userID;
         }
         return false;
+
       });
       this.loadEmployerNames();
     });
 
-    this.socket.on('receiveMessage', (message: SendMessage) => {
-      if (message.messageTo === this.userID) {
-        this.messages.push(message);
-      }
-    });
+    this.fetchMyMessages();
   }
 
   loadEmployerNames() {
     const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
-
+    
+    // Fetch employer data, including empid and name
     this.b1.fetchemployer().subscribe((employerData: any) => {
+      // console.log('Employer Data:', employerData);
       if (Array.isArray(employerData)) {
         for (const messageFrom of uniqueMessageFromValues) {
           const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
           if (matchingEmployer) {
+            // Matching employer found, store the name in employerNames
             this.employerNames[messageFrom] = matchingEmployer.empfname;
           }
         }
@@ -88,12 +88,38 @@ export class MessageComponent implements OnInit {
       }
     });
   }
+  
+  
+  
+
+  fetchMyMessages() {
+    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
+      this.filteredMessages = [];
+      const uniqueMessageIds = new Set<string>();
+
+      for (const message of messages) {
+        const messageIdentifier = `${message.messageFrom}_${message.messageTo}_${message.message}`;
+        if (!uniqueMessageIds.has(messageIdentifier)) {
+          uniqueMessageIds.add(messageIdentifier);
+          if (
+            (message.messageFrom === this.selectedUser && message.messageTo === this.abc) ||
+            (message.messageFrom === this.abc && message.messageTo === this.selectedUser)
+          ) {
+            this.filteredMessages.push(message);
+          }
+        }
+      }
+    });
+  }
+
+  selectUser(user: string) {
+    this.selectedUser = user;
+    this.fetchMyMessages();
+  }
 
   sendMessage() {
     if (this.selectedUser && this.newMessage.trim() !== '') {
       const messageToSend = new SendMessage(this.selectedUser, this.abc, this.newMessage);
-
-      this.socket.emit('sendMessage', messageToSend);
 
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: SendMessage) => {
@@ -106,22 +132,11 @@ export class MessageComponent implements OnInit {
       });
     }
   }
-
   startVideoCall() {
     if (this.selectedUser) {
-      this.router.navigate(['/dashboarduser/videocall', this.selectedUser]);
+      // Route to the video call page with the selected user as a route parameter
+      // console.log("check the selectUser",this.selectedUser);
+      this.router.navigate(['/dashboarduser/videocall', this.selectedUser]); // Adjust the route as per your project's configuration
     }
-  }
-
-  selectUser(user: string) {
-    this.selectedUser = user;
-    this.fetchMyMessages();
-  }
-
-  fetchMyMessages() {
-    this.filteredMessages = this.messages.filter(message =>
-      (message.messageFrom === this.selectedUser && message.messageTo === this.abc) ||
-      (message.messageFrom === this.abc && message.messageTo === this.selectedUser)
-    );
   }
 }
