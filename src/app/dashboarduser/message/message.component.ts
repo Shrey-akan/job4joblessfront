@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { OtpService } from 'src/app/auth/otp.service';
+import * as express from "express";
 import { UserService } from 'src/app/auth/user.service';
+import { io } from 'socket.io-client';
+
+
 // Sample User and Message classes
 class User {
   constructor(public id: number, public name: string) { }
@@ -28,12 +31,26 @@ export class MessageComponent implements OnInit {
   userData1: any;
   abc: any;
   newMessage: string = '';
+  socket: any;
 
-  constructor(private http: HttpClient,private  router:Router, public cookie: CookieService, private b1: UserService) { }
+  constructor(private http: HttpClient, private router: Router, public cookie: CookieService, private b1: UserService) { }
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
 
+    // Connect to Socket.IO server
+    this.socket = io('http://164.92.121.188:4444');
+
+    // Subscribe to Socket.IO events
+    this.socket.on('connect', () => {
+      console.log('Connected to Socket.IO server');
+    });
+
+    this.socket.on('disconnect', () => {
+      console.log('Disconnected from Socket.IO server');
+    });
+
+    // Fetch user data
     let response = this.b1.fetchuser();
 
     response.subscribe((data1: any) => {
@@ -42,30 +59,26 @@ export class MessageComponent implements OnInit {
       this.abc = this.userData1.uid;
     });
 
+    // Fetch messages
     this.fetchMessages();
   }
 
   fetchMessages() {
     const uniqueNames = new Set<string>();
 
+    // Fetch messages from API
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter((message) => {
-        // console.log('message from', message.messageFrom);
-        // console.log('message to' , message.messageTo);
-        // console.log('userID', this.userID);
-
-        if (!uniqueNames.has(message.messageFrom)&&(message.messageTo == this.userID)) {
+        if (!uniqueNames.has(message.messageFrom) && (message.messageTo == this.userID)) {
           uniqueNames.add(message.messageFrom);
-                // console.log(message.messageTo === this.userID);
-                // console.log(message.messageTo === this.abc);
           return message.messageTo === this.userID;
         }
         return false;
-
       });
       this.loadEmployerNames();
     });
 
+    // Fetch filtered messages
     this.fetchMyMessages();
   }
 
@@ -74,7 +87,6 @@ export class MessageComponent implements OnInit {
     
     // Fetch employer data, including empid and name
     this.b1.fetchemployer().subscribe((employerData: any) => {
-      // console.log('Employer Data:', employerData);
       if (Array.isArray(employerData)) {
         for (const messageFrom of uniqueMessageFromValues) {
           const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
@@ -88,11 +100,9 @@ export class MessageComponent implements OnInit {
       }
     });
   }
-  
-  
-  
 
   fetchMyMessages() {
+    // Fetch messages from API
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.filteredMessages = [];
       const uniqueMessageIds = new Set<string>();
@@ -121,21 +131,17 @@ export class MessageComponent implements OnInit {
     if (this.selectedUser && this.newMessage.trim() !== '') {
       const messageToSend = new SendMessage(this.selectedUser, this.abc, this.newMessage);
 
-      this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
-        next: (response: SendMessage) => {
-          this.newMessage = '';
-          this.fetchMessages();
-        },
-        error: (err: any) => {
-          console.error('Error sending message:', err);
-        }
-      });
+      // Emit 'sendMessage' event to the server
+      this.socket.emit('sendMessage', messageToSend);
+
+      // Clear the newMessage input field
+      this.newMessage = '';
     }
   }
+
   startVideoCall() {
     if (this.selectedUser) {
       // Route to the video call page with the selected user as a route parameter
-      // console.log("check the selectUser",this.selectedUser);
       this.router.navigate(['/dashboarduser/videocall', this.selectedUser]); // Adjust the route as per your project's configuration
     }
   }

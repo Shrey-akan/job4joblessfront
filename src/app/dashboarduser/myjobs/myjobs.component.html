@@ -25,22 +25,6 @@
           <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
         
           <p><strong>Mail:</strong> <a [href]="'mailto:' + application.jumail">{{ application.jumail }}</a></p>
-            <!-- <div *ngIf="application.profileupdate === 'Reviewed'">
-              <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i>
-              <span style="color: #fb9379;"> Reviewed</span>
-            </div>
-            <div *ngIf="application.profileupdate === 'Selected'">
-              <i class="fa-solid fa-circle-check fa-1x" style="color: #388a53;"></i>
-              <span style="color: #388a53;"> Selected</span>
-            </div>
-            <div *ngIf="application.profileupdate === 'Waiting'">
-              <i class="fa-solid fa-clock fa-1x"></i>
-              <span> Waiting</span>
-            </div>
-            <div *ngIf="application.profileupdate === 'Rejected'">
-              <i class="fa-solid fa-circle-xmark fa-1x" style="color: #ac2402;"></i>
-              <span style="color: #ac2402;"> Rejected</span>
-            </div> -->
             <div class="status-tracker">
               <!-- Waiting Status -->
               <div class="status" [ngClass]="{ 'active': application.profileupdate === 'Waiting' }">
