@@ -43,7 +43,7 @@ export class EmpmessageComponent implements OnInit {
 
     initSocketConnection() {
         // Connect to the Socket.IO server using HTTPS
-        this.socket = io('https://165.227.66.176:4444');
+        this.socket = io('https://rocknwoods.website:4444');
 
         // Event: Socket Error
         this.socket.on('error', (error: any) => {
@@ -53,7 +53,7 @@ export class EmpmessageComponent implements OnInit {
 
     fetchMessages() {
         // Fetch previous messages from the server
-        this.http.get<SendMessage[]>('https://job4jobless.com/fetchMessages').subscribe((messages: SendMessage[]) => {
+        this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
             this.messages = messages.filter(
                 (message) =>
                     (message.messageTo === this.uid &&
@@ -75,7 +75,7 @@ export class EmpmessageComponent implements OnInit {
             const messageToSend = this.messageForm.value;
             this.socket.emit('message', messageToSend); // Send message via Socket.IO
             
-            this.http.post<SendMessage>('https://job4jobless.com/send', messageToSend).subscribe({
+            this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
                 next: (response: any) => {
                     this.messageForm.patchValue({
                         message: '',
