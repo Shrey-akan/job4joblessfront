@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
-class SendMessage {
-  constructor(public messageTo: string, public messageFrom: string, public message: string) { }
+interface SendMessage {
+  messageTo: string;
+  messageFrom: string;
+  message: string;
 }
 
 @Component({
@@ -15,31 +17,31 @@ class SendMessage {
   styleUrls: ['./empmessage.component.css']
 })
 export class EmpmessageComponent implements OnInit {
-  message: SendMessage = new SendMessage('', '', '');
-  uid!: string | null;
-  empid!: string;
-  messageForm!: any;
+  messageForm: FormGroup;
   messages: SendMessage[] = [];
-  socket: any;
+  socket!: Socket;
+  uid: string | null;
+  empid: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute,
-    private cookie: CookieService, private formBuilder: FormBuilder) {
-    this.messages = []; // Initialize messages array
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private cookie: CookieService,
+    private formBuilder: FormBuilder
+  ) {
+    this.messageForm = this.formBuilder.group({
+      messageFrom: ['', Validators.required],
+      messageTo: ['', Validators.required],
+      message: ['', Validators.required]
+    });
 
-    // Initialize socket connection and event listeners
+    this.uid = this.route.snapshot.paramMap.get("uid");
+    this.empid = this.cookie.get('emp');
     this.initSocketConnection();
   }
 
   ngOnInit(): void {
-    this.uid = this.route.snapshot.paramMap.get("uid");
-    this.empid = this.cookie.get('emp');
     this.fetchMessages();
-
-    this.messageForm = this.formBuilder.group({
-      messageFrom: [this.empid, Validators.required],
-      messageTo: [this.uid, Validators.required],
-      message: ['', Validators.required]
-    });
   }
 
   initSocketConnection() {
@@ -78,6 +80,9 @@ export class EmpmessageComponent implements OnInit {
   sendMessage() {
     if (this.messageForm.valid) {
       const messageToSend = this.messageForm.value;
+      messageToSend.messageTo = this.uid; // Set the target user ID
+      messageToSend.messageFrom = this.empid; // Set the source user ID
+
       this.socket.emit('message', messageToSend); // Send message via Socket.IO
       
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
