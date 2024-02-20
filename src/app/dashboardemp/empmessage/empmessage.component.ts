@@ -49,6 +49,10 @@ export class EmpmessageComponent implements OnInit {
         this.socket.on('error', (error: any) => {
             console.error('Socket Error:', error);
         });
+        this.socket.on('message', (message: SendMessage) => {
+            // Add received message to the messages array
+            this.messages.push(message);
+        });
     }
 
     fetchMessages() {
