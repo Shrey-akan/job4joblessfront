@@ -109,8 +109,6 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   selectUser(user: string) {
     this.selectedUser = user;
-    const senderID = this.abc;
-    const receiverID = user; 
     this.fetchMyMessages();
   }
 
