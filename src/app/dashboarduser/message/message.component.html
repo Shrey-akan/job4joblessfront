@@ -45,7 +45,7 @@
 
           <!-- Send Message Form -->
           <div class="send-message-form" *ngIf="selectedUser">
-            <form (submit)="sendMessage(selectedUser, abc)">
+            <form (submit)="sendMessage()">
               <div class="input-group">
                 <textarea cols="100" rows="2" [(ngModel)]="newMessage" name="newMessage" class="form-control"
                   placeholder="Type your message..." required></textarea>

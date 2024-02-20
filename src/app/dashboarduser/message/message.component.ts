@@ -109,23 +109,14 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   selectUser(user: string) {
     this.selectedUser = user;
+    const senderID = this.abc;
+    const receiverID = user; 
     this.fetchMyMessages();
-
-    // Set sender as uid and receiver as empid
-    const senderID = this.abc; // uid
-    const receiverID = user; // empid
-
-    // You can also set the sender and receiver names here if needed
-    // For example: const senderName = this.userData1.username;
-    //             const receiverName = this.employerNames[user];
-
-    // Now you can proceed with sending messages or performing any action you want
-    this.sendMessage(senderID, receiverID);
   }
 
-  sendMessage(senderID: string, receiverID: string) {
+  sendMessage() {
     if (this.selectedUser && this.newMessage.trim() !== '') {
-      const messageToSend = new SendMessage(receiverID, senderID, this.newMessage);
+      const messageToSend = new SendMessage(this.selectedUser, this.abc!, this.newMessage);
 
       this.socket.emit('sendMessage', messageToSend); // Send message via Socket.IO
 
