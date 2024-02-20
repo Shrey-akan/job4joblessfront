@@ -48,7 +48,7 @@ export class EmpmessageComponent implements OnInit {
 
   initSocketConnection() {
     // Connect to the Socket.IO server using secure WebSocket (wss://)
-    this.socket = io('https://165.227.66.176:4444', {
+    this.socket = io('wss://165.227.66.176:4444', {
       transports: ['websocket'],
       autoConnect: false,
       query: {
@@ -61,7 +61,7 @@ export class EmpmessageComponent implements OnInit {
     this.socket.connect();
 
     // Event: Socket Error
-    this.socket.on('error', (error: any) => {
+    this.socket.on('connect_error', (error: any) => {
       console.error('Socket Error:', error);
     });
 
