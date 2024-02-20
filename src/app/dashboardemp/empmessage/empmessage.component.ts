@@ -55,10 +55,11 @@ export class EmpmessageComponent implements OnInit {
 
     // Event: Receive message
     this.socket.on('message', (message: SendMessage) => {
+      console.log('Received message:', message); // Debugging statement
       // Add received message to the messages array
       this.messages.push(message);
     });
-  }
+}
 
   fetchMessages() {
     // Fetch previous messages from the server
