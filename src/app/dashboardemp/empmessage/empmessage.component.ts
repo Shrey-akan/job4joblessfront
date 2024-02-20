@@ -51,6 +51,11 @@ export class EmpmessageComponent implements OnInit {
       console.error('Socket Error:', error);
     });
 
+    // Event: User Signin
+    this.socket.on("signin", (id) => {
+      console.log("User signed in with ID:", id);
+    });
+
     // Event: Receive message
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message); // Log received message
@@ -79,8 +84,8 @@ export class EmpmessageComponent implements OnInit {
   sendMessage() {
     if (this.messageForm.valid && this.uid) {
       const messageToSend = {
-        messageTo: this.uid,
-        messageFrom: this.empid,
+        messageTo: this.uid, // Set uid as the target ID
+        messageFrom: this.empid, // Set empid as the source ID
         message: this.messageForm.value.message
       };
 
