@@ -44,12 +44,17 @@ export class EmpmessageComponent implements OnInit {
 
   initSocketConnection() {
     // Connect to the Socket.IO server using HTTPS
-    this.socket = io('https://rocknwoods.website:4444', {
+    this.socket = io('http://164.92.121.188:4444', {
+      transports: ['websocket'],
+      autoConnect: false,
       query: {
         empid: this.empid,
         uid: this.uid
       }
     });
+
+    // Manually connect the socket
+    this.socket.connect();
 
     // Event: Socket Error
     this.socket.on('error', (error: any) => {
