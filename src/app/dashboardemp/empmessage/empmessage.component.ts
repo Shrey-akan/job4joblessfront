@@ -44,16 +44,16 @@ export class EmpmessageComponent implements OnInit {
 
   initSocketConnection() {
     // Connect to the Socket.IO server using HTTPS
-    this.socket = io('https://rocknwoods.website:4444');
+    this.socket = io('https://rocknwoods.website:4444', {
+      query: {
+        empid: this.empid,
+        uid: this.uid
+      }
+    });
 
     // Event: Socket Error
     this.socket.on('error', (error: any) => {
       console.error('Socket Error:', error);
-    });
-
-    // Event: User Signin
-    this.socket.on("signin", (id) => {
-      console.log("User signed in with ID:", id);
     });
 
     // Event: Receive message
