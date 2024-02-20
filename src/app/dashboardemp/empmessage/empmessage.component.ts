@@ -20,8 +20,8 @@ export class EmpmessageComponent implements OnInit {
   messageForm: FormGroup;
   messages: SendMessage[] = [];
   socket!: Socket;
-  uid: string | null;
   empid: string;
+  uid: string | null;
 
   constructor(
     private http: HttpClient,
@@ -30,13 +30,11 @@ export class EmpmessageComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.messageForm = this.formBuilder.group({
-      messageFrom: ['', Validators.required],
-      messageTo: ['', Validators.required],
       message: ['', Validators.required]
     });
 
-    this.uid = this.route.snapshot.paramMap.get("uid");
     this.empid = this.cookie.get('emp');
+    this.uid = this.route.snapshot.paramMap.get("uid");
     this.initSocketConnection();
   }
 
@@ -55,14 +53,14 @@ export class EmpmessageComponent implements OnInit {
 
     // Event: Receive message
     this.socket.on('message', (message: SendMessage) => {
-      console.log('Received message:', message); // Debugging statement
+      console.log('Received message:', message); // Log received message
       // Add received message to the messages array
       this.messages.push(message);
     });
-}
+  }
 
   fetchMessages() {
-    // Fetch previous messages from the server
+    // Fetch previous messages between the current user (empid) and the target user (uid)
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter(
         (message) =>
@@ -79,19 +77,24 @@ export class EmpmessageComponent implements OnInit {
   }
 
   sendMessage() {
-    if (this.messageForm.valid) {
-      const messageToSend = this.messageForm.value;
-      messageToSend.messageTo = this.uid; // Set the target user ID
-      messageToSend.messageFrom = this.empid; // Set the source user ID
+    if (this.messageForm.valid && this.uid) {
+      const messageToSend = {
+        messageTo: this.uid,
+        messageFrom: this.empid,
+        message: this.messageForm.value.message
+      };
+
+      console.log('Sending message:', messageToSend); // Log sending message
 
       this.socket.emit('message', messageToSend); // Send message via Socket.IO
       
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: any) => {
+          console.log('API Response:', response); // Log API response
           this.messageForm.patchValue({
             message: '', // Clear the message input after sending
           });
-          this.fetchMessages();
+          this.fetchMessages(); // Fetch messages again to update the view
         },
         error: (err: any) => {
           console.error('Error sending message:', err);
