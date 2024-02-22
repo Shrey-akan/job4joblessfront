@@ -11,6 +11,8 @@ interface SendMessage {
   message: string;
 }
 
+
+
 @Component({
   selector: 'app-empmessage',
   templateUrl: './empmessage.component.html',
