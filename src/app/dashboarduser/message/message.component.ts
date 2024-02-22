@@ -30,13 +30,20 @@ export class MessageComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private router: Router,
     public cookie: CookieService,
-    private b1: UserService
+    private b1: UserService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
-    // Initialize socket connection
-    this.socket = io('https://rocknwoods.website:4444');
+    // Initialize socket connection with source ID (uid) and target ID (empid)
+    this.abc = this.route.snapshot.paramMap.get('empid');
+    this.socket = io('https://rocknwoods.website:4444', {
+      query: {
+        sourceId: this.userID,
+        targetId: this.abc
+      }
+    });
 
     this.socket.on('connect', () => {
       console.log('Socket connected');
