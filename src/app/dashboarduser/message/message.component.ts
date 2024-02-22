@@ -35,7 +35,20 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userID = this.cookie.get('uid');
-    this.socket = io('https://rocknwoods.website:4444'); // Initialize socket connection
+    // Initialize socket connection
+    this.socket = io('https://rocknwoods.website:4444');
+
+    this.socket.on('connect', () => {
+      console.log('Socket connected');
+    });
+
+    this.socket.on('connect_error', (error: any) => {
+      console.error('Socket connection error:', error);
+    });
+
+    this.socket.on('disconnect', (reason: any) => {
+      console.log('Socket disconnected:', reason);
+    });
 
     let response = this.b1.fetchuser();
     response.subscribe((data1: any) => {
