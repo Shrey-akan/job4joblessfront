@@ -50,7 +50,7 @@ export class EmpmessageComponent implements OnInit {
 
   initSocketConnection() {
     // Connect to the Socket.IO server using secure WebSocket (wss://)
-    this.socket = io('https://165.227.66.176:4444', {
+    this.socket = io('https://165.227.66.176:4400', {
       transports: ['websocket'],
       autoConnect: false,
       query: {

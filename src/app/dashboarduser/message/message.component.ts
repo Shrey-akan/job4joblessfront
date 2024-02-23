@@ -52,7 +52,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   initSocketConnection(): void {
-    this.socket = io('https://rocknwoods.website:4444', {
+    this.socket = io('https://rocknwoods.website:4400', {
       query: {
         sourceId: this.userID,
         targetId: null // Target ID will be set when an employer is selected
