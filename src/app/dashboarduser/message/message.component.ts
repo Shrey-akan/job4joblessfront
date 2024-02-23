@@ -20,9 +20,9 @@ export class MessageComponent implements OnInit, OnDestroy {
   messages: SendMessage[] = [];
   selectedUser: string | null = null;
   filteredMessages: SendMessage[] = [];
-  userID: any;
+  userID: string | null = null;
   userData1: any;
-  abc: any;
+  abc: string | null = null; // Declare abc property
   newMessage: string = '';
   socket!: Socket;
 
@@ -38,11 +38,24 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.userID = this.cookie.get('uid');
     this.abc = this.route.snapshot.paramMap.get('empid');
 
-    // Initialize socket connection with source ID (uid) and target ID (empid)
+    // Initialize socket connection
+    this.initSocketConnection();
+
+    // Fetch messages
+    this.fetchMessages();
+  }
+
+  ngOnDestroy(): void {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
+  }
+
+  initSocketConnection(): void {
     this.socket = io('https://rocknwoods.website:4444', {
       query: {
         sourceId: this.userID,
-        targetId: this.abc
+        targetId: null // Target ID will be set when an employer is selected
       }
     });
 
@@ -57,47 +70,32 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket.on('disconnect', (reason: any) => {
       console.log('Socket disconnected:', reason);
     });
-
-    let response = this.b1.fetchuser();
-    response.subscribe((data1: any) => {
-      const uuid = this.userID;
-      this.userData1 = data1.find((user: any) => user.uid == uuid);
-      this.abc = this.userData1.uid;
-    });
-
-    this.fetchMessages();
   }
 
-  ngOnDestroy(): void {
-    if (this.socket) {
-      this.socket.disconnect();
+  fetchMessages(): void {
+    if (!this.userID) {
+      console.error('UserID is missing.');
+      return;
     }
-  }
-
-  fetchMessages() {
-    const uniqueNames = new Set<string>();
 
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      this.messages = messages.filter((message) => {
-        if (!uniqueNames.has(message.messageFrom) && (message.messageTo == this.userID)) {
-          uniqueNames.add(message.messageFrom);
-          return message.messageTo === this.userID;
-        }
-        return false;
-      });
+      // Filter messages based on user ID
+      this.messages = messages.filter(message => message.messageTo === this.userID);
+      // Load employer names for the filtered messages
       this.loadEmployerNames();
     });
 
+    // Fetch my messages
     this.fetchMyMessages();
   }
 
-  loadEmployerNames() {
-    const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
+  loadEmployerNames(): void {
+    const uniqueMessageFromValues = Array.from(new Set(this.messages.map(message => message.messageFrom)));
     
     this.b1.fetchemployer().subscribe((employerData: any) => {
       if (Array.isArray(employerData)) {
         for (const messageFrom of uniqueMessageFromValues) {
-          const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
+          const matchingEmployer = employerData.find(employer => employer.empid === messageFrom);
           if (matchingEmployer) {
             this.employerNames[messageFrom] = matchingEmployer.empfname;
           }
@@ -108,36 +106,39 @@ export class MessageComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchMyMessages() {
-    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      this.filteredMessages = [];
-      const uniqueMessageIds = new Set<string>();
+  fetchMyMessages(): void {
+    if (!this.userID) {
+      console.error('UserID is missing.');
+      return;
+    }
 
-      for (const message of messages) {
-        const messageIdentifier = `${message.messageFrom}_${message.messageTo}_${message.message}`;
-        if (!uniqueMessageIds.has(messageIdentifier)) {
-          uniqueMessageIds.add(messageIdentifier);
-          if (
-            (message.messageFrom === this.selectedUser && message.messageTo === this.abc) ||
-            (message.messageFrom === this.abc && message.messageTo === this.selectedUser)
-          ) {
-            this.filteredMessages.push(message);
-          }
-        }
-      }
+    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
+      // Filter messages based on selected user and userID
+      this.filteredMessages = messages.filter(message =>
+        (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
+        (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
+      );
     });
   }
 
-  selectUser(user: string) {
+  selectUser(user: string): void {
     this.selectedUser = user;
+    
+    // Set target ID when an employer is selected
+    if (this.socket && this.socket.io && this.socket.io.opts && this.socket.io.opts.query) {
+      this.socket.io.opts.query['targetId'] = user;
+    }
     this.fetchMyMessages();
   }
 
-  sendMessage() {
+  sendMessage(): void {
     if (this.selectedUser && this.newMessage.trim() !== '') {
-      const messageToSend = new SendMessage(this.selectedUser, this.abc!, this.newMessage);
+      const messageToSend = new SendMessage(this.selectedUser, this.userID!, this.newMessage);
 
-      this.socket.emit('sendMessage', messageToSend); // Send message via Socket.IO
+      // Send message via Socket.IO
+      if (this.socket) {
+        this.socket.emit('sendMessage', messageToSend);
+      }
 
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: SendMessage) => {
@@ -151,7 +152,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
   }
 
-  startVideoCall() {
+  startVideoCall(): void {
     if (this.selectedUser) {
       this.router.navigate(['/dashboarduser/videocall', this.selectedUser]);
     }
