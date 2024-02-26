@@ -57,6 +57,9 @@ export class EmpmessageComponent implements OnInit {
       }
     });
 
+    // Emit the 'join' event with the empid
+    this.socket.emit('join', this.empid);
+
     // Event: Socket Error
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket Error:', error);
