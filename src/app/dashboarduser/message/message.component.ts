@@ -57,7 +57,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.socket = io('https://165.227.66.176:4400', { // Change to your server IP and port
+    this.socket = io('https://rocknwoods.website:4400', { // Change to your server IP and port
       query: {
         sourceId: this.userID,
         targetId: null // Target ID will be set when an employer is selected
@@ -129,9 +129,10 @@ export class MessageComponent implements OnInit, OnDestroy {
   selectUser(user: string): void {
     this.selectedUser = user;
     
-    // Set target ID when an employer is selected
     if (this.socket && this.socket.io && this.socket.io.opts && this.socket.io.opts.query) {
       this.socket.io.opts.query['targetId'] = user;
+      console.log('Source ID:', this.userID);
+      console.log('Target ID:', user);
     }
     this.fetchMyMessages();
   }
