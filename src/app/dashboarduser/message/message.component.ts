@@ -156,7 +156,7 @@ export class MessageComponent implements OnInit, OnDestroy {
         if (this.socket) {
             const data = {
                 messageTo,
-                messageFrom: this.selectUser,
+                messageFrom: this.userID,
                 message
             };
             this.socket.emit('message', data);
