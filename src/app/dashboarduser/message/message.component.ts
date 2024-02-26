@@ -72,19 +72,23 @@ export class MessageComponent implements OnInit, OnDestroy {
       // Emit the 'join' event with the userID (uid)
       this.socket.emit('join', this.userID);
     });
-    
+  
     // Event: Socket connection error
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket connection error:', error);
     });
+  
+    // Event: Acknowledgment on joining
     this.socket.on('joined', (empid: string) => {
       console.log(`Joined room with empid: ${empid}`);
-  });
+    });
+  
     // Event: Socket disconnected
     this.socket.on('disconnect', (reason: any) => {
       console.log('Socket disconnected:', reason);
     });
   }
+  
   
 
   fetchMessages(): void {
