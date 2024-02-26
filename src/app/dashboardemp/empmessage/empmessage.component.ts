@@ -50,7 +50,7 @@ export class EmpmessageComponent implements OnInit {
 
   initSocketConnection() {
     // Connect to the Socket.IO server using secure WebSocket (wss://)
-    this.socket = io('https://165.227.66.176:4400', {
+    this.socket = io('https://rocknwoods.website:4400', {
       transports: ['websocket'],
       autoConnect: false,
       query: {
@@ -59,20 +59,27 @@ export class EmpmessageComponent implements OnInit {
       }
     });
 
-    // Manually connect the socket
-    this.socket.connect();
+  // Event: Socket Error
+  this.socket.on('connect_error', (error: any) => {
+    console.error('Socket Error:', error);
+  });
 
-    // Event: Socket Error
-    this.socket.on('connect_error', (error: any) => {
-      console.error('Socket Error:', error);
-    });
+  // Event: Receive message
+  this.socket.on('message', (message: SendMessage) => {
+    console.log('Received message:', message);
+    // Add received message to the messages array
+    this.messages.push(message);
+  });
 
-    // Event: Receive message
-    this.socket.on('message', (message: SendMessage) => {
-      console.log('Received message:', message);
-      // Add received message to the messages array
-      this.messages.push(message);
-    });
+  // Event: Socket connected
+  this.socket.on('connect', () => {
+    console.log('Socket connected');
+    console.log('Source ID:', this.empid);
+    console.log('Target ID:', this.uid);
+  });
+
+  // Manually connect the socket
+  this.socket.connect();
   }
 
   fetchMessages() {
