@@ -44,33 +44,43 @@ export class EmpmessageComponent implements OnInit {
   }
 
   initSocketConnection() {
+    // Check if both `empid` and `uid` are available
+    if (!this.empid || !this.uid) {
+      console.error('Empid or uid is missing.');
+      return;
+    }
+  
+    // Establish socket connection with query parameters
     this.socket = io('https://rocknwoods.website:4400', {
       transports: ['websocket'],
       autoConnect: false,
       query: {
-        sourceId: this.empid,
-        targetId: this.uid
+        id: this.empid, // Set the empid as sourceId
+        targetId: this.uid    // Set the uid as targetId
       }
     });
-
+  
+    // Handle socket events
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket Error:', error);
     });
-
+  
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message);
       this.messages.push(message);
     });
-
+  
     this.socket.on('connect', () => {
       console.log('Socket connected');
       console.log('Source ID:', this.empid);
       console.log('Target ID:', this.uid);
     });
-
+  
+    // Connect the socket
     this.socket.connect();
   }
-
+  
+  
   fetchMessages() {
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter(

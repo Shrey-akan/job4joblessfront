@@ -65,13 +65,18 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   initSocketConnection(): void {
+    if (!this.userID) {
+      console.error('UserID is missing.');
+      return;
+    }
+  
     this.socket = io('https://rocknwoods.website:4400', {
       query: {
-        sourceId: this.cookie.get('uid'),
+        id: this.cookie.get('uid'), // Send the user's ID as 'id' query parameter
         targetId: null
       }
     });
-
+  
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message);
       this.messages.push(message);
