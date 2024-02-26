@@ -52,6 +52,11 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   initSocketConnection(): void {
+    if (!this.userID) {
+      console.error('UserID is missing.');
+      return;
+    }
+
     this.socket = io('https://rocknwoods.website:4400', {
       query: {
         sourceId: this.userID,
@@ -62,7 +67,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket.on('connect', () => {
       console.log('Socket connected');
     });
-
+    
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket connection error:', error);
     });
