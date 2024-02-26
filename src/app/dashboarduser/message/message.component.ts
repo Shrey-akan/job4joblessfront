@@ -77,7 +77,9 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket connection error:', error);
     });
-  
+    this.socket.on('joined', (empid: string) => {
+      console.log(`Joined room with empid: ${empid}`);
+  });
     // Event: Socket disconnected
     this.socket.on('disconnect', (reason: any) => {
       console.log('Socket disconnected:', reason);
@@ -147,24 +149,33 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   sendMessage(): void {
     if (this.selectedUser && this.newMessage.trim() !== '') {
-      const messageToSend = new SendMessage(this.selectedUser, this.userID!, this.newMessage);
+        const messageTo = this.selectedUser;
+        const message = this.newMessage;
 
-      // Send message via Socket.IO
-      if (this.socket) {
-        this.socket.emit('sendMessage', messageToSend);
-      }
-
-      this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
-        next: (response: SendMessage) => {
-          this.newMessage = '';
-          this.fetchMessages();
-        },
-        error: (err: any) => {
-          console.error('Error sending message:', err);
+        // Send message via Socket.IO
+        if (this.socket) {
+            const data = {
+                messageTo,
+                messageFrom: this.selectUser,
+                message
+            };
+            this.socket.emit('message', data);
         }
-      });
+
+        // Send the message to the server API as well
+        const messageToSend = new SendMessage(messageTo, this.userID!, message);
+        this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
+            next: (response: SendMessage) => {
+                this.newMessage = '';
+                this.fetchMessages();
+            },
+            error: (err: any) => {
+                console.error('Error sending message:', err);
+            }
+        });
     }
-  }
+}
+
 
   startVideoCall(): void {
     if (this.selectedUser) {
