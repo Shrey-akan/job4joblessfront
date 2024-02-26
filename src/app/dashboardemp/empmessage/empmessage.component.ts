@@ -11,6 +11,8 @@ interface SendMessage {
   message: string;
 }
 
+
+
 @Component({
   selector: 'app-empmessage',
   templateUrl: './empmessage.component.html',
@@ -36,12 +38,12 @@ export class EmpmessageComponent implements OnInit {
     // Retrieve empid from cookie and uid from route parameters
     this.empid = this.cookie.get('emp');
     this.uid = this.route.snapshot.paramMap.get("uid");
+
+    // Initialize the socket connection
+    this.initSocketConnection();
   }
 
   ngOnInit(): void {
-    // Initialize the socket connection
-    this.initSocketConnection();
-
     // Fetch previous messages on component initialization
     this.fetchMessages();
   }
@@ -49,25 +51,35 @@ export class EmpmessageComponent implements OnInit {
   initSocketConnection() {
     // Connect to the Socket.IO server using secure WebSocket (wss://)
     this.socket = io('https://rocknwoods.website:4400', {
+      transports: ['websocket'],
+      autoConnect: false,
       query: {
-        sourceId: this.empid, // Set the sourceId to empid
-        targetId: this.uid // Set the targetId to uid
+        sourceId: this.empid,
+        targetId: this.uid
       }
     });
 
-    // Event: Receive message
-    this.socket.on('message', (message: SendMessage) => {
-      console.log('Received message:', message);
-      // Add received message to the messages array
-      this.messages.push(message);
-    });
+  // Event: Socket Error
+  this.socket.on('connect_error', (error: any) => {
+    console.error('Socket Error:', error);
+  });
 
-    // Event: Socket connected
-    this.socket.on('connect', () => {
-      console.log('Socket connected');
-      console.log('Source ID:', this.empid);
-      console.log('Target ID:', this.uid);
-    });
+  // Event: Receive message
+  this.socket.on('message', (message: SendMessage) => {
+    console.log('Received message:', message);
+    // Add received message to the messages array
+    this.messages.push(message);
+  });
+
+  // Event: Socket connected
+  this.socket.on('connect', () => {
+    console.log('Socket connected');
+    console.log('Source ID:', this.empid);
+    console.log('Target ID:', this.uid);
+  });
+
+  // Manually connect the socket
+  this.socket.connect();
   }
 
   fetchMessages() {
