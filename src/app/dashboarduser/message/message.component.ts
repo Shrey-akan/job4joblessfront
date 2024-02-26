@@ -56,26 +56,34 @@ export class MessageComponent implements OnInit, OnDestroy {
       console.error('UserID is missing.');
       return;
     }
-
-    this.socket = io('https://rocknwoods.website:4400', { // Change to your server IP and port
+  
+    // Connect to the Socket.IO server using secure WebSocket (wss://)
+    this.socket = io('https://rocknwoods.website:4400', {
       query: {
         sourceId: this.userID,
         targetId: null // Target ID will be set when an employer is selected
       }
     });
-
+  
+    // Event: Socket connected
     this.socket.on('connect', () => {
       console.log('Socket connected');
+  
+      // Emit the 'join' event with the userID (uid)
+      this.socket.emit('join', this.userID);
     });
     
+    // Event: Socket connection error
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket connection error:', error);
     });
-
+  
+    // Event: Socket disconnected
     this.socket.on('disconnect', (reason: any) => {
       console.log('Socket disconnected:', reason);
     });
   }
+  
 
   fetchMessages(): void {
     if (!this.userID) {
