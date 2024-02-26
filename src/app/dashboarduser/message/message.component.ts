@@ -57,7 +57,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.socket = io('http://165.227.66.176:4400', { // Change to your server IP and port
+    this.socket = io('https://165.227.66.176:4400', { // Change to your server IP and port
       query: {
         sourceId: this.userID,
         targetId: null // Target ID will be set when an employer is selected
