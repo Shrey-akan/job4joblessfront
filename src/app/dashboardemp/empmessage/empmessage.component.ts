@@ -1,3 +1,4 @@
+// empmessage.component.ts
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -10,8 +11,6 @@ interface SendMessage {
   messageFrom: string;
   message: string;
 }
-
-
 
 @Component({
   selector: 'app-empmessage',
@@ -35,21 +34,16 @@ export class EmpmessageComponent implements OnInit {
       message: ['', Validators.required]
     });
 
-    // Retrieve empid from cookie and uid from route parameters
     this.empid = this.cookie.get('emp');
     this.uid = this.route.snapshot.paramMap.get("uid");
-
-    // Initialize the socket connection
     this.initSocketConnection();
   }
 
   ngOnInit(): void {
-    // Fetch previous messages on component initialization
     this.fetchMessages();
   }
 
   initSocketConnection() {
-    // Connect to the Socket.IO server using secure WebSocket (wss://)
     this.socket = io('https://rocknwoods.website:4400', {
       transports: ['websocket'],
       autoConnect: false,
@@ -59,40 +53,32 @@ export class EmpmessageComponent implements OnInit {
       }
     });
 
-  // Event: Socket Error
-  this.socket.on('connect_error', (error: any) => {
-    console.error('Socket Error:', error);
-  });
+    this.socket.on('connect_error', (error: any) => {
+      console.error('Socket Error:', error);
+    });
 
-  // Event: Receive message
-  this.socket.on('message', (message: SendMessage) => {
-    console.log('Received message:', message);
-    // Add received message to the messages array
-    this.messages.push(message);
-  });
+    this.socket.on('message', (message: SendMessage) => {
+      console.log('Received message:', message);
+      this.messages.push(message);
+    });
 
-  // Event: Socket connected
-  this.socket.on('connect', () => {
-    console.log('Socket connected');
-    console.log('Source ID:', this.empid);
-    console.log('Target ID:', this.uid);
-  });
+    this.socket.on('connect', () => {
+      console.log('Socket connected');
+      console.log('Source ID:', this.empid);
+      console.log('Target ID:', this.uid);
+    });
 
-  // Manually connect the socket
-  this.socket.connect();
+    this.socket.connect();
   }
 
   fetchMessages() {
-    // Fetch previous messages between the current user (empid) and the target user (uid)
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      // Filter messages to include only those related to the current conversation
       this.messages = messages.filter(
         (message) =>
           (message.messageTo === this.uid && message.messageFrom === this.empid) ||
           (message.messageTo === this.empid && message.messageFrom === this.uid)
       );
 
-      // If there are previous messages, display the last message in the form
       if (this.messages.length > 0) {
         this.messageForm.patchValue({
           message: this.messages[this.messages.length - 1].message,
@@ -111,18 +97,14 @@ export class EmpmessageComponent implements OnInit {
 
       console.log('Sending message:', messageToSend);
 
-      // Send the message via Socket.IO
       this.socket.emit('message', messageToSend);
       
-      // Send the message to the server API as well
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: any) => {
           console.log('API Response:', response);
-          // Clear the message input after sending
           this.messageForm.patchValue({
             message: '',
           });
-          // Fetch messages again to update the view
           this.fetchMessages();
         },
         error: (err: any) => {

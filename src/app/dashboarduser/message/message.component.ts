@@ -1,14 +1,24 @@
+// message.component.ts
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/auth/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-class SendMessage {
-  constructor(public messageTo: string, public messageFrom: string, public message: string) { }
+// interface SendMessage {
+//   messageTo: string;
+//   messageFrom: string;
+//   message: string;
+// }
+export class SendMessage {
+  constructor(
+    public messageTo: string,
+    public messageFrom: string,
+    public message: string
+  ) {}
 }
-
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -22,27 +32,30 @@ export class MessageComponent implements OnInit, OnDestroy {
   filteredMessages: SendMessage[] = [];
   userID: string | null = null;
   userData1: any;
-  abc: string | null = null; // Declare abc property
+  abc: string | null = null;
   newMessage: string = '';
   socket!: Socket;
+  messageForm: FormGroup;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     public cookie: CookieService,
     private b1: UserService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {
+    this.messageForm = this.formBuilder.group({
+      message: ['', Validators.required]
+    });
 
-  ngOnInit(): void {
     this.userID = this.cookie.get('uid');
     this.abc = this.route.snapshot.paramMap.get('empid');
-
-    // Initialize socket connection
     this.initSocketConnection();
-
-    // Fetch messages
     this.fetchMessages();
+  }
+
+  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -52,44 +65,18 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   initSocketConnection(): void {
-    if (!this.userID) {
-      console.error('UserID is missing.');
-      return;
-    }
-  
-    // Connect to the Socket.IO server using secure WebSocket (wss://)
     this.socket = io('https://rocknwoods.website:4400', {
       query: {
-        sourceId: this.userID,
-        targetId: null // Target ID will be set when an employer is selected
+        sourceId: this.cookie.get('uid'),
+        targetId: null
       }
     });
-  
-    // Event: Socket connected
-    this.socket.on('connect', () => {
-      console.log('Socket connected');
-  
-      // Emit the 'join' event with the userID (uid)
-      this.socket.emit('join', this.userID);
-    });
-  
-    // Event: Socket connection error
-    this.socket.on('connect_error', (error: any) => {
-      console.error('Socket connection error:', error);
-    });
-  
-    // Event: Acknowledgment on joining
-    this.socket.on('joined', (empid: string) => {
-      console.log(`Joined room with empid: ${empid}`);
-    });
-  
-    // Event: Socket disconnected
-    this.socket.on('disconnect', (reason: any) => {
-      console.log('Socket disconnected:', reason);
+
+    this.socket.on('message', (message: SendMessage) => {
+      console.log('Received message:', message);
+      this.messages.push(message);
     });
   }
-  
-  
 
   fetchMessages(): void {
     if (!this.userID) {
@@ -98,13 +85,10 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
 
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      // Filter messages based on user ID
       this.messages = messages.filter(message => message.messageTo === this.userID);
-      // Load employer names for the filtered messages
       this.loadEmployerNames();
     });
 
-    // Fetch my messages
     this.fetchMyMessages();
   }
 
@@ -132,7 +116,6 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
 
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      // Filter messages based on selected user and userID
       this.filteredMessages = messages.filter(message =>
         (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
         (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
@@ -153,33 +136,30 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   sendMessage(): void {
     if (this.selectedUser && this.newMessage.trim() !== '') {
-        const messageTo = this.selectedUser;
-        const message = this.newMessage;
+      const messageTo = this.selectedUser;
+      const message = this.newMessage;
 
-        // Send message via Socket.IO
-        if (this.socket) {
-            const data = {
-                messageTo,
-                messageFrom: this.userID,
-                message
-            };
-            this.socket.emit('message', data);
+      if (this.socket) {
+        const data = {
+          messageTo,
+          messageFrom: this.cookie.get('uid'),
+          message
+        };
+        this.socket.emit('message', data);
+      }
+
+      const messageToSend = new SendMessage(messageTo, this.cookie.get('uid'), message);
+      this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
+        next: (response: SendMessage) => {
+          this.newMessage = '';
+          this.fetchMessages();
+        },
+        error: (err: any) => {
+          console.error('Error sending message:', err);
         }
-
-        // Send the message to the server API as well
-        const messageToSend = new SendMessage(messageTo, this.userID!, message);
-        this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
-            next: (response: SendMessage) => {
-                this.newMessage = '';
-                this.fetchMessages();
-            },
-            error: (err: any) => {
-                console.error('Error sending message:', err);
-            }
-        });
+      });
     }
-}
-
+  }
 
   startVideoCall(): void {
     if (this.selectedUser) {
@@ -187,3 +167,4 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
   }
 }
+
