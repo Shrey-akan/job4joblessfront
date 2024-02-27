@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/auth/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { user } from '@angular/fire/auth';
 
 // Define SendMessage model
 export class SendMessage {
@@ -53,8 +54,6 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-      // Initialize socket connection
-      this.initSocketConnection();
   }
 
   ngOnDestroy(): void {
@@ -63,7 +62,23 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
   }
 
-  initSocketConnection(): void {
+  selectUser(user: string): void {
+    this.selectedUser = user;
+    
+    if (this.socket && this.socket.io && this.socket.io.opts && this.socket.io.opts.query) {
+      this.socket.io.opts.query['targetId'] = user;
+      console.log('Source ID:', this.userID);
+      console.log('Target ID:', user);
+    }
+  
+    // Start socket connection for the selected user
+    this.initSocketConnectionForUser(user);
+  
+    // Fetch messages for the selected user
+    this.fetchMyMessages();
+  }
+  
+  initSocketConnectionForUser(userId: string): void {
     if (!this.userID) {
       console.error('UserID is missing.');
       return;
@@ -72,7 +87,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket = io('https://rocknwoods.website:4400', {
       query: {
         id: this.cookie.get('uid'), // Send the user's ID as 'id' query parameter
-        targetId: null
+        targetId: user
       }
     });
   
@@ -81,10 +96,11 @@ export class MessageComponent implements OnInit, OnDestroy {
       this.messages.push(message);
       this.cdr.detectChanges();
     });
+  
     this.socket.on('connect', () => {
       console.log('Socket connected');
       console.log('Source ID:', this.userID);
-      console.log('Target ID:', this.selectedUser);
+      console.log('Target ID:', user);
     });
   }
 
@@ -138,17 +154,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectUser(user: string): void {
-    this.selectedUser = user;
-    
-    if (this.socket && this.socket.io && this.socket.io.opts && this.socket.io.opts.query) {
-      this.socket.io.opts.query['targetId'] = user;
-      console.log('Source ID:', this.userID);
-      console.log('Target ID:', user);
-    }
-    this.initSocketConnection();
-    this.fetchMyMessages();
-  }
+
 
   sendMessage(): void {
     if (this.selectedUser && this.newMessage.trim() !== '') {
