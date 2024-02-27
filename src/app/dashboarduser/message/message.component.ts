@@ -6,6 +6,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/auth/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 // interface SendMessage {
 //   messageTo: string;
@@ -43,7 +45,8 @@ export class MessageComponent implements OnInit, OnDestroy {
     public cookie: CookieService,
     private b1: UserService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {
     this.messageForm = this.formBuilder.group({
       message: ['', Validators.required]
@@ -80,6 +83,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message);
       this.messages.push(message);
+      this.cdr.detectChanges();
     });
     this.socket.on('connect', () => {
       console.log('Socket connected');
