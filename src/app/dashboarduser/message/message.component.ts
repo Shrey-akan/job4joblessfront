@@ -1,19 +1,12 @@
-// message.component.ts
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/auth/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChangeDetectorRef } from '@angular/core';
 
-
-// interface SendMessage {
-//   messageTo: string;
-//   messageFrom: string;
-//   message: string;
-// }
+// Define SendMessage model
 export class SendMessage {
   constructor(
     public messageTo: string,
@@ -21,6 +14,7 @@ export class SendMessage {
     public message: string
   ) {}
 }
+
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -61,8 +55,6 @@ export class MessageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       // Initialize socket connection
       this.initSocketConnection();
-      // Fetch messages
-      this.fetchMessages();
   }
 
   ngOnDestroy(): void {
@@ -191,4 +183,3 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
   }
 }
-
