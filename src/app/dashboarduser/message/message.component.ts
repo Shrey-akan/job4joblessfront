@@ -9,18 +9,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 
 
-interface SendMessage {
-  messageTo: string;
-  messageFrom: string;
-  message: string;
-}
-// export class SendMessage {
-//   constructor(
-//     public messageTo: string,
-//     public messageFrom: string,
-//     public message: string
-//   ) {}
+// interface SendMessage {
+//   messageTo: string;
+//   messageFrom: string;
+//   message: string;
 // }
+export class SendMessage {
+  constructor(
+    public messageTo: string,
+    public messageFrom: string,
+    public message: string
+  ) {}
+}
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -172,12 +172,7 @@ export class MessageComponent implements OnInit, OnDestroy {
         this.socket.emit('message', data);
       }
 
-      // const messageToSend = new SendMessage(messageTo, this.cookie.get('uid'), message);
-      const messageToSend = {
-        messageTo: this.selectedUser,
-        messageFrom: this.userID,
-        message: this.messageForm.value.message
-      };
+      const messageToSend = new SendMessage(messageTo, this.cookie.get('uid'), message);
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: SendMessage) => {
           this.newMessage = '';
