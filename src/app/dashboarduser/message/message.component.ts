@@ -51,7 +51,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
     this.userID = this.cookie.get('uid');
     this.abc = this.route.snapshot.paramMap.get('empid');
-    this.initSocketConnection();
+
     this.fetchMessages();
   }
 
@@ -80,6 +80,11 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message);
       this.messages.push(message);
+    });
+    this.socket.on('connect', () => {
+      console.log('Socket connected');
+      console.log('Source ID:', this.userID);
+      console.log('Target ID:', this.selectedUser);
     });
   }
 
@@ -136,6 +141,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       console.log('Source ID:', this.userID);
       console.log('Target ID:', user);
     }
+    this.initSocketConnection();
     this.fetchMyMessages();
   }
 

@@ -63,7 +63,7 @@ export class EmpmessageComponent implements OnInit {
     // Handle socket events
     this.socket.on('connect_error', (error: any) => {
       console.error('Socket Error:', error);
-    });
+    });-
   
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message);
