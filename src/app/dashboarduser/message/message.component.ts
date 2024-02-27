@@ -59,6 +59,10 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+      // Initialize socket connection
+      this.initSocketConnection();
+      // Fetch messages
+      this.fetchMessages();
   }
 
   ngOnDestroy(): void {
