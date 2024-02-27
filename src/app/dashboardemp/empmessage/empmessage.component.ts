@@ -56,7 +56,7 @@ export class EmpmessageComponent implements OnInit {
       autoConnect: false,
       query: {
         id: this.empid, // Set the empid as sourceId
-        targetId: this.uid    // Set the uid as targetId
+        targetId: this.uid ? this.uid : ''   // Set the uid as targetId
       }
     });
   
@@ -108,7 +108,7 @@ export class EmpmessageComponent implements OnInit {
       console.log('Sending message:', messageToSend);
 
       this.socket.emit('message', messageToSend);
-      
+
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: any) => {
           console.log('API Response:', response);
