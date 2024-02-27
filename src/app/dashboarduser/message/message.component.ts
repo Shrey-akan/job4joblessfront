@@ -97,6 +97,11 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter(message => message.messageTo === this.userID);
       this.loadEmployerNames();
+      if (this.messages.length > 0) {
+        this.messageForm.patchValue({
+          message: this.messages[this.messages.length - 1].message,
+        });
+      }
     });
 
     this.fetchMyMessages();
