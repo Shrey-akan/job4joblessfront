@@ -100,17 +100,19 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      this.messages = messages.filter(message => message.messageTo === this.userID);
-      this.loadEmployerNames();
-      if (this.messages.length > 0) {
-        this.messageForm.patchValue({
-          message: this.messages[this.messages.length - 1].message,
-        });
-      }
-      this.filterMessages(); // Update filteredMessages after fetching messages
-    });
-  }
+  this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
+    this.messages = messages.filter(message =>
+      message.messageTo === this.userID || message.messageFrom === this.userID
+    );
+    this.loadEmployerNames();
+    if (this.messages.length > 0) {
+      this.messageForm.patchValue({
+        message: this.messages[this.messages.length - 1].message,
+      });
+    }
+    this.filterMessages(); // Update filteredMessages after fetching messages
+  });
+}
 
   loadEmployerNames(): void {
     const uniqueMessageFromValues = Array.from(new Set(this.messages.map(message => message.messageFrom)));
@@ -153,13 +155,17 @@ export class MessageComponent implements OnInit, OnDestroy {
           message
         };
         this.socket.emit('message', data);
+
+      const sentMessage = new SendMessage(messageTo, this.cookie.get('uid'), message);
+      this.messages.push(sentMessage);
+      this.filterMessages();
+      this.newMessage = ''; // Clear input field
       }
 
       const messageToSend = new SendMessage(messageTo, this.cookie.get('uid'), message);
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: SendMessage) => {
-          this.newMessage = '';
-          this.fetchMessages(); // Refresh messages after sending
+       
         },
         error: (err: any) => {
           console.error('Error sending message:', err);
@@ -181,9 +187,9 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.filteredMessages = this.messages.filter(message =>
-      (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
-      (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
-    );
+   this.filteredMessages = this.messages.filter(message =>
+    (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
+    (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
+  );
   }
 }
