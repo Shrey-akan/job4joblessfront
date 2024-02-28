@@ -32,6 +32,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   newMessage: string = '';
   socket!: Socket;
   messageForm: FormGroup;
+  fetchedEmployerData: any; // Declare fetchedEmployerData as a class member
 
   constructor(
     private http: HttpClient,
@@ -54,7 +55,6 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadEmployerNames();
   }
 
   ngOnDestroy(): void {
@@ -102,52 +102,43 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-  this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-    this.messages = messages.filter((message) => {
-      // console.log('message from', message.messageFrom);
-      // console.log('message to' , message.messageTo);
-      // console.log('userID', this.userID);
-
-      if (!uniqueNames.has(message.messageFrom)&&(message.messageTo == this.userID)) {
-        uniqueNames.add(message.messageFrom);
-              // console.log(message.messageTo === this.userID);
-              // console.log(message.messageTo === this.abc);
-        return message.messageTo === this.userID;
-      }
-      return false;
-
-    });
-
-    if (this.messages.length > 0) {
-      this.messageForm.patchValue({
-        message: this.messages[this.messages.length - 1].message,
-      });
-    }
-    this.filterMessages(); // Update filteredMessages after fetching messages
-  });
-}
-
-loadEmployerNames() {
-  const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
-  
-  // Fetch employer data, including empid and name
-  this.b1.fetchemployer().subscribe((employerData: any) => {
-    // console.log('Employer Data:', employerData);
-    if (Array.isArray(employerData)) {
-      for (const messageFrom of uniqueMessageFromValues) {
-        const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
-        if (matchingEmployer) {
-          // Matching employer found, store the name in employerNames
-          this.employerNames[messageFrom] = matchingEmployer.empfname;
+    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
+      this.messages = messages.filter((message) => {
+        if (!uniqueNames.has(message.messageFrom) && (message.messageTo == this.userID)) {
+          uniqueNames.add(message.messageFrom);
+          return message.messageTo === this.userID;
         }
+        return false;
+      });
+      this.loadEmployerNames();
+      if (this.messages.length > 0) {
+        this.messageForm.patchValue({
+          message: this.messages[this.messages.length - 1].message,
+        });
       }
-    } else {
-      console.error('Received employer data is not an array');
-    }
-  });
-}
+      this.filterMessages(); // Update filteredMessages after fetching messages
+    });
+  }
 
-
+  loadEmployerNames() {
+    const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
+    
+    // Fetch employer data, including empid and name
+    this.b1.fetchemployer().subscribe((employerData: any) => {
+      if (Array.isArray(employerData)) {
+        this.fetchedEmployerData = employerData; // Store fetched employer data
+        for (const messageFrom of uniqueMessageFromValues) {
+          const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
+          if (matchingEmployer) {
+            // Matching employer found, store the name in employerNames
+            this.employerNames[messageFrom] = matchingEmployer.empfname;
+          }
+        }
+      } else {
+        console.error('Received employer data is not an array');
+      }
+    });
+  }
 
   fetchMyMessages(): void {
     if (!this.userID || !this.selectedUser) {
@@ -174,10 +165,10 @@ loadEmployerNames() {
         };
         this.socket.emit('message', data);
 
-      const sentMessage = new SendMessage(messageTo, this.cookie.get('uid'), message);
-      this.messages.push(sentMessage);
-      this.filterMessages();
-      this.newMessage = ''; // Clear input field
+        const sentMessage = new SendMessage(messageTo, this.cookie.get('uid'), message);
+        this.messages.push(sentMessage);
+        this.filterMessages();
+        this.newMessage = ''; // Clear input field
       }
 
       const messageToSend = new SendMessage(messageTo, this.cookie.get('uid'), message);
@@ -205,9 +196,9 @@ loadEmployerNames() {
       return;
     }
 
-   this.filteredMessages = this.messages.filter(message =>
-    (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
-    (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
-  );
+    this.filteredMessages = this.messages.filter(message =>
+      (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
+      (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
+    );
   }
 }
