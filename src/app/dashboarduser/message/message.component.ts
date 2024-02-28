@@ -121,13 +121,15 @@ loadEmployerNames() {
   this.b1.fetchemployer().subscribe((employerData: any) => {
     // console.log('Employer Data:', employerData);
     if (Array.isArray(employerData)) {
+      const loadedEmployerNames = new Set<string>(); // Set to track loaded employer names
       for (const messageFrom of uniqueMessageFromValues) {
         // Check if the employer name for this messageFrom has already been loaded
-        if (!this.employerNames[messageFrom]) {
+        if (!this.employerNames[messageFrom] && !loadedEmployerNames.has(messageFrom)) {
           const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
           if (matchingEmployer) {
             // Matching employer found, store the name in employerNames
             this.employerNames[messageFrom] = matchingEmployer.empfname;
+            loadedEmployerNames.add(messageFrom); // Add the loaded employer name to the set
           }
         }
       }
