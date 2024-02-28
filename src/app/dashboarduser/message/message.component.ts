@@ -122,10 +122,13 @@ loadEmployerNames() {
     // console.log('Employer Data:', employerData);
     if (Array.isArray(employerData)) {
       for (const messageFrom of uniqueMessageFromValues) {
-        const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
-        if (matchingEmployer) {
-          // Matching employer found, store the name in employerNames
-          this.employerNames[messageFrom] = matchingEmployer.empfname;
+        // Check if the employer name for this messageFrom has already been loaded
+        if (!this.employerNames[messageFrom]) {
+          const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
+          if (matchingEmployer) {
+            // Matching employer found, store the name in employerNames
+            this.employerNames[messageFrom] = matchingEmployer.empfname;
+          }
         }
       }
     } else {
@@ -133,6 +136,7 @@ loadEmployerNames() {
     }
   });
 }
+
 
   fetchMyMessages(): void {
     if (!this.userID || !this.selectedUser) {
