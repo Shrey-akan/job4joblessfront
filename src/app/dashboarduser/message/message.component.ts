@@ -54,6 +54,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loadEmployerNames();
   }
 
   ngOnDestroy(): void {
@@ -116,7 +117,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       return false;
 
     });
-    this.loadEmployerNames();
+
     if (this.messages.length > 0) {
       this.messageForm.patchValue({
         message: this.messages[this.messages.length - 1].message,
