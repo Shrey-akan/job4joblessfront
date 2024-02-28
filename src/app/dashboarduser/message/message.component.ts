@@ -120,23 +120,25 @@ loadEmployerNames() {
   // Fetch employer data, including empid and name
   this.b1.fetchemployer().subscribe((employerData: any) => {
     if (Array.isArray(employerData)) {
-      const loadedEmployerNames = new Set<string>(); // Set to track loaded employer names
-      for (const messageFrom of uniqueMessageFromValues) {
-        // Check if the employer name for this messageFrom has already been loaded
-        if (!this.employerNames[messageFrom] && !loadedEmployerNames.has(messageFrom)) {
-          const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
-          if (matchingEmployer) {
-            // Matching employer found, store the name in employerNames
-            this.employerNames[messageFrom] = matchingEmployer.empfname;
-            loadedEmployerNames.add(messageFrom); // Add the loaded employer name to the set
-          }
+      const empidToNameMap: { [empid: string]: string } = {}; // Map to store empid to name mapping
+      // Populate the empidToNameMap with employer names
+      employerData.forEach((employer: any) => {
+        empidToNameMap[employer.empid] = employer.empfname;
+      });
+      
+      // Update employerNames with unique employer names
+      uniqueMessageFromValues.forEach((messageFrom: string) => {
+        const matchingEmployerName = empidToNameMap[messageFrom];
+        if (matchingEmployerName) {
+          this.employerNames[messageFrom] = matchingEmployerName;
         }
-      }
+      });
     } else {
       console.error('Received employer data is not an array');
     }
   });
 }
+
 
 
   fetchMyMessages(): void {
