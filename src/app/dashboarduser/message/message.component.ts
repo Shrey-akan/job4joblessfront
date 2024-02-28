@@ -95,15 +95,27 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   fetchMessages(): void {
+    const uniqueNames = new Set<string>();
     if (!this.userID) {
       console.error('UserID is missing.');
       return;
     }
 
   this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-    this.messages = messages.filter(message =>
-      message.messageTo === this.userID || message.messageFrom === this.userID
-    );
+    this.messages = messages.filter((message) => {
+      // console.log('message from', message.messageFrom);
+      // console.log('message to' , message.messageTo);
+      // console.log('userID', this.userID);
+
+      if (!uniqueNames.has(message.messageFrom)&&(message.messageTo == this.userID)) {
+        uniqueNames.add(message.messageFrom);
+              // console.log(message.messageTo === this.userID);
+              // console.log(message.messageTo === this.abc);
+        return message.messageTo === this.userID;
+      }
+      return false;
+
+    });
     this.loadEmployerNames();
     if (this.messages.length > 0) {
       this.messageForm.patchValue({
