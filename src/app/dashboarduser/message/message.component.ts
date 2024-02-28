@@ -119,7 +119,6 @@ loadEmployerNames() {
   
   // Fetch employer data, including empid and name
   this.b1.fetchemployer().subscribe((employerData: any) => {
-    // console.log('Employer Data:', employerData);
     if (Array.isArray(employerData)) {
       const loadedEmployerNames = new Set<string>(); // Set to track loaded employer names
       for (const messageFrom of uniqueMessageFromValues) {
