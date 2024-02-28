@@ -5,7 +5,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/auth/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { user } from '@angular/fire/auth';
 
 // Define SendMessage model
 export class SendMessage {
@@ -50,7 +49,8 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.userID = this.cookie.get('uid');
     this.abc = this.route.snapshot.paramMap.get('empid');
 
-    this.fetchMessages();
+    this.initSocketConnectionForUser(this.userID); // Initialize socket connection for the user
+    this.fetchMessages(); // Fetch messages for the user
   }
 
   ngOnInit(): void {
@@ -64,18 +64,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   selectUser(user: string): void {
     this.selectedUser = user;
-    
-    if (this.socket && this.socket.io && this.socket.io.opts && this.socket.io.opts.query) {
-      this.socket.io.opts.query['targetId'] = user;
-      console.log('Source ID:', this.userID);
-      console.log('Target ID:', user);
-    }
-  
-    // Start socket connection for the selected user
-    this.initSocketConnectionForUser(user);
-  
-    // Fetch messages for the selected user
-    this.fetchMyMessages();
+    this.fetchMyMessages(); // Fetch messages for the selected user
   }
   
   initSocketConnectionForUser(userId: string): void {
@@ -87,20 +76,21 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socket = io('https://rocknwoods.website:4400', {
       query: {
         id: this.cookie.get('uid'), // Send the user's ID as 'id' query parameter
-        targetId: user
+        targetId: userId
       }
     });
   
     this.socket.on('message', (message: SendMessage) => {
       console.log('Received message:', message);
       this.messages.push(message);
-      this.cdr.detectChanges();
+      this.filterMessages(); // Update filteredMessages when a new message is received
+      this.cdr.detectChanges(); // Trigger change detection
     });
   
     this.socket.on('connect', () => {
       console.log('Socket connected');
       console.log('Source ID:', this.userID);
-      console.log('Target ID:', user);
+      console.log('Target ID:', userId);
     });
   }
 
@@ -118,9 +108,8 @@ export class MessageComponent implements OnInit, OnDestroy {
           message: this.messages[this.messages.length - 1].message,
         });
       }
+      this.filterMessages(); // Update filteredMessages after fetching messages
     });
-
-    this.fetchMyMessages();
   }
 
   loadEmployerNames(): void {
@@ -141,20 +130,16 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   fetchMyMessages(): void {
-    if (!this.userID) {
-      console.error('UserID is missing.');
+    if (!this.userID || !this.selectedUser) {
+      console.error('UserID or selectedUser is missing.');
       return;
     }
 
-    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
-      this.filteredMessages = messages.filter(message =>
-        (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
-        (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
-      );
-    });
+    this.filteredMessages = this.messages.filter(message =>
+      (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
+      (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
+    );
   }
-
-
 
   sendMessage(): void {
     if (this.selectedUser && this.newMessage.trim() !== '') {
@@ -174,7 +159,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: SendMessage) => {
           this.newMessage = '';
-          this.fetchMessages();
+          this.fetchMessages(); // Refresh messages after sending
         },
         error: (err: any) => {
           console.error('Error sending message:', err);
@@ -187,5 +172,18 @@ export class MessageComponent implements OnInit, OnDestroy {
     if (this.selectedUser) {
       this.router.navigate(['/dashboarduser/videocall', this.selectedUser]);
     }
+  }
+
+  // Function to update filteredMessages based on selected user
+  filterMessages(): void {
+    if (!this.userID || !this.selectedUser) {
+      console.error('UserID or selectedUser is missing.');
+      return;
+    }
+
+    this.filteredMessages = this.messages.filter(message =>
+      (message.messageFrom === this.selectedUser && message.messageTo === this.userID) ||
+      (message.messageFrom === this.userID && message.messageTo === this.selectedUser)
+    );
   }
 }
