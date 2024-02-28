@@ -114,22 +114,25 @@ export class MessageComponent implements OnInit, OnDestroy {
   });
 }
 
-  loadEmployerNames(): void {
-    const uniqueMessageFromValues = Array.from(new Set(this.messages.map(message => message.messageFrom)));
-    
-    this.b1.fetchemployer().subscribe((employerData: any) => {
-      if (Array.isArray(employerData)) {
-        for (const messageFrom of uniqueMessageFromValues) {
-          const matchingEmployer = employerData.find(employer => employer.empid === messageFrom);
-          if (matchingEmployer) {
-            this.employerNames[messageFrom] = matchingEmployer.empfname;
-          }
+loadEmployerNames() {
+  const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
+  
+  // Fetch employer data, including empid and name
+  this.b1.fetchemployer().subscribe((employerData: any) => {
+    // console.log('Employer Data:', employerData);
+    if (Array.isArray(employerData)) {
+      for (const messageFrom of uniqueMessageFromValues) {
+        const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
+        if (matchingEmployer) {
+          // Matching employer found, store the name in employerNames
+          this.employerNames[messageFrom] = matchingEmployer.empfname;
         }
-      } else {
-        console.error('Received employer data is not an array');
       }
-    });
-  }
+    } else {
+      console.error('Received employer data is not an array');
+    }
+  });
+}
 
   fetchMyMessages(): void {
     if (!this.userID || !this.selectedUser) {
