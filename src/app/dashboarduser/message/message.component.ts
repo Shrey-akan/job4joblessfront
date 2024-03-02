@@ -94,7 +94,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       console.log('Target ID:', userId);
     });
   }
-
+    
   fetchMessages(): void {
     const uniqueNames = new Set<string>();
     if (!this.userID) {
@@ -120,13 +120,39 @@ export class MessageComponent implements OnInit, OnDestroy {
     });
   }
 
+  // loadEmployerNames() {
+  //   const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
+    
+  //   // Fetch employer data, including empid and name
+  //   this.b1.fetchemployer().subscribe((employerData: any) => {
+  //     if (Array.isArray(employerData)) {
+  //       this.fetchedEmployerData = employerData; // Store fetched employer data
+  //       for (const messageFrom of uniqueMessageFromValues) {
+  //         const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
+  //         if (matchingEmployer) {
+  //           // Matching employer found, store the name in employerNames
+  //           this.employerNames[messageFrom] = matchingEmployer.empfname;
+  //         }
+  //       }
+  //     } else {
+  //       console.error('Received employer data is not an array');
+  //     }
+  //   });
+  // }
+
+
+
   loadEmployerNames() {
     const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
-    
+  
     // Fetch employer data, including empid and name
     this.b1.fetchemployer().subscribe((employerData: any) => {
       if (Array.isArray(employerData)) {
         this.fetchedEmployerData = employerData; // Store fetched employer data
+        
+        // Clear existing employer names
+        this.employerNames = {};
+  
         for (const messageFrom of uniqueMessageFromValues) {
           const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
           if (matchingEmployer) {
