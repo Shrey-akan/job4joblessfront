@@ -33,6 +33,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   socket!: Socket;
   messageForm: FormGroup;
   fetchedEmployerData: any; // Declare fetchedEmployerData as a class member
+  allEmployerNames: string[] = [];
 
   constructor(
     private http: HttpClient,
@@ -52,6 +53,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
     this.initSocketConnectionForUser(this.userID); // Initialize socket connection for the user
     this.fetchMessages(); // Fetch messages for the user
+    this.loadAllEmployerNames();
   }
 
   ngOnInit(): void {
@@ -110,7 +112,7 @@ export class MessageComponent implements OnInit, OnDestroy {
         }
         return false;
       });
-      this.loadEmployerNames();
+
       if (this.messages.length > 0) {
         this.messageForm.patchValue({
           message: this.messages[this.messages.length - 1].message,
@@ -142,24 +144,10 @@ export class MessageComponent implements OnInit, OnDestroy {
 
 
 
-  loadEmployerNames() {
-    const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
-  
-    // Fetch employer data, including empid and name
+  loadAllEmployerNames(): void {
     this.b1.fetchemployer().subscribe((employerData: any) => {
       if (Array.isArray(employerData)) {
-        this.fetchedEmployerData = employerData; // Store fetched employer data
-        
-        // Clear existing employer names
-        this.employerNames = {};
-  
-        for (const messageFrom of uniqueMessageFromValues) {
-          const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
-          if (matchingEmployer) {
-            // Matching employer found, store the name in employerNames
-            this.employerNames[messageFrom] = matchingEmployer.empfname;
-          }
-        }
+        this.allEmployerNames = employerData.map((employer: any) => employer.empfname);
       } else {
         console.error('Received employer data is not an array');
       }
