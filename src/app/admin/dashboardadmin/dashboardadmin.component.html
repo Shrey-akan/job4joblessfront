@@ -27,32 +27,49 @@
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/" >Dashboard</a>
+                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]={exact:true} aria-current="page" routerLink="/admin/userdetails">Job Finder Profile</a>
+                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]={exact:true} routerLink="/admin/userdetails">
+                            <i class="fas fa-user"></i> Job Finder Profile
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/admin/employerdetails">Company Details</a>
+                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/employerdetails">
+                            <i class="fas fa-building"></i> Company Details
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/admin/jobprovided">Jobs Provided</a>
+                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/jobprovided">
+                            <i class="fas fa-briefcase"></i> Jobs Provided
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/admin/profile">Profile</a>
+                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/profile">
+                            <i class="fas fa-user-circle"></i> Profile
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/admin/enquirydetails">Enquiry Details</a>
+                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/enquirydetails">
+                            <i class="fas fa-envelope"></i> Enquiry Details
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/admin/question">Add Question</a>
+                        <a class="nav-link" routerLinkActive="active" routerLink="/admin/question">
+                            <i class="fas fa-plus-circle"></i> Add Question
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLinkActive="active" aria-current="page" (click)="signOutAdmin()">Logout</a>
+                        <a class="nav-link" routerLinkActive="active" (click)="signOutAdmin()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
                     </li>
                 </ul>
             </div>
         </nav>
+        
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <router-outlet></router-outlet>
