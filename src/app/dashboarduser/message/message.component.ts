@@ -53,7 +53,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
     this.initSocketConnectionForUser(this.userID); // Initialize socket connection for the user
     this.fetchMessages(); // Fetch messages for the user
-    this.loadAllEmployerNames();
+    this.loadEmployerNames();
   }
 
   ngOnInit(): void {
@@ -112,6 +112,7 @@ export class MessageComponent implements OnInit, OnDestroy {
         }
         return false;
       });
+      this.loadEmployerNames();
 
       if (this.messages.length > 0) {
         this.messageForm.patchValue({
@@ -144,15 +145,26 @@ export class MessageComponent implements OnInit, OnDestroy {
 
 
 
-  loadAllEmployerNames(): void {
+  loadEmployerNames() {
+    const uniqueMessageFromValues = Array.from(new Set(this.messages.map((message) => message.messageFrom)));
+    
+    // Fetch employer data, including empid and name
     this.b1.fetchemployer().subscribe((employerData: any) => {
+      // console.log('Employer Data:', employerData);
       if (Array.isArray(employerData)) {
-        this.allEmployerNames = employerData.map((employer: any) => employer.empfname);
+        for (const messageFrom of uniqueMessageFromValues) {
+          const matchingEmployer = employerData.find((employer: any) => employer.empid === messageFrom);
+          if (matchingEmployer) {
+            // Matching employer found, store the name in employerNames
+            this.employerNames[messageFrom] = matchingEmployer.empfname;
+          }
+        }
       } else {
         console.error('Received employer data is not an array');
       }
     });
   }
+  
 
   fetchMyMessages(): void {
     if (!this.userID || !this.selectedUser) {
