@@ -54,7 +54,7 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { BlogComponent } from './blog/blog.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,7 +106,8 @@ import { BloglistComponent } from './bloglist/bloglist.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
     // NgbModule
   ],
   providers: [CookieService,MessagingService,{
