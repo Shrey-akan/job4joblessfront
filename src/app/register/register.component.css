@@ -84,31 +84,3 @@ height: auto;
   color: white;
   background-color: #1e2e5c;
 }
-
-.custom-textbox {
-  height: 10rem; /* Adjust the height as needed */
-  /* padding: 10px;  Adjust the padding as needed */
-  padding: 5px 10px;
-  vertical-align: top;
-}
-.textar{
-  height: 7rem;
-}
-.summ{
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.url-label {
-  display: inline-block;
-  width: 120px; /* Adjust width as needed to align labels */
-  vertical-align: top;
-  margin-right: 10px; /* Adjust margin between label and input field */
-}
-
-.github-label {
-  width: 7.5rem; 
-  margin-left: 0.5rem;/* Adjust width as needed */
-   /* Add some spacing between the label and input field */
-}

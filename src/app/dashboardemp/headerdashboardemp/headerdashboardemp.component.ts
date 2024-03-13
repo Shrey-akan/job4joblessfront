@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { backendUrl } from 'src/app/constant';
 interface ApiResponse {
   waitingApplicationsCount:number;
   jobidWaitingCountMap: Record<string, number>;
@@ -17,7 +16,6 @@ export class HeaderdashboardempComponent implements OnInit {
   waitingApplicationsCount: number = 0;
   empId: String = "0";
   jobWaitingCounts!: number;
-  private backend_URL = `${backendUrl}`;
   constructor(private router: Router, private http: HttpClient, private cookie: CookieService) { }
 
   ngOnInit() {
@@ -35,7 +33,7 @@ export class HeaderdashboardempComponent implements OnInit {
   getWaitingApplicationsCount() {
     const empid = this.empId;
 
-    this.http.get<ApiResponse>(`${this.backend_URL}notifyEmployer?empid=${empid}`)
+    this.http.get<ApiResponse>(`https://job4jobless.com:9001/notifyEmployer?empid=${empid}`)
       .subscribe({
         next: (response:ApiResponse) => {
           console.log(response);
@@ -62,7 +60,7 @@ export class HeaderdashboardempComponent implements OnInit {
     }
 
     // Make the logout request with the refresh token as a request parameter
-    this.http.post(`${this.backend_URL}logoutEmployer`, null, {
+    this.http.post('https://job4jobless.com:9001/logoutEmployer', null, {
       responseType: 'text' // Specify the response type as 'text'
     }).subscribe({
       next: (response: string) => {

@@ -6,7 +6,6 @@ import { MessagingService } from './firebase/messaging.service';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { backendUrl } from './constant';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,14 +16,12 @@ export class AppComponent implements OnInit {
   title = 'job4jobless';
   showFooter = true;
 
-  private backend_URL=`${backendUrl}`;
-
   message:any = null;
   ngOnInit():void {
    
     const refreshToken = this.cookie.get('refreshToken');
     if (refreshToken) {
-      this.http.post(`${this.backend_URL}refreshToken`, { refreshToken }).subscribe(
+      this.http.post('https://job4jobless.com:9001/refreshToken', { refreshToken }).subscribe(
        {
         next:(response: any) => {
           if (response.accessToken) {

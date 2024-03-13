@@ -336,7 +336,7 @@ export class UserService {
     });
 
     this.h1
-      .post<Map<string, Object>>(`${API_BASE_URL}createOrGetUser`, requestBody, {
+      .post<Map<string, Object>>('https://job4jobless.com:9001/createOrGetUser', requestBody, {
         headers,
         observe: 'response', // to access the full HTTP response, including headers
       })
@@ -470,7 +470,7 @@ export class UserService {
     });
 
     this.h1
-      .post<Map<string, Object>>(`${API_BASE_URL}createOrGetEmployer`, requestBody, {
+      .post<Map<string, Object>>('https://job4jobless.com:9001/createOrGetEmployer', requestBody, {
         headers,
         observe: 'response',
       })

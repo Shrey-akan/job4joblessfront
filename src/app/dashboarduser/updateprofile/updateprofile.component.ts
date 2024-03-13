@@ -6,7 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { catchError, throwError } from 'rxjs';
 import { UserService } from 'src/app/auth/user.service';
 import * as intelInput from "intl-tel-input";
-import { backendUrl } from 'src/app/constant';
 interface User {
   uid: Number;
   userName: String;
@@ -42,8 +41,6 @@ export class UpdateprofileComponent implements OnInit {
   ) { }
 
   userID: String = "0";
-
-  private backend_URL=`${backendUrl}`;
 
   ngOnInit() {
 
@@ -107,7 +104,7 @@ export class UpdateprofileComponent implements OnInit {
     // this.fetchUserDetailById();
   }
   fetchUserDetailById(userId: String) {
-    this.http.get<User>(`${this.backend_URL}fetchuserById/${userId}`)
+    this.http.get<User>(`https://job4jobless.com:9001/fetchuserById/${userId}`)
       .subscribe({
         next: (response: User) => {
           console.log("User Old Details", response);

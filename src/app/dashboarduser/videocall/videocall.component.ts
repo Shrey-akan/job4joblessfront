@@ -4,7 +4,6 @@ import Peer from 'peerjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { backendUrl } from 'src/app/constant';
 
 class SendMessage {
   messageTo!: string;
@@ -38,8 +37,6 @@ export class VideocallComponent implements OnInit {
   constructor(private renderer: Renderer2 , private http: HttpClient, private route: ActivatedRoute,
     private cookie: CookieService,private formBuilder: FormBuilder) { }
 
-    private backend_URL=`${backendUrl}`;
-
   ngOnInit(): void {
 
     this.uid = this.route.snapshot.paramMap.get("selectedUser");
@@ -63,7 +60,7 @@ export class VideocallComponent implements OnInit {
   fetchMessages() {
     // Fetch previous messages from the server
     this.http
-      .get<SendMessage[]>(`${this.backend_URL}fetchMessages`)
+      .get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages')
       .subscribe((messages: SendMessage[]) => {
         // Filter messages to only include the relevant ones
         this.messages = messages.filter(
@@ -91,7 +88,7 @@ export class VideocallComponent implements OnInit {
 
     
       this.http
-        .post<SendMessage>(`${this.backend_URL}send`, messageToSend)
+        .post<SendMessage>('https://job4jobless.com:9001/send', messageToSend)
         .subscribe({
           next: (response: any) => {
             console.log('Message sent successfully:', response);

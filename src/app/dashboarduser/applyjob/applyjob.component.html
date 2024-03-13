@@ -23,23 +23,20 @@
                         <input type="hidden" [formControlName]="'jucompny'" />
                       </div>
                       <div class="mb-3">
-                        <label for="juname" class="form-label">Name:*</label>
-                        <input type="text" id="juname" class="form-control" formControlName="juname">
-                        <div *ngIf="myformsubmission.get('juname')?.hasError('required') && myformsubmission.get('juname')?.touched" class="text-danger">
-                          Name is required.
-                        </div>
+                        <label class="form-label">Name:*</label>
+                        <input type="text" class="form-control" formControlName="juname">
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Email:*</label>
-                        <input type="email" id="jumail" class="form-control" formControlName="jumail">
+                        <input type="email" class="form-control" formControlName="jumail">
 
-                        <div *ngIf="myformsubmission.get('jumail')?.hasError('required') && myformsubmission.get('jumail')?.touched" class="text-danger">
+                        <div *ngIf="myformsubmission.get('jumail')?.hasError('required')" class="text-danger">
                           Email is required.
                         </div>
-                        <div *ngIf="myformsubmission.get('jumail')?.hasError('email') && myformsubmission.get('jumail')?.touched" class="text-danger">
+                        <div *ngIf="myformsubmission.get('jumail')?.hasError('email')" class="text-danger">
                           Please enter a valid email address.
                         </div>
-                        <div *ngIf="myformsubmission.get('jumail')?.hasError('pattern') && myformsubmission.get('jumail')?.touched" class="text-danger">
+                        <div *ngIf="myformsubmission.get('jumail')?.hasError('pattern')" class="text-danger">
                           Email must be a valid Gmail address.
                         </div>
                       </div>
@@ -49,19 +46,12 @@
                           <input type="file" id="resume" class="form-control" formControlName="juresume" (change)="onFileSelected($event)" />
                         </div> -->
                       <div class="mb-3">
-                        <label class="form-label" for="juresume">Upload Resume:*</label>
-                        <input type="file" id="juresume" class="form-control" formControlName="juresume"
+                        <label class="form-label" for="resume">Upload Resume:*</label>
+                        <input type="file" id="resume" class="form-control" formControlName="juresume"
                           (change)="onFileSelected($event)" accept=".pdf"/>
-                          <div *ngIf="myformsubmission.get('juresume')?.hasError('required') && myformsubmission.get('juresume')?.touched" class="text-danger">
-                            Resume is required.
-                          </div>
-                          <div *ngIf="myformsubmission.get('juresume')?.hasError('invalidExtension') && myformsubmission.get('juresume')?.touched" class="text-danger">
-                            Invalid file format. Please upload a PDF file.
-                          </div>
                       </div>
 
-                      <!-- <button class="btn custom-btn rounded-pill" (click)="nextStep(); uploadFile()">Next & Upload File</button> -->
-                      <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next & Upload File</button>
+                      <button class="btn custom-btn rounded-pill" (click)="nextStep(); uploadFile()">Next & Upload File</button>
                     </div>
 
                     <div *ngIf="currentStep === 2">
@@ -72,42 +62,39 @@
                         </div>
                       </div>
                       <div class="mb-3">
-                        <label for="jurelocation" class="form-label">Will you be able to reliably commute or relocate to Anywhere for this
+                        <label class="form-label">Will you be able to reliably commute or relocate to Anywhere for this
                           job?</label>
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="commute" name="jurelocation" value="commute"
                             formControlName="jurelocation">
-                          <label class="form-check-label" for="jurelocation">
+                          <label class="form-check-label" for="commute">
                             Yes, I can make the commute
                           </label>
                         </div>
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="relocate" name="jurelocation"
                             value="relocate" formControlName="jurelocation">
-                          <label class="form-check-label" for="jurelocation">
+                          <label class="form-check-label" for="relocate">
                             Yes, I am planning to relocate
                           </label>
                         </div>
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="relocate-assistance" name="jurelocation"
                             value="relocate-assistance" formControlName="jurelocation">
-                          <label class="form-check-label" for="jurelocation">
+                          <label class="form-check-label" for="relocate-assistance">
                             Yes, but I need your location assistance
                           </label>
                         </div>
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="no" name="jurelocation" value="no"
                             formControlName="jurelocation">
-                          <label class="form-check-label" for="jurelocation">
+                          <label class="form-check-label" for="no">
                             No
                           </label>
                         </div>
-                        <div *ngIf="myformsubmission.get('jurelocation')?.hasError('required') && myformsubmission.get('jurelocation')?.touched" class="text-danger">
-                          Name is required.
-                        </div>
                       </div>
                       <div class="mb-3">
-                        <label for="jueducation" class="form-label">What is the highest level of education you have completed?</label>
+                        <label class="form-label">What is the highest level of education you have completed?</label>
                         <select class="form-select" formControlName="jueducation">
                           <option value="" disabled selected>Select an option</option>
                           <option value="none">NONE</option>
@@ -119,23 +106,42 @@
                           <option value="master">Master's</option>
                           <option value="doctorate">Doctorate</option>
                         </select>
-                        <div *ngIf="myformsubmission.get('jueducation')?.hasError('required') && myformsubmission.get('jueducation')?.touched" class="text-danger">
-                          Name is required.
-                        </div>
                       </div>
                       <div class="mb-3">
-                        <label for="juexperience" class="form-label">How many years of total work experience do you have?</label>
+                        <label class="form-label">How many years of total work experience do you have?</label>
                         <input type="number" class="form-control" formControlName="juexperience">
-                        <div *ngIf="myformsubmission.get('juexperience')?.hasError('required') && myformsubmission.get('juexperience')?.touched" class="text-danger">
-                          Name is required.
-                        </div>
                       </div>
+                      <!-- <div class="mb-3">
+                        <label class="form-label">How many years of Java experience do you have?</label>
+                        <input type="number" class="form-control" formControlName="juexpinjava">
+                      </div> -->
+                      <!-- <div class="mb-3">
+                        <label class="form-label">How many years of JSP experience do you have?</label>
+                        <input type="number" class="form-control" formControlName="juexpjsp">
+                      </div> -->
                       <div class="mb-3">
                         <label class="form-label">Please list 2-3 dates and time ranges that you could do an
                           interview.(optional)</label>
                         <textarea type="text" class="form-control" formControlName="juinterviewdate"
                           name="juinterviewdate" id="" cols="30" rows="5"></textarea>
                       </div>
+                      <!-- <div class="mb-3">
+                        <label class="form-label">Do you have a valid Java?</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="validjavayes" name="jujavavalid"
+                            value="validjavayes" formControlName="jujavavalid">
+                          <label class="form-check-label" for="validjavayes">
+                            Yes
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="validjavano" name="jujavavalid"
+                            value="validjavano" formControlName="jujavavalid">
+                          <label class="form-check-label" for="validjavano">
+                            No
+                          </label>
+                        </div>
+                      </div> -->
                       <div class="d-flex justify-content-between">
                         <button class="btn custom-btn rounded-pill" (click)="prevStep()">Previous</button>
                         <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next</button>

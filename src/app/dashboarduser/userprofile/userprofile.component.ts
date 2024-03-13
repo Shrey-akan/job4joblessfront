@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
-import { backendUrl } from 'src/app/constant';
 interface User {
   uid: Number;
   userName: String;
@@ -39,8 +38,6 @@ export class UserprofileComponent implements OnInit {
   constructor(public cookie: CookieService,private formBuilder: FormBuilder,private http: HttpClient, private router: Router, private b1: UserService) { }
 
   userID: string = "0"; // Change 'String' to 'string'
-
-  private backend_URL=`${backendUrl}`;
 
   ngOnInit(): void {
     // Check if the userID is correctly retrieved from the cookie
@@ -87,7 +84,7 @@ export class UserprofileComponent implements OnInit {
     });
 
 
-    this.pdfUrl = `${this.backend_URL}getPdfByUi/${this.userID}`;
+    this.pdfUrl = `https://job4jobless.com:9001/getPdfByUi/${this.userID}`;
     // console.log('PDF URL:', this.pdfUrl);
 
   }
@@ -100,7 +97,7 @@ export class UserprofileComponent implements OnInit {
       const formData = this.passwordResetForm.value;
 
       // Make a POST request to your backend for password reset
-      this.http.post(`${this.backend_URL}resetPassword`, formData)
+      this.http.post('https://job4jobless.com:9001/resetPassword', formData)
         .subscribe(
      {
       next:     (response: any) => {

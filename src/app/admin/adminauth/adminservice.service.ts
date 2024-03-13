@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { backendUrl } from 'src/app/constant';
 import { Observable, catchError, map, throwError } from 'rxjs';
 
 @Injectable({
@@ -8,8 +7,7 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 })
 export class AdminserviceService {
 
-  // private apiUrl = 'https://job4jobless.com:9001/';
-  private apiUrl = `${backendUrl}`;
+  private apiUrl = 'https://job4jobless.com:9001/';
 
   constructor(private http: HttpClient) {}
 

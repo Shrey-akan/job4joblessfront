@@ -5,7 +5,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/auth/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { backendUrl } from 'src/app/constant';
 
 // Define SendMessage model
 export class SendMessage {
@@ -35,8 +34,6 @@ export class MessageComponent implements OnInit, OnDestroy {
   messageForm: FormGroup;
   fetchedEmployerData: any; // Declare fetchedEmployerData as a class member
   allEmployerNames: string[] = [];
-
-  private backend_URL=`${backendUrl}`;
 
   constructor(
     private http: HttpClient,
@@ -107,7 +104,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.http.get<SendMessage[]>(`${this.backend_URL}fetchMessages`).subscribe((messages: SendMessage[]) => {
+    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter((message) => {
         if (!uniqueNames.has(message.messageFrom) && (message.messageTo == this.userID)) {
           uniqueNames.add(message.messageFrom);
@@ -201,7 +198,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       const messageToSend = new SendMessage(messageTo, this.cookie.get('uid'), message);
-      this.http.post<SendMessage>(`${this.backend_URL}send`, messageToSend).subscribe({
+      this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: SendMessage) => {
        
         },

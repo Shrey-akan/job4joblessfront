@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-headeruser',
@@ -14,9 +13,6 @@ export class HeaderuserComponent implements OnInit {
   accessToken: string | null;
   uid: string | null;
   notificationCount: number = 0;
-
-  private backend_URL=`${backendUrl}`;
-  
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private cookie: CookieService) {
     // Initialize properties from local storage
     this.accessToken = localStorage.getItem('accessToken');
@@ -40,7 +36,7 @@ export class HeaderuserComponent implements OnInit {
     }
   
  
-    this.http.post(`${this.backend_URL}logout`, null, {
+    this.http.post('https://job4jobless.com:9001/logout', null, {
       responseType: 'text' 
     }).subscribe({
       next: (response: string) => {
@@ -70,7 +66,7 @@ export class HeaderuserComponent implements OnInit {
 
   private fetchTrueStatusCount() {
     console.log("checking the value of uid",this.uid);
-    this.http.get<any>(`${this.backend_URL}countTrueStatus?uid=${this.uid}`).subscribe({
+    this.http.get<any>(`https://job4jobless.com:9001/countTrueStatus?uid=${this.uid}`).subscribe({
       next: (response) => {
         // Update the waitingApplicationsCount with the received count
         this.notificationCount = response.trueCount;

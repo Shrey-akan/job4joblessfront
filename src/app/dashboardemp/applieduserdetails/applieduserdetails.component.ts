@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
 import { ApplyJob } from 'src/app/apply-job';
-import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-applieduserdetails',
@@ -26,8 +25,6 @@ export class ApplieduserdetailsComponent implements OnInit {
   isTableVisible: boolean = false;
   exportedData: string = '';
   jobTitleFilter: string = '';
-
-  backend_URL = `${backendUrl}`;
 
   // Function to toggle the table visibility
   toggleTableVisibility() {

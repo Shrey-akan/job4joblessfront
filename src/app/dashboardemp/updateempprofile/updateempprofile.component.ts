@@ -6,7 +6,6 @@ import { UserService } from 'src/app/auth/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
-import { backendUrl } from 'src/app/constant';
 import * as intelInput from "intl-tel-input";
 @Component({
   selector: 'app-updateempprofile',
@@ -19,7 +18,6 @@ export class UpdateempprofileComponent implements OnInit {
   empDetail: any;
   abc: any;
   empid!: string | null;
-  private backend_URL=`${backendUrl}`;
   constructor(
     private formBuilder: FormBuilder,
     private b1: UserService,
@@ -91,7 +89,7 @@ export class UpdateempprofileComponent implements OnInit {
   }
   fetchUserDetailById() {
     if (this.empid) {
-      this.http.get(`${this.backend_URL}fetchempById/${this.empid}`)
+      this.http.get(`https://job4jobless.com:9001/fetchempById/${this.empid}`)
         .subscribe({
           next: (response: any) => {
             console.log("Employer Old Details", response);

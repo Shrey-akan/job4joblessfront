@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-updatejob',
@@ -12,7 +11,6 @@ import { backendUrl } from 'src/app/constant';
 export class UpdatejobComponent implements OnInit {
   jobForm!: FormGroup;
   jobid!: string | null;
-  private backend_URL=`${backendUrl}`;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +39,7 @@ export class UpdatejobComponent implements OnInit {
   }
   fetchJobDetails() {
     if (this.jobid) {
-      this.http.get(`${this.backend_URL}fetchJobPostById/${this.jobid}`)
+      this.http.get(`https://job4jobless.com:9001/fetchJobPostById/${this.jobid}`)
         .subscribe({
           next: (response: any) => {
             // Assuming response has the job post data in the correct format
@@ -58,7 +56,7 @@ export class UpdatejobComponent implements OnInit {
   updateJob() {
     const formData = this.jobForm.value;
 
-    this.http.put(`${this.backend_URL}jobpostupdate/${this.jobid}`, formData)
+    this.http.put(`https://job4jobless.com:9001/jobpostupdate/${this.jobid}`, formData)
       .subscribe(
        {
         next: (response:any) => {

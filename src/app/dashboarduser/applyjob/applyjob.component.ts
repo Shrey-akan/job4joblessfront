@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
-import { backendUrl } from 'src/app/constant';
-import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-applyjob',
@@ -25,10 +23,6 @@ export class ApplyjobComponent implements OnInit {
   // router: any;
   data: any;
   uid!: string;
-  pdfFile: boolean = false;
-
-  private backend_URL = `${backendUrl}`;
-
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private b1: UserService, private cookie: CookieService) { }
 
 
@@ -45,7 +39,7 @@ export class ApplyjobComponent implements OnInit {
       jumail: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
       jucompny: ['', Validators.required],
       jutitle: ['', Validators.required],
-      juresume: ['', [Validators.required, this.fileValidator]],
+      juresume: [''],
       jurelocation: ['', [Validators.required]],
       jueducation: ['', [Validators.required]],
       juexperience: ['', [Validators.required]],
@@ -54,7 +48,7 @@ export class ApplyjobComponent implements OnInit {
       jucompanyname: ['', Validators.required],
       empid: ['', Validators.required],
       jobid: ['', Validators.required],
-      uid: this.uid
+      uid: this.uid 
     })
     // Add more steps as needed
     this.b1.jobTitle$.subscribe((jobTitle) => {
@@ -89,88 +83,32 @@ export class ApplyjobComponent implements OnInit {
   saveFormDataToLocalStorage() {
     localStorage.setItem('applyJobFormData', JSON.stringify(this.myformsubmission.value));
   }
-  
+
   insertUserForma(myformsubmission: { value: any; }) {
-    console.log("insertUserForma called with:", myformsubmission);
-  
-    if (this.currentStep == this.totalSteps) {
-      console.log("Current step is equal to total steps. Proceeding to navigate and submit.");
-      
-      myformsubmission.value.jobid = this.jobIda;
-      myformsubmission.value.uid = this.uid;
-  
-      console.log("Submitting form data:", myformsubmission.value);
-      const submissionResult = this.b1.insertapplyjob(myformsubmission.value);
-      console.log("Submission result:", submissionResult);
-  
-      // Navigate after submitting
-      this.router.navigate(['/dashboarduser/myjobs']);
-    } else {
-      console.log("Current step is not equal to total steps. Navigating to dashboarduser.");
-      this.router.navigate(['/dashboarduser/applyjob']);
-    }
-  
+    console.log("Done");
+    myformsubmission.value.jobid = this.jobIda;
+    this.router.navigate(['/dashboarduser/myjobs']);
+    console.log(myformsubmission);
+
+    myformsubmission.value.uid = this.uid;
+
+    return this.b1.insertapplyjob(myformsubmission.value);
+
     // Clear the localStorage after submitting
-    console.log("Clearing localStorage.");
     localStorage.removeItem('applyJobFormData');
+    this.router.navigate(['/dashboarduser']);
   }
-  
 
   ngOnDestroy() {
     // Save the form data to localStorage when the component is destroyed (e.g., when the user leaves the page)
     this.saveFormDataToLocalStorage();
   }
 
-  // nextStep() {
-  //   this.currentStep++;
-  //   this.saveFormDataToLocalStorage();
+  nextStep() {
+    this.currentStep++;
+    this.saveFormDataToLocalStorage();
 
-  // }
-  nextStep(): void {
-    // this.currentStep++;
-    // this.saveFormDataToLocalStorage();
-
-    if (this.currentStep < this.totalSteps) {
-      console.log("Inside the Next Step")
-      if (this.currentStep === 1) {
-        const name = this.myformsubmission.get('juname');
-        const mail = this.myformsubmission.get('jumail');
-        const resume = this.myformsubmission.get('juresume');
-
-        if (name?.value && mail?.value && resume?.value) {
-          console.log("All required fields are valid....");
-          this.currentStep++;
-          this.uploadFile()
-          // this.saveFormDataToLocalStorage();
-
-        } else {
-          console.log("One or more required fields are empty.");
-          // Handle empty fields, e.g., display error message
-        }
-      }
-
-      else if (this.currentStep === 2) {
-        console.log("I am inside step number 2")
-        const jrelocation = this.myformsubmission.get('jurelocation');
-        const jeducation = this.myformsubmission.get('jueducation');
-        const jexperience = this.myformsubmission.get('juexperience');
-
-        if (jrelocation?.value && jeducation?.value && jexperience?.value) {
-          console.log("All required fields are valid....");
-          this.currentStep++;
-          // this.uploadFile()
-          this.saveFormDataToLocalStorage();
-
-        } else {
-          console.log("One or more required fields are empty.");
-          // Handle empty fields, e.g., display error message
-        }
-      }
-      else {
-        console.log("Nothing is there")
-      }
   }
-}
 
   prevStep() {
     this.currentStep--;
@@ -194,26 +132,11 @@ export class ApplyjobComponent implements OnInit {
     }
   }
 
-  fileValidator(control: AbstractControl): { [key: string]: any } | null {
-    const file = control.value;
-    if (file) {
-      const allowedExtensions = ['.pdf']; // List of allowed file extensions
-      const fileExtension = file.name.split('.').pop().toLowerCase();
-      if (allowedExtensions.indexOf(fileExtension) === -1) {
-        return { invalidExtension: true };
-      }
-      return null; // No error if file is selected and has valid extension
-    }
-    return { required: true }; // Error if no file is selected
-  }
-
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    // this.pdfFile=true;
   }
 
   uploadFile() {
-    const resume = this.myformsubmission.get('juresume');
     // Get the 'uid' from the cookie
     this.uid = this.cookie.get('uid');
     // console.log("checking the selected file ",this.selectedFile);
@@ -223,11 +146,10 @@ export class ApplyjobComponent implements OnInit {
       formData.append('file', this.selectedFile);
       formData.append('uid', this.uid);
       // console.log("checking the selected file ",formData);
-      this.http.post(`${this.backend_URL}uploadPdf`, formData).subscribe(
+      this.http.post('https://job4jobless.com:9001/uploadPdf', formData).subscribe(
         {
           next: (response: any) => {
-            console.log('File uploaded successfully');
-            this.saveFormDataToLocalStorage();
+            // console.log('File uploaded successfully');
           },
           error: (error: any) => {
             console.error('File upload failed:', error);

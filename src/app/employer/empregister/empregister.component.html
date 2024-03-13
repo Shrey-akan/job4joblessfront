@@ -1,205 +1,118 @@
-<div class="container-fluid registerform my-5">
-
+<div class="container">
   <div class="row">
-    <div class="col-12 col-md-8 offset-md-2">
-      <!-- <h1 class="text-center" style="font-size: 1.5rem; text-shadow: 3px 3px 5px #888; color: black;">Ready to take the next step?</h1> -->
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="container form-container bg-white p-4 rounded">
-            <h2 class="h4 mb-4">Registration</h2>
-
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="container custom-box">
+        <div class="row">
+          <h1 class="text-center">Register Now</h1>
+          <button class="btn custom-button btn-lg" (click)="loginWithGoogle()">
+            <i class="fab fa-google"></i> Sign Up with Google
+          </button>
+          <div class="col-md 6">
             <form [formGroup]="employerdetails" (ngSubmit)="empRegisteration()">
-              <div class="form-group row">
-                <div class="col">
-                  <label for="empfname">First Name:*</label>
-                  <input type="text" class="form-control" formControlName="empfname" placeholder="Enter First Name">
-                  <div
-                    *ngIf="employerdetails.get('empfname')?.hasError('required') && employerdetails.get('empfname')?.touched"
-                    class="text-danger">First Name is required.
-                  </div>
-                </div>
-                <div class="col">
-                  <label for="emplname">Last Name:*</label>
-                  <input type="text" class="form-control" formControlName="emplname" placeholder="Enter Last Name">
-                  <div
-                    *ngIf="employerdetails.get('emplname')?.hasError('required') && employerdetails.get('emplname')?.touched"
-                    class="text-danger">Last Name is required.
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="empfname">First Name:*</label>
+                <input type="text" id="empfname" formControlName="empfname" class="form-control" required>
               </div>
-
+              <div class="form-group">
+                <label for="emplname">Last Name:*</label>
+                <input type="text" id="emplname" formControlName="emplname" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="empcompany">Company Name:*</label>
+                <input type="text" id="empcompany" formControlName="empcompany" class="form-control" required>
+              </div>
               <div class="form-group">
                 <label for="empmailid">Email:*</label>
-                <input type="email" class="form-control" formControlName="empmailid" placeholder="Enter Email">
+                <input type="email" id="empmailid" formControlName="empmailid" class="form-control" required>
                 <div
-                  *ngIf="employerdetails.get('empmailid')?.hasError('required') && employerdetails.get('empmailid')?.touched"
-                  class="text-danger">Email is required.
+                  *ngIf="employerdetails.get('empmailid')?.hasError('email') && !employerdetails.get('empmailid')?.hasError('pattern')"
+                  class="text-danger">
+                  Please enter a valid email address.
                 </div>
-                <div
-                  *ngIf="employerdetails.get('empmailid')?.hasError('email') && employerdetails.get('empmailid')?.touched"
-                  class="text-danger">Please enter a valid email address.
+                <div *ngIf="employerdetails.get('empmailid')?.hasError('pattern')" class="text-danger">
+                  Email must be a valid gmail address.
                 </div>
               </div>
-
               <div class="form-group">
                 <label for="emppass">Password:*</label>
-                <div class="password-wrapper">
-                  <input type="password" class="form-control" id="password-input" formControlName="emppass"
-                    placeholder="Enter Password">
-                  <span class="toggle-password" (click)="togglePasswordVisibility()">
-                    <i id="eye-icon" class="fa fa-eye-slash"></i>
-                  </span>
-                </div>
-
-                <div
-                  *ngIf="employerdetails.get('emppass')?.hasError('required') && employerdetails.get('emppass')?.touched"
-                  class="text-danger">Password is required.
-                </div>
-                <div
-                  *ngIf="employerdetails.get('emppass')?.hasError('minlength') && employerdetails.get('emppass')?.touched"
-                  class="text-danger">Password must be at least 8 characters long.
-                </div>
-                <div
-                  *ngIf="employerdetails.get('emppass')?.hasError('pattern') && employerdetails.get('emppass')?.touched"
-                  class="text-danger">Password does not contains specific character.
-                </div>
-              </div>
-
-              <div class="row">
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="empphone">Phone:*</label>
-                    <input type="tel" id="empphone" class="form-control" formControlName="empphone"
-                      placeholder="Enter Phone" />
-                    <div
-                      *ngIf="employerdetails.get('empphone')?.hasError('required') && employerdetails.get('empphone')?.touched"
-                      class="text-danger">Phone number is required.
-                    </div>
-                    <div
-                      *ngIf="employerdetails.get('empphone')?.hasError('pattern') && employerdetails.get('empphone')?.touched"
-                      class="text-danger">Please enter a valid phone number with 10 digits.
-                    </div>
+                <div class="input-group">
+                  <input type="{{ empPasswordVisible ? 'text' : 'password' }}" id="emppass" formControlName="emppass"
+                    class="form-control" required />
+                  <div class="input-group-append">
+                    <span class="input-group-text password-toggle" (click)="toggleEmpPasswordVisibility()"
+                      style="cursor: pointer;">
+                      <i class="fa" [ngClass]="empPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+                    </span>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="empcountry">Country:*</label>
-                    <select class="form-control" formControlName="empcountry" placeholder="Select your country">
-                      <option value="">Select a country</option>
-                      <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
-                    </select>
-                    <div
-                      *ngIf="employerdetails.get('empcountry')?.hasError('required') && employerdetails.get('empcountry')?.touched"
-                      class="text-danger">Country is required.
-                    </div>
-                  </div>
+                <div *ngIf="employerdetails.get('emppass')?.hasError('minlength')" class="text-danger">
+                  Password should must have 8 characters with one special character, one uppercase and one lowercase.
+                </div>
+                <div *ngIf="employerdetails.get('emppass')?.hasError('pattern')" class="text-danger">
                 </div>
               </div>
-
-
-
               <div class="form-group">
-                <label for="empstate">State:*</label>
-                <input type="text" class="form-control" formControlName="empstate" placeholder="Enter your state">
-                <div
-                  *ngIf="employerdetails.get('empstate')?.hasError('required') && employerdetails.get('empstate')?.touched"
-                  class="text-danger">State is required.
+                <label for="empcountry">Country:*</label>
+                <select id="empcountry" formControlName="empcountry" class="form-control" required>
+                  <option value="">Select your country</option>
+                  <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                </select>
+              </div>
+              <div
+                *ngIf="employerdetails.get('empcountry')?.hasError('required') && employerdetails.get('empcountry')?.touched"
+                class="text-danger">
+                Country is required.
+              </div>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="empphone">Phone:*</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="tel" id="empphone" class="form-control" formControlName="empphone"
+                      placeholder="Enter Phone" required>
+                  </div>
+                  <div *ngIf="employerdetails.get('empphone')?.hasError('pattern')" class="text-danger">
+                    Please enter a valid 10-digit phone number.
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="empstate">State:*</label>
+                  <input type="text" id="empstate" formControlName="empstate" class="form-control" required
+                    placeholder="Enter your state">
                 </div>
               </div>
-
+              <div class="form-group">
+              </div>
               <div class="form-group">
                 <label for="empcity">City:*</label>
-                <input type="text" class="form-control" formControlName="empcity" placeholder="Enter your city">
-                <div
-                  *ngIf="employerdetails.get('empcity')?.hasError('required') && employerdetails.get('empcity')?.touched"
-                  class="text-danger">City is required.
-                </div>
+                <input type="text" id="empcity" formControlName="empcity" class="form-control" required
+                  placeholder="Enter your city">
               </div>
-
-              <div class="form-group">
-                <label for="empcompany">Company:*</label>
-                <input type="text" class="form-control" formControlName="empcompany"
-                  placeholder="Enter name of the Company">
-                <div
-                  *ngIf="employerdetails.get('empcompany')?.hasError('required') && employerdetails.get('empcompany')?.touched"
-                  class="text-danger">Company is required.
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="designation">Designation:*</label>
-                <input type="text" class="form-control" formControlName="designation"
-                  placeholder="Enter your designation">
-                <div
-                  *ngIf="employerdetails.get('designation')?.hasError('required') && employerdetails.get('designation')?.touched"
-                  class="text-danger">Designation is required.
-                </div>
-              </div>
-
-              <div>
-                <div class="form-group d-flex align-items-center">
-                  <input type="checkbox" (change)="toggleLinkedInputBox($event)">
-                  <label for="emplinkden" class="github-label">Linked URL:</label>
-                  <input *ngIf="showLinkedInputBox" type="url" class="form-control black-border"
-                    formControlName="emplinkden" placeholder="Enter LinkedIn URL">
-                </div>
-
-                <div class="form-group d-flex align-items-center">
-                  <input type="checkbox" (change)="toggleWebsiteInputBox($event)">
-                  <label for="websiteUrl" class="github-label">Website URL:</label>
-                  <input *ngIf="showWebsiteInputBox" type="url" class="form-control black-border"
-                    formControlName="websiteUrl" placeholder="Enter LinkedIn URL">
-                </div>
-
-                <div class="form-group d-flex align-items-center">
-                  <input type="checkbox" (change)="toggleOtherInputBox($event)">
-                  <label for="empotherurl" class="github-label">Other URL:</label>
-                  <input *ngIf="showOtherInputBox" type="url" class="form-control black-border"
-                    formControlName="empotherurl" placeholder="Enter URL">
-                </div>
-              </div>
-
               <div class="form-group">
                 <label for="descriptionemp">Description:*</label>
-                <textarea class="form-control textar" formControlName="descriptionemp" placeholder=""></textarea>
-                <div
-                  *ngIf="employerdetails.get('descriptionemp')?.hasError('required') && employerdetails.get('descriptionemp')?.touched"
-                  class="text-danger">Description is required.
-                </div>
+                <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" rows="4"
+                  required></textarea>
               </div>
-              <button type="submit" class="btn custom-btn rounded-pill mt-3"
-                style=" background-color: #1e2e5c;  color: white;" [disabled]="loading">
-                Register
+              <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
+                <span *ngIf="!loading">Register</span>
+                <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>
               </button>
-
-
             </form>
           </div>
         </div>
-
-        <div class="col-12 col-md-6 text-center">
-          <div class="container bg-white p-4 rounded">
-            <button class="btn custom-button btn-lg" (click)="loginWithGoogle()"
-              style="display: block; margin: 0 auto;">
-              <i class="fab fa-google"></i> Sign Up with Google
-            </button>
-            <img src="assets/SignUP-01.jpg" alt="" width="100%">
-          </div>
-        </div>
-
-
-
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-md-6">
-        <div *ngIf="successMessage" class="alert alert-success">
-          {{ successMessage }}
-        </div>
-        <div *ngIf="showWarning" class="alert alert-warning">
-          User had not created!
-        </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="showWarning" class="alert alert-warning">
+        Warning: User does not exist
       </div>
     </div>
   </div>

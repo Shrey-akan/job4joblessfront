@@ -1,84 +1,21 @@
-* {
-  padding: 0;
-  margin: 0;
-}
 .custom-btn {
-  color: white;
-  background-color: #1e2e5c;
+    color: white;
+    background-color: #1e2e5c;
 }
 
-a {
-  color: #1E2E5C;
-}
-
-
-.btn-custom {
-  background-color: #1E2E5C;
-  color: white;
-}
-
-.active {
-  border-radius: 50px !important;
-  color: white !important;
-  background-color: #1E2E5C !important;
-  padding: 0.7em 2em !important;
-}
-
-.adminPanel {
-  padding-left: 0.5rem;
-  height: 7vh;
-}
-
-.contentNav {
-  padding-left: 0.5rem;
-
-}
-
-.contentNavButton {
-  margin-left: 0.5rem;
-}
-
-.nav-link.active {
-  color: red;
-}
-
-.dashboardToggle {
-  margin-right: 1rem;
-}
-
-.custom-sidenav {
-  background-color: transparent !important;
-}
-
-.navMargin {
-  padding-left: 1rem;
-}
-
-.sideNavbar {
-  width: 100%;
-}
-
-.topAdmin{
-  padding-left: 1rem;
-}
-.divOfUl{
-  padding-right: 2rem;
-}
-
-.nav-item.active {
-  background-color: #007bff; /* Change to your desired background color */
-}
-
-.nav-item.active a {
-  color: #ffffff; /* Change to your desired text color */
-}
-
-.nav-link:hover {
-  color: inherit !important; /* Use the same color as the default */
-}
-@media (max-width: 768px) {
-  /* Medium devices (tablets, 768px and up) */
-  .navMargin {
-    width: 100%; /* Adjust the width of the navbar */
+a{
+    color: #1E2E5C;
   }
-}
+    
+  
+    .btn-custom {
+      background-color: #1E2E5C;
+      color: white;
+  }
+  
+  .active {
+    border-radius: 50px !important;
+    color: white !important;
+    background-color: #1E2E5C !important;
+    padding: 0.7em 2em !important;
+  }

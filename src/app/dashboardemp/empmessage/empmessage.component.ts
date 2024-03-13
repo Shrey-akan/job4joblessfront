@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { io, Socket } from 'socket.io-client';
-import { backendUrl } from 'src/app/constant';
 
 interface SendMessage {
   messageTo: string;
@@ -24,7 +23,6 @@ export class EmpmessageComponent implements OnInit {
   socket!: Socket;
   empid: string;
   uid: string | null;
-  private backend_URL = `${backendUrl}`;
 
   constructor(
     private http: HttpClient,
@@ -84,7 +82,7 @@ export class EmpmessageComponent implements OnInit {
   
   
   fetchMessages() {
-    this.http.get<SendMessage[]>(`${this.backend_URL}fetchMessages`).subscribe((messages: SendMessage[]) => {
+    this.http.get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages').subscribe((messages: SendMessage[]) => {
       this.messages = messages.filter(
         (message) =>
           (message.messageTo === this.uid && message.messageFrom === this.empid) ||
@@ -111,7 +109,7 @@ export class EmpmessageComponent implements OnInit {
 
       this.socket.emit('message', messageToSend);
 
-      this.http.post<SendMessage>(`${this.backend_URL}send`, messageToSend).subscribe({
+      this.http.post<SendMessage>('https://job4jobless.com:9001/send', messageToSend).subscribe({
         next: (response: any) => {
           console.log('API Response:', response);
           this.messageForm.patchValue({
