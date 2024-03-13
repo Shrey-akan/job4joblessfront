@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-resetpasswordemployer',
@@ -12,6 +13,8 @@ export class ResetpasswordemployerComponent implements OnInit {
   passwordResetForm!: FormGroup;
   successMessage = '';
   errorMessage = '';
+
+  private backend_URL=`${backendUrl}`;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {}
 
@@ -42,7 +45,7 @@ export class ResetpasswordemployerComponent implements OnInit {
     if (this.passwordResetForm.valid) {
       const formData = this.passwordResetForm.value;
 
-      this.http.post('https://job4jobless.com:9001/resetPasswordEmpverify', formData)
+      this.http.post(`${this.backend_URL}resetPasswordEmpverify`, formData)
         .subscribe({
           next: (response: any) => {
             this.successMessage = 'Password updated successfully';

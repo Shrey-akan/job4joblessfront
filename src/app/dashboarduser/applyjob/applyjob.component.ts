@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-applyjob',
@@ -23,6 +24,9 @@ export class ApplyjobComponent implements OnInit {
   // router: any;
   data: any;
   uid!: string;
+
+  private backend_URL=`${backendUrl}`;
+  
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private b1: UserService, private cookie: CookieService) { }
 
 
@@ -146,7 +150,7 @@ export class ApplyjobComponent implements OnInit {
       formData.append('file', this.selectedFile);
       formData.append('uid', this.uid);
       // console.log("checking the selected file ",formData);
-      this.http.post('https://job4jobless.com:9001/uploadPdf', formData).subscribe(
+      this.http.post(`${this.backend_URL}uploadPdf`, formData).subscribe(
         {
           next: (response: any) => {
             // console.log('File uploaded successfully');

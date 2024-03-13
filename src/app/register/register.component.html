@@ -106,6 +106,41 @@
                 </div>
               </div>
 
+              <div>
+                <div class="form-group d-flex align-items-center">
+                  <input type="checkbox" (change)="toggleLinkedInputBox($event)">
+                  <label for="userlinkden" class="github-label">Linked URL:*</label>
+                  <input *ngIf="showLinkedInputBox" type="url" class="form-control black-border" formControlName="userlinkden" placeholder="Enter LinkedIn URL">
+                  <div *ngIf="userregister.get('userlinkden')?.hasError('required') && userregister.get('userlinkden')?.touched"
+                    class="text-danger">Url is required.
+                  </div>
+                </div>
+  
+                <div class="form-group d-flex align-items-center">
+                  <input type="checkbox" (change)="toggleGitInputBox($event)">
+                  <label for="usergithub" class="github-label">Github URL:*</label>
+                  <input  *ngIf="showGitInputBox" type="url" class="form-control black-border" formControlName="usergithub" placeholder="Enter GitHub URL">
+                  <div *ngIf="userregister.get('usergithub')?.hasError('required') && userregister.get('usergithub')?.touched"
+                    class="text-danger">Url is required.
+                  </div>
+                </div>
+  
+                <div class="form-group d-flex align-items-center">
+                  <input type="checkbox" (change)="toggleOtherInputBox($event)">
+                  <label for="otherturluser" class="github-label">Other URL:</label>
+                  <input *ngIf="showOtherInputBox" type="url" class="form-control black-border" formControlName="otherturluser" placeholder="Enter URL">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="summary">Description:*</label>
+                <textarea class="form-control textar" formControlName="paragraph" placeholder=""></textarea>
+                <!-- <input type="text" class="form-control custom-textbox" formControlName="summary" placeholder="Describe Yourself"> -->
+                <div *ngIf="userregister.get('summary')?.hasError('required') && userregister.get('summary')?.touched"
+                  class="text-danger">Description is required.
+                </div>
+              </div>
+
               <!-- <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="loading">
                 <span *ngIf="!loading">Register</span>
                 <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Please wait...</span>

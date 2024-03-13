@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import * as intelInput from "intl-tel-input";
+import { backendUrl } from '../constant';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  private backend_URL=`${backendUrl}`;
   isHovered = false;
   countries: string[] = [];
   userregister!: FormGroup;
@@ -19,6 +21,23 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
   successMessage: string | null = null;
   showWarning: boolean = false;
+
+  showGitInputBox: boolean = false;
+  showLinkedInputBox: boolean = false;
+  showOtherInputBox: boolean = false;
+
+  toggleGitInputBox(event: any) {
+    this.showGitInputBox = event.target.checked;
+  }
+
+  toggleLinkedInputBox(event: any) {
+    this.showLinkedInputBox = event.target.checked;
+  }
+
+  toggleOtherInputBox(event: any) {
+    this.showOtherInputBox = event.target.checked;
+  }
+
   constructor(private formBuilder: FormBuilder, private router: Router, private userservice: UserService, private http: HttpClient) {
   }
   ngOnInit(): void {
@@ -45,7 +64,11 @@ export class RegisterComponent implements OnInit {
       userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       usercountry: ['', Validators.required],
       userstate: ['', Validators.required],
-      usercity: ['', Validators.required]
+      usercity: ['', Validators.required],
+      summary: ['', Validators.required],
+      userlinkden: ['', Validators.required],
+      usergithub: ['', Validators.required],
+      otherturluser:['']
     });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
@@ -73,7 +96,7 @@ export class RegisterComponent implements OnInit {
   userRegisteration(): void {
     if (this.userregister.valid) {
       console.log(this.userregister);
-      this.http.post('https://job4jobless.com:9001/insertusermail', this.userregister.getRawValue()).subscribe(
+      this.http.post(`${this.backend_URL}insertusermail`, this.userregister.getRawValue()).subscribe(
         (payload: any) => {
           console.log("checking after running api", this.userregister);
           this.successMessage = 'User registered successfully! Please Wait..';

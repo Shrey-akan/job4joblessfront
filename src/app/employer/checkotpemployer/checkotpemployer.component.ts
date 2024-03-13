@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-checkotpemployer',
@@ -13,6 +14,7 @@ export class CheckotpemployerComponent implements OnInit {
   otpForm!: FormGroup;
   otp: string = '';
   otpExpired: boolean = false;
+  private backend_URL=`${backendUrl}`;
 
   constructor(
     private fb: FormBuilder,
@@ -60,7 +62,7 @@ export class CheckotpemployerComponent implements OnInit {
   }
 
   updateEmployerVerificationStatus(empmailid: string): void {
-    this.http.post('https://job4jobless.com:9001/verifyEmployer', { empmailid: empmailid })
+    this.http.post(`${this.backend_URL}verifyEmployer`, { empmailid: empmailid })
       .subscribe({
         next: (response: any) => {
           // console.log("Employer verified successfully");

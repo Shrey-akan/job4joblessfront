@@ -25,8 +25,11 @@
           <p><strong>Name:</strong> {{ application.juname }}</p>
           <p><strong>Mail:</strong> <a [href]="'mailto:' + application.jumail">{{ application.jumail }}</a></p>
           <!-- <p><strong>Email:</strong> {{ application.jumail }}</p> -->
-          <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
-       
+          <!-- <p><strong>Resume:</strong> <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p> -->
+          <!-- <p><strong>Resume:</strong> <a [href]="backend_URL + 'getPdfByUid/' + application.uid" target="_blank">Open Resume</a></p> -->
+          <!-- <p><strong>Resume:</strong> <a [href]="backend_URL + 'getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p> -->
+          <p><strong>Resume:</strong> <a [href]="backend_URL + 'getPdfByUi/' + application.uid" target="_blank">Open Resume</a></p>
+
           <div *ngIf="application.profileupdate === 'Reviewed'">
             <i class="fa-solid fa-circle-check fa-1x" style="color: #fb9379;"></i>
             <span style="color: #fb9379;"> Reviewed</span>

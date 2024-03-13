@@ -4,6 +4,7 @@ import Peer from 'peerjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { backendUrl } from 'src/app/constant';
 
 class SendMessage {
   messageTo!: string;
@@ -21,6 +22,7 @@ export class VideocallComponent implements OnInit {
   uid!: string | null;
   messageForm!: any;
   messages!: SendMessage[];
+  private backend_URL=`${backendUrl}`;
   @ViewChild('roomInput', { static: true }) roomInput!: ElementRef<HTMLInputElement>;
   @ViewChild('localVideo', { static: true }) localVideo!: ElementRef<HTMLVideoElement>;
   @ViewChild('remoteVideo', { static: true }) remoteVideo!: ElementRef<HTMLVideoElement>;
@@ -61,7 +63,7 @@ export class VideocallComponent implements OnInit {
   fetchMessages() {
     // Fetch previous messages from the server
     this.http
-      .get<SendMessage[]>('https://job4jobless.com:9001/fetchMessages')
+      .get<SendMessage[]>(`${this.backend_URL}fetchMessages`)
       .subscribe((messages: SendMessage[]) => {
         // Filter messages to only include the relevant ones
         this.messages = messages.filter(
@@ -88,7 +90,7 @@ export class VideocallComponent implements OnInit {
 
       // Make an HTTP POST request to send the message
       this.http
-        .post<SendMessage>('https://job4jobless.com:9001/send', messageToSend)
+        .post<SendMessage>(`${this.backend_URL}send`, messageToSend)
         .subscribe({
           next: (response: any) => {
             // console.log('Message sent successfully:', response);

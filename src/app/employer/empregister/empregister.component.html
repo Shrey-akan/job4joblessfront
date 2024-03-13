@@ -91,6 +91,41 @@
                 <input type="text" id="empcity" formControlName="empcity" class="form-control" required
                   placeholder="Enter your city">
               </div>
+
+              <div>
+                <div class="form-group d-flex align-items-center">
+                  <input type="checkbox" (change)="toggleLinkedInputBox($event)">
+                  <label for="emplinkden" class="github-label">Linked URL:*</label>
+                  <input *ngIf="showLinkedInputBox" type="url" class="form-control" formControlName="emplinkden" placeholder="Enter LinkedIn URL">
+                  <div *ngIf="employerdetails.get('emplinkden')?.hasError('required') && employerdetails.get('emplinkden')?.touched"
+                    class="text-danger">Url is required.
+                  </div>
+                </div>
+  
+                <div class="form-group d-flex align-items-center">
+                  <input type="checkbox" (change)="toggleWebsiteInputBox($event)">
+                  <label for=" websiteUrl" class="github-label">Website URL:*</label>
+                  <input  *ngIf="showWebsiteInputBox" type="url" class="form-control" formControlName=" websiteUrl" placeholder="Enter Website URL">
+                  <div *ngIf="employerdetails.get('websiteUrl')?.hasError('required') && employerdetails.get(' websiteUrl')?.touched"
+                    class="text-danger">Url is required.
+                  </div>
+                </div>
+  
+                <div class="form-group d-flex align-items-center">
+                  <input type="checkbox" (change)="toggleOtherInputBox($event)">
+                  <label for="empotherurl" class="github-label">Other URL:</label>
+                  <input *ngIf="showOtherInputBox" type="url" class="form-control" formControlName="empotherurl" placeholder="Enter URL">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="descriptionemp">Description:*</label>
+                <textarea class="form-control textar" formControlName="paragraph" placeholder=""></textarea>
+                <!-- <input type="text" class="form-control custom-textbox" formControlName="summary" placeholder="Describe Yourself"> -->
+                <div *ngIf="employerdetails.get('descriptionemp')?.hasError('required') && employerdetails.get('descriptionemp')?.touched"
+                  class="text-danger">Description is required.
+                </div>
+              </div>
               <div class="form-group">
                 <label for="descriptionemp">Description:*</label>
                 <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" rows="4"

@@ -1,11 +1,19 @@
-a{
+.navbar {
+    padding: 1.5rem;
+    background-color: #ffffff !important;
+
+}
+
+.nav-link {
     color: #1E2E5C;
+    margin-right: 50px;
+    /* transition: color 0.3s ease; Add more spacing between tabs */
 }
 
 .active {
     border-radius: 50px !important;
-    color: white !important;
-    background-color: #1E2E5C !important;
+    color: #1E2E5C !important;
+    background-color: #e0e9f5 !important;
     padding: 0.7em 2em !important;
 }
 
@@ -15,6 +23,6 @@ nav {
 }
 
 .btn-custom {
-    background-color: #1E2E5C;
-    color: white;
+    background-color: #e0e9f5; /* Light Blue */
+    color: #1E2E5C; /* Dark Blue */
 }

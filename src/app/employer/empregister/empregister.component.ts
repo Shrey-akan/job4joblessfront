@@ -5,12 +5,31 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
 import * as intelInput from "intl-tel-input";
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { backendUrl } from 'src/app/constant';
 @Component({
   selector: 'app-empregister',
   templateUrl: './empregister.component.html',
   styleUrls: ['./empregister.component.css']
 })
 export class EmpregisterComponent {
+  private backend_URL=`${backendUrl}`;
+
+  showWebsiteInputBox: boolean = false;
+  showLinkedInputBox: boolean = false;
+  showOtherInputBox: boolean = false;
+
+  toggleWebsiteInputBox(event: any) {
+    this.showWebsiteInputBox = event.target.checked;
+  }
+
+  toggleLinkedInputBox(event: any) {
+    this.showLinkedInputBox = event.target.checked;
+  }
+
+  toggleOtherInputBox(event: any) {
+    this.showOtherInputBox = event.target.checked;
+  }
+  
   isHovered = false;
   countries: string[] = [];
   employerdetails: FormGroup;
@@ -68,12 +87,16 @@ export class EmpregisterComponent {
       descriptionemp: [''],
       empcountry: ['', Validators.required],
       empstate: ['', Validators.required],
-      empcity: ['', Validators.required]
+      empcity: ['', Validators.required],
+      emplinkden:['', Validators.required],
+      designation:['' , Validators.required],
+      websiteUrl:['' , Validators.required],
+      empotherurl:['']
     });
   }
   empRegisteration(): void {
     console.log(this.employerdetails);
-    this.http.post('https://job4jobless.com:9001/insertEmployer', this.employerdetails.getRawValue()).subscribe({
+    this.http.post(`${this.backend_URL}insertEmployer`, this.employerdetails.getRawValue()).subscribe({
       next: (payload: any) => {
         console.log("Checking after running the api", this.employerdetails);
         this.successMessage = 'Employer registered successfully! Please Wait...';

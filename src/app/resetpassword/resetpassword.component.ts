@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { backendUrl } from '../constant';
 
 @Component({
   selector: 'app-resetpassword',
@@ -17,6 +18,8 @@ export class ResetpasswordComponent implements OnInit {
   errorMessage = '';
   passwordVisible: boolean = false;
   passwordsDoNotMatch: boolean = false;
+
+  private backend_URL=`${backendUrl}`;
 
 
   constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {
@@ -68,7 +71,7 @@ export class ResetpasswordComponent implements OnInit {
         const formData = this.passwordResetForm.value;
 
         // Make a POST request to your backend for password reset
-        this.http.post('https://job4jobless.com:9001/resetPasswordUser', formData)
+        this.http.post(`${this.backend_URL}resetPasswordUser`, formData)
           .subscribe(
             {
               next: (response: any) => {

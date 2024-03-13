@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar for showing alerts
+import { backendUrl } from '../constant';
 
 @Component({
   selector: 'app-checkotpuser',
@@ -14,6 +15,7 @@ export class CheckotpuserComponent implements OnInit {
   otpForm!: FormGroup;
   otp: string = '';
   otpExpired: boolean = false;
+  private backend_URL = `${backendUrl}`;
 
   constructor(
     private fb: FormBuilder,
@@ -66,7 +68,7 @@ export class CheckotpuserComponent implements OnInit {
   }
 
   updateUserificationStatus(userName: string): void {
-    this.http.post('https://job4jobless.com:9001/verifyUser', { userName: userName })
+    this.http.post(`${this.backend_URL}verifyUser`, { userName: userName })
     .subscribe({
       next: (response: any) => {
         console.log("User verified successfully");

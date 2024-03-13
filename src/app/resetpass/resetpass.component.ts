@@ -3,6 +3,7 @@ import { UserService } from '../auth/user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import Validators
+import { backendUrl } from '../constant';
 
 @Component({
   selector: 'app-resetpass',
@@ -10,6 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import V
   styleUrls: ['./resetpass.component.css']
 })
 export class ResetpassComponent implements OnInit{
+  private backend_URL=`${backendUrl}`;
+  
   userName: string = '';
   user: any;
   errorMessage: string | undefined;
@@ -57,13 +60,21 @@ export class ResetpassComponent implements OnInit{
     console.log("checking the payload",payload);
     this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe({
       next: (response: any) => {
-        console.log("checking the responce",response);
+        console.log("checking the response",response);
         if (response.otpCreated) {
           console.log(response.otpCreated);
           console.log(payload.uid);
-          console.log(response.uid);
-          console.log("checking router is not working");
-          this.router.navigate(['/checkotpuser', payload.uid]);
+          const uidid = payload.uid;
+          console.log(uidid);
+          
+     if(payload.uid !== null){
+      console.log("checking router is working");
+      this.router.navigate(['/checkotpuser', payload.uid]);
+     }
+     else{
+      console.log("checking router is not working");
+     }
+
         } 
         else {
           console.error("Otp not generated");

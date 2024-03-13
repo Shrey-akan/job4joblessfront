@@ -8,8 +8,12 @@ import {
   HttpClient
 } from '@angular/common/http';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import { backendUrl } from '../constant';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
+  private backend_URL=`${backendUrl}`;
+  
   static accessToken: string = '';
   private refresh: boolean = false; // Define the 'refresh' property here
 
@@ -30,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.refresh = true;
 
         // Make a request to refresh the access token
-        return this.http.post('https://job4jobless.com:9001/refresh', {}, { withCredentials: true }).pipe(
+        return this.http.post(`${this.backend_URL}refresh`, {}, { withCredentials: true }).pipe(
           switchMap((res: any) => {
             AuthInterceptor.accessToken = res.accessToken;
 

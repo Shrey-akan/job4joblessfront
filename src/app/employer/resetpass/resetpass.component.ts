@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-resetpass',
@@ -15,6 +16,8 @@ export class ResetpassComponent  implements OnInit{
   errorMessage: string | undefined;
   showWarning: boolean = false;
   employerForm!: FormGroup; // Define a FormGroup for your form
+
+  private backend_URL=`${backendUrl}`;
 
   constructor(
     private userService: UserService,
