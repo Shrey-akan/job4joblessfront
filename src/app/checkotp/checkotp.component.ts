@@ -37,7 +37,7 @@ export class CheckotpComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
-    this.http.post(`${this.Otp_URL}`, {
+    this.http.post(`${this.Otp_URL}verifyOtp`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: otpValue,
       email: emailValue
@@ -77,7 +77,7 @@ export class CheckotpComponent implements OnInit {
   }
 
   resendOTP(): void {
-    this.http.post(`${this.Otp_URL}`, {
+    this.http.post(`${this.Otp_URL}verifyOtp`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: this.otpForm.controls['otp'].value,
       email: this.otpForm.controls['email'].value

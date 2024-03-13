@@ -57,7 +57,7 @@ export class ResetpassComponent  implements OnInit{
   }
 
   generateOtp(payload: any) {
-    this.http.post(`${this.Otp_Url}`, { uid: payload.empid, email: payload.empmailid }).subscribe({
+    this.http.post(`${this.Otp_Url}generateOtp`, { uid: payload.empid, email: payload.empmailid }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
           // console.log(response.otpCreated);

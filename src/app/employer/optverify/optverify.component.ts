@@ -37,7 +37,7 @@ export class OptverifyComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
-    this.http.post(`${this.Otp_Url}`, {
+    this.http.post(`${this.Otp_Url}verifyOtp`, {
       uid: this.activatedRoute.snapshot.paramMap.get('empid'),
       otp: this.otpForm.controls['otp'].value,
       email: this.otpForm.controls['email'].value

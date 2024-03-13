@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit {
     }
   }
   generateOtp(payload: any) {
-    this.http.post(`${this.Otp_URL}`, { uid: payload.uid, email: payload.userName }).subscribe(
+    this.http.post(`${this.Otp_URL}generateOtp`, { uid: payload.uid, email: payload.userName }).subscribe(
       (response: any) => {
         if (response.otpCreated) {
           this.router.navigate(['/checkotp', payload.uid]);

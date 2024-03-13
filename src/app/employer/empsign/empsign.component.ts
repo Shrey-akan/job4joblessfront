@@ -57,7 +57,7 @@ export class EmpsignComponent {
 
 
   insertemp() {
-    // console.log("Done");
+    console.log("Done");
     this.router.navigate(['/employer/empregister']);
     // return this.b1.insertempmailadd(emailFormemp.value).subscribe();
   }

@@ -175,7 +175,7 @@ export class EmpregisterComponent implements OnInit {
       });
   }
   generateOtp(payload: any) {
-    this.http.post(`${this.Otp_Url}`, { uid: payload.empid, email: payload.empmailid }).subscribe({
+    this.http.post(`${this.Otp_Url}generateOtp`, { uid: payload.empid, email: payload.empmailid }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
           this.router.navigate(['/employer/optverify', payload.empid]);
