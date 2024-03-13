@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
+import { backendUrl } from 'src/app/constant';
 
 interface Employer {
   empid: Number;
@@ -37,6 +38,7 @@ export class ProfilemepComponent implements OnInit {
   constructor(public cookie: CookieService, private fb: FormBuilder, private b1: UserService, private router: Router, private http: HttpClient) { }
 
   empId: string = "0";
+  private backend_URL = `${backendUrl}`;
   ngOnInit(): void {
 
 
@@ -93,7 +95,7 @@ export class ProfilemepComponent implements OnInit {
 
       const formData = this.passwordResetForm.value;
       // Make a POST request to your backend for password reset
-      this.http.post('https://job4jobless.com:9001/resetPasswordEmp', formData)
+      this.http.post(`${this.backend_URL}resetPasswordEmp`, formData)
         .subscribe(
           {
             next: (response: any) => {

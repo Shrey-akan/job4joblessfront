@@ -21,31 +21,40 @@
     <div *ngIf="currentStep === 1">
       <!-- Step 1: Job Title and Company Name -->
       <div class="mb-3">
-        <label for="jobtitle" class="form-label">Job Title*</label>
-        <input type="text" class="form-control" id="jobtitle" formControlName="jobtitle" required>
-        <div *ngIf="jobPostForm.get('jobtitle')?.hasError('required')" class="text-danger">
-          Job Title is required.
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="companyforthisjob" class="form-label">Company Name*</label>
-        <input type="text" class="form-control" id="companyforthisjob" formControlName="companyforthisjob" required>
-        <div *ngIf="jobPostForm.get('companyforthisjob')?.hasError('required')" class="text-danger">
-          Company Name is required.
-        </div>
-      </div>
-      <div class="mb-3">
         <label for="empName" class="form-label">Name*</label>
         <input type="text" class="form-control" id="empName" formControlName="empName" required>
-        <div *ngIf="jobPostForm.get('empName')?.hasError('required')" class="text-danger">
+        <div *ngIf="jobPostForm.get('empName')?.hasError('required')  && jobPostForm.get('empName')?.touched"
+          class="text-danger">
           Name is required.
         </div>
       </div>
       <div class="mb-3">
         <label for="empEmail" class="form-label">Email*</label>
         <input type="email" class="form-control" id="empEmail" formControlName="empEmail" required>
-        <div *ngIf="jobPostForm.get('empEmail')?.hasError('required')" class="text-danger">
+        <div *ngIf="jobPostForm.get('empEmail')?.hasError('required')  && jobPostForm.get('empEmail')?.touched"
+          class="text-danger">
           Email is required.
+        </div>
+        <div *ngIf="jobPostForm.get('empEmail')?.hasError('email') && jobPostForm.get('empEmail')?.touched"
+          class="text-danger">Please enter a valid email address.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="jobtitle" class="form-label">Job Title*</label>
+        <input type="text" class="form-control" id="jobtitle" formControlName="jobtitle" required>
+        <div *ngIf="jobPostForm.get('jobtitle')?.hasError('required') && jobPostForm.get('jobtitle')?.touched"
+          class="text-danger">
+          Job Title is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="companyforthisjob" class="form-label">Company Name*</label>
+        <input type="text" class="form-control" id="companyforthisjob" formControlName="companyforthisjob" required>
+        <div
+          *ngIf="jobPostForm.get('companyforthisjob')?.hasError('required') && jobPostForm.get('companyforthisjob')?.touched"
+          class="text-danger">
+          Company Name is required.
         </div>
       </div>
       <div class="d-flex justify-content-end">
@@ -57,13 +66,62 @@
       <div class="mb-3">
         <label for="numberofopening" class="form-label">Vacancies*</label>
         <input type="number" class="form-control" id="numberofopening" formControlName="numberofopening" required>
-        <div *ngIf="jobPostForm.get('numberofopening')?.hasError('required')" class="text-danger">
+        <div
+          *ngIf="jobPostForm.get('numberofopening')?.hasError('required') && jobPostForm.get('numberofopening')?.touched"
+          class="text-danger">
           Number of Openings is required.
         </div>
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="locationjob" class="form-label">Location*</label>
         <input type="text" class="form-control" id="locationjob" formControlName="locationjob">
+        <div *ngIf="jobPostForm.get('locationjob')?.hasError('required') && jobPostForm.get('locationjob')?.touched"
+          class="text-danger">
+          Locationis required.
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="country" class="form-label">Country:*</label>
+            <select class="form-control" id="country" formControlName="country"
+              placeholder="Select your country" required>
+              <option value="">Select your country</option>
+              <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+            </select>
+            <div *ngIf="jobPostForm.get('country')?.hasError('required') && jobPostForm.get('country')?.touched"
+              class="text-danger">
+              Country is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="state" class="form-label">State:*</label>
+            <input type="text" class="form-control" id="state" formControlName="state" required>
+            <div *ngIf="jobPostForm.get('state')?.hasError('required') && jobPostForm.get('state')?.touched"
+              class="text-danger">
+              State is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="city" class="form-label">City:*</label>
+            <input type="text" class="form-control" id="city" formControlName="city" required (change)="updateLocationJob()">
+            <div *ngIf="jobPostForm.get('city')?.hasError('required') && jobPostForm.get('city')?.touched"
+              class="text-danger">
+              City is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="locationjob" class="form-label">Location:*</label>
+        <input type="text" class="form-control" id="locationjob" formControlName="locationjob" placeholder="Location" readonly>
+        <div *ngIf="jobPostForm.get('locationjob')?.hasError('required') && jobPostForm.get('locationjob')?.touched" class="text-danger">
+          Location is required.
+        </div>
       </div>
       <div class="mb-3">
         <label for="jobtype" class="form-label">Job Type*</label>
@@ -74,9 +132,13 @@
           <option value="Hybrid">Hybrid</option>
           <option value="Freelance">Freelance</option>
         </select>
+        <div *ngIf="jobPostForm.get('jobtype')?.hasError('required') && jobPostForm.get('jobtype')?.touched"
+          class="text-danger">
+          Required.
+        </div>
       </div>
       <div class="mb-3">
-        <label class="form-label">Schedule*</label>
+        <label for="schedulejob" class="form-label">Schedule*</label>
         <select class="form-select" formControlName="schedulejob">
           <option value="" disabled selected>Select Schedule</option>
           <option value="Morning Shift">Morning Shift</option>
@@ -84,29 +146,34 @@
           <option value="Flexible">Flexible Hours</option>
           <option value="Night Shift">Night Shift</option>
         </select>
-        <div *ngIf="jobPostForm.get('schedulejob')?.hasError('required')" class="text-danger">
-          Schedule is required.
+        <div *ngIf="jobPostForm.get('schedulejob')?.hasError('required')  && jobPostForm.get('schedulejob')?.touched"
+          class="text-danger">
+          Required.
         </div>
       </div>
       <div class="mb-3">
         <label for="payjob" class="form-label">Pay*</label>
         <input type="number" class="form-control" id="payjob" formControlName="payjob" required>
-        <div *ngIf="jobPostForm.get('payjob')?.hasError('required')" class="text-danger">
-          Pay is required.
+        <div *ngIf="jobPostForm.get('payjob')?.hasError('required')  && jobPostForm.get('payjob')?.touched"
+          class="text-danger">
+          Required.
         </div>
       </div>
       <div class="mb-3">
         <label for="payjobsup" class="form-label">Supplemental Pay</label>
         <input type="number" class="form-control" id="payjobsup" formControlName="payjobsup" required>
-        <div *ngIf="jobPostForm.get('payjobsup')?.hasError('required')" class="text-danger">
-          Supplemental Pay is required.
+        <div *ngIf="jobPostForm.get('payjobsup')?.hasError('required')  && jobPostForm.get('payjobsup')?.touched"
+          class="text-danger">
+          Required.
         </div>
       </div>
       <div class="mb-3">
         <label for="descriptiondata" class="form-label">Description data*</label>
         <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea>
-        <div *ngIf="jobPostForm.get('descriptiondata')?.hasError('required')" class="text-danger">
-          Descriptiondata is required.
+        <div
+          *ngIf="jobPostForm.get('descriptiondata')?.hasError('required')  && jobPostForm.get('descriptiondata')?.touched"
+          class="text-danger">
+          Required.
         </div>
       </div>
       <div class="d-flex justify-content-between">
@@ -122,9 +189,10 @@
         <p><strong>Job Title:</strong> {{ jobPostForm.value.jobtitle }}</p>
         <p><strong>Company Name:</strong> {{ jobPostForm.value.companyforthisjob }}</p>
         <p><strong>Number of Openings:</strong> {{ jobPostForm.value.numberofopening }}</p>
-        <p><strong>Location:</strong> {{ jobPostForm.value.locationJob }}</p>
+        <p><strong>Location:</strong> {{ jobPostForm.value.locationjob }}</p>
         <p><strong>Job Type:</strong> {{ jobPostForm.value.jobtype }}</p>
-        <p><strong>Schedule:</strong> {{ jobPostForm.value.schedulejob.join(', ') }}</p>
+        <!-- <p><strong>Schedule:</strong> {{ jobPostForm.value.schedulejob.join(', ') }}</p> -->
+        <p><strong>Schedule:</strong> {{ jobPostForm.value.schedulejob }}</p>
         <p><strong>Pay:</strong> {{ jobPostForm.value.payjob }}</p>
         <p><strong>Supplemental Pay:</strong> {{ jobPostForm.value.payjobsup }}</p>
         <p><strong>descriptiondata:</strong> {{ jobPostForm.value.descriptiondata }}</p>

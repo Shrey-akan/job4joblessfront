@@ -1,33 +1,26 @@
 .footer {
-  /* background-color: #ececec; */
-  background-color: #1c1c1c;
-  padding: 2em 0em;
+  background-color: #f8f9fa;
+  padding: 2em 0;
   font-family: 'Poppins', sans-serif;
-  color: white;
+  color: #495057;
+}
+
+.footer a {
+  color: #1E2E5C;
 }
 
 .footer a:hover {
-  color: #007bff;
-  /* Change color on hover */
+  color: #0056b3;
 }
 
 .social-list li {
-
   margin: 0 10px;
-  /* Adjust margin as needed */
-
 }
 
-.text-justify {
-  text-align: justify;
-}
-
-.contact-details h2 {
+.contact-details p {
   margin-bottom: 5px;
-  /* Adjust the margin as needed to control the spacing between sections. */
 }
 
 .non-bold-text {
   font-weight: normal;
-  /* This will make the text inside the span not bold. */
 }

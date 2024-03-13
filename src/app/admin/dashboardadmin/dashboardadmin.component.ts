@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { backendUrl } from 'src/app/constant';
+
 
 @Component({
   selector: 'app-dashboardadmin',
   templateUrl: './dashboardadmin.component.html',
   styleUrls: ['./dashboardadmin.component.css']
 })
+
 export class DashboardadminComponent implements OnInit{
   router: any;
+  isContentVisible: boolean = false;
 
 constructor( private cookie:CookieService , private http: HttpClient){
 
@@ -16,7 +20,8 @@ constructor( private cookie:CookieService , private http: HttpClient){
   ngOnInit(): void {
 
   }
-
+  private backend_URL = `${backendUrl}`;
+  
   signOutAdmin(){
     const refreshToken = this.cookie.get('refreshToken');
 
@@ -25,7 +30,7 @@ constructor( private cookie:CookieService , private http: HttpClient){
     }
   
  
-    this.http.post('https://job4jobless.com:9001/adminlogout', null, {
+    this.http.post(`${this.backend_URL}adminlogout`, null, {
       responseType: 'text' 
     }).subscribe({
       next: (response: string) => {
@@ -52,5 +57,9 @@ constructor( private cookie:CookieService , private http: HttpClient){
       }
     });
   }
+
+  // toggleContent() {
+  //   this.isContentVisible = !this.isContentVisible;
+  // }
 
 }

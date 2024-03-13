@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
+import { backendUrl , OtpUrl} from 'src/app/constant';
 
 @Component({
   selector: 'app-optverify',
@@ -12,6 +13,9 @@ import { UserService } from 'src/app/auth/user.service';
 export class OptverifyComponent implements OnInit {
   otpForm!: FormGroup;
   otp: string = '';
+
+  private backend_URL=`${backendUrl}`;
+  private Otp_Url=`${OtpUrl}`;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +37,7 @@ export class OptverifyComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+    this.http.post(`${this.Otp_Url}`, {
       uid: this.activatedRoute.snapshot.paramMap.get('empid'),
       otp: this.otpForm.controls['otp'].value,
       email: this.otpForm.controls['email'].value
@@ -59,7 +63,7 @@ export class OptverifyComponent implements OnInit {
   }
 
   updateEmployerVerificationStatus(empmailid: string): void {
-    this.http.post('https://job4jobless.com:9001/verifyEmployer', { empmailid: empmailid })
+    this.http.post(`${this.backend_URL}verifyEmployer`, { empmailid: empmailid })
       .subscribe({
         next: (response: any) => {
           // console.log("Employer verified successfully");

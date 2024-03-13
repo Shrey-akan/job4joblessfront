@@ -1,4 +1,4 @@
-<div class="container text-center" style="margin: 30px;">
+<div class="container text-center" style="margin: 3%;">
     <h4>CONTACT EMPLOYER</h4>
     <div class="row">
       <table class="table table-bordered">
@@ -6,10 +6,11 @@
           <tr style="background-color: rgb(143, 236, 143);">
             <!-- <th style="width: 10%;">Contact ID</th> -->
             <th style="width: 15%;">Help Type</th>
-            <th style="width: 15%;">Name</th>
+            <th style="width: 15%;" class="blue-bgColor">Name</th>
             <th style="width: 15%;">Email</th>
-            <th style="width: 15%;">Company</th>
+            <th style="width: 15%;" class="blue-bgColor">Company</th>
             <th style="width: 10%;">Phone</th>
+            <th style="width: 10%;" class="blue-bgColor">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -21,7 +22,10 @@
 
             <td>{{ contact.contactcompany }}</td>
             <td><a href="tel:{{ contact.contactphone }}">{{ contact.contactphone }}</a></td>
-
+            <td>
+              <button type="button" class="btn" style="background-color: #1e2e5c; color: white;">Info</button>
+              &nbsp;<button type="button" class="btn btn-secondary">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>

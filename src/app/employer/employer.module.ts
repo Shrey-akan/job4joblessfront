@@ -6,7 +6,7 @@ import { EmployerComponent } from './employer.component';
 import { HeaderempComponent } from './headeremp/headeremp.component';
 import { PostjobComponent } from './postjob/postjob.component';
 import { FormsModule } from '@angular/forms';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { FindcvComponent } from './findcv/findcv.component';
 import { ProductsComponent } from './products/products.component';
 import { ResourcesComponent } from './resources/resources.component';
@@ -21,6 +21,7 @@ import { ResetpasswordemployerComponent } from './resetpasswordemployer/resetpas
 import { FootercComponent } from './footerc/footerc.component';
 import { OvercomingComponent } from './overcoming/overcoming.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     EmployerComponent,
@@ -45,7 +46,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     EmployerRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatDialogModule
   ],
   bootstrap:[
     EmployerComponent

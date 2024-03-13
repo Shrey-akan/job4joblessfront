@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ApplyJob } from 'src/app/apply-job';
 import { UserService } from 'src/app/auth/user.service';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-notificationemp',
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/auth/user.service';
   styleUrls: ['./notificationemp.component.css']
 })
 export class NotificationempComponent implements OnInit {
+  backend_URL =`${backendUrl}`;
   notifications: any[] = [];
   empId: string = "0";
   isLoading: boolean = false;

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
+import { backendUrl , OtpUrl } from '../constant';
 
 @Component({
   selector: 'app-checkotp',
@@ -13,6 +14,8 @@ export class CheckotpComponent implements OnInit {
   otpForm!: FormGroup;
   otp: string = '';
   otpExpired: boolean = false;
+  private backend_URL = `${backendUrl}`
+  private Otp_URL=`${OtpUrl}`;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +37,7 @@ export class CheckotpComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+    this.http.post(`${this.Otp_URL}`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: otpValue,
       email: emailValue
@@ -60,7 +63,7 @@ export class CheckotpComponent implements OnInit {
   }
 
   updateUserificationStatus(userName: string): void {
-    this.http.post('https://job4jobless.com:9001/verifyUser', { userName: userName })
+    this.http.post(`${this.backend_URL}verifyUser`, { userName: userName })
     .subscribe({
       next: (response: any) => {
         console.log("User verified successfully");
@@ -74,7 +77,7 @@ export class CheckotpComponent implements OnInit {
   }
 
   resendOTP(): void {
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+    this.http.post(`${this.Otp_URL}`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: this.otpForm.controls['otp'].value,
       email: this.otpForm.controls['email'].value

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar for showing alerts
+import { backendUrl , OtpUrl} from '../constant';
 
 @Component({
   selector: 'app-checkotpuser',
@@ -14,6 +15,8 @@ export class CheckotpuserComponent implements OnInit {
   otpForm!: FormGroup;
   otp: string = '';
   otpExpired: boolean = false;
+  private backend_URL = `${backendUrl}`;
+  private Otp_Url = `${OtpUrl}`;
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +39,7 @@ export class CheckotpuserComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+    this.http.post(`${this.Otp_Url}`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: otpValue,
       email: emailValue
@@ -66,7 +69,7 @@ export class CheckotpuserComponent implements OnInit {
   }
 
   updateUserificationStatus(userName: string): void {
-    this.http.post('https://job4jobless.com:9001/verifyUser', { userName: userName })
+    this.http.post(`${this.backend_URL}verifyUser`, { userName: userName })
     .subscribe({
       next: (response: any) => {
         console.log("User verified successfully");
@@ -79,7 +82,7 @@ export class CheckotpuserComponent implements OnInit {
   }
 
   resendOTP(): void {
-    this.http.post('https://otpservice.onrender.com/0auth/verifyOtp', {
+    this.http.post(`${this.Otp_Url}`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: this.otpForm.controls['otp'].value,
       email: this.otpForm.controls['email'].value
