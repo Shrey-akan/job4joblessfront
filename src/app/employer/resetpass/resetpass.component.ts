@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
-import { backendUrl } from 'src/app/constant';
+import { backendUrl , OtpUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-resetpass',
@@ -18,6 +18,7 @@ export class ResetpassComponent  implements OnInit{
   employerForm!: FormGroup; // Define a FormGroup for your form
 
   private backend_URL=`${backendUrl}`;
+  private Otp_Url = `${OtpUrl}`
 
   constructor(
     private userService: UserService,
@@ -56,7 +57,7 @@ export class ResetpassComponent  implements OnInit{
   }
 
   generateOtp(payload: any) {
-    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.empid, email: payload.empmailid }).subscribe({
+    this.http.post(`${this.Otp_Url}`, { uid: payload.empid, email: payload.empmailid }).subscribe({
       next: (response: any) => {
         if (response.otpCreated) {
           // console.log(response.otpCreated);

@@ -15,7 +15,10 @@ import { EnquirydetailsComponent } from './enquirydetails/enquirydetails.compone
 import { DashhomeComponent } from './dashhome/dashhome.component';
 import { NotifyComponent } from './notify/notify.component';
 import { QuestionComponent } from './question/question.component';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,11 @@ import { QuestionComponent } from './question/question.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   bootstrap:[
     AdminComponent

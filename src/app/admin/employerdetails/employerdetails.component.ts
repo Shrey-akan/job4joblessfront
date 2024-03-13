@@ -16,7 +16,22 @@ export class EmployerdetailsComponent implements OnInit{
   
   ngOnInit(): void {
     let responce = this.b1.fetchemployer();
-    responce.subscribe((data1: any)=>this.data=data1);    
+    responce.subscribe((data1: any)=>this.data=data1);  
+    const moveLeftBtn = document.getElementById("moveLeft");
+    const moveRightBtn = document.getElementById("moveRight");
+    const table = document.querySelector(".table-responsive");
+
+    moveLeftBtn?.addEventListener("click", () => {
+      if (table) {
+        table.scrollLeft -= 100; // Adjust as needed
+      }
+    });
+
+    moveRightBtn?.addEventListener("click", () => {
+      if (table) {
+        table.scrollLeft += 100; // Adjust as needed
+      }
+    });  
   }
   sendNotificationemp(empId:string){
        // Navigate to the notification component with the user ID as a parameter

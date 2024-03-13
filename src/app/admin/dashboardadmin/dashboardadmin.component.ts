@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { backendUrl } from 'src/app/constant';
 
+
 @Component({
   selector: 'app-dashboardadmin',
   templateUrl: './dashboardadmin.component.html',
@@ -11,6 +12,7 @@ import { backendUrl } from 'src/app/constant';
 
 export class DashboardadminComponent implements OnInit{
   router: any;
+  isContentVisible: boolean = false;
 
 constructor( private cookie:CookieService , private http: HttpClient){
 
@@ -19,6 +21,7 @@ constructor( private cookie:CookieService , private http: HttpClient){
 
   }
   private backend_URL = `${backendUrl}`;
+  
   signOutAdmin(){
     const refreshToken = this.cookie.get('refreshToken');
 
@@ -54,5 +57,9 @@ constructor( private cookie:CookieService , private http: HttpClient){
       }
     });
   }
+
+  // toggleContent() {
+  //   this.isContentVisible = !this.isContentVisible;
+  // }
 
 }

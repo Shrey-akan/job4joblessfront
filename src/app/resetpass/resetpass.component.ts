@@ -3,7 +3,7 @@ import { UserService } from '../auth/user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import Validators
-import { backendUrl } from '../constant';
+import { backendUrl , OtpUrl} from '../constant';
 
 @Component({
   selector: 'app-resetpass',
@@ -12,6 +12,7 @@ import { backendUrl } from '../constant';
 })
 export class ResetpassComponent implements OnInit{
   private backend_URL=`${backendUrl}`;
+  private Otp_Url = `${OtpUrl}`
   
   userName: string = '';
   user: any;
@@ -58,7 +59,7 @@ export class ResetpassComponent implements OnInit{
 
   generateOtp(payload: any) {
     console.log("checking the payload",payload);
-    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe({
+    this.http.post(`${this.Otp_Url}`, { uid: payload.uid, email: payload.userName }).subscribe({
       next: (response: any) => {
         console.log("checking the response",response);
         if (response.otpCreated) {

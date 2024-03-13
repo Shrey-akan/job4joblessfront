@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import * as intelInput from "intl-tel-input";
-import { backendUrl } from '../constant';
+import { backendUrl , OtpUrl} from '../constant';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
+
+
 export class RegisterComponent implements OnInit {
   private backend_URL=`${backendUrl}`;
+  private Otp_URL=`${OtpUrl}`;
+  
   isHovered = false;
   countries: string[] = [];
   userregister!: FormGroup;
@@ -111,7 +115,7 @@ export class RegisterComponent implements OnInit {
     }
   }
   generateOtp(payload: any) {
-    this.http.post('https://otpservice.onrender.com/0auth/generateOtp', { uid: payload.uid, email: payload.userName }).subscribe(
+    this.http.post(`${this.Otp_URL}`, { uid: payload.uid, email: payload.userName }).subscribe(
       (response: any) => {
         if (response.otpCreated) {
           this.router.navigate(['/checkotp', payload.uid]);
