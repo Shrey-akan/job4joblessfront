@@ -13,6 +13,11 @@ import { NotifyComponent } from './notify/notify.component';
 import { ProfileComponent } from './profile/profile.component';
 import { QuestionComponent } from './question/question.component';
 import { authGuard } from '../auth.guard';
+import { SubadminComponent } from './subadmin/subadmin.component';
+import { PushnotificationComponent } from './pushnotification/pushnotification.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { SubadmindetailsComponent } from './subadmindetails/subadmindetails.component';
+import { UpdatesubadminComponent } from './updatesubadmin/updatesubadmin.component';
 
 const routes: Routes = [
 
@@ -33,14 +38,29 @@ const routes: Routes = [
         path: 'jobprovided', component: JobprovidedComponent
       },
       {
+        path: 'subadmin', component: SubadminComponent
+      },
+      {
+        path: 'pushnotification', component: PushnotificationComponent
+      },
+      {
+        path: 'blogs', component: BlogsComponent
+      },
+      {
         path: 'notify/:userId', component: NotifyComponent
       },
       {
         path: 'profile', component: ProfileComponent
       },
+      {
+        path: 'subadmindetails', component: SubadmindetailsComponent
+      },
 
       {
         path: 'enquirydetails', component: EnquirydetailsComponent
+      },
+      {
+        path: 'updatesubadmin/:id', component: UpdatesubadminComponent
       },
       {
         path: 'question', component: QuestionComponent

@@ -19,7 +19,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-
+import { SubadminComponent } from './subadmin/subadmin.component';
+import { PushnotificationComponent } from './pushnotification/pushnotification.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { SubadmindetailsComponent } from './subadmindetails/subadmindetails.component';
+import { MatTableModule } from '@angular/material/table';
+import { UpdatesubadminComponent } from './updatesubadmin/updatesubadmin.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -33,7 +38,12 @@ import { MatListModule } from '@angular/material/list';
      EnquirydetailsComponent,
      DashhomeComponent,
      NotifyComponent,
-     QuestionComponent
+     QuestionComponent,
+     SubadminComponent,
+     PushnotificationComponent,
+     BlogsComponent,
+     SubadmindetailsComponent,
+     UpdatesubadminComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +53,8 @@ import { MatListModule } from '@angular/material/list';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   bootstrap:[
     AdminComponent
