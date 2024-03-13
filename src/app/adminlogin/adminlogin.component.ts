@@ -33,29 +33,6 @@ export class AdminloginComponent implements OnInit {
     });
   }
 
-  // onSubmit() {
-  //   console.log(this.myForm.value);
-  //   if (this.myForm.valid) {
-  //     const formData = this.myForm.value;
-  //     this.adminauth.loginCheck(formData).subscribe(
-  //   {
-  //     next : (Response:any) => {
-  //       if(Response === true){
-  //         alert("Login SuccessFull");
-  //         this.router.navigate(['/admin/dashboardadmin']);
-  //       }
-  //       else{
-  //         this.router.navigate(['/admin']);
-  //       }
-  //     },
-  //     error: (err: any) => {
-  //       alert(err);
-  //     }
-  //   }
-  //     );
-  //   }
-  // }
-
   onSubmit() {
     console.log(this.myForm.value);
     if (this.myForm.valid) {
