@@ -8,13 +8,26 @@ import { UserService } from 'src/app/auth/user.service';
 })
 export class JobprovidedComponent implements OnInit{
   
-  data:any;
+  data: any[] = [];
+  pageNumber = 1;
+  pageSize = 10;
 
-  constructor(private b1:UserService) { }
+  constructor(private userService: UserService) { }
   
   ngOnInit(): void {
-    let responce = this.b1.fetchjobpost();
-    responce.subscribe((data1: any)=>this.data=data1);    
+    this.loadJobData();
+  }
+
+  loadJobData() {
+    // this.userService.fetchjobpost(this.pageNumber, this.pageSize)
+    //   .subscribe((response: any) => {
+    //     this.data = response;
+    //   });
+  }
+
+  onPageChange(page: number) {
+    this.pageNumber = page;
+    this.loadJobData();
   }
 
 }

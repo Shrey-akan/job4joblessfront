@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { backendUrl } from 'src/app/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ export class UpdatesubadminComponent implements OnInit {
   subadminDetails: any;
   updateForm!: FormGroup; // Define form group
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private formBuilder: FormBuilder , private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -51,7 +51,7 @@ export class UpdatesubadminComponent implements OnInit {
       this.http.put(`${this.backend_URL}subadmindetails/${this.subadminId}`, formData).subscribe(
         (response) => {
           console.log('Subadmin details updated successfully:', response);
-
+          this.router.navigate(['/admin/subadmindetails']);
         },
         (error) => {
           console.error('Error updating subadmin details:', error);
