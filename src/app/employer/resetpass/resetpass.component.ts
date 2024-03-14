@@ -20,6 +20,8 @@ export class ResetpassComponent  implements OnInit{
   private backend_URL=`${backendUrl}`;
   private Otp_Url = `${OtpUrl}`
 
+  loading: boolean = false;
+
   constructor(
     private userService: UserService,
     private http: HttpClient,
@@ -37,13 +39,12 @@ export class ResetpassComponent  implements OnInit{
 
   checkUser() {
     if (this.employerForm.valid) {
+      this.loading = true;
       // console.log("checking the user name", this.employerForm.value.empmailid);
       this.userService.checkEmployer(this.employerForm.value.empmailid).subscribe({
         next: (payload: any) => {
           this.user = payload.empmailid;
           this.errorMessage = undefined;
-          // console.log(payload);
-          // console.log(payload.empid);
           this.generateOtp(payload);
         },
         error: (err: any) => {
@@ -71,6 +72,9 @@ export class ResetpassComponent  implements OnInit{
       error: (err: any) => {
         console.error(`Some error occurred: ${err}`);
         alert(err);
+      },
+      complete: () => {
+        this.loading = false; // Hide loader after OTP generation is completed
       }
     });
   }

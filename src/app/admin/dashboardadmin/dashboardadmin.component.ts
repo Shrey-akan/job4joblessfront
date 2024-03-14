@@ -34,18 +34,20 @@ constructor( private cookie:CookieService , private http: HttpClient){
       responseType: 'text' 
     }).subscribe({
       next: (response: string) => {
+        console.log(response);
         if (response === 'Logout successful') {
+          console.log(response);
     this.cookie.delete('accessToken');
         this.cookie.delete('refreshToken');
         this.cookie.delete('adminid');
           // alert("LogOut Successfull");
           this.router.navigate(['/adminlogin']);
         } else {
-          this.cookie.delete('accessToken');
-          this.cookie.delete('refreshToken');
-          this.cookie.delete('adminid');
+          // this.cookie.delete('accessToken');
+          // this.cookie.delete('refreshToken');
+          // this.cookie.delete('adminid');
             // alert("LogOut Successfull");
-            this.router.navigate(['/adminlogin']);
+            // this.router.navigate(['/adminlogin']);
         }
       },
       error: (error) => {

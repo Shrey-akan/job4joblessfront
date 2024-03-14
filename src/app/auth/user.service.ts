@@ -50,6 +50,8 @@ interface Employer {
   providedIn: 'root'
 })
 export class UserService {
+
+  public errorMessage: string = '';
   apiUrl: any;
   getUser() {
     throw new Error('Method not implemented.');
@@ -162,7 +164,7 @@ export class UserService {
     })
   }
   deleteUser(uid: string): Observable<any> {
-    const urldu = `${this.deleteuseraccount}deleteUser/${uid}`;
+    const urldu = `${this.deleteuseraccount}deactivate/${uid}`;
     return this.h1.delete(urldu);
   }
 
@@ -189,27 +191,34 @@ export class UserService {
     // console.log("done");
     return this.h1.post(this.logincheckurl, data).subscribe({
       next: (resp: any) => {
+        if (resp && !resp.accdeactivate) {
 
-      
-        const mainres: User = resp;
-        this.cookie.set('accessToken', resp.accessToken);
-        this.cookie.set('uid', resp.uid);
-        this.cookie.set('refreshToken', resp.refreshToken);
-     
-        const accessToken = resp.accessToken; 
-        AuthInterceptor.accessToken = accessToken;
+          const mainres: User = resp;
+          this.cookie.set('accessToken', resp.accessToken);
+          this.cookie.set('uid', resp.uid);
+          this.cookie.set('refreshToken', resp.refreshToken);
 
-        const isAuthenticated = resp.accessToken && resp.uid;
+          const accessToken = resp.accessToken;
+          AuthInterceptor.accessToken = accessToken;
 
-        if (isAuthenticated) {
-          alert('Login Successful!');
-          this.router.navigate(['/dashboarduser']);
+          const isAuthenticated = resp.accessToken && resp.uid;
+
+          if (isAuthenticated) {
+            alert('Login Successful!');
+            console.log("Inside authentication")
+            this.router.navigate(['/dashboarduser']);
+          } else {
+
+            alert('Incorrect Credentials!');
+            this.router.navigate(['/login']);
+          }
+          // this.router.navigate(['/home']);
         } else {
-         
-          alert('Incorrect Credentials!');
-          this.router.navigate(['/login']);
+          // Account is not activated, show error message
+          this.errorMessage = 'Your account is not activated. Please contact support for assistance.';
+          console.log(this.errorMessage);
         }
-  
+
       },
       error: (err: any) => {
         // console.log(err);
@@ -328,8 +337,8 @@ export class UserService {
   //   });
   // }
 
-  createOrGetUser(userName: any,userFirstName:any) {
-    const requestBody = { userName ,userFirstName };
+  createOrGetUser(userName: any, userFirstName: any) {
+    const requestBody = { userName, userFirstName };
     console.log(requestBody);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -397,11 +406,14 @@ export class UserService {
 
 
   //Employer
+  // deleteEmployer(empid: string): Observable<any> {
+  //   const urlde = `${this.deleteemployeraccount}deleteEmployer/${empid}`;
+  //   return this.h1.put(urlde);
+  // }
   deleteEmployer(empid: string): Observable<any> {
-    const urlde = `${this.deleteemployeraccount}deleteEmployer/${empid}`;
-    return this.h1.delete(urlde);
+    const url = `${API_BASE_URL}empldeactivate/${empid}`;
+    return this.h1.put(url, {});
   }
-
 
   checkEmployer(empmailid: string): Observable<any> {
     const url = `${API_BASE_URL}checkEmployer?empmailid=${empmailid}`;
@@ -433,25 +445,30 @@ export class UserService {
 
     return this.h1.post(this.employercheckurl, data).subscribe({
       next: (resp: any) => {
-        // console.log("Access Token Generated" + resp.accessToken);
-        const mainres: Employer = resp;
-        // console.log(`Login response from the server: ${mainres}`);
-        this.cookie.set('emp', resp.empid);
-        this.cookie.set('accessToken', resp.accessToken);
-        this.cookie.set('refreshToken', resp.refreshToken);
-        // console.log("Refresh token saved ", resp.refreshToken);
-        // Inside your logincheckgmail function
-        const accessToken = resp.accessToken; // Assuming this is where you get the access token
-        AuthInterceptor.accessToken = accessToken;
-        const isAuthenticated = resp.accessToken && resp.empid;
+        if (resp && !resp.accempldeactivate) {
+          // console.log("Access Token Generated" + resp.accessToken);
+          const mainres: Employer = resp;
+          // console.log(`Login response from the server: ${mainres}`);
+          this.cookie.set('emp', resp.empid);
+          this.cookie.set('accessToken', resp.accessToken);
+          this.cookie.set('refreshToken', resp.refreshToken);
+          // console.log("Refresh token saved ", resp.refreshToken);
+          // Inside your logincheckgmail function
+          const accessToken = resp.accessToken; // Assuming this is where you get the access token
+          AuthInterceptor.accessToken = accessToken;
+          const isAuthenticated = resp.accessToken && resp.empid;
 
-        if (isAuthenticated) {
-          // console.log("Server responded with an object of employer");
-          alert('Login Successful!');
-          this.router.navigate(['/dashboardemp']);
+          if (isAuthenticated) {
+            // console.log("Server responded with an object of employer");
+            alert('Login Successful!');
+            this.router.navigate(['/dashboardemp']);
+          } else {
+            alert('Incorrect Credentials!');
+            this.router.navigate(['/employer']);
+          }
         } else {
-          alert('Incorrect Credentials!');
-          this.router.navigate(['/employer']);
+          this.errorMessage = 'Your account is not activated. Please contact support for assistance.';
+          console.log(this.errorMessage);
         }
       },
       error: (err: any) => {
@@ -462,8 +479,8 @@ export class UserService {
     });
   }
 
-  createOrGetEmployer(empmailid: string , empfname:string) {
-    const requestBody = { empmailid , empfname };
+  createOrGetEmployer(empmailid: string, empfname: string) {
+    const requestBody = { empmailid, empfname };
     console.log(requestBody);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -754,7 +771,7 @@ export class UserService {
 
   public checkallanswer(userAnswers: any[]) {
     const url = this.checkalanswere;
-  
+
     return this.h1.post(url, userAnswers).subscribe({
       next: (resp: any) => {
         if (resp) {
@@ -778,7 +795,7 @@ export class UserService {
       }
     });
   }
-  
+
   // updateJobStatus(jobId: string, data: any): Observable<any> {
   //   const url = `${API_BASE_URL}updateJobStatus/${jobId}`;
   //   return this.h1.put(url, data);
@@ -787,7 +804,7 @@ export class UserService {
     const url = `${API_BASE_URL}update-status?jobid=${jobid}&uid=${uid}&status=${status}`;
     return this.h1.put(url, {});
   }
-  
+
 
   addQuestion(jobid: string, questionData: any): Observable<any> {
     const url = `${API_BASE_URL}add?jobid=${jobid}`;

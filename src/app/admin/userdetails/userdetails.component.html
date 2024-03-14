@@ -98,9 +98,9 @@
             <thead>
               <tr style="background-color: rgb(143, 236, 143);">
                 <th>Name</th>
-                <th class="grey-background">Phone</th>
+                <th>Phone</th>
                 <th>Email ID</th>
-                <th class="grey-background">Notification</th>
+                <th>Notification</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -115,7 +115,9 @@
                 </td>
                 <td>
                   <button type="button" class="btn" style="background-color: #1e2e5c; color: white;">Info</button>
-                  &nbsp;<button type="button" class="btn btn-secondary">Delete</button>
+                  &nbsp;<button type="button" class="btn btn-secondary" (click)="toggleUserActivation(user.uid)">
+                    {{ user.accdeactivate ? 'Activate' : 'Deactivate' }}
+                  </button>
                 </td>
               </tr>
             </tbody>

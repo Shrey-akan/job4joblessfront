@@ -175,6 +175,9 @@
 
 
             </form>
+            <div class="loader-overlay" *ngIf="loading">
+              <div class="loader"></div>
+            </div>
           </div>
         </div>
 
@@ -192,7 +195,7 @@
 
       </div>
     </div>
-    <div class="row mt-4">
+    <!-- <div class="row mt-4">
       <div class="col-md-6">
         <div *ngIf="successMessage" class="alert alert-success">
           {{ successMessage }}
@@ -201,6 +204,6 @@
           User had not created!
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

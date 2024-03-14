@@ -99,6 +99,7 @@ export class RegisterComponent implements OnInit {
   }
   userRegisteration(): void {
     if (this.userregister.valid) {
+      this.loading=true;
       console.log(this.userregister);
       this.http.post(`${this.backend_URL}insertusermail`, this.userregister.getRawValue()).subscribe(
         (payload: any) => {
@@ -118,6 +119,7 @@ export class RegisterComponent implements OnInit {
     this.http.post(`${this.Otp_URL}generateOtp`, { uid: payload.uid, email: payload.userName }).subscribe(
       (response: any) => {
         if (response.otpCreated) {
+          this.loading=false
           this.router.navigate(['/checkotp', payload.uid]);
         } else {
           console.error('Otp not generated');

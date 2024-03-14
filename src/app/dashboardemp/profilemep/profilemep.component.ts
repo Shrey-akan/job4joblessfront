@@ -143,11 +143,13 @@ export class ProfilemepComponent implements OnInit {
 
 
   deleteAccountemp() {
+    console.log(this.empId)
     // console.log(this.empId);
     // Use this.userID to pass the user's ID for deletion
     this.b1.deleteEmployer(this.empId).subscribe(
       {
         next: (response: any) => {
+          console.log(response);
           if (response === true) {
             alert("Employer Deleted Successfully");
             this.router.navigate(['/']);

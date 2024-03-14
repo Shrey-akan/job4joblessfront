@@ -19,16 +19,8 @@
         </div>
       </div>
     </div>
-  
-    <div class="row mt-4">
-      <div class="col-md-6">
-        <div *ngIf="user" class="alert alert-success">
-          Success: User exists - {{ user['empmailid'] }}
-        </div>
-        <div *ngIf="showWarning" class="alert alert-warning">
-          Warning: User does not exist
-        </div>
-      </div>
+    <div class="loader-overlay" *ngIf="loading">
+      <div class="loader"></div>
     </div>
   </div>
   

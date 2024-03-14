@@ -20,6 +20,7 @@ interface Job {
   uid: string;
   sendTime: Date;
   isDescriptionVisible: boolean;
+  approvejob:boolean;
 }
 @Component({
   selector: 'app-jobcardu',

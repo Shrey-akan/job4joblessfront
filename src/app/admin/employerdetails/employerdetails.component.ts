@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/user.service';
+import { HttpClient } from '@angular/common/http';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-employerdetails',
@@ -10,9 +12,10 @@ import { UserService } from 'src/app/auth/user.service';
 export class EmployerdetailsComponent implements OnInit{
   
   data:any;
+  private backend_URL = `${backendUrl}`;
 
 
-  constructor(private b1:UserService,private router:Router){}
+  constructor(private b1:UserService,private router:Router , private http: HttpClient){}
   
   ngOnInit(): void {
     let responce = this.b1.fetchemployer();
@@ -36,5 +39,23 @@ export class EmployerdetailsComponent implements OnInit{
   sendNotificationemp(empId:string){
        // Navigate to the notification component with the user ID as a parameter
     this.router.navigate(['/admin/notify/', empId]);
+  }
+
+  toggleUserActivation(empid: string): void {
+    this.http.put(`${this.backend_URL}empldeactivate/${empid}`, {}).subscribe({
+      next: () => {
+        console.log(`User account ${empid} ${this.getEmployeeById(empid).accempldeactivate ? 'activated' : 'deactivated'} successfully`);
+        // Update the user's accdeactivate status in the UI
+        this.getEmployeeById(empid).accempldeactivate = !this.getEmployeeById(empid).accempldeactivate;
+      },
+      error: (error) => {
+        console.error(`Error toggling user activation status for user ${empid}:`, error);
+        // Handle error scenarios
+      }
+    });
+  }
+
+  getEmployeeById(empid: string): any {
+    return this.data.find((user: any) => user.empid === empid);
   }
 }

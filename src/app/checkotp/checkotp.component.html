@@ -15,7 +15,9 @@
       </form>
 <!-- Add the Resend button and bind its [disabled] property -->
 <!-- <button class="btn btn-primary" (click)="resendOTP()" [disabled]="!otpExpired">Resend OTP</button> -->
-
+<div class="loader-overlay" *ngIf="loadingVerifyOTP">
+  <div class="loader"></div>
+</div>
 
     </div>
   </div>

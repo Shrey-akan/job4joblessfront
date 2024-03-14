@@ -16,6 +16,7 @@ export class CheckotpComponent implements OnInit {
   otpExpired: boolean = false;
   private backend_URL = `${backendUrl}`
   private Otp_URL=`${OtpUrl}`;
+  loadingVerifyOTP: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +38,7 @@ export class CheckotpComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
+    this.loadingVerifyOTP = true; 
     this.http.post(`${this.Otp_URL}verifyOtp`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: otpValue,
@@ -58,6 +60,9 @@ export class CheckotpComponent implements OnInit {
       },
       error: (err) => {
         console.error(`Some error occurred: ${err}`);
+      },
+      complete: () => {
+        this.loadingVerifyOTP = false; // Hide loader after OTP verification is completed
       }
     });
   }

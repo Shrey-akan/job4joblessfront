@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/auth/user.service';
+import { HttpClient } from '@angular/common/http';
+import { backendUrl } from 'src/app/constant';
 
 @Component({
   selector: 'app-jobprovided',
@@ -12,10 +14,31 @@ export class JobprovidedComponent implements OnInit{
   pageNumber = 1;
   pageSize = 10;
 
-  constructor(private userService: UserService) { }
+  jobPosts: any[] = [];
+  private backend_URL = `${backendUrl}`;
+
+
+  constructor(private userService: UserService , private http: HttpClient) { }
   
   ngOnInit(): void {
-    this.loadJobData();
+    // this.loadJobData();
+    this.fetchJobPosts();
+  }
+
+  fetchJobPosts(): void {
+    this.http.get<any[]>(`${this.backend_URL}fetchjobpost`)
+      .subscribe(
+        (response) => {
+          this.jobPosts = response;
+        },
+        (error) => {
+          console.error('Error fetching job posts:', error);
+        }
+      );
+  }
+
+  approveJob(job: any): void {
+    job.isApproved = !job.isApproved; // Toggle the approval status
   }
 
   loadJobData() {

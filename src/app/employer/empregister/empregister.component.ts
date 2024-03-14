@@ -111,6 +111,7 @@ export class EmpregisterComponent implements OnInit {
 
   empRegisteration(): void {
     if (this.employerdetails.valid) {
+      this.loading=true;
       console.log(this.employerdetails);
       this.http.post(`${this.backend_URL}insertEmployer`, this.employerdetails.getRawValue()).subscribe(
         (payload: any) => {
@@ -119,6 +120,8 @@ export class EmpregisterComponent implements OnInit {
           this.generateOtp(payload);
         },
         (err) => {
+          
+          this.loading=false;
           if (err.status === 409) {
             this.snackBar.open('User with this Email Id already exist....', 'Close');
           }
@@ -185,6 +188,9 @@ export class EmpregisterComponent implements OnInit {
       },
       error: (err: any) => {
         console.error(`Some error occurred: ${err}`);
+      },
+      complete: () => {
+        this.loading = false; // Hide loader after OTP generation is completed
       }
     });
   }

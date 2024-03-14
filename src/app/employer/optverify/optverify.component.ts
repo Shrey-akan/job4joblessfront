@@ -16,6 +16,7 @@ export class OptverifyComponent implements OnInit {
 
   private backend_URL=`${backendUrl}`;
   private Otp_Url=`${OtpUrl}`;
+  loadingVerifyOTP: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,29 +38,39 @@ export class OptverifyComponent implements OnInit {
     const otpValue = this.otpForm.controls['otp'].value;
     const emailValue = this.otpForm.controls['email'].value;
 
-    this.http.post(`${this.Otp_Url}verifyOtp`, {
-      uid: this.activatedRoute.snapshot.paramMap.get('empid'),
-      otp: this.otpForm.controls['otp'].value,
-      email: this.otpForm.controls['email'].value
-    })
-    .subscribe({
-      next: (payload: any) => {
-        if (payload.otpValid) {
-          if (!payload.otpExpired) {
-            this.updateEmployerVerificationStatus(emailValue);
+    if(this.otpForm.valid)
+    {
+      this.loadingVerifyOTP=true;
+      this.http.post(`${this.Otp_Url}verifyOtp`, {
+        uid: this.activatedRoute.snapshot.paramMap.get('empid'),
+        otp: this.otpForm.controls['otp'].value,
+        email: this.otpForm.controls['email'].value
+      })
+      .subscribe({
+        next: (payload: any) => {
+          if (payload.otpValid) {
+            if (!payload.otpExpired) {
+              this.updateEmployerVerificationStatus(emailValue);
+            } else {
+              console.error("OTP expired");
+              alert("OTP expired. Please resend the OTP.");
+            }
           } else {
-            console.error("OTP expired");
-            alert("OTP expired. Please resend the OTP.");
+            console.error("Incorrect OTP");
+            alert("Incorrect OTP. Please enter the correct OTP.");
           }
-        } else {
-          console.error("Incorrect OTP");
-          alert("Incorrect OTP. Please enter the correct OTP.");
+        },
+        error: (err) => {
+          console.error(`Some error occurred: ${err}`);
+        },
+        complete: () => {
+          this.loadingVerifyOTP = false; // Hide loader after OTP verification is completed
         }
-      },
-      error: (err) => {
-        console.error(`Some error occurred: ${err}`);
-      }
-    });
+      });
+    }
+    else{
+      console.log("Invalid OTP form")
+    }
   }
 
   updateEmployerVerificationStatus(empmailid: string): void {

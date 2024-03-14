@@ -25,6 +25,7 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { SubadmindetailsComponent } from './subadmindetails/subadmindetails.component';
 import { MatTableModule } from '@angular/material/table';
 import { UpdatesubadminComponent } from './updatesubadmin/updatesubadmin.component';
+import { InfoPageComponent } from './info-page/info-page.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -43,7 +44,8 @@ import { UpdatesubadminComponent } from './updatesubadmin/updatesubadmin.compone
      PushnotificationComponent,
      BlogsComponent,
      SubadmindetailsComponent,
-     UpdatesubadminComponent
+     UpdatesubadminComponent,
+     InfoPageComponent
   ],
   imports: [
     CommonModule,

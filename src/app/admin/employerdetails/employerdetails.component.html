@@ -45,7 +45,7 @@
 </div> -->
 <div class="container-fluid">
     <div class="container text-center" style="margin: 3%;">
-            <h4>EMPLOYERS DETAILS</h4>
+        <h4>EMPLOYERS DETAILS</h4>
         <div class="table-responsive">
             <table class="table table-striped custom-table">
                 <thead>
@@ -74,13 +74,19 @@
                                 Notification</button>
                         </td>
                         <td>
-                            <button type="button" class="btn"
-                                style="background-color: #1e2e5c; color: white;">Info</button>
-                            &nbsp;<button type="button" class="btn btn-secondary">Delete</button>
+                            <div>
+                        <td> <button type="button" class="btn"
+                                style="background-color: #1e2e5c; color: white;">Info</button></td>
+                        <td>
+                            <button type="button" class="btn btn-secondary" (click)="toggleUserActivation(user.empid)">
+                                {{ user.accempldeactivate ? 'Activate' : 'Deactivate' }}
+                            </button>
                         </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
+        </td>
+        </tr>
+        </tbody>
+        </table>
     </div>
+</div>
 </div>

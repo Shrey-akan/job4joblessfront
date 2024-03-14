@@ -18,6 +18,7 @@ interface Job {
   empid: string;
   sendTime:Date;
   isDescriptionVisible: boolean;
+  approvejob:boolean;
 }
 
 @Component({
