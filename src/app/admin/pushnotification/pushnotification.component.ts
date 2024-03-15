@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { backendUrl } from 'src/app/constant';
 
@@ -8,22 +8,59 @@ import { backendUrl } from 'src/app/constant';
   templateUrl: './pushnotification.component.html',
   styleUrls: ['./pushnotification.component.css']
 })
-export class PushnotificationComponent{
-
-  notificationForm!: FormGroup;
-  private backend_URL = `${backendUrl}`;
-
-  constructor(private formBuilder: FormBuilder , private http: HttpClient) { }
+export class PushnotificationComponent implements OnInit {
+  title: string = '';
+  body: string = '';
+  options: any[] = [];
+  selectedValues: any[] = [];
+  error: string | null = null;
+  show: boolean = false;
+  color: string | undefined;
+  form!: FormGroup;
+  constructor(private http: HttpClient,private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.notificationForm = this.formBuilder.group({
-      nhead: ['', Validators.required],
-      nsubhead: ['', Validators.required],
-      ndescription: ['', Validators.required],
-      notisend: ['', Validators.required],
-      notifyuid: ['', Validators.required],
-      sendTime: ['', Validators.required]
+    this.fetchTokens();
+    this.form = this.fb.group({
+      title: ['', Validators.required],
+      body: ['', Validators.required],
+      selectedValues: [[]]
     });
   }
 
+  fetchTokens(): void {
+    this.http.get<any>('https://rocknwoods.website:4000/api/gettoken')
+      .subscribe(
+        response => {
+          this.options = response?.result?.token || [];
+        },
+        error => {
+          console.error('Error fetching options:', error);
+        }
+      );
+  }
+
+  handleSubmit(): void {
+    if (this.form.valid) {
+      const formData = this.form.value;
+      this.http.post<any>('https://rocknwoods.website:4000/api/sendmsg', formData)
+        .subscribe({
+          next: response => {
+            console.log('message:', response?.data);
+            // Handle success
+          },
+          error: error => {
+            console.error('Error sending message:', error);
+            // Handle error
+          }
+        });
+    } else {
+      // Form is invalid, handle accordingly
+    }
+  }
+  
+
+  closeErrorPopup(): void {
+    this.show = false;
+  }
 }

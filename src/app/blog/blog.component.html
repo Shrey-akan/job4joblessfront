@@ -1,4 +1,4 @@
-<ng-container *ngIf="postId === 'createoustandingresume'">
+<!-- <ng-container *ngIf="postId === 'createoustandingresume'">
     <div class="container d-flex flex-column align-items-center">
         <div class="row">
             <h1 class="head_text">Connecting Perfect Matches</h1>
@@ -626,4 +626,9 @@
 
 
 
-<app-footer></app-footer>
+<app-footer></app-footer> -->
+<div *ngIf="blogDetails">
+    <h2>{{ blogDetails.title }}</h2>
+    <p>{{ blogDetails.content }}</p>
+    <!-- Display other details of the blog here -->
+  </div>

@@ -102,34 +102,122 @@
 </section> -->
 
 
+<div class="search-bar">
+  <input type="text" class="form-control" [(ngModel)]="searchQuery" placeholder="Search blogs..."
+    (input)="filterBlogs()">
+</div>
 
 <div *ngIf="loading; else content">
   <p>Loading...</p>
 </div>
+
 <ng-template #content>
-  <div class="blogs-container">
+  <button class="floating-signin-button" (click)="openSignInModal()">Sign In</button>
+  <div class="blogs-container" style="margin-left: 3%; margin-right: 3%;">
     <!-- Latest Blogs -->
-    <div class="latest-blogs">
-      <h2>Latest Blogs</h2>
-      <ul>
+    <div class="latest-blogs" style="border-right: 2px solid #ccc;">
+
+      <ul style="list-style-type: none; ">
         <li *ngFor="let blog of blogs" class="blog-item">
-          <div class="blog-info">
-            <!-- Display the image -->
-            <img [src]="blog.banner" alt="Blog Image" width="100" height="100">
-            <!-- Display the title -->
-            <h1>{{ blog.title }}</h1>
-            <!-- Display the description -->
-            <p>{{ blog.des }}</p>
+          <div class="table-padding">
+            <table class="" style="width: 100%;">
+              <tr class="padding-row">
+                <td style="width: 80%; border-bottom: 1px solid #ccc;" class="padding-row">
+                  <h1><a (click)="navigateToBlogDetails(blog.blog_id)" style="text-decoration: none;">{{ blog.title }}</a></h1>
+                  
+                  <p class="description">{{ blog.des }}</p>
+                  <div class="button-style">
+                    <span *ngFor="let tag of blog.tags" class="category-button">{{ capitalizeFirstLetter(tag) }}</span>
+                  </div>
+                </td>
+                <td style="border-bottom: 1px solid #ccc; padding-left: 8%;">
+                  <img [src]="blog.banner" alt="Blog Image" width="145" height="100">
+                </td>
+              </tr>
+            </table>
           </div>
         </li>
       </ul>
+      <button (click)="loadMoreBlogs()" class="load-more-button">
+        Load More
+      </button>
     </div>
+
     <!-- Trending Blogs -->
-    <div class="trending-blogs">
-      <h2>Trending Blogs</h2>
-      <ul>
-        <li *ngFor="let blog of trendingBlogs" class="blog-item">{{ blog.title }}</li>
-      </ul>
+    <div class="trending-blogs" style="border: none;">
+      <div>
+        <h1>Blogs covering a spectrum of interests</h1>
+        <div class="categories-container">
+          <div class="category-buttons">
+            <button *ngFor="let category of categories" class="category-button">{{
+              capitalizeFirstLetter(category)}}</button>
+          </div>
+        </div>
+        <h2 class="trends">Trending Blogs</h2>
+      </div>
+      <div>
+        <ul style="list-style-type: none; ">
+          <li *ngFor="let blog of trendingBlogs; let i = index" class="blog-item">
+            <table style="width: 100%;">
+              <tbody>
+                <tr class="blog-item" style="margin-bottom: 200px;">
+                  <td style="padding-right: 20px; font-size: 3.5rem; color: rgb(214, 214, 214); font-weight: bold;">{{ i
+                    + 1 }}</td> <!-- Displaying the index plus 1 to start from 1 -->
+                  <td style="padding-right: 10%; text-align: left;">
+                    <h1>{{ truncateTitle(blog.title)}}</h1>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </ng-template>
+
+<div class="modal" id="signInModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeSignInModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Add your sign-in form here -->
+        <!-- For example: -->
+        <form [formGroup]="loginform" (ngSubmit)="login(loginform)">
+          <div class="form-group">
+            <input type="text" class="form-control px-4 rounded-pill" formControlName="userName" id="userName"
+              placeholder="Username or Email"
+              [ngClass]="{ 'is-invalid': loginform.get('userName')?.invalid && loginform.get('userName')?.touched }" />
+            <div class="invalid-feedback" *ngIf="loginform.get('userName')?.hasError('required')">
+              Username or Email is required.
+            </div>
+          </div>
+          <div class="form-group d-flex justify-content-between align-items-center">
+            <input type="password" class="form-control px-4 rounded-pill" formControlName="userPassword"
+              id="userPassword" placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
+            <div (click)="togglePasswordVisibility()" class="px-2 eye-icon">
+              <div *ngIf="passwordVisible; else hidePassword">
+                <i class="fa-solid fa-eye-slash"></i>
+              </div>
+              <ng-template #hidePassword>
+                <i class="fa-solid fa-eye"></i>
+              </ng-template>
+            </div>
+          </div>
+          <div class="form-group d-flex flex-column justify-content-center align-items-stretch">
+            <button type="submit" class="btn rounded-pill my-3" style="background-color: #1E2E5C; color: white;">Sign
+              In</button>
+            <button class="btn rounded-pill custom-google" (click)="loginWithGoogle()">
+              <i class="fab fa-google"></i>&nbsp; &nbsp;Sign In with Google
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
