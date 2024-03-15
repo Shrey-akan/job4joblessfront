@@ -56,6 +56,7 @@ import { BloglistComponent } from './bloglist/bloglist.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { IonicModule } from '@ionic/angular';
+import { BlogCardComponent } from './blog-card/blog-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { IonicModule } from '@ionic/angular';
     AdminloginComponent,
     BlogsComponent,
     BlogComponent,
-    BloglistComponent
+    BloglistComponent,
+    BlogCardComponent
   ],
   imports: [
     BrowserModule,

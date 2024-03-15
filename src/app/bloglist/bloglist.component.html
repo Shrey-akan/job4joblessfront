@@ -115,7 +115,8 @@
   <button class="floating-signin-button" (click)="openSignInModal()">Sign In</button>
   <div class="blogs-container" style="margin-left: 3%; margin-right: 3%;">
     <!-- Latest Blogs -->
-    <div class="latest-blogs" style="border-right: 2px solid #ccc;">
+    <app-blog-card></app-blog-card>
+    <!-- <div class="latest-blogs" style="border-right: 2px solid #ccc;">
 
       <ul style="list-style-type: none; ">
         <li *ngFor="let blog of blogs" class="blog-item">
@@ -141,7 +142,7 @@
       <button (click)="loadMoreBlogs()" class="load-more-button">
         Load More
       </button>
-    </div>
+    </div> -->
 
     <!-- Trending Blogs -->
     <div class="trending-blogs" style="border: none;">

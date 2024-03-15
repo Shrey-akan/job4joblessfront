@@ -24,6 +24,7 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogComponent } from './blog/blog.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
+import { BlogCardComponent } from './blog-card/blog-card.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,9 @@ const routes: Routes = [
   },
   {
     path: 'bloglist', component: BloglistComponent
+  },
+  {
+    path: 'blog-cards', component: BlogCardComponent
   },
   {
     path: 'employer',

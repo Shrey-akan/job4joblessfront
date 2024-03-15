@@ -46,32 +46,30 @@ export class BlogComponent {
   // }
 
   ngOnInit(): void {
-    // Retrieve the blog ID from the route parameters
     this.route.paramMap.subscribe(params => {
       this.blogId = params.get('id');
       if (this.blogId) {
-        // Fetch blog details when the blogId is available
         this.fetchBlogDetails(this.blogId);
       }
     });
   }
 
   fetchBlogDetails(blogId: string): void {
-    // Make HTTP request to fetch blog details using POST method
-    this.http.post<Blog>('https://hustleforwork.com:3000/get-blog', { blogId }).subscribe(
-      (data: Blog) => {
-        // Assign the fetched blog details to the blogDetails property
-        this.blogDetails = data;
+    this.http.post<any>('https://hustleforwork.com:3000/get-blog', { blog_id: blogId, draft: false, mode: 'view' }).subscribe(
+      (response: any) => {
+        if (response.error) {
+          console.error('Error fetching blog details:', response.error);
+          // Handle error, display user-friendly message
+        } else {
+          this.blogDetails = response.blog;
+        }
       },
       error => {
-        // Log and handle any errors that occur during the HTTP request
         console.error('Error fetching blog details:', error);
-        // You might want to display a user-friendly error message to the user
+        // Handle error, display user-friendly message
       }
     );
   }
-  
-
   // careerOptions: CareerOption[] = [
   //   {
   //     title: 'Chemical Engineer',

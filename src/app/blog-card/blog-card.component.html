@@ -1,0 +1,27 @@
+<div class="latest-blogs" style="border-right: 2px solid #ccc;">
+
+    <ul style="list-style-type: none; ">
+      <li *ngFor="let blog of blogs" class="blog-item">
+        <div class="table-padding">
+          <table class="" style="width: 100%;">
+            <tr class="padding-row">
+              <td style="width: 80%; border-bottom: 1px solid #ccc;" class="padding-row">
+                <h1><a (click)="navigateToBlogDetails(blog.blog_id)" style="text-decoration: none;">{{ blog.title }}</a></h1>
+                
+                <p class="description">{{ blog.des }}</p>
+                <div class="button-style">
+                  <span *ngFor="let tag of blog.tags" class="category-button">{{ capitalizeFirstLetter(tag) }}</span>
+                </div>
+              </td>
+              <td style="border-bottom: 1px solid #ccc; padding-left: 8%;">
+                <img [src]="blog.banner" alt="Blog Image" width="145" height="100">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <button (click)="loadMoreBlogs()" class="load-more-button">
+      Load More
+    </button>
+  </div>
