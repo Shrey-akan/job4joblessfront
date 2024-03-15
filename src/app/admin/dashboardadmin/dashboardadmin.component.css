@@ -75,6 +75,7 @@ a {
 
 .nav-link:hover {
   color: inherit !important; /* Use the same color as the default */
+  cursor: pointer;
 }
 @media (max-width: 768px) {
   /* Medium devices (tablets, 768px and up) */

@@ -1,4 +1,4 @@
-<section class="blog-posts custom-font" style="margin: 50px auto;">
+<!-- <section class="blog-posts custom-font" style="margin: 50px auto;">
   <div class="container">
  
     <div class="row">
@@ -95,9 +95,41 @@
     <div class="row justify-content-center mt-4">
       <div class="colmd-4"></div>
       <div class="col-md-2">
-        <!-- <a routerLink="/bloglist" class="btn custom-btn rounded-pill btn-sm">Explore More</a> -->
+      
       </div>
     </div>
   </div>
-</section>
-<!-- <app-footer></app-footer> -->
+</section> -->
+
+
+
+<div *ngIf="loading; else content">
+  <p>Loading...</p>
+</div>
+<ng-template #content>
+  <div class="blogs-container">
+    <!-- Latest Blogs -->
+    <div class="latest-blogs">
+      <h2>Latest Blogs</h2>
+      <ul>
+        <li *ngFor="let blog of blogs" class="blog-item">
+          <div class="blog-info">
+            <!-- Display the image -->
+            <img [src]="blog.banner" alt="Blog Image" width="100" height="100">
+            <!-- Display the title -->
+            <h1>{{ blog.title }}</h1>
+            <!-- Display the description -->
+            <p>{{ blog.des }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- Trending Blogs -->
+    <div class="trending-blogs">
+      <h2>Trending Blogs</h2>
+      <ul>
+        <li *ngFor="let blog of trendingBlogs" class="blog-item">{{ blog.title }}</li>
+      </ul>
+    </div>
+  </div>
+</ng-template>

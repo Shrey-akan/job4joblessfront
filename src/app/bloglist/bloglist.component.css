@@ -1,42 +1,24 @@
-.head_text {
-    font-size: 2.5vw;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    margin: 0.5em auto;
-    color: #1E2E5C;
-    text-align: center;
-}
-
-
-
-ol {
-    list-style-type: none;
-}
-
-ol li {
-    padding-left: 1.5em;
-    text-indent: -1.5em;
-    margin-bottom: 8px;
-    position: relative;
-    font-size: large;
-    font-family: 'Poppins', sans-serif;
-}
-
-ol li::before {
-    content: "\2022";
-    color: #007BFF;
-    font-weight: bold;
-    font-size: 1.2em;
-    position: absolute;
-    left: 0;
-}
-
-.custom-btn {
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    background-color: #1e2e5c;
+.blogs-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* 3/4 and 1/4 columns */
+    gap: 20px; /* Adjust as needed */
   }
-
-  p,h1{
-    font-family: 'Poppins', sans-serif;
+  
+  .latest-blogs, .trending-blogs {
+    border: 1px solid #ccc; /* Border for visual separation */
+    padding: 10px;
   }
+  
+  .blog-item {
+    margin-bottom: 10px;
+  }
+  
+  .blog-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .blog-info img {
+    margin-right: 10px;
+  }
+  

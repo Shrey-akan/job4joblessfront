@@ -18,6 +18,7 @@ import { PushnotificationComponent } from './pushnotification/pushnotification.c
 import { BlogsComponent } from './blogs/blogs.component';
 import { SubadmindetailsComponent } from './subadmindetails/subadmindetails.component';
 import { UpdatesubadminComponent } from './updatesubadmin/updatesubadmin.component';
+import { AdminloginComponent } from '../adminlogin/adminlogin.component';
 
 const routes: Routes = [
 
@@ -33,6 +34,9 @@ const routes: Routes = [
       }, 
       {
         path: 'employerdetails', component: EmployerdetailsComponent
+      },
+      {
+        path:'adminlogin' , component:AdminloginComponent
       },
       {
         path: 'jobprovided', component: JobprovidedComponent
