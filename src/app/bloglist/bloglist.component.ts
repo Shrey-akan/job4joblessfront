@@ -78,18 +78,6 @@ export class BloglistComponent implements OnInit {
     this.quote = quote;
   }
 
-  // fetchLatestBlogs(page: number): void {
-  //   this.loading = true;
-  //   this.http.post<any>(`${this.blog_const}/latest-blogs`, { page }).subscribe(data => {
-  //     console.log('Latest Blogs Response:', data);
-  //     this.blogs = data.blogs;
-  //     this.loading = false;
-  //   }, error => {
-  //     console.error('Error fetching latest blogs:', error);
-  //     this.loading = false;
-  //   });
-  // }
-
   fetchLatestBlogs(page: number): void {
     this.loading = true;
     this.http.post<any>(`${this.blog_const}/latest-blogs`, { page }).subscribe(data => {
@@ -190,17 +178,19 @@ export class BloglistComponent implements OnInit {
 
   }
 
-  filterBlogs() {
+  filterBlogs(): void {
     if (this.searchQuery.trim() === '') {
       // If search query is empty, display all blogs
       this.filteredBlogs = this.blogs;
     } else {
-      // Filter blogs based on search query in the title
-      this.filteredBlogs = this.blogs.filter((blog:any) =>
-        blog.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      // Filter blogs based on search query in the title or description
+      this.filteredBlogs = this.blogs.filter((blog: Blog) =>
+        blog.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+        (blog.des && blog.des.toLowerCase().includes(this.searchQuery.toLowerCase()))
       );
     }
   }
+  
 
   @Input() state: any; // Replace 'any' with the appropriate type for 'state'
   @Input() fetchDataFun: any; // Replace 'any' with the appropriate type for 'fetchDataFun'

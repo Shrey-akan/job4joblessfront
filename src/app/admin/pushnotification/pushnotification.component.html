@@ -11,12 +11,6 @@
           <textarea formControlName="body" id="body" placeholder="Enter body" rows="10" class="form-control"
             required></textarea>
         </div>
-        <!-- <div class="form-group">
-                  <label  for="selectToken">Select Token:</label>
-                  <select multiple formControlName="selectedValues" id="selectToken">
-                    <option *ngFor="let option of options" [ngValue]="option">{{ option.token }}</option>
-                  </select>
-                </div> -->
         <div class="form-group row">
           <label class="col-sm-4 col-form-label"for="selectToken" style="font-size: 20px;">Select Token:</label>
           <div class="col-sm-12">
@@ -30,39 +24,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-<!-- <div>
-    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-      <div>
-        <label for="title">Title</label>
-        <input type="text" formControlName="title" id="title" placeholder="Enter title" />
-        <div *ngIf="form.get('title').invalid && form.get('title').touched">
-          Title is required.
-        </div>
-      </div>
-  
-      <div>
-        <label for="body">Body</label>
-        <textarea formControlName="body" id="body" placeholder="Enter body" rows="10"></textarea>
-        <div *ngIf="form.get('body').invalid && form.get('body').touched">
-          Body is required.
-        </div>
-      </div>
-  
-      <div>
-        <label for="selectToken">Select Token</label>
-        <select multiple formControlName="selectedValues" id="selectToken">
-          <option *ngFor="let option of options" [ngValue]="option">{{ option.token }}</option>
-        </select>
-      </div>
-  
-      <button type="submit" [disabled]="form.invalid">Submit</button>
-    </form>
-  
-
-  </div>
-   -->

@@ -40,6 +40,7 @@ export class PushnotificationComponent implements OnInit {
       );
   }
 
+
   handleSubmit(): void {
     if (this.form.valid) {
       const formData = this.form.value;
@@ -47,7 +48,7 @@ export class PushnotificationComponent implements OnInit {
         .subscribe({
           next: response => {
             if (response && response.data) {
-              console.log('message:', response.data);
+              console.log('Message:', response.data);
               // Handle success
             } else {
               console.log('No message received from server');
@@ -56,14 +57,14 @@ export class PushnotificationComponent implements OnInit {
           },
           error: error => {
             console.error('Error sending message:', error);
-            // Handle error
+            this.error = 'Error sending message. Please try again.';
           }
         });
     } else {
-      // Form is invalid, handle accordingly
+      console.log('Form is invalid');
+      // Handle invalid form
     }
-}
-
+  }
 
   closeErrorPopup(): void {
     this.show = false;

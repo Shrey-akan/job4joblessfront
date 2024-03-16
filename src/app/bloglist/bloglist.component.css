@@ -147,3 +147,13 @@
     font-size: 14px; /* Decrease font size on smaller screens */
   }
 }
+
+.centered-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-buttons button {
+  margin: 0 5px; /* Adjust margin as needed */
+}

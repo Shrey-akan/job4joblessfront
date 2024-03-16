@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import { backendUrl } from 'src/app/constant';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-jobprovided',
@@ -39,10 +40,24 @@ export class JobprovidedComponent implements OnInit{
       );
   }
 
-  approveJob(job: any): void {
-    job.isApproved = !job.isApproved; // Toggle the approval status
+  approveJob(jobId: string): void {
+    this.http.put<any>(`${this.backend_URL}jobpostupdate/${jobId}`, {})
+      .pipe(
+        catchError((error) => {
+          console.error('Error updating job post approval status:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe(
+        (response) => {
+          // Job post approval status updated successfully
+          console.log('Job post approval status updated:', response);
+          this.fetchJobPosts();
+          // You can perform any additional actions if needed
+        }
+      );
   }
-
+  
   loadJobData() {
     // this.userService.fetchjobpost(this.pageNumber, this.pageSize)
     //   .subscribe((response: any) => {

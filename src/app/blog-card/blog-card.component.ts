@@ -99,7 +99,9 @@ export class BlogCardComponent implements OnInit {
       console.log('Latest Blogs Response:', data);
       if (this.blogs && page > 1) {
         // Append new blogs to the existing list
+        
         this.blogs = [...this.blogs, ...data.blogs.slice(0, 5)];
+        console.log("Blogs are: ",this.blogs)
       } else {
         // Set blogs for the first page
         this.blogs = data.blogs.slice(0, 5);
@@ -110,8 +112,6 @@ export class BlogCardComponent implements OnInit {
       this.loading = false;
     });
   }
-  
-
 
 
   capitalizeFirstLetter(word: string): string {

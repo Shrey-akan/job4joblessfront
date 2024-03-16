@@ -22,8 +22,8 @@
                             <td>{{ job.companyforthisjob }}</td>
                             <!-- <td>{{ job.approvejob }}</td> -->
                             <td> 
-                                <button class="btn btn-primary" (click)="approveJob(job)">
-                                    {{ job.approvejob ? 'Approve' : 'Disapprove' }}
+                                <button class="btn btn-primary" (click)="approveJob(job.jobid)">
+                                    {{ job.approvejob ? 'Disapprove' : 'Approve' }}
                                 </button>
                             </td>
                             <td>

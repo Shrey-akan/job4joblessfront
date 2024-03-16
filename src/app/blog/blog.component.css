@@ -206,3 +206,7 @@ textarea {
     width: 60%;
     margin: 0 auto;
 }
+
+.center-container .app-blog-card .blog-table {
+    border: none;
+}

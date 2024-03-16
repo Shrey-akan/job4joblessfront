@@ -6,24 +6,12 @@ import { Router } from '@angular/router';
 // import { UserService } from '../auth/user.service';
 
 interface Blog {
-  _id:string;
+  _id: string;
   blog_id: string;
   title: string;
   banner?: string;
   des?: string;
-  approved:boolean;
-  // content?: any[]; // Change the type to match the actual type of the content
-  // tags?: string[];
-  // author: string; // Assuming author is a string representing the ObjectId
-  // activity: {
-  //   total_likes: number;
-  //   total_comments: number;
-  //   total_reads: number;
-  //   total_parent_comments: number;
-  // };
-  // comments?: string[]; // Assuming comments is an array of strings representing the ObjectIds
-  // draft?: boolean;
-  // createdAt?: Date;
+  approved: boolean;
 }
 
 @Component({
@@ -93,6 +81,10 @@ export class BlogsComponent {
         console.log('Blog approval status toggled:', response);
         // Update the isActive property based on the server response
         blog.isActive = response.blog.approved;
+  
+        // Update button text based on approval status
+        blog.approved = response.blog.approved ? 'Deactivate' : 'Activate';
+        this.fetchLatestBlogs(1);
       },
       error: error => {
         // Handle error
@@ -101,9 +93,5 @@ export class BlogsComponent {
         blog.isActive = !blog.isActive;
       }
     });
-  }
-  
-  
-  
-
+  }  
 }
