@@ -26,14 +26,16 @@ export class JobprovidedComponent implements OnInit{
   }
 
   fetchJobPosts(): void {
-    this.http.get<any[]>(`${this.backend_URL}fetchjobpost`)
+    this.http.get<any[]>(`${this.backend_URL}fetchjobpostadmin`)
       .subscribe(
-        (response) => {
+      {
+        next:  (response) => {
           this.jobPosts = response;
         },
-        (error) => {
+        error:(error) => {
           console.error('Error fetching job posts:', error);
         }
+      }
       );
   }
 

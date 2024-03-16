@@ -11,18 +11,19 @@ interface Blog {
   title: string;
   banner?: string;
   des?: string;
-  content?: any[]; // Change the type to match the actual type of the content
-  tags?: string[];
-  author: string; // Assuming author is a string representing the ObjectId
-  activity: {
-    total_likes: number;
-    total_comments: number;
-    total_reads: number;
-    total_parent_comments: number;
-  };
-  comments?: string[]; // Assuming comments is an array of strings representing the ObjectIds
-  draft?: boolean;
-  createdAt?: Date;
+  approved:boolean;
+  // content?: any[]; // Change the type to match the actual type of the content
+  // tags?: string[];
+  // author: string; // Assuming author is a string representing the ObjectId
+  // activity: {
+  //   total_likes: number;
+  //   total_comments: number;
+  //   total_reads: number;
+  //   total_parent_comments: number;
+  // };
+  // comments?: string[]; // Assuming comments is an array of strings representing the ObjectIds
+  // draft?: boolean;
+  // createdAt?: Date;
 }
 
 declare var $: any;
@@ -147,13 +148,11 @@ export class BlogCardComponent implements OnInit {
 
   
   loadMoreBlogs(): void {
-    // Get the current page of blogs
-    const currentPage = this.blogs ? Math.ceil(this.blogs.length / 5) + 1 : 1;
-  
-    // Fetch blogs for both the current page and the next page
-    for (let page = currentPage; page <= currentPage + 1; page++) {
-      this.fetchLatestBlogs(page);
+    if (!this.blogs) {
+      this.blogs = []; // Initialize blogs array if it's undefined
     }
+    const nextPage = (this.blogs.length / 5) + 1; // Calculate the next page based on the current number of blogs
+    this.fetchLatestBlogs(nextPage);
   }
 
   navigateToBlogDetails(blogId: string): void {

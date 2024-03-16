@@ -55,3 +55,125 @@ ol li::before {
     position: absolute;
     left: 0;
 }
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12%;
+    /* height: 100vh; Set the height of the container to the full viewport height */
+    /* width: 80%; Default width */
+}
+
+/* Media query for phones */
+@media (max-width: 768px) {
+    .center-container {
+        width: 90%; /* Adjust width for phones */
+        display: inline;
+    }
+}
+.blog-details {
+    text-align: left;
+}
+.image-container {
+    text-align: center; /* Center the content inside the container horizontally */
+    /* margin-right: 10%; */
+}
+.content-center
+{
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /* padding-right: 10%; */
+}
+@media (max-width: 768px) {
+    .content-center {
+        width: 90%; /* Adjust width for phones */
+    }
+}
+ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.font-bold {
+    font-weight: 700;
+}
+
+.text-3xl {
+    font-size: 28px;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.font-gelasio {
+    font-family: Gelasio, serif;
+}
+
+#textEditor *, .blog-page-content * {
+    font-family: Gelasio, serif;
+    font-size: 20px;
+    line-height: 2.5rem;
+}
+.title-mar
+{
+    padding-top: 2%;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.bg-grey\/80 {
+    background-color: #f3f3f3cc;
+}
+.rounded-full {
+    border-radius: 9999px;
+}
+.justify-center {
+    justify-content: center;
+}
+.items-center {
+    align-items: center;
+}
+.w-10 {
+    width: 2.5rem;
+}
+.h-10 {
+    height: 2.5rem;
+}
+.flex {
+    display: flex;
+}
+button, [role=button] {
+    cursor: pointer;
+}
+button, [type=button], [type=reset], [type=submit] {
+    /* -webkit-appearance: button; */
+    background-color: transparent;
+    background-image: none;
+}
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+.center-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Adjust as needed */
+  }

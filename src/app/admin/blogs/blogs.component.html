@@ -1,1 +1,81 @@
-<p>blogs works!</p>
+<!-- <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <table class="table table-bordered custom-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Banner</th>
+              <th>Permission</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let blog of blogs">
+              <tr>
+                <td>{{ blog.title }}</td>
+                <td class="font-gelasio">{{ blog.des }}</td>
+                <td>
+                  <img [src]="blog.banner" alt="Blog Banner" class="img-fluid" style="max-width: 100px;">
+                </td>
+                <td class="btnwidth">
+                    <div class="d-flex justify-content-center align-items-center"> 
+                        <button class="btn btn-primary" (click)="toggleButtonContent()">
+                            {{ showButtonContent ? 'Hide Content' : 'Show Content' }}
+                        </button>
+                    </div>
+                </td>
+                
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="loadMoreBlogs()">Load More</button>
+      </div>
+    </div>
+  </div>
+   -->
+
+   <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <table class="table table-bordered custom-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Banner</th>
+              <th>Permission</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let blog of blogs; let i = index">
+              <tr>
+                <td>{{ blog.title }}</td>
+                <td class="font-gelasio">{{ blog.des }}</td>
+                <td>
+                  <img [src]="blog.banner" alt="Blog Banner" class="img-fluid" style="max-width: 100px;">
+                </td>
+                <td class="btnwidth">
+                    <div class="d-flex justify-content-center align-items-center"> <!-- Apply flexbox to center content -->
+                        <button class="btn btn-primary" (click)="toggleButtonContent(i)">
+                            {{ blog.showContent ? 'Hide Content' : 'Show Content' }}
+                        </button>
+                    </div>
+                </td>
+                <td class="btnwidth">
+                    <div class="d-flex justify-content-center align-items-center"> <!-- Apply flexbox to center content -->
+                        <button class="btn btn-danger" (click)="toggleButtonActivate(i)">
+                            {{ blog.approved ? 'Deactivate' : 'Activate' }}
+                        </button>
+                    </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="loadMoreBlogs()">Load More</button>
+      </div>
+    </div>
+  </div>

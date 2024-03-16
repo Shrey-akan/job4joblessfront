@@ -46,8 +46,13 @@ export class PushnotificationComponent implements OnInit {
       this.http.post<any>('https://rocknwoods.website:4000/api/sendmsg', formData)
         .subscribe({
           next: response => {
-            console.log('message:', response?.data);
-            // Handle success
+            if (response && response.data) {
+              console.log('message:', response.data);
+              // Handle success
+            } else {
+              console.log('No message received from server');
+              // Handle case where response data is undefined
+            }
           },
           error: error => {
             console.error('Error sending message:', error);
@@ -57,8 +62,8 @@ export class PushnotificationComponent implements OnInit {
     } else {
       // Form is invalid, handle accordingly
     }
-  }
-  
+}
+
 
   closeErrorPopup(): void {
     this.show = false;

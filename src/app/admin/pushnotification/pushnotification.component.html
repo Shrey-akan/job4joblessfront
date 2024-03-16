@@ -1,57 +1,56 @@
-<!-- <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form class="shadow p-4 rounded bg-light">
-                <div class="form-group" >
-                  <label for="nhead">Notification Head:</label>
-                  <input type="text" id="nhead" formControlName="nhead" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="nsubhead">Notification Subhead:</label>
-                  <input type="text" id="nsubhead" formControlName="nsubhead" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="ndescription">Notification Description:</label>
-                  <textarea id="ndescription" formControlName="ndescription" class="form-control" rows="4" required></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="notisend">Notification Send:</label>
-                  <input type="text" id="notisend" formControlName="notisend" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="notifyuid">Notification User ID:</label>
-                  <input type="text" id="notifyuid" formControlName="notifyuid" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="sendTime">Send Time:</label>
-                  <input type="datetime-local" id="sendTime" formControlName="sendTime" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form class="shadow p-4 rounded bg-light" [formGroup]="form" (ngSubmit)="handleSubmit()">
+        <div class="form-group">
+          <label for="title" style="font-size: 20px;">Title:</label>
+          <input type="text" formControlName="title" id="title" placeholder="Enter title" class="form-control" required>
         </div>
+        <div class="form-group">
+          <label for="body" style="font-size: 20px;">Body:</label>
+          <textarea formControlName="body" id="body" placeholder="Enter body" rows="10" class="form-control"
+            required></textarea>
+        </div>
+        <!-- <div class="form-group">
+                  <label  for="selectToken">Select Token:</label>
+                  <select multiple formControlName="selectedValues" id="selectToken">
+                    <option *ngFor="let option of options" [ngValue]="option">{{ option.token }}</option>
+                  </select>
+                </div> -->
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label"for="selectToken" style="font-size: 20px;">Select Token:</label>
+          <div class="col-sm-12">
+            <select multiple formControlName="selectedValues" id="selectToken" class="form-control">
+              <option *ngFor="let option of options" [ngValue]="option" >{{ option.token }}</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+      </form>
     </div>
+  </div>
 </div>
 
 
-   -->
 
 
-   <div>
+
+<!-- <div>
     <form [formGroup]="form" (ngSubmit)="handleSubmit()">
       <div>
         <label for="title">Title</label>
         <input type="text" formControlName="title" id="title" placeholder="Enter title" />
-        <!-- <div *ngIf="form.get('title').invalid && form.get('title').touched">
+        <div *ngIf="form.get('title').invalid && form.get('title').touched">
           Title is required.
-        </div> -->
+        </div>
       </div>
   
       <div>
         <label for="body">Body</label>
         <textarea formControlName="body" id="body" placeholder="Enter body" rows="10"></textarea>
-        <!-- <div *ngIf="form.get('body').invalid && form.get('body').touched">
+        <div *ngIf="form.get('body').invalid && form.get('body').touched">
           Body is required.
-        </div> -->
+        </div>
       </div>
   
       <div>
@@ -66,4 +65,4 @@
   
 
   </div>
-  
+   -->

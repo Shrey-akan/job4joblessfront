@@ -8,13 +8,12 @@ interface CareerOption {
   requirements: string[];
   averageSalary: string;
 }
-
 interface Blog {
   blog_id: string;
   title: string;
   banner?: string;
   des?: string;
-  content?: any[]; // Change the type to match the actual type of the content
+  content?: { blocks: Block[] }[]; // Change the type to match the actual type of the content
   tags?: string[];
   author: string; // Assuming author is a string representing the ObjectId
   activity: {
@@ -27,6 +26,13 @@ interface Blog {
   draft?: boolean;
   createdAt?: Date;
 }
+interface Block {
+  id: string;
+  type: string;
+  data: {
+    text?: string;
+  };
+}
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -35,15 +41,11 @@ interface Blog {
 export class BlogComponent {
   blogId: string | null = null; // Initialize blogId with null or any default value
   blogDetails: Blog | null = null;
+  Array: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
   i: any;
 
-  // constructor(private route: ActivatedRoute) {
-  //   this.route.params.subscribe((params) => {
-  //     this.postId = params['id'];
-  //   });
-  // }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -54,6 +56,25 @@ export class BlogComponent {
     });
   }
 
+  // fetchBlogDetails(blogId: string): void {
+  //   this.http.post<any>('https://hustleforwork.com:3000/get-blog', { blog_id: blogId, draft: false, mode: 'view' }).subscribe(
+  //     (response: any) => {
+  //       if (response.error) {
+  //         console.error('Error fetching blog details:', response.error);
+  //         // Handle error, display user-friendly message
+  //       } else {
+  //         console.log('Blog details fetched successfully:', response.blog);
+  //         this.blogDetails = response.blog;
+  //       }
+  //     },
+  //     error => {
+  //       console.error('Error fetching blog details:', error);
+  //       // Handle error, display user-friendly message
+  //     }
+  //   );
+  // }
+
+
   fetchBlogDetails(blogId: string): void {
     this.http.post<any>('https://hustleforwork.com:3000/get-blog', { blog_id: blogId, draft: false, mode: 'view' }).subscribe(
       (response: any) => {
@@ -61,6 +82,7 @@ export class BlogComponent {
           console.error('Error fetching blog details:', response.error);
           // Handle error, display user-friendly message
         } else {
+          console.log('Blog details fetched successfully:', response.blog);
           this.blogDetails = response.blog;
         }
       },
@@ -69,6 +91,21 @@ export class BlogComponent {
         // Handle error, display user-friendly message
       }
     );
+  }
+
+
+  isObject(value: any): boolean {
+    return typeof value === 'object' && value !== null;
+  }
+
+  getImageWidth(): number {
+    // Calculate and return the image width based on the screen width
+    return window.innerWidth * 0.4; // Adjust the percentage as needed
+  }
+
+  getImageHeight(): number {
+    // Calculate and return the image height based on the screen height
+    return window.innerHeight * 0.5; // Adjust the percentage as needed
   }
   // careerOptions: CareerOption[] = [
   //   {

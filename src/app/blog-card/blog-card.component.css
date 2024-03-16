@@ -1,150 +1,145 @@
-.blogs-container {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    /* 3/4 and 1/4 columns */
-    gap: 20px;
-    /* Adjust as needed */
+/* .blogs-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.latest-blogs {
+  border-right: 2px solid #ccc;
+  padding: 10px; 
+}
+
+.blog-item {
+  margin-bottom: 20px; 
+}
+
+.trending-blogs {
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
+.table-padding {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.padding-row {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.custom-button {
+  background-color: #ccc;
+  border-radius: 20px;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px; 
+}
+
+.category-button {
+  background-color: #C6E2FF;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .blogs-container {
+      grid-template-columns: 3fr 1fr;
   }
-  
+
+  .latest-blogs {
+      border-right: none; 
+      border-bottom: 2px solid #ccc; 
+  }
+
   .trending-blogs {
-    border: 1px solid #ccc;
-    /* Border for visual separation */
-    padding: 10px;
+      margin-top: 20px; 
   }
-  
-  .blog-item {
-    margin-bottom: 10px;
-  }
-  
-  .blog-info {
-    /* display: flex; */
-    align-items: center;
-  }
-  
-  .blog-info img {
-    margin-right: 10px;
-  }
-  
-  .table-style {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
-  
+}
+
+@media screen and (max-width: 576px) {
   .table-padding {
-    padding-left: 3%;
-    padding-right: 3%;
+      padding-left: 0; 
+      padding-right: 0; 
   }
-  
-  .table-desc {
-    width: 100%;
-    /* padding-right: 5%; */
-  }
-  
+
   .padding-row {
-    padding-top: 2%;
-    padding-bottom: 2%;
+      padding-top: 10px; 
+      padding-bottom: 10px; 
   }
-  
+
   .custom-button {
-    background-color: #ccc;
-    border-radius: 20px;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
+      padding: 10px 16px; 
+      font-size: 14px; 
   }
-  
-  /* Additional CSS for tags */
-  .tag {
-    background-color: #f2f2f2; /* Greyish background */
-    padding: 4px 8px; /* Adjust padding as needed */
-    border-radius: 8px; /* Rounded corners */
-    margin-right: 5px; /* Adjust spacing between tags */
-  }
-  
-  .category-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-  
+
   .category-button {
-    background-color: #C6E2FF;
-    color: black;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 20px;
-    margin: 4px;
-    cursor: pointer;
-    font-size: 17px;
+      padding: 8px 12px; 
+      font-size: 14px; 
   }
-  
-  
-  .trends{
-    padding-top: 10%;
+} */
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.responsive-table td {
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-table td {
+    display: block;
+    width: 100%;
+    text-align: left;
   }
-  
-  .button-style
-  {
-    padding-top: 2%;
+}
+.category-button {
+  padding: 8px 12px; 
+  font-size: 14px; 
+  background-color: #C6E2FF;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.image-column
+{
+  text-align: right;
+}
+
+@media screen and (max-width: 770px) {
+  .image-column {
+    text-align: left; /* Align the image to the left */
   }
-  
-  /* Floating sign-in button style */
-  .floating-signin-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: black;
-    color: #fff;
-    border: none;
-    border-radius: 10%;
-    padding: 15px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 1000; /* Ensure it appears on top of other content */
+  .button-style {
+    border-top: none; /* Remove the top border */
   }
-  
-  /* Style for the button on hover */
-  .floating-signin-button:hover {
-    background-color: #C6E2FF;
-    color: black;
-  }
-  
-  .eye-icon {
-    position: absolute;
-    right: 10px; /* Adjust as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  
-  .search-bar {
-    display: flex; /* Use flexbox to align items */
-    justify-content: center;
-    margin-bottom: 20px; /* Add some bottom margin for spacing */
-    margin-right: 25%;
-    margin-left: 3%;
-  }
-  
-  .search-bar input {
-    width: 90%; /* Make the input element fill its container */
-    padding: 12px; /* Add padding to the input for better spacing */
-    border: 1px solid #ccc; /* Add a border */
-    border-radius: 25px; /* Add border-radius for rounded corners */
-    box-shadow: none; /* Remove any default box shadow */
-    transition: border-color 0.3s ease; /* Add transition for border color change */
-  }
-  
-  .search-bar input:focus {
-    outline: none; /* Remove default focus outline */
-    border-color: #007bff; /* Change border color on focus */
-  }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 768px) {
-    .search-bar input {
-      padding: 10px; /* Reduce padding on smaller screens */
-      font-size: 14px; /* Decrease font size on smaller screens */
-    }
-  }
-  
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.font-gelasio {
+  font-family: Gelasio, serif;
+}

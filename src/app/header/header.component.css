@@ -7,7 +7,6 @@
 .nav-link {
     color: #1E2E5C;
     margin-right: 50px;
-    /* transition: color 0.3s ease; Add more spacing between tabs */
 }
 
 .active {
@@ -23,6 +22,12 @@ nav {
 }
 
 .btn-custom {
-    background-color: #e0e9f5; /* Light Blue */
-    color: #1E2E5C; /* Dark Blue */
+    background-color: #e0e9f5;
+    color: #1E2E5C; 
 }
+/* .container
+{
+    padding-right: 10%;
+} */
+
+
