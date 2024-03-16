@@ -95,7 +95,7 @@ export class BlogCardComponent implements OnInit {
 
   fetchLatestBlogs(page: number): void {
     this.loading = true;
-    this.http.post<any>(`${this.blog_const}/latest-blogs`, { page }).subscribe(data => {
+    this.http.post<any>(`${this.blog_const}/latest-blogs-approved`, { page }).subscribe(data => {
       console.log('Latest Blogs Response:', data);
       if (this.blogs && page > 1) {
         // Append new blogs to the existing list

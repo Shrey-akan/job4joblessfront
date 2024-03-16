@@ -36,18 +36,18 @@
         <table class="responsive-table">
           <tr class="padding-row">
             <td style="width: 100%;" class="padding-row">
-              <h1 style="padding-top: 2%;" ><a (click)="navigateToBlogDetails(blog.blog_id)" style="text-decoration: none; cursor: pointer;">{{
+              <h1 style="padding-top: 2%;" class="font-gelasio"><a (click)="navigateToBlogDetails(blog.blog_id)" style="text-decoration: none; cursor: pointer;">{{
                   blog.title }}</a></h1>
               <ul>
                 <li *ngFor="let item of blog.content">{{ item }}</li>
               </ul>
-              <p class="description font-gelasio">{{ blog.des }}</p>
+              <p class="description font-gel">{{ blog.des }}</p>
               <div class="button-style" style="padding-top: 2%; padding-bottom: 2%;">
-                <span *ngFor="let tag of blog.tags" class="category-button">{{ capitalizeFirstLetter(tag) }}</span>
+                <span *ngFor="let tag of blog.tags" style="font-family: Gelasio, serif; font-size: 1.2rem ;" class="category-button">{{ capitalizeFirstLetter(tag) }}</span>
               </div>
             </td>
             <td class="image-column"> <!-- Add text-align: right; -->
-              <img [src]="blog.banner" alt="Blog Image" width="145" height="100">
+              <img [src]="blog.banner" alt="Blog Image" width="195" height="140">
             </td>
           </tr>
         </table>

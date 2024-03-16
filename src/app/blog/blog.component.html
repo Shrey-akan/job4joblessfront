@@ -656,25 +656,26 @@
         <div class="image-container">
             <img [src]="blogDetails.banner" alt="Blog Image" [style.width.px]="getImageWidth()"
                 [style.height.px]="getImageHeight()">
+                <h1 class="text-3xl font-bold mb-4 title-mar">{{ blogDetails.title }}</h1>
         </div>
         <div class="content-center">
-            <h1 class="text-3xl font-bold mb-4 title-mar">{{ blogDetails.title }}</h1>
+            <!-- <h1 class="text-3xl font-bold mb-4 title-mar">{{ blogDetails.title }}</h1> -->
             <!-- <p>{{blogDetails.des}}</p> -->
             <div class="my-12 font-gelasio blog-page-content">
-                <div class="flex gap-3 items-center">
+                <!-- <div class="flex gap-3 items-center">
                     <button class="w-10 h-10 rounded-full flex items-center justify-center bg-grey/80"><i
                             class="fi fi-rr-heart"></i></button>
                     <p class="text-xl text-dark-grey">0</p>
                     <button class="w-10 h-10 rounded-full flex items-center justify-center bg-grey/80"><i
                             class="fi fi-rr-comment-dots"></i></button>
 
-                </div>
+                </div> -->
             </div>
             <div class="font-gelasio blog-page-content">
                 <ul>
                     <ng-container *ngFor="let block of blogDetails?.content">
-                        <li *ngIf="block.blocks">
-                            <ul>
+                        <li *ngIf="block.blocks" style="line-height: 2.5;">
+                            <ul >
                                 <div *ngFor="let innerBlock of block.blocks">
                                     <li *ngIf="innerBlock.data?.text">
                                         <span>{{ innerBlock.data.text }}</span>
@@ -688,14 +689,6 @@
         </div>
     </div>
 </div>
-
-
-<!-- 
-<div class="center-container">
-    <div class="container">
-        <app-blog-card></app-blog-card>
-    </div>
-</div> -->
 
 <div class="center-container">
     <app-blog-card></app-blog-card>

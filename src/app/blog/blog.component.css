@@ -33,6 +33,7 @@
     color: #1E2E5C;
     text-align: left;
 }
+
 ol {
     list-style-type: none;
 }
@@ -68,19 +69,23 @@ ol li::before {
 /* Media query for phones */
 @media (max-width: 768px) {
     .center-container {
-        width: 90%; /* Adjust width for phones */
+        width: 90%;
+        /* Adjust width for phones */
         display: inline;
     }
 }
+
 .blog-details {
     text-align: left;
 }
+
 .image-container {
-    text-align: center; /* Center the content inside the container horizontally */
+    text-align: center;
+    /* Center the content inside the container horizontally */
     /* margin-right: 10%; */
 }
-.content-center
-{
+
+.content-center {
     justify-content: center;
     align-items: center;
     margin-left: auto;
@@ -88,16 +93,21 @@ ol li::before {
     width: 50%;
     /* padding-right: 10%; */
 }
+
 @media (max-width: 768px) {
     .content-center {
-        width: 90%; /* Adjust width for phones */
+        width: 90%;
+        /* Adjust width for phones */
     }
 }
-ul, li {
+
+ul,
+li {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
+
 .font-bold {
     font-weight: 700;
 }
@@ -114,13 +124,14 @@ ul, li {
     font-family: Gelasio, serif;
 }
 
-#textEditor *, .blog-page-content * {
+#textEditor *,
+.blog-page-content * {
     font-family: Gelasio, serif;
     font-size: 20px;
     line-height: 2.5rem;
 }
-.title-mar
-{
+
+.title-mar {
     padding-top: 2%;
 }
 
@@ -131,36 +142,55 @@ ul, li {
 .bg-grey\/80 {
     background-color: #f3f3f3cc;
 }
+
 .rounded-full {
     border-radius: 9999px;
 }
+
 .justify-center {
     justify-content: center;
 }
+
 .items-center {
     align-items: center;
 }
+
 .w-10 {
     width: 2.5rem;
 }
+
 .h-10 {
     height: 2.5rem;
 }
+
 .flex {
     display: flex;
 }
-button, [role=button] {
+
+button,
+[role=button] {
     cursor: pointer;
 }
-button, [type=button], [type=reset], [type=submit] {
+
+button,
+[type=button],
+[type=reset],
+[type=submit] {
     /* -webkit-appearance: button; */
     background-color: transparent;
     background-image: none;
 }
-button, select {
+
+button,
+select {
     text-transform: none;
 }
-button, input, optgroup, select, textarea {
+
+button,
+input,
+optgroup,
+select,
+textarea {
     font-family: inherit;
     font-feature-settings: inherit;
     font-variation-settings: inherit;
@@ -171,9 +201,8 @@ button, input, optgroup, select, textarea {
     margin: 0;
     padding: 0;
 }
+
 .center-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Adjust as needed */
-  }
+    width: 60%;
+    margin: 0 auto;
+}
