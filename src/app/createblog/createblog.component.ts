@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray , AbstractControl } from '@angular/forms';
 import { blogconst } from '../constant';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable, catchError, throwError } from 'rxjs';
 
 interface Blog {
   blog_id: string;
@@ -39,58 +40,77 @@ export class CreateblogComponent implements OnInit {
       title: ['', Validators.required],
       banner: ['', Validators.required],
       des: ['', Validators.required],
-      content: this.formBuilder.array([]),
+      // content: this.formBuilder.array([]),
+      content: this.formBuilder.array([this.createContentBlock()]),
       tags: [''],
       draft: [false]
     });
-
+    this.addContentBlock();
     this.accessToken = this.cookieService.get('accessToken');
   }
 
   // Convenience getter for easy access to form fields
   get f() { return this.blogForm.controls; }
 
-  get contentControls() { return (this.blogForm.get('content') as FormArray).controls; } // Getter for content form array controls
-
-  // Add a new content block
-  addContentBlock() {
-    const content = this.formBuilder.group({
-      blocks: ['', Validators.required] // Add validators for content blocks
+  createContentBlock(): FormGroup {
+    return this.formBuilder.group({
+      text: ['']
     });
-    (this.blogForm.get('content') as FormArray).push(content);
+  }
+
+  get contentControls() {
+    return (this.blogForm.get('content') as FormArray).controls;
+  }
+
+  addContentBlock() {
+    const contentArray = this.blogForm.get('content') as FormArray;
+    contentArray.push(this.createContentBlock());
   }
 
   onSubmit() {
     this.submitted = true;
-
+  
     if (this.blogForm.invalid) {
       return;
     }
-    console.log("helo shreyans jain");
-    console.log("Access token is:",this.accessToken);
+    console.log("Access token is:", this.accessToken);
+    
     const blogData: Blog = this.blogForm.value;
-
+  
     console.log('Submitted Blog:', blogData);
-
+  
+    // Set the authorization header
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.accessToken}`
     });
-
-    console.log("This is the header",headers);
+  
+    console.log("This is the header", headers);
+  
     // POST the blogData to the API
-    this.http.post<any>(`${this.blog_const}/create-blog`, blogData, { headers })
-    .subscribe(
-      (response) => {
+    this.createBlog(blogData, this.accessToken)
+    .subscribe({
+      next: (response) => {
         console.log('Blog created successfully:', response);
-        // Perform further actions if needed
+        // Handle success response
       },
-      (error) => {
-        if (error.status === 401) {
-          console.error('Unauthorized error. Check access token validity or refresh token.');
-        } else {
-          console.error('Error creating blog:', error);
-        }
+      error: (error) => {
+        console.error('Error creating blog:', error);
+        // Handle error response
       }
-    );
+    });
+  }
+
+  createBlog(blogData: any, accessToken: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${accessToken}`
+    });
+  
+    return this.http.post<any>(`${this.blog_const}/create-blog`, blogData, { headers })
+      .pipe(
+        catchError((error: any) => {
+          console.error('HTTP Error:', error);
+          return throwError('HTTP Error: ' + error.message || 'Server error');
+        })
+      );
   }
 }

@@ -1,14 +1,11 @@
 .blogs-container {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  /* 3/4 and 1/4 columns */
   gap: 20px;
-  /* Adjust as needed */
 }
 
 .trending-blogs {
   border: 1px solid #ccc;
-  /* Border for visual separation */
   padding: 10px;
 }
 
@@ -17,7 +14,6 @@
 }
 
 .blog-info {
-  /* display: flex; */
   align-items: center;
 }
 
@@ -38,7 +34,6 @@
 
 .table-desc {
   width: 100%;
-  /* padding-right: 5%; */
 }
 
 .padding-row {
@@ -54,12 +49,11 @@
   cursor: pointer;
 }
 
-/* Additional CSS for tags */
 .tag {
-  background-color: #f2f2f2; /* Greyish background */
-  padding: 4px 8px; /* Adjust padding as needed */
-  border-radius: 8px; /* Rounded corners */
-  margin-right: 5px; /* Adjust spacing between tags */
+  background-color: #f2f2f2; 
+  padding: 4px 8px; 
+  border-radius: 8px; 
+  margin-right: 5px; 
 }
 
 .category-buttons {
@@ -89,7 +83,6 @@
   padding-top: 2%;
 }
 
-/* Floating sign-in button style */
 .floating-signin-button {
   position: fixed;
   bottom: 20px;
@@ -104,7 +97,6 @@
   z-index: 1000; 
 }
 
-/* Style for the button on hover */
 .floating-signin-button:hover {
   background-color: #C6E2FF;
   color: black;
@@ -112,39 +104,38 @@
 
 .eye-icon {
   position: absolute;
-  right: 10px; /* Adjust as needed */
+  right: 10px; 
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
 }
 
 .search-bar {
-  display: flex; /* Use flexbox to align items */
+  display: flex; 
   justify-content: center;
-  margin-bottom: 20px; /* Add some bottom margin for spacing */
+  margin-bottom: 20px;
   margin-right: 25%;
   margin-left: 3%;
 }
 
 .search-bar input {
-  width: 90%; /* Make the input element fill its container */
-  padding: 12px; /* Add padding to the input for better spacing */
-  border: 1px solid #ccc; /* Add a border */
-  border-radius: 25px; /* Add border-radius for rounded corners */
-  box-shadow: none; /* Remove any default box shadow */
-  transition: border-color 0.3s ease; /* Add transition for border color change */
+  width: 90%;
+  padding: 12px; 
+  border: 1px solid #ccc;
+  border-radius: 25px; 
+  box-shadow: none; 
+  transition: border-color 0.3s ease; 
 }
 
 .search-bar input:focus {
-  outline: none; /* Remove default focus outline */
-  border-color: #007bff; /* Change border color on focus */
+  outline: none; 
+  border-color: #007bff;
 }
 
-/* Responsive styles */
 @media screen and (max-width: 768px) {
   .search-bar input {
-    padding: 10px; /* Reduce padding on smaller screens */
-    font-size: 14px; /* Decrease font size on smaller screens */
+    padding: 10px; 
+    font-size: 14px;
   }
 }
 
@@ -155,5 +146,5 @@
 }
 
 .centered-buttons button {
-  margin: 0 5px; /* Adjust margin as needed */
+  margin: 0 5px;
 }

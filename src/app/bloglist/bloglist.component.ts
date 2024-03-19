@@ -1,4 +1,4 @@
-import { Component, OnInit , Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { blogconst } from 'src/app/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -50,6 +50,7 @@ export class BloglistComponent implements OnInit {
   public passwordVisible: boolean = false;
   showLoginForm: boolean = true;
   showSignUpForm: boolean = false;
+  screenDisabled: boolean = false;
 
   categories: string[] = [
     "programming", "technology", "science", "health", "finance", "sports",
@@ -62,7 +63,7 @@ export class BloglistComponent implements OnInit {
     // Add other quotes here
   ];
 
-  constructor(private fb: FormBuilder,public cookie: CookieService, private http: HttpClient, private b1: UserService, private userservice: UserService , private router :Router) { }
+  constructor(private fb: FormBuilder, public cookie: CookieService, private http: HttpClient, private b1: UserService, private userservice: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.setQuote(this.getRandomQuote());
@@ -107,7 +108,7 @@ export class BloglistComponent implements OnInit {
       this.loading = false;
     });
   }
-  
+
 
 
   fetchTrendingBlogs(): void {
@@ -142,7 +143,7 @@ export class BloglistComponent implements OnInit {
       this.loading = false;
     });
   }
-  
+
 
   capitalizeFirstLetter(word: string): string {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -160,6 +161,9 @@ export class BloglistComponent implements OnInit {
 
   openSignInModal() {
     $('#signInModal').modal('show');
+    //   $('#signInModal').on('hidden.bs.modal', () => {
+    //     this.router.navigate(['/contact-us']);
+    // });
   }
 
   closeSignInModal() {
@@ -239,34 +243,46 @@ export class BloglistComponent implements OnInit {
         email: form.value.email,
         password: form.value.password
       };
-  
+
       this.http.post<any>(`${this.blog_const}/signin`, loginData).subscribe({
         next: (resp) => {
-          if (resp && resp.access_token) { // Check if response and access_token exist
+          if (resp && resp.access_token) {
             const accessToken = resp.access_token;
             this.cookie.set('accessToken', accessToken);
             AuthInterceptor.accessToken = accessToken;
-  
-            // Assuming authentication is successful if access_token exists
+
             console.log("Access token is: " + accessToken);
-            alert('Login Successful!');
-            console.log("Login Successfully", resp);
-            this.router.navigate(['/postblog']);
+            console.log("Response from server: ", resp);
+
+            const isAuthenticated = resp.access_token !== undefined && resp.access_token !== null;
+
+            console.log("Is authenticated:", isAuthenticated);
+
+            if (isAuthenticated) {
+              // Remove alert and directly navigate to the desired route
+              $('#signInModal').modal('hide');
+              // Show alert and navigate to the desired route after the modal is closed
+              alert('Login Successful!');
+              this.router.navigate(['/postblog']);
+            } else {
+              alert('Incorrect Credentials!');
+              this.router.navigate(['/blogs']);
+            }
           } else {
-            // Handle authentication failure
             alert('Incorrect Credentials!');
-            this.router.navigate(['blogs']);
+            this.router.navigate(['/blogs']);
           }
         },
         error: (error) => {
           console.log("Error occurred during login:", error);
-          // Handle error, such as displaying an error message to the user
           alert('An error occurred during login. Please try again later.');
         }
       });
     }
   }
-  
+
+
+
 
   signup(form: FormGroup): void {
     if (form.valid) {
@@ -278,16 +294,16 @@ export class BloglistComponent implements OnInit {
 
       this.http.post<any>(`${this.blog_const}/signup`, signupData)
         .subscribe(
-       {
-        next:   (response) => {
-          console.log('Signup successful:', response);
-          // Handle the response as needed
-        },
-        error:(error) => {
-          console.error('Error occurred during signup:', error);
-          // Handle the error as needed
-        }
-       }
+          {
+            next: (response) => {
+              console.log('Signup successful:', response);
+              // Handle the response as needed
+            },
+            error: (error) => {
+              console.error('Error occurred during signup:', error);
+              // Handle the error as needed
+            }
+          }
         );
     }
   }
@@ -309,11 +325,11 @@ export class BloglistComponent implements OnInit {
     return this.state != null && this.state.totalDocs > this.state.results.length;
   }
 
-  
+
   loadMoreBlogs(): void {
     // Get the current page of blogs
     const currentPage = this.blogs ? Math.ceil(this.blogs.length / 5) + 1 : 1;
-  
+
     // Fetch blogs for both the current page and the next page
     for (let page = currentPage; page <= currentPage + 1; page++) {
       this.fetchLatestBlogs(page);

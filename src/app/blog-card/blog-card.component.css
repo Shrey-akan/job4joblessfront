@@ -1,95 +1,4 @@
-/* .blogs-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
 
-.latest-blogs {
-  border-right: 2px solid #ccc;
-  padding: 10px; 
-}
-
-.blog-item {
-  margin-bottom: 20px; 
-}
-
-.trending-blogs {
-  border: 1px solid #ccc;
-  padding: 15px;
-}
-
-.table-padding {
-  padding-left: 3%;
-  padding-right: 3%;
-}
-
-.padding-row {
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-
-.custom-button {
-  background-color: #ccc;
-  border-radius: 20px;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.category-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 15px; 
-}
-
-.category-button {
-  background-color: #C6E2FF;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 16px;
-  margin: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-@media screen and (min-width: 768px) {
-  .blogs-container {
-      grid-template-columns: 3fr 1fr;
-  }
-
-  .latest-blogs {
-      border-right: none; 
-      border-bottom: 2px solid #ccc; 
-  }
-
-  .trending-blogs {
-      margin-top: 20px; 
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .table-padding {
-      padding-left: 0; 
-      padding-right: 0; 
-  }
-
-  .padding-row {
-      padding-top: 10px; 
-      padding-bottom: 10px; 
-  }
-
-  .custom-button {
-      padding: 10px 16px; 
-      font-size: 14px; 
-  }
-
-  .category-button {
-      padding: 8px 12px; 
-      font-size: 14px; 
-  }
-} */
 
 .responsive-table {
   width: 100%;
@@ -128,20 +37,19 @@
 
 @media screen and (max-width: 770px) {
   .image-column {
-    text-align: left; /* Align the image to the left */
+    text-align: left; 
   }
   .button-style {
-    border-top: none; /* Remove the top border */
+    border-top: none; 
   }
 }
 .button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Adjust margin as needed */
+  margin-top: 20px; 
 }
 
 .font-gelasio {
-  /* font-family: Gelasio, serif; */
   font-size: 2.3rem;
 }
 .font-gel{

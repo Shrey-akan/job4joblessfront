@@ -76,7 +76,7 @@ export class AlljobsComponent implements OnInit {
   fetchJobPostDetails() {
     this.b1.fetchjobpost(this.empId).subscribe((data1: any) => {
       this.data = data1.filter((job: any) => job.empid == this.abc);
-      
+      console.log("checking the console",data1);
       // Sort the data by sendTime in descending order
       this.filteredData = this.data
         .map((job: any) => ({ ...job, showDetails: false }))

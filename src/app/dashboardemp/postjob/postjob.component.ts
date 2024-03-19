@@ -67,7 +67,7 @@ export class PostjobComponent implements OnInit {
       country: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      // empid: ['', Validators.required]
+      empid: ['', Validators.required]
     });
 
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
