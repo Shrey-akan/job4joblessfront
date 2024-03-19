@@ -1,0 +1,48 @@
+<div class="main-content">
+    <div class="search-bar">
+        <input type="text" class="form-control" [(ngModel)]="searchQuery" placeholder="Search blogs..."
+            (input)="filterBlogs()">
+    </div>
+    <div *ngIf="loading; else content">
+        <p>Loading...</p>
+    </div>
+    <ng-template #content>
+        <!-- <button  *ngIf="showSignInButton" class="floating-signin-button" (click)="openSignInModal()" >Sign In</button> -->
+        <div class="blogs-container" style="margin-left: 3%; margin-right: 3%;">
+            <!-- Latest Blogs -->
+            <app-blog-card></app-blog-card>
+            <!-- Trending Blogs -->
+            <div class="trending-blogs" style="border: none;">
+                <div>
+                    <h1>Blogs covering a spectrum of interests</h1>
+                    <div class="categories-container">
+                        <div class="category-buttons">
+                            <button *ngFor="let category of categories" class="category-button" style="font-family: Gelasio, serif; font-size: 1.2rem ;">{{
+                                capitalizeFirstLetter(category) }}</button>
+                        </div>
+                    </div>
+                    <h2 class="trends">Trending Blogs</h2>
+                </div>
+                <div>
+                    <ul style="list-style-type: none; ">
+                        <li *ngFor="let blog of trendingBlogs; let i = index" class="blog-item">
+                            <table style="width: 100%;">
+                                <tbody>
+                                    <tr class="blog-item" style="margin-bottom: 200px;">
+                                        <td
+                                            style="padding-right: 20px; font-size: 3.5rem; color: rgb(214, 214, 214); font-weight: bold;">
+                                            {{ i + 1 }}
+                                        </td> <!-- Displaying the index plus 1 to start from 1 -->
+                                        <td style="padding-right: 10%; text-align: left;">
+                                            <h1>{{ truncateTitle(blog.title) }}</h1>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -97,11 +97,11 @@
   background-color: black;
   color: #fff;
   border: none;
-  border-radius: 10%;
+  border-radius: 5%;
   padding: 15px 20px;
   font-size: 20px;
   cursor: pointer;
-  z-index: 1000; /* Ensure it appears on top of other content */
+  z-index: 1000; 
 }
 
 /* Style for the button on hover */

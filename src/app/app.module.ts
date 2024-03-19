@@ -57,6 +57,10 @@ import { BloglistComponent } from './bloglist/bloglist.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { IonicModule } from '@ionic/angular';
 import { BlogCardComponent } from './blog-card/blog-card.component';
+import { PostblogComponent } from './postblog/postblog.component';
+import { TrendingblogsComponent } from './trendingblogs/trendingblogs.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { CreateblogComponent } from './createblog/createblog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +96,10 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
     BlogsComponent,
     BlogComponent,
     BloglistComponent,
-    BlogCardComponent
+    BlogCardComponent,
+    PostblogComponent,
+    TrendingblogsComponent,
+    CreateblogComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +118,8 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
     MatButtonModule,
     MatSelectModule,
     MatSnackBarModule,
-    IonicModule
+    IonicModule,
+    MatSidenavModule
     // NgbModule
   ],
   providers: [CookieService,MessagingService,{

@@ -4,9 +4,7 @@ import { blogconst } from 'src/app/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
-import { error } from 'jquery';
-import { CookieService } from 'ngx-cookie-service';
-import { AuthInterceptor } from '../interceptors/auth.interceptor';
+
 
 interface Blog {
   blog_id: string;
@@ -30,11 +28,11 @@ interface Blog {
 declare var $: any;
 
 @Component({
-  selector: 'app-bloglist',
-  templateUrl: './bloglist.component.html',
-  styleUrls: ['./bloglist.component.css']
+  selector: 'app-trendingblogs',
+  templateUrl: './trendingblogs.component.html',
+  styleUrls: ['./trendingblogs.component.css']
 })
-export class BloglistComponent implements OnInit {
+export class TrendingblogsComponent implements OnInit {
   private blog_const = `${blogconst}`;
   blogs: any;
   trendingBlogs: any;
@@ -62,7 +60,7 @@ export class BloglistComponent implements OnInit {
     // Add other quotes here
   ];
 
-  constructor(private fb: FormBuilder,public cookie: CookieService, private http: HttpClient, private b1: UserService, private userservice: UserService , private router :Router) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private b1: UserService, private userservice: UserService , private router :Router) { }
 
   ngOnInit(): void {
     this.setQuote(this.getRandomQuote());
@@ -184,89 +182,28 @@ export class BloglistComponent implements OnInit {
       });
   }
 
-  // login(form: FormGroup): void {
-  //   // form.markAllAsTouched(); 
-  //   if (form.valid) {
-  //     const loginData = {
-  //       email:form.value.email,
-  //       password:form.value.password
-  //     };
-  //     this.http.post<any>(`${this.blog_const}/signin`,loginData)
-  //     .subscribe(
-  //    {
-  //     next:   (resp) =>{
-  //       // console.log("Login Successfully",respone);
-  //       // this.router.navigate(['postblog']);
-  //       if (resp) {
-  //         // console.log("Access Token Generated" + resp.accessToken);
-  //         // const mainres: Employer = resp;
-  //         // console.log(`Login response from the server: ${mainres}`);
-  //         // this.cookie.set('emp', resp.empid);
-  //         this.cookie.set('accessToken', resp.access_token);
-  //         // this.cookie.set('refreshToken', resp.refreshToken);
-  //         // console.log("Refresh token saved ", resp.refreshToken);
-  //         // Inside your logincheckgmail function
-  //         const accessToken = resp.access_token; // Assuming this is where you get the access token
-  //         AuthInterceptor.accessToken = accessToken;
-  //         const isAuthenticated = resp.access_token;
-  //         console.log("Access token is: "+accessToken);
-
-  //         if (isAuthenticated) {
-  //           // console.log("Server responded with an object of employer");
-  //           alert('Login Successful!');
-  //           console.log("Login Successfully",resp);
-  //           this.router.navigate(['postblog']);
-  //         } else {
-  //           alert('Incorrect Credentials!');
-  //           this.router.navigate(['blogs']);
-  //         }
-  //       } else {
-  //         // this.errorMessage = 'Your account is not activated. Please contact support for assistance.';
-  //         // console.log(this.errorMessage);
-  //       }
-  //     },
-  //     error:(error)=>
-  //     {
-  //       console.log("Error is coming",error);
-  //     }
-  //    }
-  //     );
-  //   }
-  // }
   login(form: FormGroup): void {
+    // form.markAllAsTouched(); 
     if (form.valid) {
       const loginData = {
-        email: form.value.email,
-        password: form.value.password
+        email:form.value.email,
+        password:form.value.password
       };
-  
-      this.http.post<any>(`${this.blog_const}/signin`, loginData).subscribe({
-        next: (resp) => {
-          if (resp && resp.access_token) { // Check if response and access_token exist
-            const accessToken = resp.access_token;
-            this.cookie.set('accessToken', accessToken);
-            AuthInterceptor.accessToken = accessToken;
-  
-            // Assuming authentication is successful if access_token exists
-            console.log("Access token is: " + accessToken);
-            alert('Login Successful!');
-            console.log("Login Successfully", resp);
-            this.router.navigate(['/postblog']);
-          } else {
-            // Handle authentication failure
-            alert('Incorrect Credentials!');
-            this.router.navigate(['blogs']);
-          }
-        },
-        error: (error) => {
-          console.log("Error occurred during login:", error);
-          // Handle error, such as displaying an error message to the user
-          alert('An error occurred during login. Please try again later.');
-        }
-      });
+      this.http.post<any>(`${this.blog_const}/signin`,loginData)
+      .subscribe(
+     {
+      next:   (respone) =>{
+        console.log("Login Successfully",respone);
+        this.router.navigate(['postblog']);
+      },
+      error:(error)=>
+      {
+        console.log("Error is coming",error);
+      }
+     }
+      );
     }
   }
-  
 
   signup(form: FormGroup): void {
     if (form.valid) {
@@ -302,11 +239,33 @@ export class BloglistComponent implements OnInit {
     this.showSignUpForm = true;
   }
 
+
+  filterBlogs(): void {
+    if (this.searchQuery.trim() === '') {
+      // If search query is empty, display all blogs
+      this.filteredBlogs = this.blogs;
+    } else {
+      // Filter blogs based on search query in the title or description
+      this.filteredBlogs = this.blogs.filter((blog: Blog) =>
+        blog.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+        (blog.des && blog.des.toLowerCase().includes(this.searchQuery.toLowerCase()))
+      );
+    }
+  }
+  
+
   @Input() state: any; // Replace 'any' with the appropriate type for 'state'
   @Input() fetchDataFun: any; // Replace 'any' with the appropriate type for 'fetchDataFun'
+  @Input() showSignInButton = true;
 
   shouldDisplayLoadMoreButton(): boolean {
     return this.state != null && this.state.totalDocs > this.state.results.length;
+  }
+
+  fetchData(): void {
+    if (typeof this.fetchDataFun === 'function') {
+      this.fetchDataFun({ page: this.state.page + 1 });
+    }
   }
 
   
@@ -320,4 +279,8 @@ export class BloglistComponent implements OnInit {
     }
   }
 
+  navigateToBlogDetails(blogId: string): void {
+    // Navigate to BlogDetailsComponent with the blog ID as a parameter
+    this.router.navigate(['/blog/', blogId]);
+  }
 }

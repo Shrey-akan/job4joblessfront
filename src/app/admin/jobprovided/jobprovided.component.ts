@@ -45,6 +45,7 @@ export class JobprovidedComponent implements OnInit{
       .pipe(
         catchError((error) => {
           console.error('Error updating job post approval status:', error);
+          // this.fetchJobPosts();
           return throwError(error);
         })
       )

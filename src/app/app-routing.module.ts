@@ -25,6 +25,9 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { BlogComponent } from './blog/blog.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 import { BlogCardComponent } from './blog-card/blog-card.component';
+import { PostblogComponent } from './postblog/postblog.component';
+import { TrendingblogsComponent } from './trendingblogs/trendingblogs.component';
+import { CreateblogComponent } from './createblog/createblog.component';
 
 const routes: Routes = [
   {
@@ -72,7 +75,16 @@ const routes: Routes = [
     path: 'bloglist', component: BloglistComponent
   },
   {
+    path: 'trendingblogs', component: TrendingblogsComponent
+  },
+  {
     path: 'blog-cards', component: BlogCardComponent
+  },
+  {
+    path: 'postblog', component: PostblogComponent
+  },
+  {
+    path: 'createblog', component: CreateblogComponent
   },
   {
     path: 'employer',

@@ -1,0 +1,48 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="container">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title"
+            [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
+        <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">Title is required</div>
+    </div>
+
+    <div class="form-group">
+        <label for="banner">Banner Image</label>
+        <input type="file" formControlName="banner" accept="image/*" class="form-control-file"
+            [ngClass]="{ 'is-invalid': submitted && f['banner'].errors }">
+        <div *ngIf="submitted && f['banner'].errors" class="invalid-feedback">Banner image is required</div>
+    </div>
+    
+    <div class="form-group">
+        <label for="des">Description</label>
+        <textarea formControlName="des" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['des'].errors }"></textarea>
+        <div *ngIf="submitted && f['des'].errors" class="invalid-feedback">Description is required</div>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Content</label>
+        <div formArrayName="content">
+            <div *ngFor="let control of contentControls; let i = index" [formGroupName]="i">
+                <textarea formControlName="blocks" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && control.errors }"></textarea>
+                <div *ngIf="submitted && control.errors" class="invalid-feedback">Content block is required</div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="addContentBlock()">Add Content Block</button>
+    </div>
+
+    
+    
+    <div class="form-group">
+        <label for="tags">Tags</label>
+        <input type="text" formControlName="tags" class="form-control">
+    </div>
+
+    <div class="form-check">
+        <input type="checkbox" formControlName="draft" class="form-check-input" id="draft">
+        <label class="form-check-label" for="draft">Draft</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
