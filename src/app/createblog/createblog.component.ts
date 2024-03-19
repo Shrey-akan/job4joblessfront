@@ -1,25 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray , AbstractControl } from '@angular/forms';
-import { blogconst } from '../constant';
+import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, catchError, throwError } from 'rxjs';
+import { blogconst} from '../constant';
 
-interface Blog {
-  blog_id: string;
-  title: string;
-  banner?: string;
-  des?: string;
-  content?: { blocks: Block[] }[];
-  tags?: string[];
-  draft?: boolean;
-}
-
-interface Block {
-  id: string;
+interface ContentBlock {
   type: string;
   data: {
-    text?: string;
+    text: string;
   };
 }
 
@@ -30,87 +18,98 @@ interface Block {
 })
 export class CreateblogComponent implements OnInit {
   blogForm!: FormGroup;
-  submitted = false;
   private blog_const = `${blogconst}`;
   accessToken!: string;
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private cookieService: CookieService) { }
+  submitted = false;
+
+  blocksArray: AbstractControl[] = [];
+  tagsArray: AbstractControl[] = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit(): void {
+    this.accessToken = this.cookieService.get('accessToken');
+
     this.blogForm = this.formBuilder.group({
       title: ['', Validators.required],
-      banner: ['', Validators.required],
       des: ['', Validators.required],
-      // content: this.formBuilder.array([]),
-      content: this.formBuilder.array([this.createContentBlock()]),
-      tags: [''],
+      banner: ['', Validators.required],
+      content: this.formBuilder.array([
+        this.createContentBlock()
+      ]),
+      tags: this.formBuilder.array([]),
       draft: [false]
     });
-    this.addContentBlock();
-    this.accessToken = this.cookieService.get('accessToken');
-  }
 
-  // Convenience getter for easy access to form fields
-  get f() { return this.blogForm.controls; }
+    this.blocksArray = (this.blogForm.get('content') as FormArray).controls;
+    this.tagsArray = (this.blogForm.get('tags') as FormArray).controls;
+  }
 
   createContentBlock(): FormGroup {
     return this.formBuilder.group({
-      text: ['']
+      type: ['', Validators.required],
+      text: ['', Validators.required]
     });
   }
 
-  get contentControls() {
-    return (this.blogForm.get('content') as FormArray).controls;
+  addContentBlock(): void {
+    const blocks = this.blogForm.get('content') as FormArray;
+    blocks.push(this.createContentBlock());
+    this.blocksArray = blocks.controls;
   }
 
-  addContentBlock() {
-    const contentArray = this.blogForm.get('content') as FormArray;
-    contentArray.push(this.createContentBlock());
+  addTag(): void {
+    const tags = this.blogForm.get('tags') as FormArray;
+    tags.push(this.formBuilder.control(''));
+    this.tagsArray = tags.controls as FormControl[]; 
   }
 
-  onSubmit() {
+  removeTag(index: number): void {
+    const tags = this.blogForm.get('tags') as FormArray;
+    tags.removeAt(index);
+  }
+
+  onSubmit(): void {
     this.submitted = true;
+    if (this.blogForm.invalid) { return; }
   
-    if (this.blogForm.invalid) {
-      return;
-    }
-    console.log("Access token is:", this.accessToken);
-    
-    const blogData: Blog = this.blogForm.value;
+    const formData = new FormData();
+    formData.append('title', this.blogForm.get('title')!.value);
+    formData.append('des', this.blogForm.get('des')!.value);
+    formData.append('banner', this.blogForm.get('banner')!.value);
+    formData.append('draft', this.blogForm.get('draft')!.value);
   
-    console.log('Submitted Blog:', blogData);
-  
-    // Set the authorization header
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.accessToken}`
+    const blocks = this.blogForm.get('content') as FormArray;
+    blocks.controls.forEach((control: AbstractControl) => {
+      if (control instanceof FormGroup) {
+        formData.append('content[blocks][][type]', control.get('type')!.value);
+        formData.append('content[blocks][][text]', control.get('text')!.value);
+      }
     });
   
-    console.log("This is the header", headers);
+    const tags = this.blogForm.get('tags') as FormArray;
+    tags.controls.forEach((tag: AbstractControl, index: number) => {
+      formData.append(`tags[${index}]`, tag.value);
+    });
   
-    // POST the blogData to the API
-    this.createBlog(blogData, this.accessToken)
-    .subscribe({
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.accessToken}`,
+      'Content-Type': 'multipart/form-data'
+    });
+  
+    this.http.post(`${this.blog_const}/create-blog`, formData, { headers }).subscribe({
       next: (response) => {
-        console.log('Blog created successfully:', response);
+        console.log('Blog data submitted successfully:', response);
         // Handle success response
       },
       error: (error) => {
-        console.error('Error creating blog:', error);
+        console.error('Error submitting blog data:', error);
         // Handle error response
       }
     });
-  }
-
-  createBlog(blogData: any, accessToken: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${accessToken}`
-    });
-  
-    return this.http.post<any>(`${this.blog_const}/create-blog`, blogData, { headers })
-      .pipe(
-        catchError((error: any) => {
-          console.error('HTTP Error:', error);
-          return throwError('HTTP Error: ' + error.message || 'Server error');
-        })
-      );
-  }
+}
 }

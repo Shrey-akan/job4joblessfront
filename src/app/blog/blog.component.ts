@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 interface CareerOption {
   title: string;
@@ -43,7 +44,7 @@ export class BlogComponent {
   blogDetails: Blog | null = null;
   Array: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient , private sanitizer: DomSanitizer) { }
   i: any;
 
 
@@ -74,7 +75,13 @@ export class BlogComponent {
   //   );
   // }
 
-
+  parseHTML(htmlString: string | undefined): SafeHtml {
+    if (htmlString) {
+      return this.sanitizer.bypassSecurityTrustHtml(htmlString);
+  } else {
+      return '';
+  }
+}
   fetchBlogDetails(blogId: string): void {
     this.http.post<any>('https://hustleforwork.com:3000/get-blog', { blog_id: blogId, draft: false, mode: 'view' }).subscribe(
       (response: any) => {

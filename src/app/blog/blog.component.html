@@ -656,14 +656,14 @@
         <div class="image-container">
             <img [src]="blogDetails.banner" alt="Blog Image" [style.width.px]="getImageWidth()"
                 [style.height.px]="getImageHeight()">
-                <h1 class="text-3xl font-bold mb-4 title-mar">{{ blogDetails.title }}</h1>
+            <h1 class="text-3xl font-bold mb-4 title-mar">{{ blogDetails.title }}</h1>
         </div>
         <div class="content-center">
             <div class="font-gelasio blog-page-content">
-                <ul>
+                <!-- <ul>
                     <ng-container *ngFor="let block of blogDetails?.content">
                         <li *ngIf="block.blocks">
-                            <ul >
+                            <ul>
                                 <div *ngFor="let innerBlock of block.blocks">
                                     <li *ngIf="innerBlock.data?.text" style="line-height: 4.5;">
                                         <div>
@@ -674,7 +674,18 @@
                             </ul>
                         </li>
                     </ng-container>
-                </ul>
+                </ul> -->
+                <ng-container *ngFor="let block of blogDetails?.content">
+                    <li *ngIf="block.blocks">
+                        <ul>
+                            <ng-container *ngFor="let innerBlock of block.blocks">
+                                <li *ngIf="innerBlock.data?.text" style="line-height: 4.5;">
+                                    <div [innerHTML]="parseHTML(innerBlock.data.text)"></div>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
             </div>
         </div>
     </div>
