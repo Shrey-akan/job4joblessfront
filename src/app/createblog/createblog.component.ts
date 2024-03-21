@@ -16,7 +16,7 @@ interface ContentBlock {
   templateUrl: './createblog.component.html',
   styleUrls: ['./createblog.component.css']
 })
-export class CreateblogComponent implements OnInit {
+export class CreateblogComponent  {
   blogForm!: FormGroup;
   private blog_const = `${blogconst}`;
   accessToken!: string;

@@ -1,50 +1,5 @@
-<!-- <div class="container text-center" style="margin: 30px;">
-  <h4>EMPLOYERS DETAILS</h4>
-  <div class="row">
-      <div class="table-responsive">
-          <table class="table table-striped">
-              <thead>
-                  <tr style="background-color: rgb(143, 236, 143);">
-                      <th>S.no.</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Company</th>
-                      <th>Email</th>
-                      <th>Password</th>
-                      <th>Phone</th>
-                      <th>Country</th>
-                      <th>State</th>
-                      <th>City</th>
-                      <th>Description</th>
-                      <th>Action</th> Add a new column for the action button
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let user of data" style="background-color: rgb(216, 252, 216);">
-                      <td>{{ user.empid }}</td>
-                      <td>{{ user.empfname }}</td>
-                      <td>{{ user.emplname }}</td>
-                      <td>{{ user.empcompany }}</td>
-                      <td><a href="mailto:{{ user.empmailid }}">{{ user.empmailid }}</a></td>
-
-                      <td>{{ user.emppass }}</td>
-                      <td><a href="tel:{{ user.empphone }}">{{ user.empphone }}</a></td>
-
-                      <td>{{ user.empcountry }}</td>
-                      <td>{{ user.empstate }}</td>
-                      <td>{{ user.empcity }}</td>
-                      <td>{{ user.descriptionemp }}</td>
-                      <td>
-                          <button class="btn custom-btn rounded-pill" (click)="sendNotificationemp(user.empid)">Send Notification</button>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
-</div> -->
 <div class="container-fluid">
-    <div class="container text-center" style="margin: 3%;">
+    <div class="container text-center" style="margin: 1%;">
         <h4>EMPLOYERS DETAILS</h4>
         <div class="table-responsive">
             <table class="table table-striped custom-table">
@@ -68,17 +23,20 @@
                         <td>{{ user.empcompany }}</td>
                         <td><a href="mailto:{{ user.empmailid }}">{{ user.empmailid }}</a></td>
                         <td><a href="tel:{{ user.empphone }}">{{ user.empphone }}</a></td>
-                        <td style="width: 200px;">{{ user.descriptionemp }}</td>
+                        <td style="width: 300px;">{{ truncateDescription(user.descriptionemp) }}</td>
+                        <!-- <td style="width: 300px;">{{ user.descriptionemp }}</td> -->
                         <td>
-                            <button class="btn custom-btn rounded-pill" (click)="sendNotificationemp(user.empid)">Send
+                            <button style="font-size: small;" class="btn custom-btn rounded-pill" (click)="sendNotificationemp(user.empid)">Send
                                 Notification</button>
                         </td>
                         <td>
                             <div>
-                        <td> <button type="button" class="btn"
-                                style="background-color: #1e2e5c; color: white;">Info</button></td>
+                        <td> <button type="button" class="btn btn-secondary"
+                                (click)="infoPage(user.empid)">Info</button></td>
                         <td>
-                            <button type="button" class="btn btn-secondary" (click)="toggleUserActivation(user.empid)">
+                            <button type="button" class="btn btn-secondary"
+                                style="background-color: #1e2e5c; color: white;"
+                                (click)="toggleUserActivation(user.empid)">
                                 {{ user.accempldeactivate ? 'Activate' : 'Deactivate' }}
                             </button>
                         </td>

@@ -36,10 +36,10 @@ console.log(this.jobid);
     // Create the form with validation rules
     this.questionForm = this.formBuilder.group({
       question: ['', Validators.required],
-      optionA: ['', Validators.required],
-      optionB: ['', Validators.required],
-      optionC: ['', Validators.required],
-      optionD: ['', Validators.required],
+      optionA: [null, Validators.required],
+      optionB: [null, Validators.required],
+      optionC: [null, Validators.required],
+      optionD: [null, Validators.required],
       correctAnswer: ['', Validators.required],
       jobid: [this.jobid, Validators.required]
     });

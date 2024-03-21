@@ -1,46 +1,71 @@
 <!-- add-question.component.html -->
 
 <div class="container mt-4">
-    <div class="d-flex justify-content-between">
-      <h2>Add Question</h2>
-      <div>
-        <span class="badge rounded-pill custom-pills">Question {{ currentQuestionIndex + 1 }} of 5</span>
-        <button class="btn rounded-pill custom-btn ms-2" (click)="skipQuestion()">Skip</button>
-      </div>
+  <div class="d-flex justify-content-between">
+    <h2>Add Question</h2>
+    <div>
+      <span class="badge rounded-pill custom-pills">Question {{ currentQuestionIndex + 1 }} of 5</span>
+      <button class="btn rounded-pill custom-btn ms-2" (click)="skipQuestion()">Skip</button>
     </div>
-    <hr>
-  
-    <form [formGroup]="questionForm" (ngSubmit)="submitForm()">
-      <div class="mb-3">
-        <label for="question" class="form-label">Question:</label>
-        <input type="text" id="question" class="form-control" formControlName="question" />
-      </div>
-      <div class="mb-3">
-        <label for="optionA" class="form-label">Option A:</label>
-        <input type="text" id="optionA" class="form-control" formControlName="optionA" />
-      </div>
-      <div class="mb-3">
-        <label for="optionB" class="form-label">Option B:</label>
-        <input type="text" id="optionB" class="form-control" formControlName="optionB" />
-      </div>
-      <div class="mb-3">
-        <label for="optionC" class="form-label">Option C:</label>
-        <input type="text" id="optionC" class="form-control" formControlName="optionC" />
-      </div>
-      <div class="mb-3">
-        <label for="optionD" class="form-label">Option D:</label>
-        <input type="text" id="optionD" class="form-control" formControlName="optionD" />
-      </div>
-      <div class="mb-3">
-        <label for="correctAnswer" class="form-label">Correct Answer:</label>
-        <input type="text" id="correctAnswer" class="form-control" formControlName="correctAnswer" />
-      </div>
-      <div class="mb-3">
-        <input type="hidden" id="jobid" class="form-control" formControlName="jobid" />
+  </div>
+  <hr>
+
+  <form [formGroup]="questionForm" (ngSubmit)="submitForm()" class="mb-3">
+    <div class="mb-3">
+      <label for="question" class="form-label">Question:</label>
+      <input type="text" id="question" class="form-control" formControlName="question" required />
+      <div *ngIf="questionForm.get('question')?.invalid && questionForm.get('question')?.touched" class="text-danger">
+        Question is required</div>
+    </div>
+    <div class="mb-3">
+      <label for="optionA" class="form-label">Option A:</label>
+      <input type="text" id="optionA" class="form-control" formControlName="optionA" required />
+      <div *ngIf="questionForm.get('optionA')?.invalid && questionForm.get('optionA')?.touched" class="text-danger">
+        Option A is required</div>
+    </div>
+    <div class="mb-3">
+      <label for="optionB" class="form-label">Option B:</label>
+      <input type="text" id="optionB" class="form-control" formControlName="optionB" required />
+      <div *ngIf="questionForm.get('optionB')?.invalid && questionForm.get('optionB')?.touched" class="text-danger">
+        Option B is required</div>
+    </div>
+    <div class="mb-3">
+      <label for="optionC" class="form-label">Option C:</label>
+      <input type="text" id="optionC" class="form-control" formControlName="optionC" required />
+      <div *ngIf="questionForm.get('optionC')?.invalid && questionForm.get('optionC')?.touched" class="text-danger">
+        Option C is required</div>
+    </div>
+    <div class="mb-3">
+      <label for="optionD" class="form-label">Option D:</label>
+      <input type="text" id="optionD" class="form-control" formControlName="optionD" required />
+      <div *ngIf="questionForm.get('optionD')?.invalid && questionForm.get('optionD')?.touched" class="text-danger">
+        Option D is required</div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Correct Answer:</label>
+      <div>
+        <label class="form-check-label">
+          <input type="radio" formControlName="correctAnswer" [value]="questionForm.get('optionA')?.value" required /> Option A
+        </label>
       </div>
       <div>
-        <button type="submit" class="btn rounded-pill custom-btn">Submit Question</button>
+        <label class="form-check-label">
+          <input type="radio" formControlName="correctAnswer"  [value]="questionForm.get('optionB')?.value" required /> Option B
+        </label>
       </div>
-    </form>
-  </div>
-  
+      <div>
+        <label class="form-check-label">
+          <input type="radio" formControlName="correctAnswer"  [value]="questionForm.get('optionC')?.value" required /> Option C
+        </label>
+      </div>
+      <div>
+        <label class="form-check-label">
+          <input type="radio" formControlName="correctAnswer"  [value]="questionForm.get('optionD')?.value" required /> Option D
+        </label>
+      </div>
+      <div *ngIf="questionForm.get('correctAnswer')?.invalid && questionForm.get('correctAnswer')?.touched"
+        class="text-danger">Correct Answer is required</div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="questionForm.invalid">Submit</button>
+  </form>
+</div>

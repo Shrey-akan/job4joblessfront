@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
@@ -24,6 +24,14 @@ interface PostJob {
   sendTime: Date;
 }
 
+function nameValidator(control: AbstractControl): { [key: string]: boolean } | null {
+  const nameRegex = /^[a-zA-Z\s]*$/; // Regular expression to allow only letters and spaces
+
+  if (!nameRegex.test(control.value)) {
+    return { 'invalidName': true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-postjob',
@@ -47,28 +55,29 @@ export class PostjobComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentStep=1;
+    this.currentStep = 1;
     // Initialize the form with default values and validations
     this.jobPostForm = this.formBuilder.group({
-      jobtitle: ['', Validators.required],
-      empName: ['', Validators.required],
+      jobtitle: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
+      empName: ['', [Validators.required, nameValidator]],
       empEmail: [
         '',
-        [Validators.required,Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]
+        [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]
       ],
-      companyforthisjob: ['', Validators.required],
+      companyforthisjob: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
       numberofopening: ['', Validators.required],
       locationjob: ['', Validators.required],
       jobtype: ['', Validators.required],
       schedulejob: ['', Validators.required],
       payjob: ['', Validators.required],
-      payjobsup: ['',Validators.required],
+      // payjobsup: ['',Validators.required],
       descriptiondata: ['', Validators.required],
       country: ['', Validators.required],
-      state: ['', Validators.required],
-      city: ['', Validators.required],
+      state: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      city: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       empid: ['', Validators.required]
     });
+
 
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
@@ -84,11 +93,38 @@ export class PostjobComponent implements OnInit {
       // this.jobPostForm.setValue(savedData);
       this.currentStep = savedData.currentStep || 1;
     }
+    this.jobPostForm.get('country')?.valueChanges.subscribe(() => {
+      this.updateLocation();
+    });
+    this.jobPostForm.get('state')?.valueChanges.subscribe(() => {
+      this.updateLocation();
+    });
+    this.jobPostForm.get('city')?.valueChanges.subscribe(() => {
+      this.updateLocation();
+    });
   }
 
   // Apply rich text editor command
   applyCommand(command: string): void {
     document.execCommand(command, false, '');
+  }
+
+  updateLocation() {
+    const country = this.jobPostForm.get('country')?.value;
+    const state = this.jobPostForm.get('state')?.value;
+    const city = this.jobPostForm.get('city')?.value;
+
+    // Update the location field
+    const countryControl = this.jobPostForm.get('country');
+    const stateControl = this.jobPostForm.get('state');
+    const cityControl = this.jobPostForm.get('city');
+    if (countryControl?.valid && stateControl?.valid && cityControl?.valid) {
+      // Update the location field
+      this.jobPostForm.get('locationjob')?.setValue(`${city}, ${state}, ${country}`);
+    } else {
+      // Clear the location field if any of the fields are not valid
+      this.jobPostForm.get('locationjob')?.setValue('');
+    }
   }
 
   // Handle form submission
@@ -101,7 +137,7 @@ export class PostjobComponent implements OnInit {
           console.log('Complete Response:', resp);
 
           if (resp !== null) {
-            this.currentStep=1;
+            this.currentStep = 1;
             this.jobid = resp;
             console.log('checking the response for jobid', this.jobid);
 
@@ -122,18 +158,18 @@ export class PostjobComponent implements OnInit {
     }
   }
 
-  updateLocationJob(): void {
-    const country = this.jobPostForm.get('country')?.value;
-    const state = this.jobPostForm.get('state')?.value;
-    const city = this.jobPostForm.get('city')?.value;
+  // updateLocationJob(): void {
+  //   const country = this.jobPostForm.get('country')?.value;
+  //   const state = this.jobPostForm.get('state')?.value;
+  //   const city = this.jobPostForm.get('city')?.value;
 
-    let currentLocation = this.jobPostForm.get('locationjob')?.value;
-    currentLocation = currentLocation ? currentLocation + ', ' : '';
-    const newLocation = currentLocation + city + ', ' + state + ', ' + country;
+  //   let currentLocation = this.jobPostForm.get('locationjob')?.value;
+  //   currentLocation = currentLocation ? currentLocation + ', ' : '';
+  //   const newLocation = currentLocation + city + ', ' + state + ', ' + country;
 
-    // Update locationjob with the new concatenated value
-    this.jobPostForm.patchValue({ locationjob: newLocation });
-  }
+  //   // Update locationjob with the new concatenated value
+  //   this.jobPostForm.patchValue({ locationjob: newLocation });
+  // }
 
   // Navigate to the next step
   nextStep(): void {
@@ -176,11 +212,10 @@ export class PostjobComponent implements OnInit {
         const jobType = this.jobPostForm.get('jobtype');
         const scheduleJob = this.jobPostForm.get('schedulejob');
         const payJob = this.jobPostForm.get('payjob');
-        const supPay = this.jobPostForm.get('payjobsup');
-        const desc= this.jobPostForm.get('descriptiondata');
+        const desc = this.jobPostForm.get('descriptiondata');
 
 
-        if (openings?.value && location?.value && jobType?.value && scheduleJob?.value  && payJob?.value && supPay?.value && desc?.value) {
+        if (openings?.value && location?.value && jobType?.value && scheduleJob?.value && payJob?.value && desc?.value) {
           console.log("All required fields are valid....");
           this.currentStep++;
           this.jobPostService.saveFormData({

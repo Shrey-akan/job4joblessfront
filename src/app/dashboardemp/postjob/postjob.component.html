@@ -22,15 +22,19 @@
       <!-- Step 1: Job Title and Company Name -->
       <div class="mb-3">
         <label for="empName" class="form-label">Name*</label>
-        <input type="text" class="form-control" id="empName" formControlName="empName" required>
+        <input type="text" class="form-control" id="empName" formControlName="empName" placeholder="Enter your name" required>
         <div *ngIf="jobPostForm.get('empName')?.hasError('required')  && jobPostForm.get('empName')?.touched"
           class="text-danger">
           Name is required.
         </div>
+        <div *ngIf="jobPostForm.get('empName')?.hasError('invalidName') && jobPostForm.get('empName')?.touched"
+          class="text-danger">
+          Name cannot contain special characters or numbers.
+        </div>
       </div>
       <div class="mb-3">
         <label for="empEmail" class="form-label">Email*</label>
-        <input type="email" class="form-control" id="empEmail" formControlName="empEmail" required>
+        <input type="email" class="form-control" id="empEmail" formControlName="empEmail" placeholder="Enter your email" required>
         <div *ngIf="jobPostForm.get('empEmail')?.hasError('required')  && jobPostForm.get('empEmail')?.touched"
           class="text-danger">
           Email is required.
@@ -38,54 +42,59 @@
         <div *ngIf="jobPostForm.get('empEmail')?.hasError('email') && jobPostForm.get('empEmail')?.touched"
           class="text-danger">Please enter a valid email address.
         </div>
+        <div *ngIf="jobPostForm.get('empEmail')?.hasError('pattern') && jobPostForm.get('empEmail')?.touched"
+          class="text-danger">Please enter a valid email address.
+        </div>
       </div>
       <div class="mb-3">
         <label for="jobtitle" class="form-label">Job Title*</label>
-        <input type="text" class="form-control" id="jobtitle" formControlName="jobtitle" required>
+        <input type="text" class="form-control" id="jobtitle" formControlName="jobtitle" placeholder="Enter Job title" required>
         <div *ngIf="jobPostForm.get('jobtitle')?.hasError('required') && jobPostForm.get('jobtitle')?.touched"
           class="text-danger">
           Job Title is required.
+        </div>
+        <div *ngIf="jobPostForm.get('jobtitle')?.hasError('pattern') && jobPostForm.get('jobtitle')?.touched"
+          class="text-danger">
+          Job Title cannot contain special character.
         </div>
       </div>
 
       <div class="mb-3">
         <label for="companyforthisjob" class="form-label">Company Name*</label>
-        <input type="text" class="form-control" id="companyforthisjob" formControlName="companyforthisjob" required>
+        <input type="text" class="form-control" id="companyforthisjob" formControlName="companyforthisjob" placeholder="Enter the Company Name" required>
         <div
           *ngIf="jobPostForm.get('companyforthisjob')?.hasError('required') && jobPostForm.get('companyforthisjob')?.touched"
           class="text-danger">
           Company Name is required.
         </div>
+        <div
+          *ngIf="jobPostForm.get('companyforthisjob')?.hasError('pattern') && jobPostForm.get('companyforthisjob')?.touched"
+          class="text-danger">
+          Company Name cannot contain special character.
+        </div>
       </div>
       <div class="d-flex justify-content-end">
-        <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next</button>
+        <button class="btn custom-btn rounded-pill" (click)="nextStep()"
+          [disabled]="!jobPostForm.get('empName')?.valid || !jobPostForm.get('empEmail')?.valid || !jobPostForm.get('jobtitle')?.valid || !jobPostForm.get('companyforthisjob')?.valid">Next</button>
       </div>
     </div>
     <div *ngIf="currentStep === 2">
       <!-- Step 2: Job Details -->
       <div class="mb-3">
         <label for="numberofopening" class="form-label">Vacancies*</label>
-        <input type="number" class="form-control" id="numberofopening" formControlName="numberofopening" required>
+        <input type="number" class="form-control" id="numberofopening" formControlName="numberofopening" placeholder="Enter the number of vacancies" required>
         <div
           *ngIf="jobPostForm.get('numberofopening')?.hasError('required') && jobPostForm.get('numberofopening')?.touched"
           class="text-danger">
           Number of Openings is required.
         </div>
       </div>
-      <!-- <div class="mb-3">
-        <label for="locationjob" class="form-label">Location*</label>
-        <input type="text" class="form-control" id="locationjob" formControlName="locationjob">
-        <div *ngIf="jobPostForm.get('locationjob')?.hasError('required') && jobPostForm.get('locationjob')?.touched"
-          class="text-danger">
-          Locationis required.
-        </div>
-      </div> -->
       <div class="row">
         <div class="col-md-4">
           <div class="mb-3">
             <label for="country" class="form-label">Country:*</label>
-            <select class="form-control" id="country" formControlName="country"
-              placeholder="Select your country" required>
+            <select class="form-control" id="country" formControlName="country" placeholder="Select your country"
+              required>
               <option value="">Select your country</option>
               <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
             </select>
@@ -98,28 +107,38 @@
         <div class="col-md-4">
           <div class="mb-3">
             <label for="state" class="form-label">State:*</label>
-            <input type="text" class="form-control" id="state" formControlName="state" required>
+            <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter the state" required>
             <div *ngIf="jobPostForm.get('state')?.hasError('required') && jobPostForm.get('state')?.touched"
               class="text-danger">
               State is required.
+            </div>
+            <div *ngIf="jobPostForm.get('state')?.hasError('pattern') && jobPostForm.get('state')?.touched"
+              class="text-danger">
+              Invalid state.
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="mb-3">
             <label for="city" class="form-label">City:*</label>
-            <input type="text" class="form-control" id="city" formControlName="city" required (change)="updateLocationJob()">
+              <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter the city" required>
             <div *ngIf="jobPostForm.get('city')?.hasError('required') && jobPostForm.get('city')?.touched"
               class="text-danger">
               City is required.
+            </div>
+            <div *ngIf="jobPostForm.get('city')?.hasError('pattern') && jobPostForm.get('city')?.touched"
+              class="text-danger">
+              Invalid City.
             </div>
           </div>
         </div>
       </div>
       <div class="mb-3">
         <label for="locationjob" class="form-label">Location:*</label>
-        <input type="text" class="form-control" id="locationjob" formControlName="locationjob" placeholder="Location" readonly>
-        <div *ngIf="jobPostForm.get('locationjob')?.hasError('required') && jobPostForm.get('locationjob')?.touched" class="text-danger">
+        <input type="text" class="form-control" id="locationjob" formControlName="locationjob" placeholder="Location"
+          readonly>
+        <div *ngIf="jobPostForm.get('locationjob')?.hasError('required') && jobPostForm.get('locationjob')?.touched"
+          class="text-danger">
           Location is required.
         </div>
       </div>
@@ -153,20 +172,29 @@
       </div>
       <div class="mb-3">
         <label for="payjob" class="form-label">Pay*</label>
-        <input type="number" class="form-control" id="payjob" formControlName="payjob" required>
+        <select class="form-select" formControlName="payjob">
+          <option value="" disabled selected>Select Salary Range</option>
+          <option value="5000-10000">5000-10000</option>
+          <option value="10000-20000">10000-20000</option>
+          <option value="20000-40000">20000-40000</option>
+          <option value="40000-60000">40000-60000</option>
+          <option value="60000-80000">60000-80000</option>
+          <option value="80000-100000">80000-100000</option>
+          <option value="100000+">100000+</option>
+        </select>
         <div *ngIf="jobPostForm.get('payjob')?.hasError('required')  && jobPostForm.get('payjob')?.touched"
           class="text-danger">
           Required.
         </div>
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="payjobsup" class="form-label">Supplemental Pay</label>
         <input type="number" class="form-control" id="payjobsup" formControlName="payjobsup" required>
         <div *ngIf="jobPostForm.get('payjobsup')?.hasError('required')  && jobPostForm.get('payjobsup')?.touched"
           class="text-danger">
           Required.
         </div>
-      </div>
+      </div> -->
       <div class="mb-3">
         <label for="descriptiondata" class="form-label">Description data*</label>
         <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea>
@@ -178,7 +206,10 @@
       </div>
       <div class="d-flex justify-content-between">
         <button class="btn custom-btn rounded-pill" (click)="prevStep()">Previous</button>
-        <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next</button>
+        <button class="btn custom-btn rounded-pill" (click)="nextStep()" 
+        [disabled]="!jobPostForm.get('numberofopening')?.valid || !jobPostForm.get('descriptiondata')?.valid || !jobPostForm.get('payjob')?.valid || 
+        !jobPostForm.get('schedulejob')?.valid || !jobPostForm.get('city')?.valid || !jobPostForm.get('state')?.valid  || !jobPostForm.get('country')?.valid
+        || !jobPostForm.get('locationjob')?.valid  || !jobPostForm.get('jobtype')?.valid">Next</button>
       </div>
     </div>
 
@@ -194,7 +225,7 @@
         <!-- <p><strong>Schedule:</strong> {{ jobPostForm.value.schedulejob.join(', ') }}</p> -->
         <p><strong>Schedule:</strong> {{ jobPostForm.value.schedulejob }}</p>
         <p><strong>Pay:</strong> {{ jobPostForm.value.payjob }}</p>
-        <p><strong>Supplemental Pay:</strong> {{ jobPostForm.value.payjobsup }}</p>
+        <!-- <p><strong>Supplemental Pay:</strong> {{ jobPostForm.value.payjobsup }}</p> -->
         <p><strong>descriptiondata:</strong> {{ jobPostForm.value.descriptiondata }}</p>
       </div>
       <div class="d-flex justify-content-between">

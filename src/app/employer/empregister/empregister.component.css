@@ -6,6 +6,26 @@
 .fa-eye-slash {
   cursor: pointer;
 }
+.password-wrapper {
+  position: relative;
+}
+
+#password-input {
+  padding-right: 30px; /* Adjust this value as needed to ensure the icon does not overlap with the text */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust the right position as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Style the eye icon */
+#eye-icon {
+  color: #888; /* Icon color */
+}
 
 
 /* Custom styles for the registration form */

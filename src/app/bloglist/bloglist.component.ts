@@ -51,6 +51,8 @@ export class BloglistComponent implements OnInit {
   showLoginForm: boolean = true;
   showSignUpForm: boolean = false;
   screenDisabled: boolean = false;
+  SignInloading:boolean = false;
+  SignUploading:boolean = false
 
   categories: string[] = [
     "programming", "technology", "science", "health", "finance", "sports",
@@ -70,14 +72,20 @@ export class BloglistComponent implements OnInit {
     this.fetchLatestBlogs(1); // Load page 1 when the component initializes
     this.fetchTrendingBlogs();
     this.loginform = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(/.+@gmail\.com$/)]],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
+      password: ['', [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
     });
 
     this.signupForm = this.fb.group({
-      fullname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(/.+@gmail\.com$/)]],
-      password: ['', Validators.required]
+      fullname: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]]
     });
     // this.filterBlogs();
   }
@@ -239,6 +247,7 @@ export class BloglistComponent implements OnInit {
   // }
   login(form: FormGroup): void {
     if (form.valid) {
+      this.SignInloading=true;
       const loginData = {
         email: form.value.email,
         password: form.value.password
@@ -286,6 +295,7 @@ export class BloglistComponent implements OnInit {
 
   signup(form: FormGroup): void {
     if (form.valid) {
+      this.SignUploading=true;
       const signupData = {
         fullname: form.value.fullname,
         email: form.value.email,

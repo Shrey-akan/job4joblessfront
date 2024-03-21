@@ -1,10 +1,10 @@
-import { Component, OnInit , NgModule } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import * as intelInput from "intl-tel-input";
-import { backendUrl , OtpUrl} from '../constant';
+import { backendUrl, OtpUrl } from '../constant';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,9 +13,9 @@ import { backendUrl , OtpUrl} from '../constant';
 
 
 export class RegisterComponent implements OnInit {
-  private backend_URL=`${backendUrl}`;
-  private Otp_URL=`${OtpUrl}`;
-  
+  private backend_URL = `${backendUrl}`;
+  private Otp_URL = `${OtpUrl}`;
+
   isHovered = false;
   countries: string[] = [];
   userregister!: FormGroup;
@@ -54,30 +54,32 @@ export class RegisterComponent implements OnInit {
       })
     }
     this.userregister = this.formBuilder.group({
-      userFirstName: ['', Validators.required],
-      userLastName: ['', Validators.required],
+      userFirstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      userLastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       userName: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
       userPassword: [
         '',
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
         ]
       ],
       userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
-      usercountry: ['', Validators.required],
-      userstate: ['', Validators.required],
-      usercity: ['', Validators.required],
+      usercountry: ['', Validators.required ],
+      userstate: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
+      usercity: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       summary: ['', Validators.required],
       userlinkden: ['', Validators.required],
       usergithub: ['', Validators.required],
-      otherturluser:['']
+      otherturluser: ['']
     });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
     });
   }
+
+
   loginWithGoogle() {
     this.userservice.loginWithGoogle()
       .then((userCredential) => {
@@ -99,7 +101,7 @@ export class RegisterComponent implements OnInit {
   }
   userRegisteration(): void {
     if (this.userregister.valid) {
-      this.loading=true;
+      this.loading = true;
       console.log(this.userregister);
       this.http.post(`${this.backend_URL}insertusermail`, this.userregister.getRawValue()).subscribe(
         (payload: any) => {
@@ -119,7 +121,7 @@ export class RegisterComponent implements OnInit {
     this.http.post(`${this.Otp_URL}generateOtp`, { uid: payload.uid, email: payload.userName }).subscribe(
       (response: any) => {
         if (response.otpCreated) {
-          this.loading=false
+          this.loading = false
           this.router.navigate(['/checkotp', payload.uid]);
         } else {
           console.error('Otp not generated');

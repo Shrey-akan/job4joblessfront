@@ -1,4 +1,8 @@
-<div class="latest-blogs" style="border-right: 2px solid #ccc;">
+<div class="loader-container" *ngIf="isloading">
+  <div class="loader"></div>
+</div>
+
+<div class="latest-blogs" style="border-right: 2px solid #ccc;" *ngIf="!isloading">
   <ul style="list-style-type: none;">
     <li *ngFor="let blog of blogs" class="blog-item">
       <div class="table-padding">
@@ -29,6 +33,6 @@
     </li>
   </ul>
   <div class="button-container">
-    <button class="btn btn-primary" (click)="loadMoreBlogs()">Load More</button>
+    <button class="btn btn-primary my-4" (click)="loadMoreBlogs()">Load More</button>
   </div>
 </div>

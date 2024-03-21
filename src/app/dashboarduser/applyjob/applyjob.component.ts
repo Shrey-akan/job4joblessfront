@@ -26,6 +26,7 @@ export class ApplyjobComponent implements OnInit {
   data: any;
   uid!: string;
   pdfFile: boolean = false;
+  formValues: any = {}; 
 
   private backend_URL = `${backendUrl}`;
 
@@ -41,21 +42,23 @@ export class ApplyjobComponent implements OnInit {
     // responce.subscribe((data1: any)=>this.data=data1);
     this.myformsubmission = this.formBuilder.group({
 
-      juname: ['', [Validators.required]],
+      juname: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       jumail: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
-      jucompny: ['', Validators.required],
+      jucompny: ['', Validators.required , Validators.pattern(/^[A-Za-z0-9\s]+$/)],
       jutitle: ['', Validators.required],
-      juresume: ['', [Validators.required, this.fileValidator]],
+      // juresume: ['', [Validators.required, this.fileValidator]],
+      juresume: ['', [Validators.required]],
       jurelocation: ['', [Validators.required]],
       jueducation: ['', [Validators.required]],
       juexperience: ['', [Validators.required]],
-      juinterviewdate: [''],
-      jujobtitle: ['', Validators.required],
-      jucompanyname: ['', Validators.required],
+      juinterviewdate: ['' , [ Validators.pattern(/^[\d,-]+$/)]],
+      jujobtitle: ['', [ Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
+      jucompanyname: ['', [ Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
       empid: ['', Validators.required],
       jobid: ['', Validators.required],
       uid: this.uid
     })
+    // this.formValues = this.myformsubmission.value;
     // Add more steps as needed
     this.b1.jobTitle$.subscribe((jobTitle) => {
       this.jobTitle = jobTitle;
@@ -139,9 +142,10 @@ export class ApplyjobComponent implements OnInit {
 
         if (name?.value && mail?.value && resume?.value) {
           console.log("All required fields are valid....");
+          // this.formValues = this.myformsubmission.value;
           this.currentStep++;
           this.uploadFile()
-          // this.saveFormDataToLocalStorage();
+          this.saveFormDataToLocalStorage();
 
         } else {
           console.log("One or more required fields are empty.");
@@ -169,6 +173,7 @@ export class ApplyjobComponent implements OnInit {
       else {
         console.log("Nothing is there")
       }
+      // this.formValues = this.myformsubmission.value;
   }
 }
 
@@ -196,20 +201,29 @@ export class ApplyjobComponent implements OnInit {
 
   fileValidator(control: AbstractControl): { [key: string]: any } | null {
     const file = control.value;
-    if (file) {
-      const allowedExtensions = ['.pdf']; // List of allowed file extensions
-      const fileExtension = file.name.split('.').pop().toLowerCase();
-      if (allowedExtensions.indexOf(fileExtension) === -1) {
-        return { invalidExtension: true };
-      }
-      return null; // No error if file is selected and has valid extension
+    if (!file) {
+      return { required: true }; // Error if no file is selected
     }
-    return { required: true }; // Error if no file is selected
+    
+    const allowedExtensions = ['.pdf']; // List of allowed file extensions
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (allowedExtensions.indexOf(fileExtension) === -1) {
+      return { invalidExtension: true }; // Error if file extension is not allowed
+    }
+    
+    return null; // No error if file is selected and has valid extension
   }
+  
+  
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    // this.pdfFile=true;
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    const fileExtension = file ? file.name.split('.').pop().toLowerCase() : '';
+    if (fileExtension !== 'pdf') {
+      this.myformsubmission.get('juresume')?.setErrors({ 'invalidFormat': true });
+    } else {
+      this.myformsubmission.get('juresume')?.setErrors(null);
+    }
   }
 
   uploadFile() {

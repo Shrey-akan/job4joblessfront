@@ -28,6 +28,9 @@
                         <div *ngIf="myformsubmission.get('juname')?.hasError('required') && myformsubmission.get('juname')?.touched" class="text-danger">
                           Name is required.
                         </div>
+                        <div *ngIf="myformsubmission.get('juname')?.hasError('pattern') && myformsubmission.get('juname')?.touched" class="text-danger">
+                          Name is invalid.
+                        </div>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Email:*</label>
@@ -43,25 +46,21 @@
                           Email must be a valid Gmail address.
                         </div>
                       </div>
-
-                      <!-- <div class="mb-3">
-                          <label class="form-label" for="resume">Upload Resume:*</label>
-                          <input type="file" id="resume" class="form-control" formControlName="juresume" (change)="onFileSelected($event)" />
-                        </div> -->
-                      <div class="mb-3">
-                        <label class="form-label" for="juresume">Upload Resume:*</label>
-                        <input type="file" id="juresume" class="form-control" formControlName="juresume"
-                          (change)="onFileSelected($event)" accept=".pdf"/>
+                        <div class="mb-3">
+                          <label class="form-label" for="juresume">Upload Resume:*</label>
+                          <input type="file" id="juresume" class="form-control" formControlName="juresume" (change)="onFileSelected($event)" accept=".pdf"/>
                           <div *ngIf="myformsubmission.get('juresume')?.hasError('required') && myformsubmission.get('juresume')?.touched" class="text-danger">
-                            Resume is required.
+                              Resume is required.
                           </div>
-                          <div *ngIf="myformsubmission.get('juresume')?.hasError('invalidExtension') && myformsubmission.get('juresume')?.touched" class="text-danger">
-                            Invalid file format. Please upload a PDF file.
+                          <div *ngIf="myformsubmission.get('juresume')?.hasError('invalidFormat') && myformsubmission.get('juresume')?.touched" class="text-danger">
+                              Invalid file format. Please upload a PDF file.
                           </div>
                       </div>
+                      
 
                       <!-- <button class="btn custom-btn rounded-pill" (click)="nextStep(); uploadFile()">Next & Upload File</button> -->
-                      <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next & Upload File</button>
+                      <button class="btn custom-btn rounded-pill" (click)="nextStep()" [disabled]="!myformsubmission.get('juname')?.valid || !myformsubmission.get('jumail')?.valid
+                      || !myformsubmission.get('juresume')?.valid">Next & Upload File</button>
                     </div>
 
                     <div *ngIf="currentStep === 2">
@@ -103,7 +102,7 @@
                           </label>
                         </div>
                         <div *ngIf="myformsubmission.get('jurelocation')?.hasError('required') && myformsubmission.get('jurelocation')?.touched" class="text-danger">
-                          Name is required.
+                          Please select atleast one option.
                         </div>
                       </div>
                       <div class="mb-3">
@@ -132,13 +131,17 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Please list 2-3 dates and time ranges that you could do an
-                          interview.(optional)</label>
+                          interview.(Format DD-MM-YYYY)(optional)</label>
                         <textarea type="text" class="form-control" formControlName="juinterviewdate"
                           name="juinterviewdate" id="" cols="30" rows="5"></textarea>
+                          <div *ngIf="myformsubmission.get('juinterviewdate')?.hasError('pattern') && myformsubmission.get('juinterviewdate')?.touched" class="text-danger">
+                            Invalid date.
+                          </div>
                       </div>
                       <div class="d-flex justify-content-between">
                         <button class="btn custom-btn rounded-pill" (click)="prevStep()">Previous</button>
-                        <button class="btn custom-btn rounded-pill" (click)="nextStep()">Next</button>
+                        <button class="btn custom-btn rounded-pill" (click)="nextStep()" [disabled]="!myformsubmission.get('jueducation')?.valid || !myformsubmission.get('jurelocation')?.valid
+                        || !myformsubmission.get('juexperience')?.valid">Next</button>
                       </div>
                     </div>
                     <div *ngIf="currentStep === 3">
@@ -155,12 +158,14 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Job title</label>
-                        <input type="text" class="form-control" formControlName="jujobtitle" placeholder="Job title">
+                        <input type="text" id="jujobtitle" class="form-control" formControlName="jujobtitle" placeholder="Job title">
+                        
                       </div>
                       <div class="mb-3">
                         <label class="form-label" for="jucompanyname">Company</label>
                         <input type="text" id="jucompanyname" class="form-control" placeholder="Company Name"
                           formControlName="jucompanyname">
+                          
                       </div>
                       <div class="d-flex justify-content-between">
                         <button class="btn custom-btn rounded-pill" (click)="prevStep()">Previous</button>

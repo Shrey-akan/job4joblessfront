@@ -13,6 +13,7 @@
             <div class="card mb-4 job-card">
               <div class="card-body">
                 <h2 class="card-title">{{ job.jobtitle }}</h2>
+                <p class="card-text"><strong>Job ID:</strong> {{ job.jobid }}</p>
                 <p class="card-text"><strong>Company:</strong> {{ job.companyforthisjob }}</p>
                 <p class="card-text"><strong>Name</strong> {{ job.empName }}</p>
                 <p class="card-text"><strong>Email</strong> {{ job.empEmail }}</p>
@@ -21,7 +22,7 @@
                 <p class="card-text"><strong>Type:</strong> {{ job.jobtype }}</p>
                 <p class="card-text"><strong>Schedule:</strong> {{ job.schedulejob }}</p>
                 <p class="card-text"><strong>Pay:</strong> {{ job.payjob }}</p>
-                <p class="card-text"><strong>Pay Support:</strong> {{ job.payjobsup }}</p>
+                <!-- <p class="card-text"><strong>Pay Support:</strong> {{ job.payjobsup }}</p> -->
                 <div class="d-flex justify-content-between align-items-center">
                   <button class="btn custom-btn rounded-pill show-more" (click)="showMoreInfo(job)"> {{ isTableVisible ?
                     'Hide Description' : 'Show Description' }}</button>

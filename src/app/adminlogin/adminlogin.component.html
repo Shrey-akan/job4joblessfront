@@ -21,15 +21,17 @@
         <div class="form-group d-flex justify-content-between align-items-center">
           <input type="password" class="form-control px-4 rounded-pill" formControlName="adminPass" id="exampleInputPassword1"
             placeholder="Password" [type]="passwordVisible ? 'text' : 'password'" />
-          <div (click)="togglePasswordVisibility()" class="px-2">
-            <div *ngIf="passwordVisible; else hidePassword">
-              <i class="fa-solid fa-eye-slash"></i>
+            <div class="toggle-password-icon" (click)="togglePasswordVisibility()">
+              <div *ngIf="passwordVisible; else hidePassword" class="eye-icon">
+                <i class="fa-solid fa-eye-slash"></i>
+              </div>
+              <ng-template #hidePassword>
+                <div class="eye-icon">
+                  <i class="fa-solid fa-eye"></i>
+                </div>
+              </ng-template>
             </div>
-            <ng-template #hidePassword>
-              <i class="fa-solid fa-eye"></i>
-            </ng-template>
-          </div>
-        </div>
+        </div> 
         <div class="form-group d-flex flex-column justify-content-center align-items-stretch">
          
           <button type="submit" class="btn rounded-pill my-3" style="background-color: #1E2E5C; color: white;">Sign In</button>

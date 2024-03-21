@@ -58,6 +58,26 @@ export class JobprovidedComponent implements OnInit{
         }
       );
   }
+
+  deleteJob(jobId: string): void {
+    if (!jobId) return; // jobId is not available
+
+    // Make HTTP DELETE request to delete the job
+    this.http.delete(`${this.backend_URL}deleteJob/${jobId}`, { responseType: 'text' })
+      .subscribe({
+        next: (response: any) => {
+          console.log('Job deleted successfully:', response);
+          alert('Successfully Deleted the Job.');
+          this.fetchJobPosts();
+          // Optionally, navigate to another page or reload current page
+        },
+        error: (error: any) => {
+          console.error('Error deleting job:', error);
+          // Handle error (e.g., show an error message)
+          alert('Error deleting job. Please try again later.');
+        }
+      });
+  }
   
   loadJobData() {
     // this.userService.fetchjobpost(this.pageNumber, this.pageSize)

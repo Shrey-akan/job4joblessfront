@@ -11,12 +11,16 @@
             <form [formGroup]="userregister" (ngSubmit)="userRegisteration()">
               <div class="form-group row">
                 <div class="col">
-                  <label for="userFirstName">First Name:*</label>
+                  <label for="userFirstName">First Name:</label>
                   <input type="text" class="form-control" formControlName="userFirstName"
                     placeholder="Enter First Name">
                   <div
                     *ngIf="userregister.get('userFirstName')?.hasError('required') && userregister.get('userFirstName')?.touched"
                     class="text-danger">First Name is required.
+                  </div>
+                  <div
+                    *ngIf="userregister.get('userFirstName')?.hasError('pattern') && userregister.get('userFirstName')?.touched"
+                    class="text-danger">Invalid Name.
                   </div>
                 </div>
                 <div class="col">
@@ -26,21 +30,28 @@
                     *ngIf="userregister.get('userLastName')?.hasError('required') && userregister.get('userLastName')?.touched"
                     class="text-danger">Last Name is required.
                   </div>
+                  <div
+                    *ngIf="userregister.get('userLastName')?.hasError('pattern') && userregister.get('userLastName')?.touched"
+                    class="text-danger">Invalid Name.
+                  </div>
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="userName">Email:*</label>
-                <input type="email" class="form-control" formControlName="userName" placeholder="Enter Email">
+                <input type="email" autocomplete="off" class="form-control" formControlName="userName" placeholder="Enter Email">
                 <div *ngIf="userregister.get('userName')?.hasError('required') && userregister.get('userName')?.touched"
                   class="text-danger">Email is required.
                 </div>
                 <div *ngIf="userregister.get('userName')?.hasError('email') && userregister.get('userName')?.touched"
                   class="text-danger">Please enter a valid email address.
                 </div>
+                <div *ngIf="userregister.get('userName')?.hasError('pattern') && userregister.get('userName')?.touched"
+                  class="text-danger">Please enter a valid email address.
+                </div>
               </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="userPassword">Password:*</label>
                 <input type="password" class="form-control" formControlName="userPassword" placeholder="Enter Password">
                 <div
@@ -51,12 +62,37 @@
                   *ngIf="userregister.get('userPassword')?.hasError('minlength') && userregister.get('userPassword')?.touched"
                   class="text-danger">Password must be at least 8 characters long.
                 </div>
+              </div> -->
+              <div class="form-group position-relative">
+                <input type="password" class="form-control" formControlName="userPassword" id="userPassword"
+                  placeholder="Password" autocomplete="off" [type]="passwordVisible ? 'text' : 'password'" />
+                <div class="toggle-password-icon" (click)="togglePasswordVisibility()">
+                  <div *ngIf="passwordVisible; else hidePassword" class="eye-icon">
+                    <i class="fa-solid fa-eye-slash"></i>
+                  </div>
+                  <ng-template #hidePassword>
+                    <div class="eye-icon">
+                      <i class="fa-solid fa-eye"></i>
+                    </div>
+                  </ng-template>
+                </div>
+                <div
+                  *ngIf="userregister.get('userPassword')?.hasError('required') && userregister.get('userPassword')?.touched"
+                  class="text-danger">Password is required.
+                </div>
+                <div
+                  *ngIf="userregister.get('userPassword')?.hasError('minlength') && userregister.get('userPassword')?.touched"
+                  class="text-danger">Password must be at least 8 characters long.
+                </div>
+                <div
+                  *ngIf="userregister.get('userPassword')?.hasError('pattern') && userregister.get('userPassword')?.touched"
+                  class="text-danger">Password must contain at least one capital letter, one small letter, one number,
+                  and one special character.
+                </div>
               </div>
 
-       
-
               <div class="row">
-           
+
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="userphone">Phone:*</label>
@@ -87,7 +123,7 @@
                 </div>
               </div>
 
-          
+
 
               <div class="form-group">
                 <label for="userstate">State:*</label>
@@ -96,6 +132,10 @@
                   *ngIf="userregister.get('userstate')?.hasError('required') && userregister.get('userstate')?.touched"
                   class="text-danger">State is required.
                 </div>
+                <div
+                *ngIf="userregister.get('userstate')?.hasError('pattern') && userregister.get('userstate')?.touched"
+                class="text-danger">Invalid State.
+              </div>
               </div>
 
               <div class="form-group">
@@ -104,31 +144,39 @@
                 <div *ngIf="userregister.get('usercity')?.hasError('required') && userregister.get('usercity')?.touched"
                   class="text-danger">City is required.
                 </div>
+                <div *ngIf="userregister.get('usercity')?.hasError('pattern') && userregister.get('usercity')?.touched"
+                  class="text-danger">Invalid City.
+                </div>
               </div>
 
               <div>
                 <div class="form-group d-flex align-items-center">
                   <input type="checkbox" (change)="toggleLinkedInputBox($event)">
                   <label for="userlinkden" class="github-label">Linked URL:*</label>
-                  <input *ngIf="showLinkedInputBox" type="url" class="form-control black-border" formControlName="userlinkden" placeholder="Enter LinkedIn URL">
-                  <div *ngIf="userregister.get('userlinkden')?.hasError('required') && userregister.get('userlinkden')?.touched"
+                  <input *ngIf="showLinkedInputBox" type="url" class="form-control black-border"
+                    formControlName="userlinkden" placeholder="Enter LinkedIn URL">
+                  <div
+                    *ngIf="userregister.get('userlinkden')?.hasError('required') && userregister.get('userlinkden')?.touched"
                     class="text-danger">Url is required.
                   </div>
                 </div>
-  
+
                 <div class="form-group d-flex align-items-center">
                   <input type="checkbox" (change)="toggleGitInputBox($event)">
                   <label for="usergithub" class="github-label">Github URL:*</label>
-                  <input  *ngIf="showGitInputBox" type="url" class="form-control black-border" formControlName="usergithub" placeholder="Enter GitHub URL">
-                  <div *ngIf="userregister.get('usergithub')?.hasError('required') && userregister.get('usergithub')?.touched"
+                  <input *ngIf="showGitInputBox" type="url" class="form-control black-border"
+                    formControlName="usergithub" placeholder="Enter GitHub URL">
+                  <div
+                    *ngIf="userregister.get('usergithub')?.hasError('required') && userregister.get('usergithub')?.touched"
                     class="text-danger">Url is required.
                   </div>
                 </div>
-  
+
                 <div class="form-group d-flex align-items-center">
                   <input type="checkbox" (change)="toggleOtherInputBox($event)">
                   <label for="otherturluser" class="github-label">Other URL:</label>
-                  <input *ngIf="showOtherInputBox" type="url" class="form-control black-border" formControlName="otherturluser" placeholder="Enter URL">
+                  <input *ngIf="showOtherInputBox" type="url" class="form-control black-border"
+                    formControlName="otherturluser" placeholder="Enter URL">
                 </div>
               </div>
 
@@ -147,7 +195,7 @@
               </button> -->
               <button type="submit" class="btn custom-btn rounded-pill mt-3"
                 style=" background-color: #1e2e5c;  color: white;" [disabled]="loading">
-               Register
+                Register
               </button>
 
 
@@ -178,10 +226,9 @@
           {{ successMessage }}
         </div>
         <div *ngIf="showWarning" class="alert alert-warning">
-           User had not created!
+          User had not created!
         </div>
       </div>
     </div>
   </div>
 </div>
-

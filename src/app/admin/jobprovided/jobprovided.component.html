@@ -12,6 +12,7 @@
                             <th>Company</th>
                             <th>Approved</th>
                             <th>View Details</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,12 +23,15 @@
                             <td>{{ job.companyforthisjob }}</td>
                             <!-- <td>{{ job.approvejob }}</td> -->
                             <td> 
-                                <button class="btn btn-primary" (click)="approveJob(job.jobid)">
+                                <button class="btn btn-secondary" (click)="approveJob(job.jobid)">
                                     {{ job.approvejob ? 'Disapprove' : 'Approve' }}
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-primary">Info</button>
+                                <button class="btn" style="background-color: #1e2e5c; color: white;">Info</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary"(click)="deleteJob(job.jobid)">Delete</button>
                             </td>
                         </tr>
                     </tbody>

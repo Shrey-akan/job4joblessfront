@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -44,7 +44,7 @@ export class BlogComponent {
   blogDetails: Blog | null = null;
   Array: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient , private sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private sanitizer: DomSanitizer) { }
   i: any;
 
 
@@ -57,30 +57,18 @@ export class BlogComponent {
     });
   }
 
-  // fetchBlogDetails(blogId: string): void {
-  //   this.http.post<any>('https://hustleforwork.com:3000/get-blog', { blog_id: blogId, draft: false, mode: 'view' }).subscribe(
-  //     (response: any) => {
-  //       if (response.error) {
-  //         console.error('Error fetching blog details:', response.error);
-  //         // Handle error, display user-friendly message
-  //       } else {
-  //         console.log('Blog details fetched successfully:', response.blog);
-  //         this.blogDetails = response.blog;
-  //       }
-  //     },
-  //     error => {
-  //       console.error('Error fetching blog details:', error);
-  //       // Handle error, display user-friendly message
-  //     }
-  //   );
-  // }
-
   parseHTML(htmlString: string | undefined): SafeHtml {
     if (htmlString) {
-      return this.sanitizer.bypassSecurityTrustHtml(htmlString);
-  } else {
-      return '';
-  }
+        // Ensure that htmlString contains valid HTML markup
+        const sanitizedHtml = this.sanitizer.sanitize(
+            SecurityContext.HTML,
+            htmlString
+        );
+        // Return sanitized HTML
+        return this.sanitizer.bypassSecurityTrustHtml(sanitizedHtml || '');
+    } else {
+        return '';
+    }
 }
   fetchBlogDetails(blogId: string): void {
     this.http.post<any>('https://hustleforwork.com:3000/get-blog', { blog_id: blogId, draft: false, mode: 'view' }).subscribe(

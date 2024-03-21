@@ -694,6 +694,7 @@ export class UserService {
         // console.log("Data inserted");
       },
       error: (err: any) => {
+        alert("You have already apply for this from this account once...");
         // console.log(err);
       }
     });

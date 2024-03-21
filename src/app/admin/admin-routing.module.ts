@@ -19,6 +19,7 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { SubadmindetailsComponent } from './subadmindetails/subadmindetails.component';
 import { UpdatesubadminComponent } from './updatesubadmin/updatesubadmin.component';
 import { AdminloginComponent } from '../adminlogin/adminlogin.component';
+import { InfoPageComponent } from './info-page/info-page.component';
 
 const routes: Routes = [
 
@@ -59,7 +60,9 @@ const routes: Routes = [
       {
         path: 'subadmindetails', component: SubadmindetailsComponent
       },
-
+      {
+        path: 'infoPage', component: InfoPageComponent
+      },
       {
         path: 'enquirydetails', component: EnquirydetailsComponent
       },

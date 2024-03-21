@@ -4,6 +4,7 @@ import { UserService } from 'src/app/auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import { backendUrl } from 'src/app/constant';
 
+
 @Component({
   selector: 'app-employerdetails',
   templateUrl: './employerdetails.component.html',
@@ -54,8 +55,23 @@ export class EmployerdetailsComponent implements OnInit{
       }
     });
   }
-
+  infoPage(jobid:string):void
+  {
+    this.router.navigate(['/infoPage']);
+  }
   getEmployeeById(empid: string): any {
     return this.data.find((user: any) => user.empid === empid);
+  }
+  truncateDescription(description: string): string {
+    if (!description) {
+      return ''; // Return empty string if description is null or undefined
+    }
+  
+    const words = description.split(' ');
+    if (words.length > 50) {
+      return words.slice(0, 30).join(' ') + '...';
+    } else {
+      return description;
+    }
   }
 }

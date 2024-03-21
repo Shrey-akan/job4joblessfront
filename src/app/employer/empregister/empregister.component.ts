@@ -89,18 +89,18 @@ export class EmpregisterComponent implements OnInit {
       })
     }
     this.employerdetails = this.formBuilder.group({
-      empfname: ['', Validators.required],
-      emplname: ['', Validators.required],
+      empfname: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      emplname: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       empmailid: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
       emppass: ['',[Validators.required , Validators.minLength(8) , Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@])[A-Za-z\d@]{8,}$/)]],
       empphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
-      empcompany: ['', Validators.required],
+      empcompany: ['', [Validators.required , Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
       descriptionemp: ['', Validators.required],
       empcountry: ['', Validators.required],
-      empstate: ['', Validators.required],
-      empcity: ['', Validators.required],
+      empstate: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
+      empcity: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       emplinkden: [''],
-      designation: ['', Validators.required],
+      designation: ['', [Validators.required , Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
       websiteUrl: [''],
       empotherurl: ['']
     });

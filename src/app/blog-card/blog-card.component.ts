@@ -41,7 +41,7 @@ export class BlogCardComponent implements OnInit {
   pageState: string = "home";
   loading: boolean = false;
   quote: string = '';
-
+  isloading: boolean = true;
   searchQuery: string = '';
   filteredBlogs: any[] = [];
 
@@ -94,6 +94,7 @@ export class BlogCardComponent implements OnInit {
   // }
 
   fetchLatestBlogs(page: number): void {
+    this.isloading=true;
     this.loading = true;
     this.http.post<any>(`${this.blog_const}/latest-blogs-approved`, { page }).subscribe(data => {
       console.log('Latest Blogs Response:', data);
@@ -102,14 +103,18 @@ export class BlogCardComponent implements OnInit {
         
         this.blogs = [...this.blogs, ...data.blogs.slice(0, 5)];
         console.log("Blogs are: ",this.blogs)
+        this.isloading=false
       } else {
         // Set blogs for the first page
+        this.isloading=false;
         this.blogs = data.blogs.slice(0, 5);
       }
+      this.isloading=false;
       this.loading = false;
     }, error => {
       console.error('Error fetching latest blogs:', error);
       this.loading = false;
+      this.isloading=false;
     });
   }
 

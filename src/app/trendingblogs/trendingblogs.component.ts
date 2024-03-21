@@ -39,6 +39,7 @@ export class TrendingblogsComponent implements OnInit {
   pageState: string = "home";
   loading: boolean = false;
   quote: string = '';
+  isloading: boolean = true;
 
   searchQuery: string = '';
   filteredBlogs: any[] = [];
@@ -90,19 +91,24 @@ export class TrendingblogsComponent implements OnInit {
 
   fetchLatestBlogs(page: number): void {
     this.loading = true;
+    this.isloading=true;
     this.http.post<any>(`${this.blog_const}/latest-blogs`, { page }).subscribe(data => {
       console.log('Latest Blogs Response:', data);
       if (this.blogs && page > 1) {
         // Append new blogs to the existing list
         this.blogs = [...this.blogs, ...data.blogs.slice(0, 5)];
+        this.isloading=false;
       } else {
         // Set blogs for the first page
         this.blogs = data.blogs.slice(0, 5);
+        this.isloading=false;
       }
+      this.isloading=false;
       this.loading = false;
     }, error => {
       console.error('Error fetching latest blogs:', error);
       this.loading = false;
+      this.isloading=false;
     });
   }
   
