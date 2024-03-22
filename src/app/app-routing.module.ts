@@ -81,7 +81,7 @@ const routes: Routes = [
     path: 'blog-cards', component: BlogCardComponent
   },
   {
-    path: 'postblog', component: PostblogComponent
+    path: 'postblog/:token', component: PostblogComponent
   },
   {
     path: 'createblog', component: CreateblogComponent

@@ -27,6 +27,17 @@ interface SubadminDetails {
 export class SubadmindetailsComponent implements OnInit {
   private backend_URL = `${backendUrl}`;
 
+  currentPage = 1;
+  itemsPerPage = 10;
+
+  loadNextPage() {
+    this.currentPage++;
+  }
+
+  loadPreviousPage() {
+    this.currentPage--;
+  }
+
   dataSource: MatTableDataSource<SubadminDetails> = new MatTableDataSource<SubadminDetails>([]);
   displayedColumns: string[] = ['subadminame', 'subadminmail', 'manageUsers', 'manageEmployers', 'postJob', 'applyJob', 'manageBlogs', 'pushNotification', 'approveJobDetails', 'actions', 'actionsa'];
 

@@ -1,9 +1,7 @@
-<!-- subadmindetails.component.html -->
-<div class="container my-5">
+<!-- <div class="container my-5">
     <div class="table-responsive">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 shadow p-4 rounded bg-light table-with-shadow">
 
-            <!-- Define columns -->
             <ng-container matColumnDef="subadminame">
                 <th mat-header-cell *matHeaderCellDef> Subadmin Name </th>
                 <td mat-cell *matCellDef="let element"> {{element.subadminame}} </td>
@@ -62,9 +60,80 @@
                 </td>
             </ng-container>
 
-            <!-- Define table rows -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="container text-center" style="margin: 1%;">
+        <h4>EMPLOYERS DETAILS</h4>
+        <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource" class="table table-striped custom-table">
+                <ng-container matColumnDef="subadminame">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Subadmin Name </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.subadminame}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="subadminmail">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Subadmin Email </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.subadminmail}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="manageUsers">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Manage Users </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.manageUsers ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="manageEmployers">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Manage Employers </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.manageEmployers ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="postJob">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Post Job </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.postJob ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="applyJob">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Apply Job </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.applyJob ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="manageBlogs">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Manage Blogs </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.manageBlogs ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pushNotification">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Push Notification </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.pushNotification ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="approveJobDetails">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Approve Job Details </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element"> {{element.approveJobDetails ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element">
+                        <button class="btn btn-primary mr-2"
+                            (click)="redirectToUpdateSubadmin(element.subadminid)">Edit</button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="actionsa">
+                    <th class="table-row-border" mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td class="table-row-border" mat-cell *matCellDef="let element">
+                        <button class="btn btn-danger" (click)="deleteSubAdmin(element.subadminid)">Delete</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row class="table-row-border" *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <!-- <button *ngIf=" currentPage!==1" class="previous-button" (click)="loadPreviousPage()">< Previous</button> -->
+            <!-- <button *ngIf="currentPage * itemsPerPage < dataSource.length" class="load-more-button" (click)="loadNextPage()">Next ></button> -->
+        </div>
     </div>
 </div>

@@ -14,6 +14,16 @@ export class EmployerdetailsComponent implements OnInit{
   
   data:any;
   private backend_URL = `${backendUrl}`;
+  currentPage = 1;
+  itemsPerPage = 10;
+
+  loadNextPage() {
+    this.currentPage++;
+  }
+
+  loadPreviousPage() {
+    this.currentPage--;
+  }
 
 
   constructor(private b1:UserService,private router:Router , private http: HttpClient){}
@@ -74,4 +84,5 @@ export class EmployerdetailsComponent implements OnInit{
       return description;
     }
   }
+  
 }

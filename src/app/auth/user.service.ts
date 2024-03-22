@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ApplyJob } from 'src/app/apply-job';
-import { backendUrl } from '../constant';
+import { backendUrl , blogconst } from '../constant';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import {
   Auth,
@@ -18,6 +18,7 @@ import { PostJob } from '../dashboardemp/alljobs/alljobs.component';
 // Define your API base URL as a constant variable
 // const API_BASE_URL = '${API_BASE_URL}';
 const API_BASE_URL = `${backendUrl}`;
+const hustleURL = `${blogconst}`;
 interface User {
   uid: Number;
   userName: String;
@@ -122,6 +123,9 @@ export class UserService {
   fetchquestionpaperurl = `${API_BASE_URL}fetchquestion`;
   // Check Answer URL
   checkalanswere = `${API_BASE_URL}checkallanswer`;
+
+  //Blog Content
+  loginWithGoogleHustle = `${hustleURL}/google-auth`;
   constructor(private h1: HttpClient, private jobPostService: JobPostService, private router: Router, private auth: Auth, public cookie: CookieService) { }
 
 
@@ -271,6 +275,43 @@ export class UserService {
           this.router.navigate(['/login']);
         }
         // console.log("Data checked");
+      },
+      error: (err: any) => {
+        // console.log(err);
+        alert('Incorrect Credentials!');
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  public logincheckgmailBLOG(userName: string) {
+    const data = { userName }; // Wrap the username in an object
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    this.h1.post(this.loginWithGoogleHustle, data, { headers }).subscribe({
+      next: (resp: any) => {
+
+        const mainres: User = resp;
+
+        this.cookie.set('accessToken', resp.access_token);
+        // this.cookie.set('uid', resp.uid);
+
+        const accessToken = resp.access_token;
+        AuthInterceptor.accessToken = accessToken;
+
+        const isAuthenticated = resp.accessToken;
+        if (isAuthenticated) {
+
+          alert('Login Successful!');
+          this.router.navigate([`/postblog/${accessToken}`]);
+        } else {
+
+          alert('Incorrect Credentials!');
+          this.router.navigate(['/blogs']);
+        }
       },
       error: (err: any) => {
         // console.log(err);

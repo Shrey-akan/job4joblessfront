@@ -23,3 +23,37 @@
     overflow-x: auto;
     /* Enable horizontal scrolling */
 }
+
+/* CSS for Load More button */
+.load-more-button {
+    color: white;
+    background-color: #1e2e5c;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: large;
+}
+
+.load-more-button:hover {
+    background-color: #273769;
+}
+
+/* CSS for Previous button */
+.previous-button {
+    color: white;
+    background-color: #2b2626;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 7px;
+    font-size: large;
+}
+
+.previous-button:hover {
+    background-color: #bbb;
+    color: black;
+}

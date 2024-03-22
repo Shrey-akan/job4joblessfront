@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>Create Blog</h2>
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" class="form-control" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label>Description:</label>
+        <textarea class="form-control" formControlName="des" rows="5"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Banner Image:</label>
+        <input type="file" class="form-control-file" formControlName="banner">
+      </div>
+      <div class="form-group">
+        <label>Description:</label>
+       
+      </div>
+      <!-- <div class="form-group">
+        <label>Content:</label>
+        <div formArrayName="content">
+          <div *ngFor="let block of blocksArray; let i = index" class="mb-3" [formGroupName]="i">
+            <input type="text" class="form-control" formControlName="type" placeholder="Type">
+            <textarea class="form-control mt-2" formControlName="text" rows="3" placeholder="Text"></textarea>
+            <button type="button" class="btn btn-danger mt-2" (click)="removeContentBlock(i)">Remove Content</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addContentBlock()">Add Content Block</button>
+      </div> -->
+      <div class="form-group">
+        <label>Tags:</label>
+        <div formArrayName="tags">
+          <input type="text" class="form-control" *ngFor="let tag of tagsArray; let i = index" [formControlName]="i" placeholder="Tag">
+          <!-- <button type="button" class="btn btn-danger mt-2" (click)="removeTag(i)">Remove Tag</button> -->
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addTag()">Add Tag</button>
+      </div>
+      <div class="form-group">
+        <label>Draft:</label>
+        <input type="checkbox" class="form-check-input" formControlName="draft">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  

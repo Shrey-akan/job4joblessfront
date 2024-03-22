@@ -14,6 +14,16 @@ export class JobprovidedComponent implements OnInit{
   data: any[] = [];
   pageNumber = 1;
   pageSize = 10;
+  currentPage = 1;
+  itemsPerPage = 10;
+
+  loadNextPage() {
+    this.currentPage++;
+  }
+
+  loadPreviousPage() {
+    this.currentPage--;
+  }
 
   jobPosts: any[] = [];
   private backend_URL = `${backendUrl}`;

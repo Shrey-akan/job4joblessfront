@@ -41,12 +41,10 @@ export class ApplyjobComponent implements OnInit {
     // let responce = this.b1.empaccregrepo();
     // responce.subscribe((data1: any)=>this.data=data1);
     this.myformsubmission = this.formBuilder.group({
-
       juname: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       jumail: ['', [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
       jucompny: ['', Validators.required , Validators.pattern(/^[A-Za-z0-9\s]+$/)],
       jutitle: ['', Validators.required],
-      // juresume: ['', [Validators.required, this.fileValidator]],
       juresume: ['', [Validators.required]],
       jurelocation: ['', [Validators.required]],
       jueducation: ['', [Validators.required]],
@@ -62,6 +60,7 @@ export class ApplyjobComponent implements OnInit {
     // Add more steps as needed
     this.b1.jobTitle$.subscribe((jobTitle) => {
       this.jobTitle = jobTitle;
+      this.myformsubmission.get('jutitle')?.setValue(jobTitle); // Set jutitle value
     });
 
     this.b1.jobId$.subscribe((jobId) => {
@@ -73,6 +72,7 @@ export class ApplyjobComponent implements OnInit {
     });
     this.b1.empId$.subscribe((empId) => {
       this.empId = empId;
+      this.myformsubmission.get('empid')?.setValue(empId); // Set empid value
     });
     // Set the value of the form control
     this.myformsubmission.get('jucompny')?.setValue(this.companyName);

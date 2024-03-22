@@ -52,7 +52,7 @@ export class BloglistComponent implements OnInit {
   showSignUpForm: boolean = false;
   screenDisabled: boolean = false;
   SignInloading:boolean = false;
-  SignUploading:boolean = false
+  SignUploading:boolean = false;
 
   categories: string[] = [
     "programming", "technology", "science", "health", "finance", "sports",
@@ -187,7 +187,8 @@ export class BloglistComponent implements OnInit {
         const user = userCredential.user;
         if (user.email) {
           const userName = user.email;
-          this.b1.logincheckgmail(userName);
+          console.log(userName);
+          this.b1.logincheckgmailBLOG(userName);
         } else {
           console.error('User email is null. Handle this case as needed.');
         }
@@ -195,56 +196,6 @@ export class BloglistComponent implements OnInit {
       .catch((error) => {
       });
   }
-
-  // login(form: FormGroup): void {
-  //   // form.markAllAsTouched(); 
-  //   if (form.valid) {
-  //     const loginData = {
-  //       email:form.value.email,
-  //       password:form.value.password
-  //     };
-  //     this.http.post<any>(`${this.blog_const}/signin`,loginData)
-  //     .subscribe(
-  //    {
-  //     next:   (resp) =>{
-  //       // console.log("Login Successfully",respone);
-  //       // this.router.navigate(['postblog']);
-  //       if (resp) {
-  //         // console.log("Access Token Generated" + resp.accessToken);
-  //         // const mainres: Employer = resp;
-  //         // console.log(`Login response from the server: ${mainres}`);
-  //         // this.cookie.set('emp', resp.empid);
-  //         this.cookie.set('accessToken', resp.access_token);
-  //         // this.cookie.set('refreshToken', resp.refreshToken);
-  //         // console.log("Refresh token saved ", resp.refreshToken);
-  //         // Inside your logincheckgmail function
-  //         const accessToken = resp.access_token; // Assuming this is where you get the access token
-  //         AuthInterceptor.accessToken = accessToken;
-  //         const isAuthenticated = resp.access_token;
-  //         console.log("Access token is: "+accessToken);
-
-  //         if (isAuthenticated) {
-  //           // console.log("Server responded with an object of employer");
-  //           alert('Login Successful!');
-  //           console.log("Login Successfully",resp);
-  //           this.router.navigate(['postblog']);
-  //         } else {
-  //           alert('Incorrect Credentials!');
-  //           this.router.navigate(['blogs']);
-  //         }
-  //       } else {
-  //         // this.errorMessage = 'Your account is not activated. Please contact support for assistance.';
-  //         // console.log(this.errorMessage);
-  //       }
-  //     },
-  //     error:(error)=>
-  //     {
-  //       console.log("Error is coming",error);
-  //     }
-  //    }
-  //     );
-  //   }
-  // }
   login(form: FormGroup): void {
     if (form.valid) {
       this.SignInloading=true;
@@ -272,7 +223,7 @@ export class BloglistComponent implements OnInit {
               $('#signInModal').modal('hide');
               // Show alert and navigate to the desired route after the modal is closed
               alert('Login Successful!');
-              this.router.navigate(['/postblog']);
+              this.router.navigate([`/postblog/${accessToken}`]);
             } else {
               alert('Incorrect Credentials!');
               this.router.navigate(['/blogs']);
@@ -310,6 +261,9 @@ export class BloglistComponent implements OnInit {
               // Handle the response as needed
             },
             error: (error) => {
+              if (error.status === 500) {
+                alert('User is already Registered...');
+              } 
               console.error('Error occurred during signup:', error);
               // Handle the error as needed
             }

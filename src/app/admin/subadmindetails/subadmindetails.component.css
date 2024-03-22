@@ -1,0 +1,28 @@
+.custom-btn {
+    color: white;
+    background-color: #1e2e5c;
+}
+
+.custom-table {
+    border: 1px solid black;
+}
+
+.w-10 {
+    width: 30%;
+    /* Adjust the width as needed */
+}
+
+.blue-bgColor {
+    color: white;
+    background-color: #1e2e5c;
+}
+
+.table-responsive {
+    width: 100%;
+    /* Adjust width as needed */
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+}
+.table-row-border {
+    border-bottom: 1px solid black;
+  }

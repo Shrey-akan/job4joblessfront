@@ -89,7 +89,7 @@
 </div> -->
 
 <div class="container-fluid mr-3">
-  <div class="row justify-content-center" style="margin: 3%;">
+  <div class="row justify-content-center" style="margin: 1%;">
     <div class="col-lg-10">
       <div class="text-center" >
         <h4>SEEKERS DETAILS</h4>
@@ -105,7 +105,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of data" style="background-color: rgb(216, 252, 216);">
+              <tr *ngFor="let user of data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" style="background-color: rgb(216, 252, 216);">
                 <td>{{ user.userFirstName }} {{ user.userLastName }}</td>
                 <td><a href="tel:{{ user.userphone }}">{{ user.userphone }}</a></td>
                 <td><a href="mailto:{{ user.userName }}">{{ user.userName }}</a></td>
@@ -122,6 +122,8 @@
               </tr>
             </tbody>
           </table>
+          <button *ngIf=" currentPage!==1" class="previous-button" (click)="loadPreviousPage()">< Previous</button>
+        <button *ngIf="currentPage * itemsPerPage < data.length" class="load-more-button" (click)="loadNextPage()">Next ></button>
         </div>
       </div>
     </div>

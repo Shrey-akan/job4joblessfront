@@ -7,26 +7,27 @@
                     <tr style="background-color: rgb(143, 236, 143);">
                         <!-- <th>S.no.</th> -->
                         <th>Name</th>
-                        <th class="blue-bgColor">Company</th>
+                        <th>Company</th>
                         <th>Email</th>
-                        <th class="blue-bgColor">Phone</th>
+                        <th>Phone</th>
                         <th>Description</th>
-                        <th class="blue-bgColor">Notification</th>
+                        <th>Notification</th>
                         <th>Actions</th>
                         <!-- Add a new column for the action button -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of data" style="background-color: rgb(216, 252, 216);">
+                    <!-- <tr *ngFor="let user of data" style="background-color: rgb(216, 252, 216);"> -->
+                       <tr *ngFor="let user of data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" style="background-color: rgb(216, 252, 216);">
                         <!-- <td>{{ user.empid }}</td> -->
                         <td>{{ user.empfname }} {{ user.emplname }}</td>
                         <td>{{ user.empcompany }}</td>
                         <td><a href="mailto:{{ user.empmailid }}">{{ user.empmailid }}</a></td>
                         <td><a href="tel:{{ user.empphone }}">{{ user.empphone }}</a></td>
                         <td style="width: 300px;">{{ truncateDescription(user.descriptionemp) }}</td>
-                        <!-- <td style="width: 300px;">{{ user.descriptionemp }}</td> -->
                         <td>
-                            <button style="font-size: small;" class="btn custom-btn rounded-pill" (click)="sendNotificationemp(user.empid)">Send
+                            <button style="font-size: small;" class="btn custom-btn rounded-pill"
+                                (click)="sendNotificationemp(user.empid)">Send
                                 Notification</button>
                         </td>
                         <td>
@@ -45,6 +46,8 @@
         </tr>
         </tbody>
         </table>
+        <button *ngIf=" currentPage!==1" class="previous-button" (click)="loadPreviousPage()">< Previous</button>
+        <button *ngIf="currentPage * itemsPerPage < data.length" class="load-more-button" (click)="loadNextPage()">Next ></button>
     </div>
 </div>
 </div>

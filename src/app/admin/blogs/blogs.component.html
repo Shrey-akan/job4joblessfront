@@ -14,8 +14,8 @@
         <tbody>
           <ng-container *ngFor="let blog of blogs; let i = index">
             <tr>
-              <td>{{ blog.title }}</td>
-              <td class="font-gelasio">{{ blog.des }}</td>
+              <td style="width: 200px;">{{ blog.title }}</td>
+              <td class="font-gelasio" style="width: 400px;">{{ blog.des }}</td>
               <td>
                 <img [src]="blog.banner" alt="Blog Banner" class="img-fluid" style="max-width: 100px;">
               </td>
