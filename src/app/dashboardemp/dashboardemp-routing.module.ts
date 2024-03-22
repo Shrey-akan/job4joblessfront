@@ -13,6 +13,7 @@ import { VideocallComponent } from './videocall/videocall.component';
 import { UpdatejobComponent } from './updatejob/updatejob.component';
 import { authGuard } from '../auth.guard';
 import { SetQuestionComponent } from './set-question/set-question.component';
+import { DisapprovejobComponent } from './disapprovejob/disapprovejob.component';
 
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
 {
 path:'set-question/:jobid',component:SetQuestionComponent
 },
+{
+  path:'disapprovejob',component:DisapprovejobComponent
+  },
+
       {
         path:'videocall/:uid', component:VideocallComponent
       },

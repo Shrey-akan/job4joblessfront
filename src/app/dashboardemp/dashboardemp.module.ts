@@ -20,6 +20,7 @@ import { NotificationempComponent } from './notificationemp/notificationemp.comp
 import { VideocallComponent } from './videocall/videocall.component';
 import { UpdatejobComponent } from './updatejob/updatejob.component';
 import { SetQuestionComponent } from './set-question/set-question.component';
+import { DisapprovejobComponent } from './disapprovejob/disapprovejob.component';
 @NgModule({
   declarations: [
     DashboardempComponent,
@@ -35,7 +36,8 @@ import { SetQuestionComponent } from './set-question/set-question.component';
      NotificationempComponent,
      VideocallComponent,
      UpdatejobComponent,
-     SetQuestionComponent
+     SetQuestionComponent,
+     DisapprovejobComponent
   ],
   imports: [
     CommonModule,

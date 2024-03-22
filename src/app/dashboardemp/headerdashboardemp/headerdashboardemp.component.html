@@ -15,8 +15,21 @@
           <a class="nav-link" routerLink="/dashboardemp/" [routerLinkActiveOptions]={exact:true}
             routerLinkActive="active">Post Job</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/dashboardemp/alljobs" routerLinkActive="active">Job Posted</a>
+        </li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
+            Job Posted
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li>
+              <a class="dropdown-item" routerLink="/dashboardemp/alljobs" style="color: black;" routerLinkActive="active">Approved Jobs </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/dashboardemp/disapprovejob" style="color: black;" routerLinkActive="active">Dis-Approved Jobs</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboardemp/applieduserdetails" routerLinkActive="active">Applied Users</a>
