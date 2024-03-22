@@ -15,6 +15,7 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
 import { CheckotpemployerComponent } from './checkotpemployer/checkotpemployer.component';
 import { ResetpasswordemployerComponent } from './resetpasswordemployer/resetpasswordemployer.component';
 import { OvercomingComponent } from './overcoming/overcoming.component';
+import { TermsComponent } from '../terms/terms.component';
 
 const routes: Routes = [
 
@@ -56,6 +57,9 @@ const routes: Routes = [
       },
       {
         path:'resetpasswordemployer' , component:ResetpasswordemployerComponent
+      },
+      {
+        path:'terms' , component:TermsComponent
       },
       {
         path:'overcoming' , component:OvercomingComponent

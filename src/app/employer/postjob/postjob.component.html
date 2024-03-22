@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <div class="container" style="margin: 60px auto;">
                     <div class="row">
-                        <h1 class="animated-text">Let's make your next great hire. Fast.</h1>
+                        <h1 class="animated-text">Let's make your next great hire fast</h1>
 
                     </div>
                     <div class="row">
@@ -340,15 +340,18 @@
                         Password is required.
                     </div>
                 </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" id="termsCheckbox" formControlName="termsCheckbox" class="form-check-input">
+                    <label for="termsCheckbox" class="form-check-label">I agree to the <a routerLink="/terms" routerLinkActive="active">Terms and Conditions</a> and <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a></label>
+                    <div *ngIf="companyswitch.get('termsCheckbox')?.invalid && companyswitch.get('termsCheckbox')?.touched"
+                        class="text-danger">
+                        You must agree to the <a routerLink="/terms" routerLinkActive="active">Terms and Conditions</a> and <a routerLink="">Privacy Policy</a>.
+                    </div>
+                </div>
                 <button type="submit" class="btn custom-btn rounded-pill">Submit</button>
             </form>
 
-            <p>By creating an account, you agree to Indeed’s <a href="">Terms of Service</a> ,
-                <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>. You consent to
-                receiving marketing messages from Indeed and may opt out from receiving such
-                messages by following the unsubscribe link in our messages, or as detailed in
-                our terms.
-            </p>
+         
         </div>
 
     </div>

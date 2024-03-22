@@ -1,19 +1,19 @@
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="showNavbaremp">
-      <div class="container">
-          <a class="navbar-brand" routerLink="/dashboardemp">
-              <img src="assets/Asset 1@4x-8.png" width="200" class="image-thumbnail d-inline-block">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <!-- <span class="navbar-toggler-icon"></span> -->
-              <i class="fa-solid fa-bars-staggered"></i>
-          </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="showNavbaremp">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/dashboardemp">
+      <img src="assets/Asset 1@4x-8.png" width="200" class="image-thumbnail d-inline-block">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars-staggered"></i>
+    </button>
 
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboardemp/" [routerLinkActiveOptions]={exact:true} routerLinkActive="active">Post Job</a>
+          <a class="nav-link" routerLink="/dashboardemp/" [routerLinkActiveOptions]={exact:true}
+            routerLinkActive="active">Post Job</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboardemp/alljobs" routerLinkActive="active">Job Posted</a>
@@ -22,12 +22,14 @@
           <a class="nav-link" routerLink="/dashboardemp/applieduserdetails" routerLinkActive="active">Applied Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" routerLink="/dashboardemp/notificationemp" routerLinkActive="active">
+          <a class="nav-link d-flex align-items-center" routerLink="/dashboardemp/notificationemp"
+            routerLinkActive="active">
             Notifications&nbsp;
-            <span *ngIf="waitingApplicationsCount > 0" class="badge rounded-pill bg-danger ml-2">{{ waitingApplicationsCount }}</span>
+            <span *ngIf="waitingApplicationsCount > 0" class="badge rounded-pill bg-danger ml-2">{{
+              waitingApplicationsCount }}</span>
           </a>
         </li>
-          
+
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -37,7 +39,8 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" (click)="logoutEmployer()" routerLinkActive="active">
-            <button class="btn btn-custom rounded-pill">Logout<span class="mx-2"><i class="fa-solid fa-right-from-bracket"></i></span></button>
+            <button class="btn btn-custom rounded-pill">Logout<span class="mx-2"><i
+                  class="fa-solid fa-right-from-bracket"></i></span></button>
           </a>
         </li>
       </ul>
@@ -45,6 +48,5 @@
   </div>
 </nav>
 
-  
-  <router-outlet></router-outlet>
-  
+
+<router-outlet></router-outlet>

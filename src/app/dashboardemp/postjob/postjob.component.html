@@ -21,6 +21,17 @@
     <div *ngIf="currentStep === 1">
       <!-- Step 1: Job Title and Company Name -->
       <div class="mb-3">
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
         <label for="empName" class="form-label">Name*</label>
         <input type="text" class="form-control" id="empName" formControlName="empName" placeholder="Enter your name" required>
         <div *ngIf="jobPostForm.get('empName')?.hasError('required')  && jobPostForm.get('empName')?.touched"
