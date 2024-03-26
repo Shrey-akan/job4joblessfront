@@ -4,20 +4,45 @@
     <div class="form-group">
       <label for="empfname">First Name*</label>
       <input type="text" id="empfname" formControlName="empfname" class="form-control" required>
+      <div *ngIf="employeeForm.get('empfname')?.hasError('required') && employeeForm.get('empfname')?.touched"
+        class="text-danger">First Name is required.
+      </div>
+      <div *ngIf="employeeForm.get('empfname')?.hasError('pattern') && employeeForm.get('empfname')?.touched"
+        class="text-danger">Invalid Name.
+      </div>
     </div>
     <div class="form-group">
       <label for="emplname">Last Name*</label>
       <input type="text" id="emplname" formControlName="emplname" class="form-control" required>
+      <div *ngIf="employeeForm.get('emplname')?.hasError('required') && employeeForm.get('emplname')?.touched"
+        class="text-danger">Last Name is required.
+      </div>
+      <div *ngIf="employeeForm.get('emplname')?.hasError('pattern') && employeeForm.get('emplname')?.touched"
+        class="text-danger">Invalid Name.
+      </div>
     </div>
     <div class="form-group">
       <label for="empcompany">Company*</label>
       <input type="text" id="empcompany" formControlName="empcompany" class="form-control" required>
+      <div *ngIf="employeeForm.get('empcompany')?.hasError('required') && employeeForm.get('empcompany')?.touched"
+        class="text-danger">Company Name is required.
+      </div>
+      <div *ngIf="employeeForm.get('empcompany')?.hasError('pattern') && employeeForm.get('empcompany')?.touched"
+        class="text-danger">Invalid Name.
+      </div>
     </div>
 
     <div class="form-group">
       <label for="empphone">Phone*</label>
       <!-- <input type="tel" id="empphone" formControlName="empphone" class="form-control" required> -->
-      <input type="tel" id="empphone" class="form-control" formControlName="empphone" placeholder="Enter Phone" required>
+      <input type="tel" id="empphone" class="form-control" formControlName="empphone" placeholder="Enter Phone"
+        required>
+      <div *ngIf="employeeForm.get('empphone')?.hasError('required') && employeeForm.get('empphone')?.touched"
+        class="text-danger">Phone number is required.
+      </div>
+      <div *ngIf="employeeForm.get('empphone')?.hasError('pattern') && employeeForm.get('empphone')?.touched"
+        class="text-danger">Please enter a valid phone number with 10 digits.
+      </div>
     </div>
     <div class="form-group">
       <label for="empcountry">Country*</label>
@@ -25,22 +50,37 @@
         <option value="">Select your country</option>
         <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
       </select>
-    </div>
-   
-    <div *ngIf="employeeForm.get('empcountry')?.hasError('required') && employeeForm.get('empcountry')?.touched" class="text-danger">
-      Country is required.
+      <div *ngIf="employeeForm.get('empcountry')?.hasError('required') && employeeForm.get('empcountry')?.touched"
+        class="text-danger">
+        Country is required.
+      </div>
     </div>
     <div class="form-group">
       <label for="empstate">State*</label>
       <input type="text" id="empstate" formControlName="empstate" class="form-control" required>
+      <div *ngIf="employeeForm.get('empstate')?.hasError('required') && employeeForm.get('empstate')?.touched"
+        class="text-danger">State is required.
+      </div>
+      <div *ngIf="employeeForm.get('empstate')?.hasError('pattern') && employeeForm.get('empstate')?.touched"
+        class="text-danger">Invalid State.
+      </div>
     </div>
     <div class="form-group">
       <label for="empcity">City*</label>
       <input type="text" id="empcity" formControlName="empcity" class="form-control" required>
+      <div *ngIf="employeeForm.get('empcity')?.hasError('required') && employeeForm.get('empcity')?.touched"
+        class="text-danger">State is required.
+      </div>
+      <div *ngIf="employeeForm.get('empcity')?.hasError('pattern') && employeeForm.get('empcity')?.touched"
+        class="text-danger">Invalid State.
+      </div>
     </div>
     <div class="form-group">
       <label for="descriptionemp">Description*</label>
       <textarea id="descriptionemp" formControlName="descriptionemp" class="form-control" required></textarea>
+      <div *ngIf="employeeForm.get('descriptionemp')?.hasError('required') && employeeForm.get('descriptionemp')?.touched"
+      class="text-danger">Description is required.
+    </div>
     </div>
     <button type="submit" class="btn custom-btn rounded-pill">Save Profile</button>
   </form>

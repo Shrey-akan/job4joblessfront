@@ -82,14 +82,14 @@ export class UpdateprofileComponent implements OnInit {
     // Initialize the form with default values or load existing employee data
     this.userform = this.formBuilder.group({
       uid: [this.userID, Validators.required],
-      userFirstName: ['', Validators.required],
-      userLastName: ['', Validators.required],
+      userFirstName: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
+      userLastName: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       companyuser: ['', Validators.required],
 
-      userphone: ['', Validators.required],
+      userphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       usercountry: ['', Validators.required],
-      userstate: ['', Validators.required],
-      usercity: ['', Validators.required],
+      userstate: ['',  [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
+      usercity: ['',  [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       websiteuser: ['', Validators.required]
       // Set the default value for userName using abc
       // This line sets the default value for userName

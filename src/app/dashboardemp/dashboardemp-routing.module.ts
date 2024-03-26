@@ -35,7 +35,7 @@ const routes: Routes = [
         path: 'applieduserdetails', component: ApplieduserdetailsComponent
       },
       {
-        path: 'updateempprofile/:empId', component: UpdateempprofileComponent
+        path: 'updateempprofile/:empid', component: UpdateempprofileComponent
       },
       {
         path: 'notificationemp', component: NotificationempComponent

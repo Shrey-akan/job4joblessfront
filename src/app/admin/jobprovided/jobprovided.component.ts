@@ -28,6 +28,8 @@ export class JobprovidedComponent implements OnInit{
   jobPosts: any[] = [];
   private backend_URL = `${backendUrl}`;
 
+  isLoading: boolean = true;
+
 
   constructor(private userService: UserService , private http: HttpClient) { }
   
@@ -42,6 +44,7 @@ export class JobprovidedComponent implements OnInit{
       {
         next:  (response) => {
           this.jobPosts = response;
+          this.isLoading = false; 
         },
         error:(error) => {
           console.error('Error fetching job posts:', error);

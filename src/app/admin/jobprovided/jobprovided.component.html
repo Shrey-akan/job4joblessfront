@@ -1,44 +1,53 @@
 <div class="comtainer-fluid">
     <div class="container text-center" style="margin: 1%;">
         <h4>JOBS PROVIDER</h4>
-        <!-- <h2 class="text-center">Job Posts</h2> -->
-        <div class="table-responsive">
-            <table class="table table-striped custom-table">
-                <thead>
-                    <tr>
-                        <th>Employer Name</th>
-                        <th>Employer Email</th>
-                        <th>Job Title</th>
-                        <th>Company</th>
-                        <th>Approved</th>
-                        <th>View Details</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- <tr *ngFor="let job of jobPosts"> -->
-                        <tr *ngFor="let job of jobPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" style="background-color: rgb(216, 252, 216);">
-                        <td>{{ job.empName }}</td>
-                        <td>{{ job.empEmail }}</td>
-                        <td>{{ job.jobtitle }}</td>
-                        <td>{{ job.companyforthisjob }}</td>
-                        <!-- <td>{{ job.approvejob }}</td> -->
-                        <td>
-                            <button class="btn btn-secondary" (click)="approveJob(job.jobid)">
-                                {{ job.approvejob ? 'Disapprove' : 'Approve' }}
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn" style="background-color: #1e2e5c; color: white;">Info</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-secondary" (click)="deleteJob(job.jobid)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button *ngIf=" currentPage!==1" class="previous-button" (click)="loadPreviousPage()">< Previous</button>
-        <button *ngIf="currentPage * itemsPerPage < jobPosts.length" class="load-more-button" (click)="loadNextPage()">Next ></button>
+        <div *ngIf="isLoading; else tableContent">
+            <!-- Loader -->
+            <div class="loader"></div>
         </div>
+        <!-- <h2 class="text-center">Job Posts</h2> -->
+        <ng-template #tableContent>
+            <div class="table-responsive">
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
+                            <th>Employer Name</th>
+                            <th>Employer Email</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Approved</th>
+                            <th>View Details</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngFor="let job of jobPosts"> -->
+                        <tr *ngFor="let job of jobPosts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+                            style="background-color: rgb(216, 252, 216);">
+                            <td>{{ job.empName }}</td>
+                            <td>{{ job.empEmail }}</td>
+                            <td>{{ job.jobtitle }}</td>
+                            <td>{{ job.companyforthisjob }}</td>
+                            <!-- <td>{{ job.approvejob }}</td> -->
+                            <td>
+                                <button class="btn btn-secondary" (click)="approveJob(job.jobid)">
+                                    {{ job.approvejob ? 'Disapprove' : 'Approve' }}
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn" style="background-color: #1e2e5c; color: white;">Info</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary" (click)="deleteJob(job.jobid)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button *ngIf=" currentPage!==1" class="previous-button" (click)="loadPreviousPage()">
+                    < Previous</button>
+                        <button *ngIf="currentPage * itemsPerPage < jobPosts.length" class="load-more-button"
+                            (click)="loadNextPage()">Next ></button>
+            </div>
+        </ng-template>
     </div>
 </div>

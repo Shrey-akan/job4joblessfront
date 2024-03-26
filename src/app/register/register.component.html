@@ -39,7 +39,8 @@
 
               <div class="form-group">
                 <label for="userName">Email:*</label>
-                <input type="email" autocomplete="off" class="form-control" formControlName="userName" placeholder="Enter Email">
+                <input type="email" autocomplete="off" class="form-control" formControlName="userName"
+                  placeholder="Enter Email">
                 <div *ngIf="userregister.get('userName')?.hasError('required') && userregister.get('userName')?.touched"
                   class="text-danger">Email is required.
                 </div>
@@ -133,9 +134,9 @@
                   class="text-danger">State is required.
                 </div>
                 <div
-                *ngIf="userregister.get('userstate')?.hasError('pattern') && userregister.get('userstate')?.touched"
-                class="text-danger">Invalid State.
-              </div>
+                  *ngIf="userregister.get('userstate')?.hasError('pattern') && userregister.get('userstate')?.touched"
+                  class="text-danger">Invalid State.
+                </div>
               </div>
 
               <div class="form-group">

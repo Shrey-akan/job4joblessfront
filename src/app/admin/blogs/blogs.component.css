@@ -4,11 +4,19 @@
 
 .custom-table {
     width: 100%; /* Set table width to 100% */
+    border: 1px solid black;
 }
 
 .btnwidth
 {
-    width: 18%;
+    width: 1%;
+    text-align: center; /* Center-align the contents of the table cell */
+    vertical-align: middle; /* Vertical alignment of the cell */
+    height: 100%;
+}
+.btnwidth1
+{
+    width: 3%;
     text-align: center; /* Center-align the contents of the table cell */
     vertical-align: middle; /* Vertical alignment of the cell */
     height: 100%;

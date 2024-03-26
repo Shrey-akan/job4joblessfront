@@ -2,3 +2,15 @@
     color: white;
     background-color: #1e2e5c;
 }
+.password-input-container {
+    position: relative;
+  }
+  
+  .password-input-container i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  

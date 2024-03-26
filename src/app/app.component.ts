@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         next:(response: any) => {
           if (response.accessToken) {
             const accessToken = response.accessToken;
-            this.redirectToDashboard(response.role, response.uid, response.empid,response.adminid , response.accessToken);
+            this.redirectToDashboard(response.role, response.uid, response.empid,response.adminid,response.subadminid , response.accessToken);
 
           }
         },
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     this.requestPermission();
     this.listen();
   }
-  redirectToDashboard(role: string, uid: string, empid: string, adminid:string ,accessToken:string) {
+  redirectToDashboard(role: string, uid: string, empid: string, adminid:string,subadminid:string ,accessToken:string) {
     if (role === 'user') {
       AuthInterceptor.accessToken = accessToken;
       this.cookie.set('accessToken', accessToken);
@@ -57,6 +57,12 @@ export class AppComponent implements OnInit {
       AuthInterceptor.accessToken = accessToken;
       this.cookie.set('accessToken', accessToken);
       this.cookie.set('adminid', adminid); 
+      this.router.navigate(['/admin']);
+    }
+    else if(role === 'subadmin'){
+      AuthInterceptor.accessToken = accessToken;
+      this.cookie.set('accessToken', accessToken);
+      this.cookie.set('subadminid', adminid); 
       this.router.navigate(['/admin']);
     }
   }

@@ -141,7 +141,15 @@ export class ProfilemepComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-
+  togglePasswordVisibility(inputId: string): void {
+    const input = document.getElementById(inputId) as HTMLInputElement;
+    if (input.type === 'password') {
+      input.type = 'text';
+    } else {
+      input.type = 'password';
+    }
+  }
+  
   deleteAccountemp() {
     console.log(this.empId)
     // console.log(this.empId);

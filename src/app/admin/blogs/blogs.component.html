@@ -1,40 +1,43 @@
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <table class="table table-bordered custom-table">
+<div class="container-fluid">
+  <div class="container text-center" style="margin: 1%;">
+    <h4>BLOGS DETAILS</h4>
+    <div class="table-responsive">
+      <table class="table table-striped custom-table">
         <thead>
-          <tr>
+          <tr style="background-color: rgb(143, 236, 143);">
+            <!-- <th>S.no.</th> -->
             <th>Title</th>
             <th>Description</th>
             <th>Banner</th>
             <th>Permission</th>
             <th>Delete</th>
+            <!-- Add a new column for the action button -->
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let blog of blogs; let i = index">
-            <tr>
-              <td style="width: 200px;">{{ blog.title }}</td>
-              <td class="font-gelasio" style="width: 400px;">{{ blog.des }}</td>
-              <td>
-                <img [src]="blog.banner" alt="Blog Banner" class="img-fluid" style="max-width: 100px;">
-              </td>
-              <td class="btnwidth">
-                <div class="d-flex justify-content-center align-items-center"> <!-- Apply flexbox to center content -->
-                  <button class="btn btn-primary" (click)="toggleButtonContent(i)">
-                    {{ blog.showContent ? 'Hide Content' : 'Show Content' }}
-                  </button>
-                </div>
-              </td>
-              <td class="btnwidth">
-                <div class="d-flex justify-content-center align-items-center"> <!-- Apply flexbox to center content -->
-                  <button class="btn btn-danger" (click)="toggleButtonActivate(i)">
-                    {{ blog.approved ? 'Deactivate' : 'Activate' }}
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </ng-container>
+          <!-- <tr *ngFor="let user of data" style="background-color: rgb(216, 252, 216);"> -->
+          <!-- <tr *ngFor="let user of data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" style="background-color: rgb(216, 252, 216);"> -->
+          <tr *ngFor="let blog of blogs; let i = index">
+            <td style="width: 5%; font-size: 1.5rem; line-height: 1.3;">{{ blog.title }}</td>
+            <td class="font-gelasio" style="width:10%; font-size: 1.5rem; line-height: 1.5;">{{ blog.des }}</td>
+            <td style="width: 6%;">
+              <img [src]="blog.banner" alt="Blog Banner" class="img-fluid" style="max-width: 130px;">
+            </td>
+            <td class="btnwidth1">
+              <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-primary" (click)="toggleButtonContent(i)">
+                  {{ blog.showContent ? 'Hide Content' : 'Show Content' }}
+                </button>
+              </div>
+            </td>
+            <td class="btnwidth">
+              <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-danger" (click)="toggleButtonActivate(i)">
+                  {{ blog.approved ? 'Deactivate' : 'Activate' }}
+                </button>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" (click)="loadMoreBlogs()">Load More</button>

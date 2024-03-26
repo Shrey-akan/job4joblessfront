@@ -37,6 +37,29 @@ export class AdminserviceService {
     );
   }
 
+  subadminLoginCheck(formData: any): Observable<any> {
+    console.log("I am authenticating sub admin")
+    return this.http.post(`${this.apiUrl}subadmindetails/subadminLoginCheck`, formData).pipe(
+      map((response: any) => response),
+      catchError((error) => {
+        console.error('Error during loginCheck:', error);
+        let errorMessage = 'An error occurred during loginCheck';
+
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else if (error.status === 401) {
+          errorMessage = 'Invalid admin credentials';
+        } else if (error.status === 500) {
+          errorMessage = 'Internal server error';
+        }else{
+          console.log("Reponse is: ")
+        }
+
+        return throwError(errorMessage);
+      })
+    );
+  }
+
   fetchAdminData(): Observable<any> {
     return this.http.get(`${this.apiUrl}fetchadmin`);
   }

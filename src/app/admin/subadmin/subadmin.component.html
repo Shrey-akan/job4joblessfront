@@ -1,18 +1,55 @@
-
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form [formGroup]="adminForm" (ngSubmit)="onSubmit()" class="shadow p-4 rounded bg-light">
                 <div class="form-group">
                     <input type="text" formControlName="subadminame" class="form-control" placeholder="Subadmin Name">
+                    <div *ngIf="adminForm.get('subadminame')?.hasError('required') && adminForm.get('subadminame')?.touched"
+                        class="text-danger">Name is required.
+                    </div>
+                    <div *ngIf="adminForm.get('subadminame')?.hasError('pattern') && adminForm.get('subadminame')?.touched"
+                        class="text-danger">Invalid Name.
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="email" formControlName="subadminmail" class="form-control" placeholder="Subadmin Email">
+                    <input type="email" formControlName="subadminmail" class="form-control"
+                        placeholder="Subadmin Email">
+                    <div *ngIf="adminForm.get('subadminmail')?.hasError('required') && adminForm.get('subadminmail')?.touched"
+                        class="text-danger">Email is required.
+                    </div>
+                    <div *ngIf="adminForm.get('subadminmail')?.hasError('email') && adminForm.get('subadminmail')?.touched"
+                        class="text-danger">Please enter a valid email address.
+                    </div>
+                    <div *ngIf="adminForm.get('subadminmail')?.hasError('pattern') && adminForm.get('subadminmail')?.touched"
+                        class="text-danger">Please enter a valid email address.
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" formControlName="subadminpassword" class="form-control" placeholder="Password">
+                <div class="form-group position-relative formGroup">
+                    <input type="password" formControlName="subadminpassword" class="form-control password-input"
+                        placeholder="Password" [type]="passwordVisible ? 'text' : 'password'">
+                    <div class="toggle-password-icon" (click)="togglePasswordVisibility()">
+                        <div *ngIf="passwordVisible; else hidePassword" class="eye-icon">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </div>
+                        <ng-template #hidePassword>
+                            <div class="eye-icon">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div *ngIf="adminForm.get('subadminpassword')?.hasError('required') && adminForm.get('subadminpassword')?.touched"
+                        class="text-danger">Password is required.
+                    </div>
+                    <div *ngIf="adminForm.get('subadminpassword')?.hasError('minlength') && adminForm.get('subadminpassword')?.touched"
+                        class="text-danger">Password must be at least 8 characters long.
+                    </div>
+                    <div *ngIf="adminForm.get('subadminpassword')?.hasError('pattern') && adminForm.get('subadminpassword')?.touched"
+                        class="text-danger">Password must contain at least one capital letter, one small letter, one
+                        number,
+                        and one special character.
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label>
                         <input type="checkbox" formControlName="manageUsers"> Manage Users
@@ -45,11 +82,16 @@
                 </div>
                 <div class="form-group">
                     <label>
+                        <input type="checkbox" formControlName="enquiry"> Enquiry
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
                         <input type="checkbox" formControlName="approveJobDetails"> Approve Job Details
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" [disabled]="loading">Submit</button>
             </form>
         </div>
     </div>

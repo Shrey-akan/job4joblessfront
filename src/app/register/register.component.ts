@@ -5,6 +5,7 @@ import { UserService } from '../auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import * as intelInput from "intl-tel-input";
 import { backendUrl, OtpUrl } from '../constant';
+import { error } from 'jquery';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -99,6 +100,25 @@ export class RegisterComponent implements OnInit {
       .catch((error: any) => {
       });
   }
+  // userRegisteration(): void {
+  //   if (this.userregister.valid) {
+  //     this.loading = true;
+  //     console.log(this.userregister);
+  //     this.http.post(`${this.backend_URL}insertusermail`, this.userregister.getRawValue()).subscribe(
+  //       (payload: any) => {
+  //         console.log("checking after running api", this.userregister);
+  //         this.successMessage = 'User registered successfully! Please Wait..';
+          
+  //         this.generateOtp(payload);
+  //       },
+  //       (err) => {
+  //         console.error('Some error occurred:', err);
+  //       }
+  //     );
+  //   } else {
+  //     this.userregister.markAllAsTouched();
+  //   }
+  // }
   userRegisteration(): void {
     if (this.userregister.valid) {
       this.loading = true;
@@ -106,17 +126,27 @@ export class RegisterComponent implements OnInit {
       this.http.post(`${this.backend_URL}insertusermail`, this.userregister.getRawValue()).subscribe(
         (payload: any) => {
           console.log("checking after running api", this.userregister);
-          this.successMessage = 'User registered successfully! Please Wait..';
-          this.generateOtp(payload);
+          if (payload.userExists) {
+            // User already exists with the email
+            alert('User already exists with this email!');
+          } else {
+            // User does not exist, generate OTP
+            this.successMessage = 'User registered successfully! Please Wait..';
+            this.generateOtp(payload);
+          }
+          this.loading = false; // Remove loader after API call completes
         },
         (err) => {
           console.error('Some error occurred:', err);
+          alert('User already exists with this email!');
+          this.loading = false; // Remove loader if an error occurs
         }
       );
     } else {
       this.userregister.markAllAsTouched();
     }
   }
+  
   generateOtp(payload: any) {
     this.http.post(`${this.Otp_URL}generateOtp`, { uid: payload.uid, email: payload.userName }).subscribe(
       (response: any) => {

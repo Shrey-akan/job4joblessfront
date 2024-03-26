@@ -106,6 +106,8 @@ export class UserService {
   // Job Post
   inserturljobpost = `${API_BASE_URL}jobpostinsert`;
   fetchjobposturl = `${API_BASE_URL}fetchjobpost`;
+  fetchdisapprovejobpost = `${API_BASE_URL}fetchdisapprovejobpost`;
+
   // Contact
   inserturlcontact = `${API_BASE_URL}insertcontact`;
   fetchcontactdetails = `${API_BASE_URL}fetchcontact`;
@@ -480,6 +482,7 @@ export class UserService {
     return throwError(errorMessage);
   }
 
+  employeeID:string='';
 
   logincheckemp(data: any) {
     // console.log(data);
@@ -493,6 +496,8 @@ export class UserService {
           this.cookie.set('emp', resp.empid);
           this.cookie.set('accessToken', resp.accessToken);
           this.cookie.set('refreshToken', resp.refreshToken);
+          console.log("Employee ID is: ",resp.empid);
+          this.employeeID = resp.empid;
           // console.log("Refresh token saved ", resp.refreshToken);
           // Inside your logincheckgmail function
           const accessToken = resp.accessToken; // Assuming this is where you get the access token
@@ -684,6 +689,12 @@ export class UserService {
   }
   fetchjobpost(empid?: string): Observable<PostJob[]> {
     const url = empid ? `${this.fetchjobposturl}?empid=${empid}` : this.fetchjobposturl;
+    return this.h1.get<PostJob[]>(url);
+  }
+
+
+  fetchDisapprovejobpostadmin(empid?: string): Observable<PostJob[]> {
+    const url = empid ? `${this.fetchdisapprovejobpost}?empid=${empid}` : this.fetchjobposturl;
     return this.h1.get<PostJob[]>(url);
   }
 

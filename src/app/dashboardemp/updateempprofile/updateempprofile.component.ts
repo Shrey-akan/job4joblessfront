@@ -66,14 +66,14 @@ export class UpdateempprofileComponent implements OnInit {
     // Initialize the form with default values or load existing employee data
     this.employeeForm = this.formBuilder.group({
       empid: this.empId,
-      empfname: ['', Validators.required],
-      emplname: ['', Validators.required],
-      empcompany: ['', Validators.required],
+      empfname: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      emplname: ['',[Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      empcompany: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
 
-      empphone: ['', Validators.required],
+      empphone: ['', [Validators.required, Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
       empcountry: ['', Validators.required],
-      empstate: ['', Validators.required],
-      empcity: ['', Validators.required],
+      empstate: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      empcity: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       descriptionemp: ['', Validators.required]
     });
 
@@ -86,6 +86,8 @@ export class UpdateempprofileComponent implements OnInit {
     });
 
     this.empid = this.route.snapshot.paramMap.get('empid');
+    console.log(this.empid);
+    console.log(this.empId);
     this.fetchUserDetailById();
 
   }

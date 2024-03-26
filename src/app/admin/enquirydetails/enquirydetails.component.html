@@ -1,54 +1,53 @@
 <div class="container text-center" style="margin: 30px;">
-    <h4>CONTACT EMPLOYER</h4>
-    <div class="row">
-      <table class="table table-bordered">
-        <thead>
-          <tr style="background-color: rgb(143, 236, 143);">
-            <!-- <th style="width: 10%;">Contact ID</th> -->
-            <th style="width: 15%;">Help Type</th>
-            <th style="width: 15%;">Name</th>
-            <th style="width: 15%;">Email</th>
-            <th style="width: 15%;">Company</th>
-            <th style="width: 10%;">Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let contact of data" style="background-color: rgb(216, 252, 216);">
-            <!-- <td>{{ contact.contactid }}</td> -->
-            <td>{{ contact.contacthelp }}</td>
-            <td>{{ contact.contactname }}</td>
-            <td><a href="mailto:{{ contact.contactmail }}">{{ contact.contactmail }}</a></td>
+  <h4>CONTACT EMPLOYER</h4>
+  <div class="row">
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: rgb(143, 236, 143);">
+          <!-- <th style="width: 10%;">Contact ID</th> -->
+          <th style="width: 15%;">Help Type</th>
+          <th style="width: 15%;">Name</th>
+          <th style="width: 15%;">Email</th>
+          <th style="width: 15%;">Company</th>
+          <th style="width: 10%;">Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of data" style="background-color: rgb(216, 252, 216);">
+          <!-- <td>{{ contact.contactid }}</td> -->
+          <td>{{ contact.contacthelp }}</td>
+          <td>{{ contact.contactname }}</td>
+          <td><a href="mailto:{{ contact.contactmail }}">{{ contact.contactmail }}</a></td>
 
-            <td>{{ contact.contactcompany }}</td>
-            <td><a href="tel:{{ contact.contactphone }}">{{ contact.contactphone }}</a></td>
+          <td>{{ contact.contactcompany }}</td>
+          <td><a href="tel:{{ contact.contactphone }}">{{ contact.contactphone }}</a></td>
 
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
 
 
 
 
 <div class="container">
-  <div class="row card" *ngFor="let contact of dcontacts">
-  
-      <div class="contact-card">
-        <p><strong>Contact ID:</strong> {{ contact.contactid }}</p>
-        <p><strong>Name:</strong> {{ contact.name }}</p>
-        <p>
-          <strong>Email:</strong>
-          <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-        </p>
-          <!-- Clickable Phone Number -->
-    <p>
-      <strong>Contact Number:</strong>
-      <span (click)="openContactOption(contact.contactNumber)">{{ contact.contactNumber }}</span>
-    </p>
-        <p><strong>Message:</strong> {{ contact.message }}</p>
-      </div>
-   
-  </div>
+<div class="row card" *ngFor="let contact of dcontacts">
+
+    <div class="contact-card">
+      <p><strong>Contact ID:</strong> {{ contact.contactid }}</p>
+      <p><strong>Name:</strong> {{ contact.name }}</p>
+      <p>
+        <strong>Email:</strong>
+        <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+      </p>
+        <!-- Clickable Phone Number -->
+  <p>
+    <strong>Contact Number:</strong>
+    <span (click)="openContactOption(contact.contactNumber)">{{ contact.contactNumber }}</span>
+  </p>
+      <p><strong>Message:</strong> {{ contact.message }}</p>
+    </div>
+ 
 </div>
-  
+</div>
