@@ -193,46 +193,51 @@ export class UserService {
     );
   }
 
-  public logincheck(data: any) {
-    // console.log("done");
-    return this.h1.post(this.logincheckurl, data).subscribe({
-      next: (resp: any) => {
-        if (resp && !resp.accdeactivate) {
+    public logincheck(data: any) {
+      // console.log("done");
+      return this.h1.post(this.logincheckurl, data).subscribe({
+        next: (resp: any) => {
+          if (resp && !resp.accdeactivate) {
 
-          const mainres: User = resp;
-          this.cookie.set('accessToken', resp.accessToken);
-          this.cookie.set('uid', resp.uid);
-          this.cookie.set('refreshToken', resp.refreshToken);
+            const mainres: User = resp;
+            this.cookie.set('accessToken', resp.accessToken);
+            this.cookie.set('uid', resp.uid);
+            this.cookie.set('refreshToken', resp.refreshToken);
 
-          const accessToken = resp.accessToken;
-          AuthInterceptor.accessToken = accessToken;
+            const accessToken = resp.accessToken;
+            AuthInterceptor.accessToken = accessToken;
 
-          const isAuthenticated = resp.accessToken && resp.uid;
+            const isAuthenticated = resp.accessToken && resp.uid;
 
-          if (isAuthenticated) {
-            alert('Login Successful!');
-            console.log("Inside authentication")
-            this.router.navigate(['/dashboarduser']);
+            if (isAuthenticated) {
+              alert('Login Successful!');
+              console.log("Inside authentication")
+              this.router.navigate(['/dashboarduser']);
+            } else if (resp && resp.error) {
+              // Error occurred
+              console.log("message")
+              alert(resp.error); // Display the error message
+              this.router.navigate(['/login']);
+            } else {
+              // Unexpected response format
+              alert('An unexpected error occurred. Please try again later.');
+              console.error('Unknown response format:', resp);
+              this.router.navigate(['/login']);
+            }
+            // this.router.navigate(['/home']);
           } else {
-
-            alert('Incorrect Credentials!');
-            this.router.navigate(['/login']);
+            this.errorMessage = 'Your account is not activated. Please contact support for assistance.';
+            console.log(this.errorMessage);
           }
-          // this.router.navigate(['/home']);
-        } else {
-          // Account is not activated, show error message
-          this.errorMessage = 'Your account is not activated. Please contact support for assistance.';
-          console.log(this.errorMessage);
-        }
 
-      },
-      error: (err: any) => {
-        // console.log(err);
-        alert('Incorrect Credentials!');
-        this.router.navigate(['/login']);
-      }
-    });
-  }
+        },
+        error: (err: any) => {
+          console.log(err);
+          alert('Incorrect Credentials!');
+          this.router.navigate(['/login']);
+        }
+      });
+    }
 
 
   public logincheckgmail(userName: string) {

@@ -35,46 +35,6 @@ export class AdminloginComponent implements OnInit {
     });
   }
 
-  // onSubmit() {
-  //   console.log(this.myForm.value);
-  //   if (this.myForm.valid) {
-  //     const formData = this.myForm.value;
-
-  //     this.adminauth.loginCheck(formData).subscribe({
-  //       next: (response: any) => {
-  //         if (response.accessToken && response.refreshToken && response.adminid) {
-  //           const mainres: Admin = response;
-  //           this.cookie.set('accessToken', response.accessToken);
-  //           this.cookie.set('adminid', response.adminid);
-  //           this.cookie.set('refreshToken', response.refreshToken);
-
-  //           const accessToken = response.accessToken; 
-  //           AuthInterceptor.accessToken = accessToken;
-
-  //           const isAuthenticated = response.accessToken && response.adminid;
-  //           console.log(isAuthenticated);
-  //           if (isAuthenticated) {
-  //             alert('Login Successful!');
-  //             this.router.navigate(['/admin']);
-  //           } else {
-
-  //             alert('Incorrect Credentials!');
-  //             this.router.navigate(['/admin']);
-  //           }
-  //         } else {
-
-  //           alert("Invalid response format");
-  //         }
-  //       },
-  //       error: (err: any) => {
-
-  //         alert(err);
-
-  //       }
-  //     });
-  //   }
-  // }
-
   onSubmit() {
     if (this.myForm.valid && this.myForm.get('userType')?.value) {
       const formData = this.myForm.value;

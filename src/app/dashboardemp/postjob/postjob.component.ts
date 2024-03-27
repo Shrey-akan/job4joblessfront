@@ -62,7 +62,7 @@ export class PostjobComponent implements OnInit {
       empName: ['', [Validators.required, nameValidator]],
       empEmail: [
         '',
-        [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]
+        [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@+[A-Za-z0-9.]\b/)]
       ],
       companyforthisjob: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
       numberofopening: ['', Validators.required],

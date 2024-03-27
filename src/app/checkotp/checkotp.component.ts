@@ -82,7 +82,7 @@ export class CheckotpComponent implements OnInit {
   }
 
   resendOTP(): void {
-    this.http.post(`${this.Otp_URL}verifyOtp`, {
+    this.http.post(`${this.Otp_URL}resendOtp`, {
       uid: this.activatedRoute.snapshot.paramMap.get('uid'),
       otp: this.otpForm.controls['otp'].value,
       email: this.otpForm.controls['email'].value

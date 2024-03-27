@@ -23,10 +23,15 @@ export class PostblogComponent implements OnInit {
 
     // Print the token to the console
     console.log("Token:", token);
+    // const accessToken = this.cookieService.get('access_token');
     // this.filterBlogs();
   }
   createBlog(): void {
-    this.router.navigate(['createblog']);
+    const currentUrl = window.location.href;
+    const tokenStartIndex = currentUrl.lastIndexOf('/') + 1;
+    const token = currentUrl.substring(tokenStartIndex);
+    console.log("Your access toke is: ",token)
+    this.router.navigate(['createblog'], { queryParams: { token:token } });
   }
 
   logout(): void {
