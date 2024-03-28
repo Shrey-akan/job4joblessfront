@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit  } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, NgControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { JobPostService } from 'src/app/auth/job-post.service';
 import { UserService } from 'src/app/auth/user.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { NgxEditorComponent } from 'ngx-editor';
 
 interface PostJob {
   jobid: string;
@@ -32,7 +34,6 @@ function nameValidator(control: AbstractControl): { [key: string]: boolean } | n
   }
   return null;
 }
-
 @Component({
   selector: 'app-postjob',
   templateUrl: './postjob.component.html',
@@ -54,6 +55,8 @@ export class PostjobComponent implements OnInit {
     private http: HttpClient
   ) { }
 
+  positiveNumberPattern = /^[0-9]+(?:[,.][0-9]+)?$/;
+
   ngOnInit(): void {
     this.currentStep = 1;
     // Initialize the form with default values and validations
@@ -62,25 +65,53 @@ export class PostjobComponent implements OnInit {
       empName: ['', [Validators.required, nameValidator]],
       empEmail: [
         '',
-        [Validators.required, Validators.email, Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/)]
+        [Validators.required, Validators.email, Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/)
+      ]
       ],
       companyforthisjob: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
-      numberofopening: ['', Validators.required],
+      numberofopening: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/), Validators.min(0)]],
       locationjob: ['', Validators.required],
       jobtype: ['', Validators.required],
       schedulejob: ['', Validators.required],
       payjob: ['', Validators.required],
       // payjobsup: ['',Validators.required],
+      
       descriptiondata: ['', Validators.required],
       country: ['', Validators.required],
       state: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      empid: ['', Validators.required]
+      // Range: ['', [Validators.required,  Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
+      // Starting_amount: ['', [Validators.required,  Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
+      // Maximum_Amount: ['', [Validators.required,  Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
+      // Exact_Amount: ['', [Validators.required,  Validators.pattern(/^\d{10}$/), Validators.pattern(/^[0-9]*$/)]],
+      empid: ['', Validators.required],
+      minAmount: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
+      maxAmount: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
+      amount: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
+      
+      rate: ['', Validators.required],
+      payjobType:['',Validators.required]
     });
 
 
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
+    });
+
+    this.jobPostForm.get('payjobType')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobPostForm.get('minAmount')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobPostForm.get('maxAmount')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobPostForm.get('amount')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobPostForm.get('rate')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
     });
 
     // Set employee ID from cookie
@@ -127,6 +158,39 @@ export class PostjobComponent implements OnInit {
     }
   }
 
+  updatePayJobValue() {
+    const payjobValue = this.jobPostForm.get('payjobType')?.value;
+    let combinedValue = '';
+
+    switch (payjobValue) {
+      case 'Range':
+        const minAmount = this.jobPostForm.get('minAmount')?.value;
+        const maxAmount = this.jobPostForm.get('maxAmount')?.value;
+        const rateRange = this.jobPostForm.get('rate')?.value;
+        combinedValue = `Range: ${minAmount} - ${maxAmount} ${rateRange}`;
+        break;
+      case 'Starting_amount':
+        const startingAmount = this.jobPostForm.get('amount')?.value;
+        const rateStarting = this.jobPostForm.get('rate')?.value;
+        combinedValue = `Starting Amount: ${startingAmount} ${rateStarting}`;
+        break;
+      case 'Exact_Amount':
+        const exactAmount = this.jobPostForm.get('amount')?.value;
+        const rateExact = this.jobPostForm.get('rate')?.value;
+        combinedValue = `Exact Amount: ${exactAmount} ${rateExact}`;
+        break;
+      case 'Maximum_Amount':
+        const maximumAmount = this.jobPostForm.get('amount')?.value;
+        const rateMaximum = this.jobPostForm.get('rate')?.value;
+        combinedValue = `Maximum Amount: ${maximumAmount} ${rateMaximum}`;
+        break;
+    }
+
+    // Update the 'payjob' form control value
+    this.jobPostForm.patchValue({
+      payjob: combinedValue
+    });
+  }
   // Handle form submission
   jobDetailsForm(jobPostForm: { value: any }): void {
     this.jobPostService.saveFormData(jobPostForm.value);
@@ -158,32 +222,7 @@ export class PostjobComponent implements OnInit {
     }
   }
 
-  // updateLocationJob(): void {
-  //   const country = this.jobPostForm.get('country')?.value;
-  //   const state = this.jobPostForm.get('state')?.value;
-  //   const city = this.jobPostForm.get('city')?.value;
-
-  //   let currentLocation = this.jobPostForm.get('locationjob')?.value;
-  //   currentLocation = currentLocation ? currentLocation + ', ' : '';
-  //   const newLocation = currentLocation + city + ', ' + state + ', ' + country;
-
-  //   // Update locationjob with the new concatenated value
-  //   this.jobPostForm.patchValue({ locationjob: newLocation });
-  // }
-
-  // Navigate to the next step
   nextStep(): void {
-    // if (this.jobPostForm.valid) {
-    //   console.log(this.jobPostForm);
-    //   if (this.currentStep < this.totalSteps) {
-    //     this.currentStep++;
-    //   }
-
-    //   this.jobPostService.saveFormData({
-    //     ...this.jobPostForm.value,
-    //     currentStep: this.currentStep
-    //   });
-    // }
     if (this.currentStep < this.totalSteps) {
       console.log("Inside the Next Step")
       if (this.currentStep === 1) {
@@ -225,17 +264,14 @@ export class PostjobComponent implements OnInit {
 
         } else {
           console.log("One or more required fields are empty.");
-          // Handle empty fields, e.g., display error message
+    
         }
       }
-      // this.currentStep++;
+
 
     }
 
-    // this.jobPostService.saveFormData({
-    //   ...this.jobPostForm.value,
-    //   currentStep: this.currentStep
-    // });
+ 
   }
 
   // Navigate to the previous step
