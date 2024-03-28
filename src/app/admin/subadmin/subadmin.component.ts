@@ -22,7 +22,8 @@ export class SubadminComponent implements OnInit{
       subadminame: ['', [Validators.required , Validators.pattern(/^[A-Za-z\s]+$/)]],
       subadminmail: ['', [Validators.required ,Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]],
       subadminpassword: ['', [Validators.required, Validators.minLength(6) , 
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/)
+]],
       manageUsers: [false],
       manageEmployers: [false],
       postJob: [false],
