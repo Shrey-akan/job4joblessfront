@@ -42,7 +42,7 @@ export class UpdatejobComponent implements OnInit {
         [Validators.required, Validators.email, Validators.pattern(/\b[A-Za-z0-9._%+-]+@gmail\.com\b/)]
       ],
       companyforthisjob: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
-      numberofopening: ['', Validators.required],
+      numberofopening: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/), Validators.min(0)]],
       locationjob: ['', Validators.required],
       jobtype: ['', Validators.required],
       schedulejob: ['', Validators.required],
@@ -52,11 +52,34 @@ export class UpdatejobComponent implements OnInit {
       country: ['', Validators.required],
       state: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
-      empid: ['', Validators.required]
+      empid: ['', Validators.required],
+      minAmount: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
+      maxAmount: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
+      amount: ['', [Validators.required, Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
+      
+      rate: ['', Validators.required],
+      payjobType:['',Validators.required]
     });
     this.http.get<any[]>('https://restcountries.com/v3/all').subscribe((data) => {
       this.countries = data.map(country => country.name.common).sort();
     });
+    this.jobForm.get('payjobType')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobForm.get('minAmount')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobForm.get('maxAmount')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobForm.get('amount')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+    this.jobForm.get('rate')?.valueChanges.subscribe(() => {
+      this.updatePayJobValue();
+    });
+
+
 
     this.jobForm.get('country')?.valueChanges.subscribe(() => {
       this.updateLocation();
@@ -71,6 +94,42 @@ export class UpdatejobComponent implements OnInit {
     this.jobid = this.route.snapshot.paramMap.get('jobid');
     this.fetchJobDetails();
   }
+
+  updatePayJobValue() {
+    const payjobValue = this.jobForm.get('payjobType')?.value;
+    let combinedValue = '';
+
+    switch (payjobValue) {
+      case 'Range':
+        const minAmount = this.jobForm.get('minAmount')?.value;
+        const maxAmount = this.jobForm.get('maxAmount')?.value;
+        const rateRange = this.jobForm.get('rate')?.value;
+        combinedValue = `Range: ${minAmount} - ${maxAmount} ${rateRange}`;
+        break;
+      case 'Starting_amount':
+        const startingAmount = this.jobForm.get('amount')?.value;
+        const rateStarting = this.jobForm.get('rate')?.value;
+        combinedValue = `Starting Amount: ${startingAmount} ${rateStarting}`;
+        break;
+      case 'Exact_Amount':
+        const exactAmount = this.jobForm.get('amount')?.value;
+        const rateExact = this.jobForm.get('rate')?.value;
+        combinedValue = `Exact Amount: ${exactAmount} ${rateExact}`;
+        break;
+      case 'Maximum_Amount':
+        const maximumAmount = this.jobForm.get('amount')?.value;
+        const rateMaximum = this.jobForm.get('rate')?.value;
+        combinedValue = `Maximum Amount: ${maximumAmount} ${rateMaximum}`;
+        break;
+    }
+
+    // Update the 'payjob' form control value
+    this.jobForm.patchValue({
+      payjob: combinedValue
+    });
+  }
+
+
   fetchJobDetails() {
     if (this.jobid) {
       this.http.get(`${this.backend_URL}fetchJobPostById/${this.jobid}`)
