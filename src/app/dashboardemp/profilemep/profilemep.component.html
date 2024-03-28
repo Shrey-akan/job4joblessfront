@@ -56,7 +56,7 @@
                    
                     <div class="form-group">
                       <label for="inputBio">Biography</label>
-                      <h2>{{ empDetail.descriptionemp }}</h2>
+                      <h2 [innerHTML]="empDetail.descriptionemp"></h2>
                       <!-- <textarea rows="2" class="form-control" id="inputBio"
                         placeholder="Tell something about yourself"></textarea> -->
                     </div>
@@ -239,7 +239,8 @@
                   </tr>
                   <tr>
                     <th>Description</th>
-                    <td>{{ empDetail.descriptionemp }}</td>
+                    <!-- <td>{{ empDetail.descriptionemp }}</td> -->
+                    <td [innerHTML]="empDetail.descriptionemp"></td>
                   </tr>
                 </tbody>
               </table>

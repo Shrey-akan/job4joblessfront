@@ -37,7 +37,8 @@
                 </div>
               </div>
               <div class="card-footer" *ngIf="job.showDetails">
-                <p><strong>Description:</strong> {{ job.descriptiondata }}</p>
+                <strong>Description:</strong>
+                <p [innerHTML]="job.descriptiondata"></p>
               </div>
             </div>
           </div>

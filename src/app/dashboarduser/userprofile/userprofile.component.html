@@ -211,6 +211,10 @@
                     <td>{{ userData1.usercity }}</td>
                   </tr>
                   <tr>
+                    <th>Description</th>
+                    <td [innerHTML]="userData1.summary"></td>
+                  </tr>
+                  <tr>
                     <th> Resume</th>
                     <td> 
                       <a [href]="'https://job4jobless.com:9001/getPdfByUi/' + userID" target="_blank">

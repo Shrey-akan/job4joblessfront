@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/auth/user.service';
 import { backendUrl } from 'src/app/constant';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 interface User {
   uid: Number;
   userName: String;
@@ -17,6 +18,7 @@ interface User {
   usercountry: String;
   userstate: String;
   usercity: String;
+  summary: String;
 }
 @Component({
   selector: 'app-userprofile',
@@ -36,11 +38,11 @@ export class UserprofileComponent implements OnInit {
 
   successMessage = '';
   errorMessage = '';
-  constructor(public cookie: CookieService,private formBuilder: FormBuilder,private http: HttpClient, private router: Router, private b1: UserService) { }
+  constructor(public cookie: CookieService,private sanitizer: DomSanitizer, private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private b1: UserService) { }
 
   userID: string = "0"; // Change 'String' to 'string'
 
-  private backend_URL=`${backendUrl}`;
+  private backend_URL = `${backendUrl}`;
 
   ngOnInit(): void {
     // Check if the userID is correctly retrieved from the cookie
@@ -69,27 +71,32 @@ export class UserprofileComponent implements OnInit {
 
     this.passwordResetForm = this.formBuilder.group({
       userName: ['', Validators.required],
-      oldPassword: ['',       [
+      oldPassword: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/)
-
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
-      newPassword: ['',       [
+      newPassword: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/)
-
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
-      verifyPassword: ['',       [
+      verifyPassword: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/)
-
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
     });
 
-
+  //   document.addEventListener("DOMContentLoaded", function() {
+  //     var userDataSummary = document.getElementById("userDataSummary");
+  //     if (userDataSummary !== null) {
+  //         userDataSummary.innerHTML = User.summary;
+  //     } else {
+  //         console.error("Element with ID 'userDataSummary' not found.");
+  //     }
+  // });
+  
     this.pdfUrl = `${this.backend_URL}getPdfByUi/${this.userID}`;
     // console.log('PDF URL:', this.pdfUrl);
 
@@ -105,33 +112,46 @@ export class UserprofileComponent implements OnInit {
       // Make a POST request to your backend for password reset
       this.http.post(`${this.backend_URL}resetPassword`, formData)
         .subscribe(
-     {
-      next:     (response: any) => {
-        // Handle success
-        // console.log(response);
-        this.successMessage = 'Password updated successfully';
-        this.errorMessage = '';
-        alert('Password updated successfully');
-        this.router.navigate(['/dashboarduser/userprofile']);
-      },
+          {
+            next: (response: any) => {
+              // Handle success
+              // console.log(response);
+              this.successMessage = 'Password updated successfully';
+              this.errorMessage = '';
+              alert('Password updated successfully');
+              this.router.navigate(['/dashboarduser/userprofile']);
+            },
 
-     error: (err: any) => {
-        // Handle errors
-        if (err.status === 401) {
-          this.errorMessage = 'Invalid old password';
-          this.successMessage = '';
-        } else if (err.status === 404) {
-          this.errorMessage = 'User not found';
-          this.successMessage = '';
-        } else {
-          this.errorMessage = 'An error occurred: ' + err.message;
-          this.successMessage = '';
-        }
-      }
-     }
+            error: (err: any) => {
+              // Handle errors
+              if (err.status === 401) {
+                this.errorMessage = 'Invalid old password';
+                this.successMessage = '';
+              } else if (err.status === 404) {
+                this.errorMessage = 'User not found';
+                this.successMessage = '';
+              } else {
+                this.errorMessage = 'An error occurred: ' + err.message;
+                this.successMessage = '';
+              }
+            }
+          }
         );
     } else {
       // Form is invalid, show error messages or perform desired actions
+    }
+  }
+  parseHTML(htmlString: string | undefined): SafeHtml {
+    if (htmlString) {
+      // Ensure that htmlString contains valid HTML markup
+      const sanitizedHtml = this.sanitizer.sanitize(
+        SecurityContext.HTML,
+        htmlString
+      );
+      // Return sanitized HTML
+      return this.sanitizer.bypassSecurityTrustHtml(sanitizedHtml || '');
+    } else {
+      return ''; // Return empty string as fallback
     }
   }
   userData: any = {
@@ -147,7 +167,7 @@ export class UserprofileComponent implements OnInit {
     this.b1.deleteUser(this.userID).subscribe(
       {
         next: (response: any) => {
-          if(response === true) {
+          if (response === true) {
             alert("User Deleted Successfully");
             this.router.navigate(['/']);
           }

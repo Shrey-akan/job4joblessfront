@@ -15,16 +15,14 @@
     <div class="form-group">
       <label for="company">Company*</label>
       <input type="text" class="form-control" id="company" formControlName="companyforthisjob" required>
-      <div
-      *ngIf="jobForm.get('companyforthisjob')?.hasError('required') && jobForm.get('companyforthisjob')?.touched"
-      class="text-danger">
-      Company Name is required.
-    </div>
-    <div
-      *ngIf="jobForm.get('companyforthisjob')?.hasError('pattern') && jobForm.get('companyforthisjob')?.touched"
-      class="text-danger">
-      Company Name cannot contain special character.
-    </div>
+      <div *ngIf="jobForm.get('companyforthisjob')?.hasError('required') && jobForm.get('companyforthisjob')?.touched"
+        class="text-danger">
+        Company Name is required.
+      </div>
+      <div *ngIf="jobForm.get('companyforthisjob')?.hasError('pattern') && jobForm.get('companyforthisjob')?.touched"
+        class="text-danger">
+        Company Name cannot contain special character.
+      </div>
     </div>
     <div class="form-group">
       <label for="empName">Name*</label>
@@ -32,8 +30,7 @@
       <div *ngIf="jobForm.get('empName')?.hasError('required')  && jobForm.get('empName')?.touched" class="text-danger">
         Name is required.
       </div>
-      <div *ngIf="jobForm.get('empName')?.hasError('pattern') && jobForm.get('empName')?.touched"
-        class="text-danger">
+      <div *ngIf="jobForm.get('empName')?.hasError('pattern') && jobForm.get('empName')?.touched" class="text-danger">
         Name cannot contain special characters or numbers.
       </div>
     </div>
@@ -54,11 +51,10 @@
     <div class="form-group">
       <label for="openings">Number of Openings*</label>
       <input type="number" class="form-control" id="openings" formControlName="numberofopening" required>
-      <div
-          *ngIf="jobForm.get('numberofopening')?.hasError('required') && jobForm.get('numberofopening')?.touched"
-          class="text-danger">
-          Number of Openings is required.
-        </div>
+      <div *ngIf="jobForm.get('numberofopening')?.hasError('required') && jobForm.get('numberofopening')?.touched"
+        class="text-danger">
+        Number of Openings is required.
+      </div>
     </div>
     <div class="row">
       <div class="col-md-4">
@@ -78,13 +74,12 @@
       <div class="col-md-4">
         <div class="mb-3">
           <label for="state" class="form-label">State:*</label>
-          <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter the state" required>
-          <div *ngIf="jobForm.get('state')?.hasError('required') && jobForm.get('state')?.touched"
-            class="text-danger">
+          <input type="text" class="form-control" id="state" formControlName="state" placeholder="Enter the state"
+            required>
+          <div *ngIf="jobForm.get('state')?.hasError('required') && jobForm.get('state')?.touched" class="text-danger">
             State is required.
           </div>
-          <div *ngIf="jobForm.get('state')?.hasError('pattern') && jobForm.get('state')?.touched"
-            class="text-danger">
+          <div *ngIf="jobForm.get('state')?.hasError('pattern') && jobForm.get('state')?.touched" class="text-danger">
             Invalid state.
           </div>
         </div>
@@ -92,13 +87,12 @@
       <div class="col-md-4">
         <div class="mb-3">
           <label for="city" class="form-label">City:*</label>
-            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter the city" required>
-          <div *ngIf="jobForm.get('city')?.hasError('required') && jobForm.get('city')?.touched"
-            class="text-danger">
+          <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter the city"
+            required>
+          <div *ngIf="jobForm.get('city')?.hasError('required') && jobForm.get('city')?.touched" class="text-danger">
             City is required.
           </div>
-          <div *ngIf="jobForm.get('city')?.hasError('pattern') && jobForm.get('city')?.touched"
-            class="text-danger">
+          <div *ngIf="jobForm.get('city')?.hasError('pattern') && jobForm.get('city')?.touched" class="text-danger">
             Invalid City.
           </div>
         </div>
@@ -122,8 +116,7 @@
         <option value="Hybrid">Hybrid</option>
         <option value="Freelance">Freelance</option>
       </select>
-      <div *ngIf="jobForm.get('jobtype')?.hasError('required') && jobForm.get('jobtype')?.touched"
-        class="text-danger">
+      <div *ngIf="jobForm.get('jobtype')?.hasError('required') && jobForm.get('jobtype')?.touched" class="text-danger">
         Required.
       </div>
     </div>
@@ -179,7 +172,7 @@
             <!-- Minimum input column -->
             <label for="minAmount" class="form-label" required>Minimum:*</label>
             <input type="number" class="form-control me-2" id="minAmount" formControlName="minAmount"
-              placeholder="Minimum" >
+              placeholder="Minimum">
             <!-- Maximum input column -->
             <label for="maxAmount" class="form-label" required>Maximum:*</label>
             <input type="number" class="form-control me-2" id="maxAmount" formControlName="maxAmount"
@@ -203,8 +196,7 @@
             class="text-danger">
             Maximum Amount is Required.
           </div>
-          <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched"
-            class="text-danger">
+          <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched" class="text-danger">
             Rate is Required.
           </div>
         </div>
@@ -228,8 +220,7 @@
               class="text-danger">
               Please fill the amount.
             </div>
-            <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched"
-              class="text-danger">
+            <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched" class="text-danger">
               Rate is Required.
             </div>
           </div>
@@ -256,8 +247,7 @@
               class="text-danger">
               Please fill the amount.
             </div>
-            <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched"
-              class="text-danger">
+            <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched" class="text-danger">
               Rate is Required.
             </div>
           </div>
@@ -282,8 +272,7 @@
               class="text-danger">
               Please fill the amount.
             </div>
-            <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched"
-              class="text-danger">
+            <div *ngIf="jobForm.get('rate')?.hasError('required')  && jobForm.get('rate')?.touched" class="text-danger">
               Rate is Required.
             </div>
           </div>
@@ -293,8 +282,7 @@
     <div class="mb-3">
       <label for="payjob" class="form-label">Job Pay:*</label>
       <input type="text" class="form-control" id="payjob" formControlName="payjob" placeholder="Job Pay" readonly>
-      <div *ngIf="jobForm.get('payjob')?.hasError('required') && jobForm.get('payjob')?.touched"
-        class="text-danger">
+      <div *ngIf="jobForm.get('payjob')?.hasError('required') && jobForm.get('payjob')?.touched" class="text-danger">
         Job Pay is required.
       </div>
     </div>
@@ -304,9 +292,9 @@
     </div> -->
     <div class="mb-3">
       <label for="descriptiondata" class="form-label">Description data*</label>
-      <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea>
-      <div
-        *ngIf="jobForm.get('descriptiondata')?.hasError('required')  && jobForm.get('descriptiondata')?.touched"
+      <!-- <textarea class="form-control" id="descriptiondata" formControlName="descriptiondata" required></textarea> -->
+      <angular-editor formControlName="descriptiondata" [placeholder]="'Enter text here...'"></angular-editor>
+      <div *ngIf="jobForm.get('descriptiondata')?.hasError('required')  && jobForm.get('descriptiondata')?.touched"
         class="text-danger">
         Required.
       </div>

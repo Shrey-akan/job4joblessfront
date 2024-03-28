@@ -187,14 +187,6 @@
                 </div>
               </div>
 
-              <!-- <div class="form-group">
-                <label for="descriptionemp">Description:*</label>
-                <textarea class="form-control textar" formControlName="descriptionemp" placeholder=""></textarea>
-                <div
-                  *ngIf="employerdetails.get('descriptionemp')?.hasError('required') && employerdetails.get('descriptionemp')?.touched"
-                  class="text-danger">Description is required.
-                </div>
-              </div> -->
               <div class="form-group">
                 <label for="descriptionemp">Description:*</label>
                 <!-- <textarea class="form-control textar" formControlName="descriptionemp" placeholder=""></textarea> -->
@@ -209,7 +201,7 @@
                 Register
               </button>
 
-
+              <!-- <angular-editor formControlName="summary" [placeholder]="'Enter text here...'"></angular-editor> -->
             </form>
             <div class="loader-overlay" *ngIf="loading">
               <div class="loader"></div>
