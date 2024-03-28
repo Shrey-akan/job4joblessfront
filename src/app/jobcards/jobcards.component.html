@@ -68,7 +68,9 @@
               </h2>
               <div *ngIf="selectedJob === job" id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#job.jobid">
                 <div class="accordion-body m-2 px-2 py-2 rounded-3" style="background-color: #bbbbbb;">
-                  <p>{{ job.companyforthisjob }} {{ job.descriptiondata }}</p>
+                  <!-- <p>{{ job.companyforthisjob }} {{ job.descriptiondata }}</p> -->
+                  <p>{{ job.companyforthisjob }}</p>
+                  <p [innerHTML]="job.descriptiondata"></p>
                 </div>
               </div>
             </div>

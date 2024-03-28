@@ -140,7 +140,7 @@
    
         <td>{{ application.jujobtitle }}</td>
         <td>{{ application.jucompanyname }}</td>
-        <td>{{ application.description }}</td>
+        <td [innerHTML]="application.description"></td>
         <td>{{ application.juphone }}</td>
         <td>{{ application.julastsal }}</td>
         <td>{{ application.juexpecsalary }}</td>
