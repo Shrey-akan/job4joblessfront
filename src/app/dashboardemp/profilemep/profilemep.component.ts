@@ -35,6 +35,9 @@ export class ProfilemepComponent implements OnInit {
   passwordResetForm!: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
+  passwordVisible1: boolean = false;
+  passwordVisible2: boolean = false;
+  passwordVisible3: boolean = false;
   constructor(public cookie: CookieService, private fb: FormBuilder, private b1: UserService, private router: Router, private http: HttpClient) { }
 
   empId: string = "0";

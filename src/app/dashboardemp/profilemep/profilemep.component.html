@@ -109,16 +109,26 @@
                   <label for="inputPasswordNew">New password</label>
                   <!-- <input type="password" class="form-control" id="inputPasswordNew" formControlName="newPassword"> -->
                   <div class="password-input-container">
-                    <input type="password" class="form-control" id="inputPasswordNew" formControlName="newPassword">
-                    <i class="fas fa-eye" (click)="togglePasswordVisibility('inputPasswordNew')"></i>
+                    <input type="password" class="form-control" id="inputPasswordNew" formControlName="newPassword"
+                    autocomplete="off" [type]="passwordVisible1 ? 'text' : 'password'">
+                    <div class="toggle-password-icon" (click)="togglePasswordVisibility('inputPasswordNew')">
+                      <div *ngIf="passwordVisible1; else hidePassword" class="eye-icon">
+                        <i class="fa-solid fa-eye-slash"></i>
+                      </div>
+                      <ng-template #hidePassword>
+                        <div class="eye-icon">
+                          <i class="fa-solid fa-eye"></i>
+                        </div>
+                      </ng-template>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPasswordNew2">Verify password</label>
                   <!-- <input type="password" class="form-control" id="inputPasswordNew2" formControlName="verifyPassword"> -->
                   <div class="password-input-container">
-                    <input type="password" class="form-control" id="inputPasswordCurrent" formControlName="oldPassword">
-                    <i class="fas fa-eye" (click)="togglePasswordVisibility('inputPasswordCurrent')"></i>
+                    <input type="password" class="form-control" id="inputPasswordNewVerify" formControlName="newPassword">
+                    <i class="fas fa-eye" (click)="togglePasswordVisibility('inputPasswordNewVerify')"></i>
                   </div>
                 </div>
                 <button type="submit" class="btn custom-btn rounded-pill">Save changes</button>
