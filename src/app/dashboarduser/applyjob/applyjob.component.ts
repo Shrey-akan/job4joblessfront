@@ -48,7 +48,7 @@ export class ApplyjobComponent implements OnInit {
       juresume: ['', [Validators.required]],
       jurelocation: ['', [Validators.required]],
       jueducation: ['', [Validators.required]],
-      juexperience: ['', [Validators.required]],
+      juexperience: ['', [Validators.required,Validators.pattern(/^[0-9]+(?:[,.][0-9]+)?$/)]],
       juinterviewdate: ['' , [ Validators.pattern(/^[\d,-]+$/)]],
       jujobtitle: ['', [ Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
       jucompanyname: ['', [ Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
