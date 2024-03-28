@@ -22,6 +22,7 @@ import { FootercComponent } from './footerc/footerc.component';
 import { OvercomingComponent } from './overcoming/overcoming.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     EmployerComponent,

@@ -52,19 +52,24 @@
     </div>
     <button type="button" (click)="addTag()">Add Tag</button>
   
-    <!-- Content Blocks -->
-    <div formArrayName="content">
+
+    <!-- <div formArrayName="content">
       <div *ngFor="let block of contentBlocks.controls; let i=index" [formGroupName]="i">
         <label>Type:</label>
         <input type="text" formControlName="type">
-        <!-- Adjust the above input field according to your data structure -->
-  
         <label>Data:</label>
         <textarea formControlName="data"></textarea>
-        <!-- Adjust the above textarea field according to your data structure -->
-  
-        <!-- Button to remove content block -->
         <button type="button" (click)="removeContentBlock(i)">Remove</button>
+      </div>
+    </div> -->
+    <div class="mb-3">
+      <label for="content" class="form-label">Description</label>
+      <!-- <textarea formControlName="descriptiondata"></textarea> -->
+      <angular-editor formControlName="content" [placeholder]="'Enter text here...'"></angular-editor>
+      <div
+        *ngIf="blogForm.get('content')?.hasError('required') && blogForm.get('content')?.touched"
+        class="text-danger">
+        Required.
       </div>
     </div>
   

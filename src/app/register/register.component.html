@@ -181,12 +181,19 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="summary">Description:*</label>
                 <textarea class="form-control textar" formControlName="summary" placeholder=""></textarea>
-                <!-- <input type="text" class="form-control custom-textbox" formControlName="summary" placeholder="Describe Yourself"> -->
+             
                 <div *ngIf="userregister.get('summary')?.hasError('required') && userregister.get('summary')?.touched"
                   class="text-danger">Description is required.
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label for="summary">Description:*</label>
+                <angular-editor formControlName="summary" [placeholder]="'Enter text here...'"></angular-editor>
+                <div *ngIf="userregister.get('summary')?.hasError('required') && userregister.get('summary')?.touched" class="text-danger">
+                  Description is required.
                 </div>
               </div>
 

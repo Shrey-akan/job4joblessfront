@@ -187,9 +187,18 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="descriptionemp">Description:*</label>
                 <textarea class="form-control textar" formControlName="descriptionemp" placeholder=""></textarea>
+                <div
+                  *ngIf="employerdetails.get('descriptionemp')?.hasError('required') && employerdetails.get('descriptionemp')?.touched"
+                  class="text-danger">Description is required.
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label for="descriptionemp">Description:*</label>
+                <!-- <textarea class="form-control textar" formControlName="descriptionemp" placeholder=""></textarea> -->
+                <angular-editor formControlName="descriptionemp" [placeholder]="'Enter text here...'"></angular-editor>
                 <div
                   *ngIf="employerdetails.get('descriptionemp')?.hasError('required') && employerdetails.get('descriptionemp')?.touched"
                   class="text-danger">Description is required.

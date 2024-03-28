@@ -23,6 +23,7 @@ import { QuestionpaperComponent } from './questionpaper/questionpaper.component'
 import { VideocallComponent } from './videocall/videocall.component';
 import { JobcarduComponent } from './jobcardu/jobcardu.component';
 import { SavedjobComponent } from './savedjob/savedjob.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
     DashboarduserComponent,
@@ -49,6 +50,7 @@ import { SavedjobComponent } from './savedjob/savedjob.component';
     DashboarduserRoutingModule,
     ReactiveFormsModule,
     // NgbAccordionModule,
+    AngularEditorModule,
     FormsModule
   ]
 })

@@ -21,6 +21,7 @@ import { VideocallComponent } from './videocall/videocall.component';
 import { UpdatejobComponent } from './updatejob/updatejob.component';
 import { SetQuestionComponent } from './set-question/set-question.component';
 import { DisapprovejobComponent } from './disapprovejob/disapprovejob.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
     DashboardempComponent,
@@ -44,6 +45,7 @@ import { DisapprovejobComponent } from './disapprovejob/disapprovejob.component'
     DashboardempRoutingModule,
     ReactiveFormsModule,
     MatSelectModule,
+    AngularEditorModule,
     FormsModule
   ]
 })

@@ -127,7 +127,8 @@ export class CreateblogComponent {
       des: ['', Validators.required],
       banner: [''],
       tags: this.fb.array(['']), // Initialize with one tag input
-      content: this.fb.array([]),
+      // content: this.fb.array([]),
+      content:['', Validators.required],
       draft: [false]
     });
   }

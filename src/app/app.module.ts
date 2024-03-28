@@ -61,6 +61,10 @@ import { PostblogComponent } from './postblog/postblog.component';
 import { TrendingblogsComponent } from './trendingblogs/trendingblogs.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CreateblogComponent } from './createblog/createblog.component';
+
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +123,8 @@ import { CreateblogComponent } from './createblog/createblog.component';
     MatSelectModule,
     MatSnackBarModule,
     IonicModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AngularEditorModule
     // NgbModule
   ],
   providers: [CookieService,MessagingService,{
